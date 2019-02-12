@@ -4,9 +4,8 @@ using UnityEngine;
 
 namespace Team17.BallDash
 {
-    public class Player : Entity
+    public class BallCanceler : Environment
     {
-        [SerializeField] private Rigidbody body;
 
     }
 }

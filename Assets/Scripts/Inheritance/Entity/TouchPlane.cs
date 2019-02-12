@@ -6,21 +6,21 @@ namespace Team17.BallDash
 {
     public class TouchPlane : Entity, Touchable
     {
-        [SerializeField] private Player player;
+        [SerializeField] private PlayerProjectile ball;
 
         public void OnTouchBegin(Vector3 touchPos)
         {
-            player.Teleport(touchPos);
+            ball.StartCalculation();
         }
 
         public void OnTouchHeld(Vector3 touchPos)
         {
-
+            ball.FeedBack(touchPos);
         }
 
         public void OnTouchReleased(Vector3 touchPos)
         {
-
+            ball.Launch((touchPos - ball.transform.position));
         }
     }
 }
