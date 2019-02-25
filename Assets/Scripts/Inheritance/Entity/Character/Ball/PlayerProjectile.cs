@@ -21,12 +21,25 @@ namespace Team17.BallDash
         private int numberOfHits = 0;
         private int reHitTimer;
         private bool wasCanceled = false;
+        private Vector3 movementDirection;
         private Vector3 initialFeedbackScale;
+        private Vector3 lastEnter;
+        private Vector3 lastNormal;
+        private Vector3 lastContact;
+        private Vector3 lastNewDir;
 
         protected override void Start()
         {
             base.Start();
             initialFeedbackScale = timerFeedback.localScale;
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            Debug.DrawRay(lastContact, lastNormal.normalized * 3, Color.magenta);
+            Debug.DrawRay(lastContact, -lastEnter.normalized * 3, Color.blue);
+            Debug.DrawRay(lastContact, lastNewDir.normalized * 3, Color.red);
         }
 
         public void StartCalculation()
@@ -62,7 +75,8 @@ namespace Team17.BallDash
             body.useGravity = false;
             Time.timeScale = 1;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
-            body.velocity = newDirection.normalized * (speed * speedMultiplier.Evaluate(numberOfHits));
+            movementDirection = newDirection.normalized * (speed * speedMultiplier.Evaluate(numberOfHits));
+            body.velocity = movementDirection;
             timer.DeleteTimer(reHitTimer);
             numberOfHits++;
             timerFeedback.gameObject.SetActive(false);
@@ -72,7 +86,6 @@ namespace Team17.BallDash
 
         private void CancelRehit()
         {
-            Debug.Log("canceled");
             Time.timeScale = 1;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             numberOfHits = 0;
@@ -84,12 +97,27 @@ namespace Team17.BallDash
             player.gameObject.SetActive(false);
         }
 
+        private void Bounce(Vector3 enterVector, Vector3 collisionNormal)
+        {
+            body.velocity = Vector3.zero;
+            Vector3 newDir = Vector3.Reflect(enterVector, collisionNormal);
+            lastNewDir = newDir;
+            body.velocity = newDir.normalized * (speed * speedMultiplier.Evaluate(numberOfHits));
+            Debug.Log("New dir : " + newDir);
+        }
+
         private void OnCollisionEnter(Collision coll)
         {
             if(coll.gameObject.GetComponent<BallCanceler>() != null)
             {
                 CancelRehit();
-                Debug.Log("Canceled because of collision");
+            }
+            else
+            {
+                lastNormal = coll.contacts[0].normal;
+                lastContact = coll.contacts[0].point;
+                lastEnter = movementDirection;
+                Bounce(movementDirection, coll.contacts[0].normal);
             }
         }
     }

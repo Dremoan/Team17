@@ -112,9 +112,15 @@ public class TimersCalculator : MonoBehaviour
     {
         CheckForListExistance();
         Timer t = GetTimerFromUserIndex(i);
-        if (t.UserIndex == -1) return;
+        if (t.UserIndex == -1)
+        {
+            return;
+        }
         int index = GetTimerIndexFromUserIndex(i);
-        if (index != -1) timers.Remove(timers[index]);
+        if (index != -1)
+        {
+            timers.Remove(timers[index]);
+        }
     }
 
     private bool CheckForListExistance()
