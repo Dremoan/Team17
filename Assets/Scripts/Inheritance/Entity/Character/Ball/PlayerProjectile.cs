@@ -99,11 +99,16 @@ namespace Team17.BallDash
 
         private void Bounce(Vector3 enterVector, Vector3 collisionNormal)
         {
-            body.velocity = Vector3.zero;
             Vector3 newDir = Vector3.Reflect(enterVector, collisionNormal);
             lastNewDir = newDir;
-            body.velocity = newDir.normalized * (speed * speedMultiplier.Evaluate(numberOfHits));
+            movementDirection = newDir.normalized * (speed * speedMultiplier.Evaluate(numberOfHits));
+            body.velocity = movementDirection;
             Debug.Log("New dir : " + newDir);
+        }
+
+        private void OnTriggerEnter(Collider coll)
+        {
+
         }
 
         private void OnCollisionEnter(Collision coll)
