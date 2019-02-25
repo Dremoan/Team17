@@ -72,6 +72,7 @@ namespace Team17.BallDash
 
         private void CancelRehit()
         {
+            Debug.Log("canceled");
             Time.timeScale = 1;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             numberOfHits = 0;
@@ -88,6 +89,7 @@ namespace Team17.BallDash
             if(coll.gameObject.GetComponent<BallCanceler>() != null)
             {
                 CancelRehit();
+                Debug.Log("Canceled because of collision");
             }
         }
     }
