@@ -89,7 +89,7 @@ namespace Team17.BallDash
             Time.timeScale = 1;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             Timer t = timer.GetTimerFromUserIndex(reHitTimer);
-            power += (t.Inc / slowedTimeScale) * 1.2f;
+            power += (t.Inc / slowedTimeScale) * 1.7f;
             Debug.Log("Power after shot : " + power + ", Added : " + (t.Inc / slowedTimeScale) * 1.2f);
             movementDirection = newDirection.normalized * (speed * speedMultiplier.Evaluate(power));
             body.velocity = movementDirection;
@@ -121,6 +121,7 @@ namespace Team17.BallDash
             timerFeedback.gameObject.SetActive(false);
             trajectory.gameObject.SetActive(false);
             player.gameObject.SetActive(false);
+            wasCanceled = true;
         }
 
         #endregion
