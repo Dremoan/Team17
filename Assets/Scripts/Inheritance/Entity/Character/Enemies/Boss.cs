@@ -4,63 +4,54 @@ using UnityEngine;
 
 namespace Team17.BallDash
 {
-    public class Boss : Entity
+    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(TimersCalculator))]
+    public class Boss : Character
     {
-        [Header("Parameters")]
-        [SerializeField] private TimersCalculator timer;
-        [SerializeField] private float minWaitTime = 5f;
-        [SerializeField] private float maxWaitTime = 10f;
-        [SerializeField] private float speed = 0.2f;
-        [SerializeField] private BossPattern[] patterns;
-        [Header("Feedback")]
-        [SerializeField] private Transform timerFeedback;
-        private BossPattern currentPattern;
-        private Vector3 currentWorldPosition;
-        private Vector3 posRef;
-        private Vector3 initialFeedbackScale;
-        private int timerIndex;
+        [Header("Components")]
+        [SerializeField] protected Rigidbody body;
+        [SerializeField] protected TimersCalculator timers;
 
-        protected override void Start()
+        protected float currentHealthToNextState = 0f;
+        protected BossState bossState = BossState.First;
+        protected int bossStateIndex = 0;
+
+        protected virtual void Hit(float dmgs)
         {
-            base.Start();
-            currentWorldPosition = transform.position;
-            timerIndex = timer.LaunchNewTimer(Random.Range(minWaitTime, maxWaitTime), SpawnNewPattern);
-            initialFeedbackScale = timerFeedback.localScale;
+            currentHealthToNextState -= dmgs;
+            GameManager.state.CallOnBossHurt();
+            if (currentHealthToNextState < 0) SwitchState();
         }
 
-        protected override void Update()
+        protected virtual void SwitchState()
         {
-            base.Update();
-            transform.position = Vector3.SmoothDamp(transform.position, currentWorldPosition, ref posRef, speed);
-            Timer t = timer.GetTimerFromUserIndex(timerIndex);
-            timerFeedback.localScale = Mathf.InverseLerp(0, t.MaxTime, t.TimeLeft) * initialFeedbackScale;
-        }
-
-        private void SpawnNewPattern()
-        {
-            if(currentPattern.PatternGameobject == null)
-            {
-                currentPattern = patterns[Random.Range(0, patterns.Length)];
-            }
+            bossStateIndex++;
+            if (bossStateIndex > 2) Death();
             else
             {
-                currentPattern.PatternGameobject.SetActive(false);
-                currentPattern = patterns[Random.Range(0, patterns.Length)];
+                GameManager.state.CallOnBossChangeState();
+                bossState = (Team17.BallDash.BossState) bossStateIndex;
             }
-            currentPattern.PatternGameobject.SetActive(true);
-            currentWorldPosition = currentPattern.BossWorldPosition;
-            timerIndex = timer.LaunchNewTimer(Random.Range(minWaitTime, maxWaitTime), SpawnNewPattern);
         }
+
+        protected virtual void Death()
+        {
+            GameManager.state.CallOnBossDeath();
+        }
+
+        #region Properties
+
+        public float CurrentHealthToNextState { get => currentHealthToNextState;}
+        public BossState BossState { get => bossState; }
+        public int BossStateIndex { get => bossStateIndex;}
+
+        #endregion
     }
 
-    [System.Serializable]
-    public struct BossPattern
+    public enum BossState
     {
-        [SerializeField] private string name;
-        [SerializeField] private Vector3 bossWorldPosition;
-        [SerializeField] private GameObject patternGameobject;
-
-        public Vector3 BossWorldPosition { get => bossWorldPosition; set => bossWorldPosition = value; }
-        public GameObject PatternGameobject { get => patternGameobject; set => patternGameobject = value; }
-    }
+        First = 0,
+        Second = 1,
+        Third = 2
+    };
 }

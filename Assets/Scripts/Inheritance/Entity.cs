@@ -5,7 +5,9 @@ using UnityEngine;
 namespace Team17.BallDash
 {
     public class Entity : MonoBehaviour
-    { 
+    {
+        #region Monobehaviour callbacks
+
         protected virtual void Start()
         {
 
@@ -30,10 +32,52 @@ namespace Team17.BallDash
         {
             GameManager.state.UnregisterEntity(this);
         }
+    
+        #endregion
 
-        public virtual void OnPlayerBeginTeleport()
+        #region Entity callbacks
+
+        public virtual void OnPlayerTeleport()
         {
 
         }
+
+        public virtual void OnBallShooted()
+        {
+
+        }
+
+        public virtual void OnBallCanceled()
+        {
+
+        }
+
+        public virtual void OnBallSlowed()
+        {
+
+        }
+
+        public virtual void OnBallBounced()
+        {
+
+        }
+
+        public virtual void OnBossHurt()
+        {
+
+        }
+
+        public virtual void OnBossChangeState()
+        {
+
+        }
+
+        public virtual void OnBossDeath()
+        {
+
+        }
+
+        #endregion
+
     }
 }

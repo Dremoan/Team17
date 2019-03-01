@@ -23,11 +23,67 @@ namespace Team17.BallDash
             entities.Remove(ent);
         }
 
-        public void CallOnPlayerBeginTeleport()
+        public void CallOnPlayerTeleport()
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                entities[i].OnPlayerBeginTeleport();
+                entities[i].OnPlayerTeleport();
+            }
+        }
+
+        public void CallOnBallShooted()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBallShooted();
+            }
+        }
+
+        public void CallOnBallCanceled()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBallCanceled();
+            }
+        }
+
+        public void CallOnBallSlowed()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBallSlowed();
+            }
+        }
+
+        public void CallOnBallBounced()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBallBounced();
+            }
+        }
+
+        public void CallOnBossHurt()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBossHurt();
+            }
+        }
+
+        public void CallOnBossChangeState()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBossChangeState();
+            }
+        }
+
+        public void CallOnBossDeath()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBossDeath();
             }
         }
     }
