@@ -7,7 +7,7 @@ namespace Team17.BallDash
     public class SnakeBoss : Boss
     {
         [Header("Snake parameters")]
-        [SerializeField] [Vector3InGameZone] private Vector3 testVector;
+        [SerializeField] private BossAimZone zone;
         [SerializeField] private int y;
     }
 

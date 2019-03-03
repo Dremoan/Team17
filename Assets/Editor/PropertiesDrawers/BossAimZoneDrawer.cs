@@ -5,8 +5,8 @@ using UnityEditor;
 
 namespace Team17.BallDash
 {
-    [CustomPropertyDrawer(typeof(Vector3InGameZone))]
-    public class Vector3InGameZoneDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(BossAimZone))]
+    public class BossAimZoneDrawer : PropertyDrawer
     {
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
@@ -15,23 +15,25 @@ namespace Team17.BallDash
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            Vector3 target = (Vector3)fieldInfo.GetValue(property.serializedObject.targetObject);
+            BossAimZone target = (BossAimZone)fieldInfo.GetValue(property.serializedObject.targetObject);
 
             EditorGUI.BeginProperty(position, label, property);
 
             int ident = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
 
-            Rect vectorRect = new Rect(position.x + 205, position.y, position.width * 0.61f, 16);
-            Rect buttonRect = new Rect(position.x, position.y + 18, position.width, 16);
+            Rect vectorRect = new Rect(position.x + 205, position.y, position.width * 0.4f, 16);
+            Rect buttonRect = new Rect(position.x + 455, position.y, position.width * 0.15f, 16);
             EditorGUI.LabelField(position, label);
             GUI.enabled = false;
-            EditorGUI.Vector3Field(vectorRect, "", target);
+            EditorGUI.Vector3Field(vectorRect, "", target.ZoneCenter);
             GUI.enabled = true;
 
-            if (GUI.Button(buttonRect, "Test"))
+            if (GUI.Button(buttonRect, "Edit Zone"))
             {
                 //display editor window
+                BossAimZoneWindow window = BossAimZoneWindow.ShowWindow();
+                window.SetBaseValues(target.ZoneCenter, target.ZoneRay);
             }
 
             EditorGUI.indentLevel = ident;
