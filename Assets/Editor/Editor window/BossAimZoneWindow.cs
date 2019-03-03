@@ -7,7 +7,7 @@ namespace Team17.BallDash
 {
     public class BossAimZoneWindow : EditorWindow
     {
-
+        private GUIBossAimZone bossAimZone;
         private Vector3 guiZoneCenter;
         private Vector3 calculatedZoneCenter;
         private float zoneRay;
@@ -17,19 +17,12 @@ namespace Team17.BallDash
         private Texture2D backgroundTex;
 
         private int wallWidth = 15;
-        private Vector3[] circlePoints;
 
         public static BossAimZoneWindow ShowWindow()
         {
             BossAimZoneWindow window = EditorWindow.GetWindow<BossAimZoneWindow>();
             window.titleContent = new GUIContent("Edit boss aim zone");
             return window;
-        }
-
-        public void SetBaseValues(Vector3 center, float ray)
-        {
-            guiZoneCenter = new Vector3(minSize.x * 0.5f, minSize.y - wallWidth);
-            zoneRay = ray;
         }
 
         private void OnEnable()
@@ -45,6 +38,13 @@ namespace Team17.BallDash
 
             minSize = new Vector2(160, 90) * 7;
             maxSize = new Vector2(160, 90) * 7;
+        }
+
+        public void SetBaseValues(Vector3 center, float ray)
+        {
+            guiZoneCenter = new Vector3(minSize.x * 0.5f, minSize.y - wallWidth);
+            zoneRay = ray;
+            bossAimZone = new GUIBossAimZone(zoneCenterStyle, new Vector3(minSize.x * 0.5f, minSize.y - wallWidth));
         }
 
         private void OnGUI()
@@ -153,19 +153,34 @@ namespace Team17.BallDash
 
         private void CalculateZoneCircle(float ray, int segments)
         {
-            circlePoints = new Vector3[segments];
-            for (int i = 0; i < circlePoints.Length; i++)
-            {
-                /*float ratio = 360 / (entities - 1);
-                for (int i = 0; i < entities - 1; i++)
-                {
-                    Vector3 pos;
-                    pos.x = center.x + (circle.radius * Mathf.Sin((ratio * i) * Mathf.Deg2Rad));
-                    pos.y = center.y + (circle.radius * Mathf.Cos((ratio * i) * Mathf.Deg2Rad));
-                    pos.z = 0;
-                    potentialCirclePos.Add(pos);
-                }*/
-            }
+
         }
+    }
+
+    public class GUIBossAimZone
+    {
+        private Vector3 gameCenterPosition;
+        private Vector3 guiCenterPosition;
+
+        private Rect rect;
+
+        private GUIStyle style;
+
+        public GUIBossAimZone(GUIStyle centerStyle, Rect centerRect, Vector3 initialGameCenterPos)
+        {
+            style = centerStyle;
+            gameCenterPosition = initialGameCenterPos;
+            rect = centerRect;
+        }
+
+        public void Draw()
+        {
+
+        }
+
+        public Vector3 GuiCenterPosition { get => guiCenterPosition; set => guiCenterPosition = value; }
+        public Vector3 GameCenterPosition { get => gameCenterPosition; set => gameCenterPosition = value; }
+        public GUIStyle Style { get => style; set => style = value; }
+        public Rect Rect { get => rect; set => rect = value; }
     }
 }
