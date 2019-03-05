@@ -7,12 +7,14 @@ namespace Team17.BallDash
 {
     public class BossAimZoneWindow : EditorWindow
     {
-        private GUIBossAimZone bossAimZone;
+        private GUIBossAimZoneCenter bossAimZoneCenter;
+        private GUIBossAimZoneArea bossAimZoneArea;
+        private GUIBossAimZoneHandle topHandle;
+        private GUIBossAimZoneHandle rightHandle;
+        private GUIBossAimZoneHandle botHandle;
+        private GUIBossAimZoneHandle leftHandle;
         private Vector3 guiZoneCenter;
         private Vector3 calculatedZoneCenter;
-        private float zoneRay;
-
-        private GUIStyle zoneCenterStyle;
 
         private Texture2D backgroundTex;
 
@@ -31,20 +33,21 @@ namespace Team17.BallDash
             backgroundTex.SetPixel(0, 0, new Color(0.25f, 0.25f, 0.25f));
             backgroundTex.Apply();
 
-            zoneCenterStyle = new GUIStyle();
-            zoneCenterStyle.normal.background = EditorGUIUtility.Load("builtin skins/darkskin/images/btn left.png") as Texture2D;
-            zoneCenterStyle.active.background = EditorGUIUtility.Load("builtin skins/darkskin/images/btn left on.png") as Texture2D;
-            zoneCenterStyle.border = new RectOffset(4, 4, 12, 12);
-
             minSize = new Vector2(160, 90) * 7;
             maxSize = new Vector2(160, 90) * 7;
         }
 
         public void SetBaseValues(Vector3 center, float ray)
         {
-            guiZoneCenter = new Vector3(minSize.x * 0.5f, minSize.y - wallWidth);
-            zoneRay = ray;
-            bossAimZone = new GUIBossAimZone(zoneCenterStyle, new Vector3(minSize.x * 0.5f, minSize.y - wallWidth));
+            // feed the GUI position there
+            // TODO : make the conversion method to actually get the GUI pos from the game pos
+            bossAimZoneCenter = new GUIBossAimZoneCenter(new Rect(guiZoneCenter.x - 10, guiZoneCenter.y - 10, 20, 20), new Vector3(minSize.x * 0.5f, minSize.y - wallWidth));
+            bossAimZoneArea = new GUIBossAimZoneArea(bossAimZoneCenter);
+
+            topHandle = new GUIBossAimZoneHandle(BossAimZoneHandleType.Top, bossAimZoneArea);
+            rightHandle = new GUIBossAimZoneHandle(BossAimZoneHandleType.Right, bossAimZoneArea);
+            botHandle = new GUIBossAimZoneHandle(BossAimZoneHandleType.Bottom, bossAimZoneArea);
+            leftHandle = new GUIBossAimZoneHandle(BossAimZoneHandleType.Left, bossAimZoneArea);
         }
 
         private void OnGUI()
@@ -54,9 +57,13 @@ namespace Team17.BallDash
             DrawGrid(20, 0.2f, Color.gray);
             DrawWalls();
 
-            DrawZone();
+            bossAimZoneCenter.Draw();
+            bossAimZoneArea.Draw();
+            topHandle.Draw();
+            rightHandle.Draw();
+            botHandle.Draw();
+            leftHandle.Draw();
 
-            CalculateZoneCircle(5, 10);
             ProcessEvents(Event.current);
         }
 
@@ -116,29 +123,18 @@ namespace Team17.BallDash
             Handles.EndGUI();
         }
 
-        private void DrawZone()
-        {
-            Handles.BeginGUI();
-
-            Rect zoneCenterRect = new Rect(guiZoneCenter.x - 10, guiZoneCenter.y - 10, 20, 20);
-            GUI.Box(zoneCenterRect, "");
-            
-
-            Handles.EndGUI();
-        }
-
         private void ProcessEvents(Event e)
         {
-            switch(e.type)
+            if(PosInGameZone(e.mousePosition))
             {
-                case EventType.MouseDown:
-                    if(PosInGameZone(e.mousePosition))
-                    {
-                        guiZoneCenter = e.mousePosition;
-                        GUI.changed = true;
-                    }
-                    break;
-                    
+                if(bossAimZoneCenter.ProcessEvents(e))
+                {
+                    GUI.changed = true;
+                }
+                if (topHandle.ProcessEvents(e)) GUI.changed = true;
+                if (rightHandle.ProcessEvents(e)) GUI.changed = true;
+                if (botHandle.ProcessEvents(e)) GUI.changed = true;
+                if (leftHandle.ProcessEvents(e)) GUI.changed = true;
             }
         }
 
@@ -150,37 +146,199 @@ namespace Team17.BallDash
             if (pos.y < wallWidth) return false;
             return true;
         }
-
-        private void CalculateZoneCircle(float ray, int segments)
-        {
-
-        }
     }
 
-    public class GUIBossAimZone
+    public class GUIBossAimZoneCenter
     {
-        private Vector3 gameCenterPosition;
         private Vector3 guiCenterPosition;
 
         private Rect rect;
 
-        private GUIStyle style;
-
-        public GUIBossAimZone(GUIStyle centerStyle, Rect centerRect, Vector3 initialGameCenterPos)
+        public GUIBossAimZoneCenter(Rect centerRect, Vector3 initialGameCenterPos)
         {
-            style = centerStyle;
-            gameCenterPosition = initialGameCenterPos;
+            guiCenterPosition = initialGameCenterPos;
             rect = centerRect;
         }
 
         public void Draw()
         {
+            Handles.BeginGUI();
 
+            rect = new Rect(guiCenterPosition.x - rect.width * 0.5f, guiCenterPosition.y - rect.height * 0.5f, rect.width, rect.height);
+            GUI.Box(rect, "");
+
+            Handles.EndGUI();
+        }
+
+        public bool ProcessEvents(Event e)
+        {
+            switch (e.type)
+            {
+                case EventType.MouseDown:
+                    if (e.button == 1)
+                    {
+                        guiCenterPosition = e.mousePosition;
+                        return true;
+                    }
+                    break;
+
+            }
+            return false;
         }
 
         public Vector3 GuiCenterPosition { get => guiCenterPosition; set => guiCenterPosition = value; }
-        public Vector3 GameCenterPosition { get => gameCenterPosition; set => gameCenterPosition = value; }
-        public GUIStyle Style { get => style; set => style = value; }
-        public Rect Rect { get => rect; set => rect = value; }
     }
+
+    public class GUIBossAimZoneHandle
+    {
+        private BossAimZoneHandleType type;
+        private GUIBossAimZoneArea area;
+
+        private Rect rect;
+
+        private float width = 10f;
+
+        private bool dragging = false;
+
+        public GUIBossAimZoneHandle(BossAimZoneHandleType t, GUIBossAimZoneArea a)
+        {
+            area = a;
+            type = t;
+        }
+
+        public bool ProcessEvents(Event e)
+        {
+            switch(e.type)
+            {
+                case EventType.MouseDown:
+                    if(e.button == 0)
+                    {
+                        if(rect.Contains(e.mousePosition))
+                        {
+                            Debug.Log("contained");
+                            dragging = true;
+                        }
+                    }
+                    break;
+                case EventType.MouseDrag:
+                    if (dragging)
+                    {
+                        Debug.Log("Type : " + type.ToString() + " dragged : " + Vector3.Distance(area.CenterPos, new Vector3(area.CenterPos.x, e.mousePosition.y)));
+                        switch (type)
+                        {
+                            case BossAimZoneHandleType.Top:
+                                area.TopDist = -Vector3.Distance(area.CenterPos, new Vector3(area.CenterPos.x, e.mousePosition.y));
+                                break;
+                            case BossAimZoneHandleType.Right:
+                                area.RightDist = Vector3.Distance(area.CenterPos, new Vector3(e.mousePosition.x, area.CenterPos.y));
+                                break;
+                            case BossAimZoneHandleType.Bottom:
+                                area.BotDist = Vector3.Distance(area.CenterPos, new Vector3(area.CenterPos.x, e.mousePosition.y));
+                                break;
+                            case BossAimZoneHandleType.Left:
+                                area.LeftDist = -Vector3.Distance(area.CenterPos, new Vector3(e.mousePosition.x, area.CenterPos.y));
+                                break;
+                        }
+                    }
+                    break;
+                case EventType.MouseUp:
+                    if (e.button == 0)
+                    {
+                        Debug.Log("upped");
+                        dragging = false;
+                    }
+                    break;
+            }
+            return dragging;
+        }
+
+        public void Draw()
+        {
+            Handles.BeginGUI();
+
+            switch(type)
+            {
+                case BossAimZoneHandleType.Top:
+                    rect = new Rect(area.TopHandlePos.x - width * 0.5f, area.TopHandlePos.y - width * 0.5f, width, width);
+                    break;
+                case BossAimZoneHandleType.Right:
+                    rect = new Rect(area.RightHandlePos.x - width * 0.5f, area.RightHandlePos.y - width * 0.5f, width, width);
+                    break;
+                case BossAimZoneHandleType.Bottom:
+                    rect = new Rect(area.BotHandlePos.x - width * 0.5f, area.BotHandlePos.y - width * 0.5f, width, width);
+                    break;
+                case BossAimZoneHandleType.Left:
+                    rect = new Rect(area.LeftHandlePos.x - width * 0.5f, area.LeftHandlePos.y - width * 0.5f, width, width);
+                    break;
+            }
+
+            GUI.Box(rect, "");
+
+            Handles.EndGUI();
+        }
+    }
+
+    public class GUIBossAimZoneArea
+    {
+        private GUIBossAimZoneCenter center;
+        private float topDist = -50f;
+        private float rightDist = 50f;
+        private float botDist = 50f;
+        private float leftDist = -50f;
+
+        private Vector3 topLineStart = Vector3.zero;
+        private Vector3 rightLineStart = Vector3.zero;
+        private Vector3 botLineStart = Vector3.zero;
+        private Vector3 leftLineStart = Vector3.zero;
+
+        private Vector3 topHandlePos;
+        private Vector3 rightHandlePos;
+        private Vector3 botHandlePos;
+        private Vector3 leftHandlePos;
+
+        public GUIBossAimZoneArea(GUIBossAimZoneCenter c)
+        {
+            center = c;
+        }
+
+        public void Draw()
+        {
+            Handles.BeginGUI();
+
+            topLineStart = new Vector3(leftDist, topDist) + center.GuiCenterPosition;
+            rightLineStart = new Vector3(rightDist, topDist) + center.GuiCenterPosition;
+            botLineStart = new Vector3(rightDist, botDist) + center.GuiCenterPosition;
+            leftLineStart = new Vector3(leftDist, botDist) + center.GuiCenterPosition;
+
+            Handles.DrawLine(topLineStart, rightLineStart);
+            Handles.DrawLine(rightLineStart, botLineStart);
+            Handles.DrawLine(botLineStart, leftLineStart);
+            Handles.DrawLine(leftLineStart, topLineStart);
+
+            topHandlePos = new Vector3(center.GuiCenterPosition.x, topLineStart.y);
+            rightHandlePos = new Vector3(rightLineStart.x, center.GuiCenterPosition.y);
+            botHandlePos = new Vector3(center.GuiCenterPosition.x, botLineStart.y);
+            leftHandlePos = new Vector3(leftLineStart.x, center.GuiCenterPosition.y);
+
+            Handles.EndGUI();
+        }
+
+        public Vector3 CenterPos { get => center.GuiCenterPosition; }
+        public float TopDist { get => topDist; set => topDist = value; }
+        public float RightDist { get => rightDist; set => rightDist = value; }
+        public float BotDist { get => botDist; set => botDist = value; }
+        public float LeftDist { get => leftDist; set => leftDist = value; }
+        public Vector3 TopHandlePos { get => topHandlePos; set => topHandlePos = value; }
+        public Vector3 RightHandlePos { get => rightHandlePos; set => rightHandlePos = value; }
+        public Vector3 BotHandlePos { get => botHandlePos; set => botHandlePos = value; }
+        public Vector3 LeftHandlePos { get => leftHandlePos; set => leftHandlePos = value; }
+    }
+
+    public enum BossAimZoneHandleType
+    {
+        Top,
+        Right,
+        Bottom,
+        Left,
+    };
 }
