@@ -16,6 +16,11 @@ namespace Team17.BallDash
         private Vector3 guiZoneCenter;
         private Vector3 calculatedZoneCenter;
 
+        private float maxGameX = 9.8f;
+        private float minGameX = -9.9f;
+        private float maxGameY = 10.4f;
+        private float minGameY = -0.4f;
+
         private Texture2D backgroundTex;
 
         private int wallWidth = 15;
@@ -125,7 +130,7 @@ namespace Team17.BallDash
 
         private void ProcessEvents(Event e)
         {
-            if(PosInGameZone(e.mousePosition))
+            if(WindowContains(e.mousePosition))
             {
                 if(bossAimZoneCenter.ProcessEvents(e))
                 {
@@ -138,13 +143,31 @@ namespace Team17.BallDash
             }
         }
 
-        private bool PosInGameZone(Vector3 pos)
+        private bool WindowContains(Vector3 pos)
         {
             if (pos.x > minSize.x - wallWidth) return false;
             if (pos.x < wallWidth) return false;
             if (pos.y > minSize.y - wallWidth) return false;
             if (pos.y < wallWidth) return false;
             return true;
+        }
+
+        private Vector3 GUIToGamePos(Vector3 pos)
+        {
+            float x = Mathf.InverseLerp(0, maxSize.x, pos.x);
+            float y = Mathf.InverseLerp(0, maxSize.y, pos.y);
+            x = Mathf.Lerp(minGameX, maxGameX, x);
+            y = Mathf.Lerp(minGameY, maxGameY, y);
+            return new Vector3(x, y, 0);
+        }
+
+        private Vector3 GameToGUIPos(Vector3 pos)
+        {
+            float x = Mathf.InverseLerp(0, maxSize.x, pos.x);
+            float y = Mathf.InverseLerp(0, maxSize.y, pos.y);
+            x = Mathf.Lerp(minGameX, maxGameX, x);
+            y = Mathf.Lerp(minGameY, maxGameY, y);
+            return new Vector3(x, y, 0);
         }
     }
 
@@ -215,7 +238,6 @@ namespace Team17.BallDash
                     {
                         if(rect.Contains(e.mousePosition))
                         {
-                            Debug.Log("contained");
                             dragging = true;
                         }
                     }
@@ -223,7 +245,6 @@ namespace Team17.BallDash
                 case EventType.MouseDrag:
                     if (dragging)
                     {
-                        Debug.Log("Type : " + type.ToString() + " dragged : " + Vector3.Distance(area.CenterPos, new Vector3(area.CenterPos.x, e.mousePosition.y)));
                         switch (type)
                         {
                             case BossAimZoneHandleType.Top:
@@ -244,7 +265,6 @@ namespace Team17.BallDash
                 case EventType.MouseUp:
                     if (e.button == 0)
                     {
-                        Debug.Log("upped");
                         dragging = false;
                     }
                     break;

@@ -33,7 +33,7 @@ namespace Team17.BallDash
             {
                 //display editor window
                 BossAimZoneWindow window = BossAimZoneWindow.ShowWindow();
-                window.SetBaseValues(target.ZoneCenter, target.ZoneRay);
+                window.SetBaseValues(target.ZoneCenter, 2);
             }
 
             EditorGUI.indentLevel = ident;
