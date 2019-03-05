@@ -39,8 +39,8 @@ namespace Team17.BallDash
 
         public void SetBaseValues(Vector3 center, float ray)
         {
-            // feed the GUI position there
             // TODO : make the conversion method to actually get the GUI pos from the game pos
+            // feed the GUI position there
             bossAimZoneCenter = new GUIBossAimZoneCenter(new Rect(guiZoneCenter.x - 10, guiZoneCenter.y - 10, 20, 20), new Vector3(minSize.x * 0.5f, minSize.y - wallWidth));
             bossAimZoneArea = new GUIBossAimZoneArea(bossAimZoneCenter);
 
