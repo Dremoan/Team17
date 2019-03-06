@@ -6,7 +6,7 @@ namespace Team17.BallDash
 {
     public class PlayerProjectile : Character
     {
-        enum TypeOfTimer {Cancel, Rehit, Nothing}
+        enum TypeOfTimer {Cancel, Nothing}
         [Header("Components")]
         [SerializeField] private Rigidbody body;
         [SerializeField] private TimersCalculator timer;
@@ -51,9 +51,6 @@ namespace Team17.BallDash
             switch(type)
             {
                 case TypeOfTimer.Cancel:
-                    reHitTimer = timer.LaunchNewTimer(timeToHit.Evaluate(power) * slowedTimeScale, CancelRehit);
-                    break;
-                case TypeOfTimer.Rehit:
                     reHitTimer = timer.LaunchNewTimer(timeToHit.Evaluate(power) * slowedTimeScale, CancelRehit);
                     break;
                 case TypeOfTimer.Nothing:

@@ -10,7 +10,7 @@ namespace Team17.BallDash
     {
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            return EditorGUIUtility.singleLineHeight * 2 + 2;
+            return EditorGUIUtility.singleLineHeight * 6 + 14;
         }
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -21,19 +21,27 @@ namespace Team17.BallDash
 
             int ident = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
-
-            Rect vectorRect = new Rect(position.x + 205, position.y, position.width * 0.4f, 16);
-            Rect buttonRect = new Rect(position.x + 455, position.y, position.width * 0.15f, 16);
+            float spacing = 16;
+            Rect centerRect = new Rect(position.x, position.y + spacing, position.width, 16);
+            Rect topRightRect = new Rect(position.x, position.y + spacing*2, position.width, 16);
+            Rect topLeftRect = new Rect(position.x, position.y + spacing*3, position.width, 16);
+            Rect botRightRect = new Rect(position.x, position.y + spacing*4, position.width, 16);
+            Rect botLeftRect = new Rect(position.x, position.y + spacing*5, position.width, 16);
+            Rect buttonRect = new Rect(position.x, position.y + spacing*6, position.width, 16);
             EditorGUI.LabelField(position, label);
             GUI.enabled = false;
-            EditorGUI.Vector3Field(vectorRect, "", target.ZoneCenter);
+            EditorGUI.Vector3Field(centerRect, "Center :", target.ZoneCenter);
+            EditorGUI.Vector3Field(topRightRect, "Top right", target.TopRight);
+            EditorGUI.Vector3Field(topLeftRect, "Top left :", target.TopLeft);
+            EditorGUI.Vector3Field(botRightRect, "Bot right :", target.BotRight);
+            EditorGUI.Vector3Field(botLeftRect, "Bot left:", target.BotLeft);
             GUI.enabled = true;
 
             if (GUI.Button(buttonRect, "Edit Zone"))
             {
                 //display editor window
                 BossAimZoneWindow window = BossAimZoneWindow.ShowWindow();
-                window.SetBaseValues(target.ZoneCenter, 2);
+                window.SetBaseValues(target.ZoneCenter, target);
             }
 
             EditorGUI.indentLevel = ident;
