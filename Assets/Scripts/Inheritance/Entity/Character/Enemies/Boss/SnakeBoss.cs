@@ -8,15 +8,10 @@ namespace Team17.BallDash
     {
         [Header("Snake parameters")]
         [SerializeField] private BossAimZone zone;
-        [SerializeField] private int y;
 
         protected override void Update()
         {
             base.Update();
-            Debug.DrawLine(zone.ZoneCenter, zone.TopLeft, Color.blue);
-            Debug.DrawLine(zone.ZoneCenter, zone.TopRight, Color.magenta);
-            Debug.DrawLine(zone.ZoneCenter, zone.BotLeft, Color.red);
-            Debug.DrawLine(zone.ZoneCenter, zone.BotRight, Color.green);
         }
     }
 

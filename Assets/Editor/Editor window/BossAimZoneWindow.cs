@@ -44,7 +44,7 @@ namespace Team17.BallDash
             maxSize = new Vector2(160, 90) * 7;
         }
 
-        public void SetBaseValues(Vector3 center, BossAimZone zone)
+        public void SetBaseValues(BossAimZone zone)
         {
             linkedZone = zone;
             // TODO : make the conversion method to actually get the GUI pos from the game pos
@@ -59,8 +59,8 @@ namespace Team17.BallDash
 
             float topDist = -Vector3.Distance(guiCenter, new Vector3(guiCenter.x, guiTopRight.y));
             float rightDist = Vector3.Distance(guiCenter, new Vector3(guiTopRight.x, guiCenter.y));
-            float botDist = -Vector3.Distance(guiCenter, new Vector3(guiCenter.x, guiBotRight.y));
-            float leftDist = Vector3.Distance(guiCenter, new Vector3(guiBotLeft.x, guiCenter.y));
+            float botDist = Vector3.Distance(guiCenter, new Vector3(guiCenter.x, guiBotRight.y));
+            float leftDist = -Vector3.Distance(guiCenter, new Vector3(guiBotLeft.x, guiCenter.y));
 
             bossAimZoneArea = new GUIBossAimZoneArea(bossAimZoneCenter, topDist, rightDist, botDist, leftDist);
 
@@ -68,6 +68,7 @@ namespace Team17.BallDash
             rightHandle = new GUIBossAimZoneHandle(BossAimZoneHandleType.Right, bossAimZoneArea);
             botHandle = new GUIBossAimZoneHandle(BossAimZoneHandleType.Bottom, bossAimZoneArea);
             leftHandle = new GUIBossAimZoneHandle(BossAimZoneHandleType.Left, bossAimZoneArea);
+
         }
 
         private void OnGUI()
@@ -88,6 +89,12 @@ namespace Team17.BallDash
             leftHandle.Draw();
 
             ProcessEvents(Event.current);
+
+            linkedZone.ZoneCenter = GUIToGamePos(bossAimZoneCenter.GuiCenterPosition);
+            linkedZone.TopRight = GUIToGamePos(bossAimZoneArea.RightLineStart);
+            linkedZone.TopLeft = GUIToGamePos(bossAimZoneArea.TopLineStart);
+            linkedZone.BotLeft = GUIToGamePos(bossAimZoneArea.LeftLineStart);
+            linkedZone.BotRight = GUIToGamePos(bossAimZoneArea.BotLineStart);
         }
 
         private void DrawBackgroud()
@@ -181,9 +188,9 @@ namespace Team17.BallDash
         private Vector3 GUIToGamePos(Vector3 pos)
         {
             float x = Mathf.InverseLerp(0, maxSize.x, pos.x);
-            float y = Mathf.InverseLerp(maxSize.y, 0, pos.y);
+            float y = Mathf.InverseLerp(0, maxSize.y, pos.y);
             x = Mathf.Lerp(minGameX, maxGameX, x);
-            y = Mathf.Lerp(minGameY, maxGameY, y);
+            y = Mathf.Lerp(maxGameY, minGameY, y);
             return new Vector3(x, y, 0);
         }
 
@@ -192,7 +199,7 @@ namespace Team17.BallDash
             float x = Mathf.InverseLerp(minGameX, maxGameX, pos.x);
             float y = Mathf.InverseLerp(minGameY, maxGameY, pos.y);
             x = Mathf.Lerp(0, minSize.x, x);
-            y = Mathf.Lerp(0, minSize.y, y);
+            y = Mathf.Lerp(minSize.y, 0, y);
             return new Vector3(x, y, 0);
         }
     }
@@ -235,6 +242,7 @@ namespace Team17.BallDash
         }
 
         public Vector3 GuiCenterPosition { get => guiCenterPosition; set => guiCenterPosition = value; }
+
     }
 
     public class GUIBossAimZoneHandle
@@ -359,12 +367,15 @@ namespace Team17.BallDash
             botLineStart = new Vector3(rightDist, botDist) + center.GuiCenterPosition;
             leftLineStart = new Vector3(leftDist, botDist) + center.GuiCenterPosition;
 
+            /*topLineStart = new Vector3(leftDist, topDist);
+            rightLineStart = new Vector3(rightDist, topDist);
+            botLineStart = new Vector3(rightDist, botDist);
+            leftLineStart = new Vector3(leftDist, botDist);*/
+
             Handles.DrawLine(topLineStart, rightLineStart);
             Handles.DrawLine(rightLineStart, botLineStart);
             Handles.DrawLine(botLineStart, leftLineStart);
             Handles.DrawLine(leftLineStart, topLineStart);
-
-            Debug.Log("Top : " + topDist + " Right : " + rightDist + " Bot : " + botDist + " Left : " + leftDist);
 
             topHandlePos = new Vector3(center.GuiCenterPosition.x, topLineStart.y);
             rightHandlePos = new Vector3(rightLineStart.x, center.GuiCenterPosition.y);

@@ -21,6 +21,7 @@ namespace Team17.BallDash
 
             int ident = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
+
             float spacing = 16;
             Rect centerRect = new Rect(position.x, position.y + spacing, position.width, 16);
             Rect topRightRect = new Rect(position.x, position.y + spacing*2, position.width, 16);
@@ -28,7 +29,9 @@ namespace Team17.BallDash
             Rect botRightRect = new Rect(position.x, position.y + spacing*4, position.width, 16);
             Rect botLeftRect = new Rect(position.x, position.y + spacing*5, position.width, 16);
             Rect buttonRect = new Rect(position.x, position.y + spacing*6, position.width, 16);
+
             EditorGUI.LabelField(position, label);
+
             GUI.enabled = false;
             EditorGUI.Vector3Field(centerRect, "Center :", target.ZoneCenter);
             EditorGUI.Vector3Field(topRightRect, "Top right", target.TopRight);
@@ -41,7 +44,7 @@ namespace Team17.BallDash
             {
                 //display editor window
                 BossAimZoneWindow window = BossAimZoneWindow.ShowWindow();
-                window.SetBaseValues(target.ZoneCenter, target);
+                window.SetBaseValues(target);
             }
 
             EditorGUI.indentLevel = ident;
