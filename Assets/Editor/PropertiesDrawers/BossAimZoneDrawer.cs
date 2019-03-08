@@ -17,7 +17,7 @@ namespace Team17.BallDash
         {
             EditorGUI.BeginProperty(position, label, property);
 
-            int ident = EditorGUI.indentLevel;
+            int indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
 
             float spacing = 16;
@@ -39,13 +39,8 @@ namespace Team17.BallDash
             GUI.enabled = true;
 
             BossAimZone target = new BossAimZone();
-            object targetObject = property.serializedObject.targetObject;
-            System.Type targetObjectType = targetObject.GetType();
-            System.Reflection.FieldInfo info = targetObjectType.GetField(property.propertyPath);
-            if(info != null)
-            {
-                target = info.GetValue(targetObject) as BossAimZone;
-            }
+            //fieldInfo.GetValue(property.FindPropertyRelative("zoneCenter"));
+            
 
             if (GUI.Button(buttonRect, "Edit Zone"))
             {
@@ -53,7 +48,7 @@ namespace Team17.BallDash
                 window.SetBaseValues(target);
             }
 
-            EditorGUI.indentLevel = ident;
+            EditorGUI.indentLevel = indent;
 
             EditorGUI.EndProperty();
         }

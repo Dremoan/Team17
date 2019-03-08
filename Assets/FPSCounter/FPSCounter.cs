@@ -17,7 +17,7 @@ namespace Otumn.FPSCounter
 
         private void Update()
         {
-            fps = 1.0f / Time.deltaTime;
+            fps = (1.0f / Time.deltaTime) * Time.timeScale;
             fpsText.text = fps.ToString("F") + " fps";
         }
     }

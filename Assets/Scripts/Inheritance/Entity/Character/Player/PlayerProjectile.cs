@@ -72,8 +72,9 @@ namespace Team17.BallDash
             float zRot = Vector3.SignedAngle(transform.up, (touchPos - transform.position), Vector3.forward);
             trajectory.rotation = Quaternion.Euler(0, 0, zRot);
             trajectory.localScale = new Vector3(1, Vector3.Distance(transform.position, touchPos) * 2, 1);
-            character.transform.position = transform.position + (transform.position - Vector3.Lerp(transform.position, touchPos, 0.2f));
-            character.transform.rotation = Quaternion.Euler(0, 0, zRot - 90); 
+            /*character.transform.position = transform.position + (transform.position - Vector3.Lerp(transform.position, touchPos, 0.2f));
+            character.transform.rotation = Quaternion.Euler(0, 0, zRot - 90); */
+            character.PrepareStrike(transform.position, touchPos);
         }
 
         public void Launch(Vector3 newDirection)
@@ -88,7 +89,6 @@ namespace Team17.BallDash
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             Timer t = timer.GetTimerFromUserIndex(reHitTimer);
             power += (t.Inc / slowedTimeScale) * 1.7f;
-            Debug.Log("Power after shot : " + power + ", Added : " + (t.Inc / slowedTimeScale) * 1.2f);
             movementDirection = newDirection.normalized * (speed * speedMultiplier.Evaluate(power));
             body.velocity = movementDirection;
             timer.DeleteTimer(reHitTimer);

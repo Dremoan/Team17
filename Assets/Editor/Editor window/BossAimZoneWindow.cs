@@ -27,10 +27,13 @@ namespace Team17.BallDash
 
         private int wallWidth = 15;
 
+        static SerializedObject serObject;
+
         public static BossAimZoneWindow ShowWindow()
         {
             BossAimZoneWindow window = EditorWindow.GetWindow<BossAimZoneWindow>();
             window.titleContent = new GUIContent("Edit boss aim zone");
+            //serObject = new SerializedObject(_target);
             return window;
         }
 
@@ -43,6 +46,8 @@ namespace Team17.BallDash
             minSize = new Vector2(160, 90) * 7;
             maxSize = new Vector2(160, 90) * 7;
         }
+
+
 
         public void SetBaseValues(BossAimZone zone)
         {
