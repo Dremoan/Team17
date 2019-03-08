@@ -8,10 +8,19 @@ namespace Team17.BallDash
     {
         [Header("Snake parameters")]
         [SerializeField] private BossAimZone zone;
+        [SerializeField] private SnakeBossPattern[] patterns;
+        [SerializeField] private BossAimZone[] zones;
 
         protected override void Update()
         {
             base.Update();
+        }
+
+        [ContextMenu("Add")]
+        public void Add()
+        {
+            zones = new BossAimZone[1];
+            zones[0] = new BossAimZone();
         }
     }
 
@@ -19,6 +28,6 @@ namespace Team17.BallDash
     public struct SnakeBossPattern
     {
         [SerializeField] private string name;
-        [SerializeField] private BossAimZone zone;
+        //[SerializeField] private BossAimZone zone;
     }
 }

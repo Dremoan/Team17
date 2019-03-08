@@ -15,8 +15,6 @@ namespace Team17.BallDash
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            BossAimZone target = (BossAimZone)fieldInfo.GetValue(property.serializedObject.targetObject);
-
             EditorGUI.BeginProperty(position, label, property);
 
             int ident = EditorGUI.indentLevel;
@@ -33,16 +31,24 @@ namespace Team17.BallDash
             EditorGUI.LabelField(position, label);
 
             GUI.enabled = false;
-            EditorGUI.Vector3Field(centerRect, "Center :", target.ZoneCenter);
-            EditorGUI.Vector3Field(topRightRect, "Top right", target.TopRight);
-            EditorGUI.Vector3Field(topLeftRect, "Top left :", target.TopLeft);
-            EditorGUI.Vector3Field(botRightRect, "Bot right :", target.BotRight);
-            EditorGUI.Vector3Field(botLeftRect, "Bot left:", target.BotLeft);
+            EditorGUI.PropertyField(centerRect, property.FindPropertyRelative("zoneCenter"), true);
+            EditorGUI.PropertyField(topRightRect, property.FindPropertyRelative("topRight"), true);
+            EditorGUI.PropertyField(topLeftRect, property.FindPropertyRelative("topLeft"), true);
+            EditorGUI.PropertyField(botRightRect, property.FindPropertyRelative("botRight"), true);
+            EditorGUI.PropertyField(botLeftRect, property.FindPropertyRelative("botLeft"), true);
             GUI.enabled = true;
+
+            BossAimZone target = new BossAimZone();
+            object targetObject = property.serializedObject.targetObject;
+            System.Type targetObjectType = targetObject.GetType();
+            System.Reflection.FieldInfo info = targetObjectType.GetField(property.propertyPath);
+            if(info != null)
+            {
+                target = info.GetValue(targetObject) as BossAimZone;
+            }
 
             if (GUI.Button(buttonRect, "Edit Zone"))
             {
-                //display editor window
                 BossAimZoneWindow window = BossAimZoneWindow.ShowWindow();
                 window.SetBaseValues(target);
             }
