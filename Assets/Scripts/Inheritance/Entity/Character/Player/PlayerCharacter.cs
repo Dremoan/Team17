@@ -8,27 +8,37 @@ namespace Team17.BallDash
     {
         [SerializeField] private Rigidbody body;
         [SerializeField] private Collider hardCollider;
+        [SerializeField] private Animator anim;
+        [SerializeField] private float distFromBall = 1.2f;
 
+        private bool negativeAngle = false;
         private float angle = 0;
+        private bool aiming = false;
 
         public void Physicate(bool physicate)
         {
             body.useGravity = physicate;
             hardCollider.enabled = physicate;
             body.velocity = Vector3.zero;
-            transform.rotation = Quaternion.identity;
+            transform.rotation = Quaternion.Euler(0, 90, 0);
+            anim.SetBool("aiming", !physicate);
         }
 
         public void PrepareStrike(Vector3 ballPos, Vector3 touchPos)
         {
-            transform.position = ballPos + (ballPos - touchPos).normalized * 1.2f;
+            transform.position = ballPos + (ballPos - touchPos).normalized * distFromBall;
             angle = Vector3.SignedAngle(Vector3.up, (ballPos - touchPos), Vector3.forward);
-            Debug.Log(angle);
+            negativeAngle = (angle < 0);
+            angle = Mathf.Abs(angle);
+            anim.SetFloat("angle", angle);
+            anim.SetBool("angleNegative", negativeAngle);
+
+            Debug.Log("Negative angle : " + negativeAngle + " Abs angle : " + angle);
         }
 
         public void Strike()
         {
-
+            anim.SetTrigger("shoot");
         }
     }
 }

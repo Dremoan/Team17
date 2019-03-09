@@ -95,6 +95,7 @@ namespace Team17.BallDash
             timerFeedback.gameObject.SetActive(false);
             trajectory.gameObject.SetActive(false);
             character.Physicate(true);
+            character.Strike();
         }
 
         #region Type of timer
