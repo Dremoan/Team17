@@ -2,38 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
+using UnityEngine.Events;
 
 public class FollowPath : MonoBehaviour
 {
-    [SerializeField] private PathCreator pathCreator;
-    [SerializeField] private BossManagement bossManager;
-    [SerializeField] private float speed = 5f;
-    [SerializeField] private bool startMoveAlongSpline; 
+    public PathCreator pathCreator;
+    public float speed = 5f;
+    public bool pathEnded;
+    public bool startPathFollowing;
     private float distanceTravelled;
-    private bool launchNext;
-    private int pathCount;
+    public UnityEvent endSpline;
+    private Vector3 initialPos;
+    private Quaternion initialRot;
 
+    private void Start()
+    {
+        initialPos = transform.localPosition;
+        initialRot = transform.localRotation;
+    }
     public void Update()
     {
-        Debug.Log(pathCreator.path.ended);
-        if(Input.GetMouseButtonDown(1))
+        MoveAlongSpline();
+        EndSplineResetValues();
+    }
+
+    public void MoveAlongSpline()
+    {
+        if (startPathFollowing)
         {
             pathCreator.path.ended = false;
-        }
-
-        if(pathCreator.path.ended == false)
-        {
-            launchNext = false;
             distanceTravelled += speed * Time.fixedDeltaTime;
-            transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, EndOfPathInstruction.Stop);
-            transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, EndOfPathInstruction.Stop);
-        }
-        else if(pathCreator.path.ended == true && launchNext)
-        {
-            pathCount++;
-            launchNext = false;
-            Debug.Log("Chemin numéro" + pathCount + "effectué");
+            transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, EndOfPathInstruction.StopAndTrigger);
+            transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, EndOfPathInstruction.StopAndTrigger);
         }
 
     }
+
+    public void EndSplineResetValues()
+    {
+        if (pathCreator.path.ended == true)
+        {
+            startPathFollowing = false;
+            distanceTravelled = 0f;
+            endSpline.Invoke();
+        }
+    }
+
+    public void ResetPositions()
+    {
+        transform.position = initialPos;
+        transform.rotation = initialRot;
+    }
+    
 }

@@ -15,7 +15,7 @@ namespace PathCreation
     public class VertexPath
     {
         #region Fields
-        public bool ended = true;
+        public bool ended;
         public readonly PathSpace space;
         public readonly bool isClosedLoop;
         public readonly Vector3[] vertices;
@@ -173,7 +173,7 @@ namespace PathCreation
                 return vertices.Length;
             }
         }
-
+        
         /// Gets point on path based on distance travelled.
         public Vector3 GetPointAtDistance(float dst, EndOfPathInstruction endOfPathInstruction = EndOfPathInstruction.Loop)
         {
@@ -256,6 +256,13 @@ namespace PathCreation
                     break;
                 case EndOfPathInstruction.Stop:
                     t = Mathf.Clamp01(t);
+                    break;
+                case EndOfPathInstruction.StopAndTrigger:
+                    if(t > 1)
+                    {
+                        t = Mathf.Clamp01(t);
+                        ended = true;
+                    }
                     break;
 
             }
