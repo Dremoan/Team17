@@ -49,7 +49,9 @@ namespace Team17.BallDash
         {
             Time.timeScale = slowedTimeScale;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
-            switch(type)
+            reHitTimer = timer.LaunchNewTimer(timeToHit.Evaluate(power) * slowedTimeScale, CancelBall);
+            Debug.Log(reHitTimer);
+            /*switch (type)
             {
                 case TypeOfTimer.Cancel:
                     reHitTimer = timer.LaunchNewTimer(timeToHit.Evaluate(power) * slowedTimeScale, CancelBall);
@@ -57,7 +59,7 @@ namespace Team17.BallDash
                 case TypeOfTimer.Nothing:
                     reHitTimer = timer.LaunchNewTimer(timeToHit.Evaluate(power) * slowedTimeScale, Nothing);
                     break;
-            }
+            }*/
             timerFeedback.gameObject.SetActive(true);
             trajectory.gameObject.SetActive(true);
             character.Physicate(false);
@@ -72,8 +74,6 @@ namespace Team17.BallDash
             float zRot = Vector3.SignedAngle(transform.up, (touchPos - transform.position), Vector3.forward);
             trajectory.rotation = Quaternion.Euler(0, 0, zRot);
             trajectory.localScale = new Vector3(1, Vector3.Distance(transform.position, touchPos) * 2, 1);
-            /*character.transform.position = transform.position + (transform.position - Vector3.Lerp(transform.position, touchPos, 0.2f));
-            character.transform.rotation = Quaternion.Euler(0, 0, zRot - 90); */
             character.PrepareStrike(transform.position, touchPos);
         }
 
@@ -119,8 +119,8 @@ namespace Team17.BallDash
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             timerFeedback.gameObject.SetActive(false);
             trajectory.gameObject.SetActive(false);
-            character.Physicate(true);
-            wasCanceled = true;
+            //character.Physicate(true);
+            //wasCanceled = true;
         }
 
         #endregion

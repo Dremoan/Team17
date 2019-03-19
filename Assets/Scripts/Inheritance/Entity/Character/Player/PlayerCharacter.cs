@@ -32,8 +32,6 @@ namespace Team17.BallDash
             angle = Mathf.Abs(angle);
             anim.SetFloat("angle", angle);
             anim.SetBool("angleNegative", negativeAngle);
-
-            Debug.Log("Negative angle : " + negativeAngle + " Abs angle : " + angle);
         }
 
         public void Strike()

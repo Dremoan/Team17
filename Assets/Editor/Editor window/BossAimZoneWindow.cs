@@ -83,9 +83,6 @@ namespace Team17.BallDash
             DrawGrid(20, 0.2f, Color.gray);
             DrawWalls();
 
-            Rect rect = new Rect(GameToGUIPos(linkedZone.TopRight).x, GameToGUIPos(linkedZone.TopRight).y, 2, 2);
-            GUI.Box(rect, "");
-
             bossAimZoneCenter.Draw();
             bossAimZoneArea.Draw();
             topHandle.Draw();

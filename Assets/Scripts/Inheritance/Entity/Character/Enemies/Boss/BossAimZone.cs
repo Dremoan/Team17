@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Team17.BallDash
 {
-    [System.Serializable]
-    public class BossAimZone
+    [CreateAssetMenu]
+    public class BossAimZone : ScriptableObject
     {
         [SerializeField] private Vector3 zoneCenter = new Vector3(0, 5);
 
