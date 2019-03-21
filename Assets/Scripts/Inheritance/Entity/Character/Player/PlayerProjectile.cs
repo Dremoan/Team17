@@ -21,6 +21,7 @@ namespace Team17.BallDash
         [SerializeField] private float slowedTimeScale = 0.2f;
         [SerializeField] private AnimationCurve speedMultiplier;
         [SerializeField] private AnimationCurve timeToHit;
+        private float selfTimeScale = 1f;
         private float power = 0;
         private int reHitTimer;
         private bool wasCanceled = false;
@@ -39,6 +40,7 @@ namespace Team17.BallDash
 
         protected override void Update()
         {
+            body.velocity = body.velocity * selfTimeScale;
             base.Update();
             Debug.DrawRay(lastContact, lastNormal.normalized * 3, Color.magenta);
             Debug.DrawRay(lastContact, -lastEnter.normalized * 3, Color.blue);
@@ -47,9 +49,10 @@ namespace Team17.BallDash
 
         public void StartCalculation()
         {
-            Time.timeScale = slowedTimeScale;
-            Time.fixedDeltaTime = 0.02f * Time.timeScale;
-            reHitTimer = timer.LaunchNewTimer(timeToHit.Evaluate(power) * slowedTimeScale, CancelBall);
+            /*Time.timeScale = slowedTimeScale;
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;*/
+            selfTimeScale = slowedTimeScale;
+            reHitTimer = timer.LaunchNewTimer(timeToHit.Evaluate(power), CancelBall);
             Debug.Log(reHitTimer);
             /*switch (type)
             {
@@ -85,10 +88,11 @@ namespace Team17.BallDash
                 return;
             }
             body.useGravity = false;
-            Time.timeScale = 1;
-            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            /*Time.timeScale = 1;
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;*/
+            selfTimeScale = 1f;
             Timer t = timer.GetTimerFromUserIndex(reHitTimer);
-            power += (t.Inc / slowedTimeScale) * 1.7f;
+            power += (t.Inc) * 1.7f;
             movementDirection = newDirection.normalized * (speed * speedMultiplier.Evaluate(power));
             body.velocity = movementDirection;
             timer.DeleteTimer(reHitTimer);
