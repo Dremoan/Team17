@@ -33,12 +33,12 @@ namespace Team17.BallDash
         public float delayFollowSnakeChunks = 0.25f;
         public FollowPath[] snakeBodyParts;
 
-
         protected override void Start()
         {
             base.Start();
             PickMove();
         }
+
         protected override void Update()
         {
             base.Update();
@@ -92,9 +92,6 @@ namespace Team17.BallDash
             }
         }
     }
-
-
-
-
-
 }
+
+
