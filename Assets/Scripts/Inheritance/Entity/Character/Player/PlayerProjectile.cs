@@ -21,7 +21,6 @@ namespace Team17.BallDash
         [SerializeField] private float slowedTimeScale = 0.2f;
         [SerializeField] private AnimationCurve speedMultiplier;
         [SerializeField] private AnimationCurve timeToHit;
-        private float selfTimeScale = 1f;
         private float power = 0;
         private int reHitTimer;
         private bool wasCanceled = false;
@@ -40,7 +39,6 @@ namespace Team17.BallDash
 
         protected override void Update()
         {
-            body.velocity = body.velocity * selfTimeScale;
             base.Update();
             Debug.DrawRay(lastContact, lastNormal.normalized * 3, Color.magenta);
             Debug.DrawRay(lastContact, -lastEnter.normalized * 3, Color.blue);
@@ -49,20 +47,8 @@ namespace Team17.BallDash
 
         public void StartCalculation()
         {
-            /*Time.timeScale = slowedTimeScale;
-            Time.fixedDeltaTime = 0.02f * Time.timeScale;*/
-            selfTimeScale = slowedTimeScale;
+            body.velocity *= slowedTimeScale;
             reHitTimer = timer.LaunchNewTimer(timeToHit.Evaluate(power), CancelBall);
-            Debug.Log(reHitTimer);
-            /*switch (type)
-            {
-                case TypeOfTimer.Cancel:
-                    reHitTimer = timer.LaunchNewTimer(timeToHit.Evaluate(power) * slowedTimeScale, CancelBall);
-                    break;
-                case TypeOfTimer.Nothing:
-                    reHitTimer = timer.LaunchNewTimer(timeToHit.Evaluate(power) * slowedTimeScale, Nothing);
-                    break;
-            }*/
             timerFeedback.gameObject.SetActive(true);
             trajectory.gameObject.SetActive(true);
             character.Physicate(false);
@@ -88,9 +74,6 @@ namespace Team17.BallDash
                 return;
             }
             body.useGravity = false;
-            /*Time.timeScale = 1;
-            Time.fixedDeltaTime = 0.02f * Time.timeScale;*/
-            selfTimeScale = 1f;
             Timer t = timer.GetTimerFromUserIndex(reHitTimer);
             power += (t.Inc) * 1.7f;
             movementDirection = newDirection.normalized * (speed * speedMultiplier.Evaluate(power));
@@ -123,8 +106,6 @@ namespace Team17.BallDash
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             timerFeedback.gameObject.SetActive(false);
             trajectory.gameObject.SetActive(false);
-            //character.Physicate(true);
-            //wasCanceled = true;
         }
 
         #endregion

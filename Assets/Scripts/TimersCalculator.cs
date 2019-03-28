@@ -39,6 +39,10 @@ public class TimersCalculator : MonoBehaviour
                 }
             }
         }
+        if(timers.Count == 0)
+        {
+            givenTimers = 0;
+        }
     }
 
     /// <summary>

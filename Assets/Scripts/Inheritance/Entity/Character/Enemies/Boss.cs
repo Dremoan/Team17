@@ -16,6 +16,8 @@ namespace Team17.BallDash
         [SerializeField] protected BossAttack[] secondPhaseAttacks;
         [SerializeField] protected BossAttack[] thirdPhaseAttacks;
 
+        [SerializeField] protected Transform testTarget;
+
         protected float currentHealthToNextState = 0f;
         protected BossState bossState = BossState.First;
         protected int bossStateIndex = 0;
@@ -30,6 +32,13 @@ namespace Team17.BallDash
         {
             base.Start();
             SetMoveListsTimers();
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            ChooseAttack();
+            Attack();
         }
 
         #endregion
@@ -66,16 +75,20 @@ namespace Team17.BallDash
 
         protected virtual void ChooseAttack()
         {
-            int index = 0;
+            int index = -1;
             int lastPriority = -1;
             switch (bossState) 
             {
                 case BossState.First:
                     for (int i = 0; i < firstPhaseAttacks.Length; i++)
                     {
-                        if(firstPhaseAttacks[i].CanBeUsed)
+                        if(firstPhaseAttacks[i].IsUsableAndUseful(testTarget.position))
                         {
-                            
+                            if(firstPhaseAttacks[i].Priority > lastPriority)
+                            {
+                                index = i;
+                                lastPriority = firstPhaseAttacks[i].Priority;
+                            }
                         }
                     }
                     break;
@@ -88,12 +101,22 @@ namespace Team17.BallDash
 
                     break;
             }
+            if (index == -1) return;
+            nextAttackIndex = index;
         }
 
-        private bool CheckForAttackAvailability(BossAttack attack)
+        protected virtual void Attack()
         {
-
-            return false;
+            if(canAttack)
+            {
+                switch (bossState)
+                {
+                    case BossState.First:
+                        firstPhaseAttacks[nextAttackIndex].LaunchAttack(AttackEnd);
+                        break;
+                }
+                canAttack = false;
+            }
         }
 
         protected virtual void AttackEnd()
@@ -147,15 +170,33 @@ namespace Team17.BallDash
 
         private TimersCalculator timers;
         private bool canBeUsed = true;
+        private System.Action endAction;
 
-        public void LaunchAttack(System.Action endAction)
+        public void LaunchAttack(System.Action endAct)
         {
+            Debug.Log(name);
+            attack.Invoke();
+            endAction = endAct;
+            canBeUsed = false;
+            timers.LaunchNewTimer(timeToEnd, EndAttack);
+        }
 
+        private void EndAttack()
+        {
+            endAction.Invoke();
+            timers.LaunchNewTimer(coolDown, ResetAttack);
         }
 
         private void ResetAttack()
         {
+            canBeUsed = true;
+        }
 
+        public bool IsUsableAndUseful(Vector3 targetPos)
+        {
+            if (!canBeUsed) return false;
+            if (zone.Contains(targetPos)) return true;
+            return false;
         }
 
         public bool CanBeUsed { get => canBeUsed; }
