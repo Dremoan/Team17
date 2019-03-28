@@ -1175,7 +1175,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1969560058
 Transform:
   m_ObjectHideFlags: 0
@@ -1205,42 +1205,21 @@ MonoBehaviour:
   body: {fileID: 1969560061}
   timers: {fileID: 1969560060}
   firstPhaseAttacks:
-  - name: Top kick
-    zone: {fileID: 11400000, guid: d135d49b601869d4298908ffc3b36f37, type: 2}
-    priority: 3
-    timeToEnd: 2
-    coolDown: 5
-    attack:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 0}
-          m_MethodName: 
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: 
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  - name: Center kick
+  - name: High kick
     zone: {fileID: 11400000, guid: d98f4c220bae9044aae7ebfae36503c9, type: 2}
-    priority: 2
+    priority: 7
     timeToEnd: 3
-    coolDown: 2
+    coolDown: 5
     attack:
       m_PersistentCalls:
         m_Calls: []
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-  - name: Whole kick
-    zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
+  - name: 
+    zone: {fileID: 0}
     priority: 0
-    timeToEnd: 0.5
-    coolDown: 1
+    timeToEnd: 0
+    coolDown: 0
     attack:
       m_PersistentCalls:
         m_Calls: []
@@ -1292,7 +1271,7 @@ GameObject:
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1985607053
 Transform:
   m_ObjectHideFlags: 0
@@ -1396,7 +1375,7 @@ PrefabInstance:
     - target: {fileID: 7407564158975760487, guid: 1d7d8698125f9844c8139764c4c000a7,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3455242873607892154, guid: 1d7d8698125f9844c8139764c4c000a7,
         type: 3}
