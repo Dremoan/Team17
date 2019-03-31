@@ -6,25 +6,28 @@ namespace Team17.BallDash
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(TimersCalculator))]
-    public class Boss : Character
+    public class Boss : Character, IBallHitable
     {
         [Header("Components")]
         [SerializeField] protected Rigidbody body;
         [SerializeField] protected TimersCalculator timers;
+        [Header("Health and state")]
+        [SerializeField] protected BossState bossState = BossState.First;
+        [SerializeField] protected float firstPhaseHealth = 50f;
+        [SerializeField] protected float secondPhaseHealth = 75f;
+        [SerializeField] protected float thirdPhaseHealth = 100f;
+
         [Header("Move list")]
         [SerializeField] protected BossAttack[] firstPhaseAttacks;
         [SerializeField] protected BossAttack[] secondPhaseAttacks;
         [SerializeField] protected BossAttack[] thirdPhaseAttacks;
 
-        [SerializeField] protected Transform testTarget;
+        [SerializeField] protected Transform testTarget; // TO DO : find a way to get player's position instead of that
 
         protected float currentHealthToNextState = 0f;
-        protected BossState bossState = BossState.First;
         protected int bossStateIndex = 0;
         protected int nextAttackIndex = 0;
         protected bool canAttack = true;
-
-
 
         #region Monobehaviour callbacks
 
@@ -32,6 +35,8 @@ namespace Team17.BallDash
         {
             base.Start();
             SetMoveListsTimers();
+            SetHealth();
+            bossStateIndex = (int)bossState;
         }
 
         protected override void Update()
@@ -45,7 +50,7 @@ namespace Team17.BallDash
 
         #region State management
 
-        protected virtual void Hit(float dmgs)
+        public void Hit(float dmgs)
         {
             currentHealthToNextState -= dmgs;
             GameManager.state.CallOnBossHurt();
@@ -61,6 +66,7 @@ namespace Team17.BallDash
             {
                 GameManager.state.CallOnBossChangeState();
                 bossState = (Team17.BallDash.BossState) bossStateIndex;
+                SetHealth();
             }
         }
 
@@ -142,7 +148,23 @@ namespace Team17.BallDash
             }
         }
 
-        #endregion 
+        private void SetHealth()
+        {
+            switch(bossState)
+            {
+                case BossState.First:
+                    currentHealthToNextState = firstPhaseHealth;
+                    break;
+                case BossState.Second:
+                    currentHealthToNextState = secondPhaseHealth;
+                    break;
+                case BossState.Third:
+                    currentHealthToNextState = thirdPhaseHealth;
+                    break;
+            }
+        }
+
+        #endregion
 
         #region Properties
 

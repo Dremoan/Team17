@@ -135,6 +135,16 @@ namespace Team17.BallDash
                 lastEnter = movementDirection;
                 Bounce(movementDirection, coll.contacts[0].normal);
             }
+
+            if(coll.gameObject.GetComponent<IBallHitable>() != null)
+            {
+                coll.gameObject.GetComponent<IBallHitable>().Hit(power);
+            }
         }
+    }
+
+    public interface IBallHitable
+    {
+        void Hit(float dmgs);
     }
 }
