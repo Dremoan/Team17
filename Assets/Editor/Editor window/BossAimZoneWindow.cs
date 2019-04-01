@@ -33,7 +33,6 @@ namespace Team17.BallDash
         {
             BossAimZoneWindow window = EditorWindow.GetWindow<BossAimZoneWindow>();
             window.titleContent = new GUIContent("Edit boss aim zone");
-            //serObject = new SerializedObject(_target);
             return window;
         }
 
@@ -52,8 +51,6 @@ namespace Team17.BallDash
         public void SetBaseValues(BossAimZone zone)
         {
             linkedZone = zone;
-            // TODO : make the conversion method to actually get the GUI pos from the game pos
-            // feed the GUI position there
             bossAimZoneCenter = new GUIBossAimZoneCenter(new Rect(guiZoneCenter.x - 10, guiZoneCenter.y - 10, 20, 20), GameToGUIPos(zone.ZoneCenter));
 
             Vector3 guiCenter = GameToGUIPos(zone.ZoneCenter);
@@ -175,7 +172,6 @@ namespace Team17.BallDash
             linkedZone.TopLeft = GUIToGamePos(bossAimZoneArea.TopLineStart);
             linkedZone.BotLeft = GUIToGamePos(bossAimZoneArea.LeftLineStart);
             linkedZone.BotRight = GUIToGamePos(bossAimZoneArea.BotLineStart);
-            // save values here
         }
 
         private bool WindowContains(Vector3 pos)
@@ -368,11 +364,6 @@ namespace Team17.BallDash
             rightLineStart = new Vector3(rightDist, topDist) + center.GuiCenterPosition;
             botLineStart = new Vector3(rightDist, botDist) + center.GuiCenterPosition;
             leftLineStart = new Vector3(leftDist, botDist) + center.GuiCenterPosition;
-
-            /*topLineStart = new Vector3(leftDist, topDist);
-            rightLineStart = new Vector3(rightDist, topDist);
-            botLineStart = new Vector3(rightDist, botDist);
-            leftLineStart = new Vector3(leftDist, botDist);*/
 
             Handles.DrawLine(topLineStart, rightLineStart);
             Handles.DrawLine(rightLineStart, botLineStart);

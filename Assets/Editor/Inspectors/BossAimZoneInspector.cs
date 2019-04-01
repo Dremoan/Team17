@@ -34,8 +34,6 @@ namespace Team17.BallDash
                 window.SetBaseValues(aimZone);
             }
 
-            
-
             serializedObject.ApplyModifiedProperties();
         }
     }
