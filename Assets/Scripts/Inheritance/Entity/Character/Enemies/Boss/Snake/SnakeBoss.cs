@@ -5,7 +5,7 @@ using PathCreation;
 
 namespace Team17.BallDash
 {
-    public class SnakeBoss : Boss
+    public class SnakeBoss : Entity
     {
         #region NotNow
         /*
@@ -27,27 +27,28 @@ namespace Team17.BallDash
                 }
             */
         #endregion
-        public Transform snakeHead;
-        public PathCreator[] pathPull;
+        [SerializeField] private FollowPath[] snakeBodyParts;
+        [SerializeField] private PathCreator[] pathPull;
         private PathCreator actualPath;
-        public float delayFollowSnakeChunks = 0.25f;
-        public FollowPath[] snakeBodyParts;
+        
+        [SerializeField] private Transform snakeHead;
+        [SerializeField] private Animator snakeAnim;
+        
 
-        protected override void Start()
+        [SerializeField] private float delayFollowSnakeChunks = 0.25f;
+        private int indexPath;
+
+
+        void Start()
         {
-            base.Start();
-            PickMove();
+            ResetPositionsEvent();
         }
-
-        protected override void Update()
-        {
-            base.Update();
-        }
-
 
         IEnumerator Delay()
         {
-            for (int i = 0; i < snakeBodyParts.Length; i++)
+            snakeBodyParts[0].startPathFollowing = true;
+            yield return new WaitForSeconds(delayFollowSnakeChunks);
+            for (int i = 1; i < snakeBodyParts.Length; i++)
             {
                 snakeBodyParts[i].startPathFollowing = true;
                 yield return new WaitForSeconds(delayFollowSnakeChunks);
@@ -56,8 +57,7 @@ namespace Team17.BallDash
 
         public void PickMove()
         {
-            ResetPositionsEvent();
-            snakeBodyParts[0].pathCreator = GetRandomPath();
+            snakeBodyParts[0].pathCreator = actualPath;
 
             for (int i = 1; i < snakeBodyParts.Length; i++)
             {
@@ -67,20 +67,15 @@ namespace Team17.BallDash
             StartCoroutine(Delay());
         }
 
-        public void PickAttack()
+        public void GetPath(int index)
         {
-            snakeBodyParts[0].pathCreator = GetRandomPath();
-
-            for (int i = 1; i < snakeBodyParts.Length; i++)
-            {
-                snakeBodyParts[i].pathCreator = snakeBodyParts[0].pathCreator;
-            }
-            
+            indexPath = index;
+            AssignPath();
         }
 
-        public PathCreator GetRandomPath()
+        public PathCreator AssignPath()
         {
-            actualPath = pathPull[Random.Range(0, pathPull.Length)];
+            actualPath = pathPull[indexPath];
             return actualPath;
         }
 
@@ -88,8 +83,15 @@ namespace Team17.BallDash
         {
             for (int i = 0; i < snakeBodyParts.Length; i++)
             {
-                snakeBodyParts[i].ResetPositions();
+                snakeBodyParts[i].EndSplineResetValues();
             }
+        }
+
+        public void AssignAttack(int indexToAssign)
+        {
+            snakeAnim.SetFloat("AttackZoneIndex", 0f);
+            ResetPositionsEvent();
+            snakeAnim.SetInteger("AttackZoneIndex", indexToAssign);
         }
     }
 }
