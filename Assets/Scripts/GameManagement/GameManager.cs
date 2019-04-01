@@ -12,6 +12,7 @@ namespace Team17.BallDash
     public class GameState
     {
         private List<Entity> entities = new List<Entity>();
+        private GameObject playerGameObject;
 
         public void RegisterEntity(Entity ent)
         {
@@ -86,5 +87,7 @@ namespace Team17.BallDash
                 entities[i].OnBossDeath();
             }
         }
+
+        public GameObject PlayerGameObject { get => playerGameObject; set => playerGameObject = value; }
     }
 }
