@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BallTestBehaviour : MonoBehaviour
 {
-
     [SerializeField] private Rigidbody body;
 
     private GameObject particleLaunch;
@@ -34,6 +33,10 @@ public class BallTestBehaviour : MonoBehaviour
         {
             test.GetComponent<ParticleSystem>().Play();
         }
+        else
+        {
+            Debug.LogWarning("no partcile system found on " + test.name);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -43,6 +46,4 @@ public class BallTestBehaviour : MonoBehaviour
         Destroy(impactClone, impactLife);
         Destroy(this.gameObject);
     }
-
-
 }
