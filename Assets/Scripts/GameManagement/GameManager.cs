@@ -32,19 +32,19 @@ namespace Team17.BallDash
             }
         }
 
-        public void CallOnBallShooted()
+        public void CallOnBallShot()
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                entities[i].OnBallShooted();
+                entities[i].OnBallShot();
             }
         }
 
-        public void CallOnBallCanceled()
+        public void CallOnBallDestroyed()
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                entities[i].OnBallCanceled();
+                entities[i].OnBallDestroyed();
             }
         }
 

@@ -42,12 +42,12 @@ namespace Team17.BallDash
 
         }
 
-        public virtual void OnBallShooted()
+        public virtual void OnBallShot()
         {
 
         }
 
-        public virtual void OnBallCanceled()
+        public virtual void OnBallDestroyed()
         {
 
         }

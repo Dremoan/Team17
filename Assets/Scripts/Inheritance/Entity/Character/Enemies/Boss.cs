@@ -22,8 +22,6 @@ namespace Team17.BallDash
         [SerializeField] protected BossAttack[] secondPhaseAttacks;
         [SerializeField] protected BossAttack[] thirdPhaseAttacks;
 
-        [SerializeField] protected Transform testTarget; // TO DO : find a way to get player's position instead of that
-
         protected float currentHealthToNextState = 0f;
         protected int bossStateIndex = 0;
         protected int nextAttackIndex = 0;
@@ -139,6 +137,12 @@ namespace Team17.BallDash
                 {
                     case BossState.First:
                         firstPhaseAttacks[nextAttackIndex].LaunchAttack(AttackEnd);
+                        break;
+                    case BossState.Second:
+                        secondPhaseAttacks[nextAttackIndex].LaunchAttack(AttackEnd);
+                        break;
+                    case BossState.Third:
+                        thirdPhaseAttacks[nextAttackIndex].LaunchAttack(AttackEnd);
                         break;
                 }
                 canAttack = false;

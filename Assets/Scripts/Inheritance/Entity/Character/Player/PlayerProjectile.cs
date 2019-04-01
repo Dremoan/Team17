@@ -6,7 +6,6 @@ namespace Team17.BallDash
 {
     public class PlayerProjectile : Character
     {
-        enum TypeOfTimer {Cancel, Nothing}
         [Header("Components")]
         [SerializeField] private Rigidbody body;
         [SerializeField] private TimersCalculator timer;
@@ -16,13 +15,15 @@ namespace Team17.BallDash
         [SerializeField] private PlayerCharacter character;
 
         [Header("Parameters")]
-        [SerializeField] private TypeOfTimer type; 
         [SerializeField] private float speed = 50f;
         [SerializeField] private float slowedTimeScale = 0.2f;
         [SerializeField] private AnimationCurve speedMultiplier;
         [SerializeField] private AnimationCurve timeToHit;
+        [SerializeField] private AnimationCurve powerGained;
+        [SerializeField] private float powerLostOnBounce = 5f;
         private float power = 0;
         private int reHitTimer;
+        private bool destroyed = false;
         private bool wasCanceled = false;
         private Vector3 movementDirection;
         private Vector3 initialFeedbackScale;
@@ -59,6 +60,7 @@ namespace Team17.BallDash
             trajectory.gameObject.SetActive(true);
             character.Physicate(false);
             wasCanceled = false;
+            GameManager.state.CallOnPlayerTeleport();
         }
 
         public void FeedBack(Vector3 touchPos)
@@ -81,22 +83,22 @@ namespace Team17.BallDash
             }
             body.useGravity = false;
             Timer t = timer.GetTimerFromUserIndex(reHitTimer);
-            power += (t.Inc) * 1.7f;
+            power += powerGained.Evaluate(t.Inc);
             movementDirection = newDirection.normalized * (speed * speedMultiplier.Evaluate(power));
+            Debug.Log("Gained : " + powerGained.Evaluate(t.Inc) + " Power : " + power + " Speed : " + speed * speedMultiplier.Evaluate(power));
             body.velocity = movementDirection;
             timer.DeleteTimer(reHitTimer);
             timerFeedback.gameObject.SetActive(false);
             trajectory.gameObject.SetActive(false);
             character.Physicate(true);
             character.Strike();
+            GameManager.state.CallOnBallShot();
         }
 
-        #region Type of timer
+        #region Ball interactions
 
         private void CancelBall()
         {
-            Time.timeScale = 1;
-            Time.fixedDeltaTime = 0.02f * Time.timeScale;
             power = 0;
             body.velocity = body.velocity * 0.7f;
             body.useGravity = true;
@@ -104,29 +106,24 @@ namespace Team17.BallDash
             timerFeedback.gameObject.SetActive(false);
             trajectory.gameObject.SetActive(false);
             character.Physicate(true);
+            gameObject.SetActive(false);
+            GameManager.state.CallOnBallDestroyed();
         }
-
-        private void Nothing()
-        {
-            Time.timeScale = 1;
-            Time.fixedDeltaTime = 0.02f * Time.timeScale;
-            timerFeedback.gameObject.SetActive(false);
-            trajectory.gameObject.SetActive(false);
-        }
-
-        #endregion
 
         private void Bounce(Vector3 enterVector, Vector3 collisionNormal)
         {
             if (body.useGravity) return;
             Vector3 newDir = Vector3.Reflect(enterVector, collisionNormal);
             lastNewDir = newDir;
-            power -= 5;
+            power -= powerLostOnBounce;
             if (power < 0) power = 0;
             Debug.Log("Power after bounce : " + power);
             movementDirection = newDir.normalized * (speed * speedMultiplier.Evaluate(power));
             body.velocity = movementDirection;
+            GameManager.state.CallOnBallBounced();
         }
+
+        #endregion
 
         private void OnCollisionEnter(Collision coll)
         {
@@ -141,12 +138,18 @@ namespace Team17.BallDash
                 lastEnter = movementDirection;
                 Bounce(movementDirection, coll.contacts[0].normal);
             }
+        }
 
-            if(coll.gameObject.GetComponent<IBallHitable>() != null)
+        private void OnTriggerEnter(Collider coll)
+        {
+            if (coll.gameObject.GetComponent<IBallHitable>() != null)
             {
                 coll.gameObject.GetComponent<IBallHitable>().Hit(power);
             }
         }
+
+        public bool Destroyed { get => destroyed; set => destroyed = value; }
+
     }
 
     public interface IBallHitable
