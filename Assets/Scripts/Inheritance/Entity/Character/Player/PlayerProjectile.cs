@@ -45,6 +45,12 @@ namespace Team17.BallDash
             Debug.DrawRay(lastContact, lastNewDir.normalized * 3, Color.red);
         }
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            GameManager.state.PlayerGameObject = this.gameObject;
+        }
+
         public void StartCalculation()
         {
             body.velocity *= slowedTimeScale;

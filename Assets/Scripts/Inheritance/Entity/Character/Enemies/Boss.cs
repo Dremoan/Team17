@@ -88,7 +88,7 @@ namespace Team17.BallDash
                 case BossState.First:
                     for (int i = 0; i < firstPhaseAttacks.Length; i++)
                     {
-                        if(firstPhaseAttacks[i].IsUsableAndUseful(testTarget.position))
+                        if(firstPhaseAttacks[i].IsUsableAndUseful(GameManager.state.PlayerGameObject.transform.position))
                         {
                             if(firstPhaseAttacks[i].Priority > lastPriority)
                             {
@@ -100,11 +100,31 @@ namespace Team17.BallDash
                     break;
 
                 case BossState.Second:
-
+                    for (int i = 0; i < secondPhaseAttacks.Length; i++)
+                    {
+                        if (secondPhaseAttacks[i].IsUsableAndUseful(GameManager.state.PlayerGameObject.transform.position))
+                        {
+                            if (secondPhaseAttacks[i].Priority > lastPriority)
+                            {
+                                index = i;
+                                lastPriority = secondPhaseAttacks[i].Priority;
+                            }
+                        }
+                    }
                     break;
 
                 case BossState.Third:
-
+                    for (int i = 0; i < thirdPhaseAttacks.Length; i++)
+                    {
+                        if (thirdPhaseAttacks[i].IsUsableAndUseful(GameManager.state.PlayerGameObject.transform.position))
+                        {
+                            if (thirdPhaseAttacks[i].Priority > lastPriority)
+                            {
+                                index = i;
+                                lastPriority = thirdPhaseAttacks[i].Priority;
+                            }
+                        }
+                    }
                     break;
             }
             if (index == -1) return;
