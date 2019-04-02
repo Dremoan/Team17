@@ -23,15 +23,15 @@ public class BallTestBehaviour : MonoBehaviour
         for (int i = 0; i < particleLaunch.Length; i++)
         {
             GameObject clone = GameObject.Instantiate(particleLaunch[i], transform.position, Quaternion.identity);
-            PlayParticle(particleLaunch[i]);
-            Destroy(particleLaunch[i], launchLifetime);
+            PlayParticle(clone);
+            Destroy(clone, launchLifetime);
         }
 
         for (int i = 0; i < particleTrail.Length; i++)
         {
             GameObject clone = GameObject.Instantiate(particleTrail[i], transform.position, Quaternion.identity);
             clone.transform.parent = transform;
-            PlayParticle(particleTrail[i]);
+            PlayParticle(clone);
         }
     }
 
@@ -52,7 +52,7 @@ public class BallTestBehaviour : MonoBehaviour
         for (int i = 0; i < particleImpact.Length; i++)
         {
             GameObject clone = GameObject.Instantiate(particleImpact[i], transform.position, Quaternion.identity);
-            PlayParticle(particleImpact[i]);
+            PlayParticle(clone);
             Destroy(clone, impactLife);
         }
 
