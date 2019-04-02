@@ -42,6 +42,11 @@ namespace Team17.BallDash
 
         }
 
+        public virtual void OnBossBeginsPatterns()
+        {
+
+        }
+
         public virtual void OnPlayerTeleport()
         {
 
