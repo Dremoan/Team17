@@ -35,6 +35,7 @@ namespace Team17.BallDash
             }
 
             serializedObject.ApplyModifiedProperties();
+            EditorUtility.SetDirty(target);
         }
     }
 }
