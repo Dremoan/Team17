@@ -120,6 +120,28 @@ namespace Team17.BallDash
             ResetPositionsEvent();
             snakeAnim.SetInteger("AttackZoneIndex", indexToAssign);
         }
+
+        public void StopMovingSnake()
+        {
+            for (int i = 0; i < snakeBodyParts.Length; i++)
+            {
+                snakeBodyParts[i].startPathFollowing = false;
+            }
+        }
+
+        public void RestartMovingSnake()
+        {
+            for (int i = 0; i < snakeBodyParts.Length; i++)
+            {
+                snakeBodyParts[i].startPathFollowing = true;
+            }
+        }
+
+
+        public void StartMovingSnake()
+        {
+            StartCoroutine(Delay());
+        }
     }
 }
 
