@@ -7,7 +7,7 @@ namespace Team17.BallDash
     public class TpFxTest : MonoBehaviour
     {
         [SerializeField] private KeyCode testKey = KeyCode.T;
-        [SerializeField] private GameObject particleToTest;
+        [SerializeField] private GameObject[] particleToTest;
         [SerializeField] private float lifeTime;
         private bool toTheRight = false;
 
@@ -32,15 +32,14 @@ namespace Team17.BallDash
 
         private void PlayParticle()
         {
-            if(particleToTest != null && particleToTest.GetComponent<ParticleSystem>() != null)
+            if(particleToTest != null)
             {
-                GameObject clone = GameObject.Instantiate(particleToTest, transform.position, Quaternion.identity);
-                clone.GetComponent<ParticleSystem>().Play();
-                Destroy(clone, lifeTime);
-            }
-            else
-            {
-                Debug.LogWarning("no particle system found on " + gameObject.name);
+                for (int i = 0; i < particleToTest.Length; i++)
+                {
+                    GameObject clone = GameObject.Instantiate(particleToTest[i], transform.position, Quaternion.identity);
+                    if(clone.GetComponent<ParticleSystem>() != null) clone.GetComponent<ParticleSystem>().Play();
+                    Destroy(clone, lifeTime);
+                }
             }
         }
     }
