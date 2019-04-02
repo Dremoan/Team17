@@ -1,9 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Team17.BallDash
 {
+    /*
+    [System.Serializable]
+    public class MyCustomCoolEvent : UnityEvent<Transform, Rigidbody, Animator>
+    {
+
+    }
+    /* */
+
     [RequireComponent(typeof(TimersCalculator))]
     public class Boss : Character, IBallHitable
     {
@@ -20,8 +29,9 @@ namespace Team17.BallDash
         [SerializeField] protected Transform phaseTwoZero;
         [SerializeField] protected Transform phaseThreeZero;
 
+        [Header("Intro move")]
+        [SerializeField] protected BossAttack introMove;
         [Header("Move list")]
-        [SerializeField] protected UnityEngine.Events.UnityEvent introEvent;
         [SerializeField] protected BossAttack[] firstPhaseAttacks;
         [SerializeField] protected BossAttack[] secondPhaseAttacks;
         [SerializeField] protected BossAttack[] thirdPhaseAttacks;
@@ -92,8 +102,7 @@ namespace Team17.BallDash
                 switch (bossState)
                 {
                     case BossState.Intro:
-                        introEvent.Invoke();
-                        bossState = BossState.First;
+
                         break;
 
                     case BossState.First:

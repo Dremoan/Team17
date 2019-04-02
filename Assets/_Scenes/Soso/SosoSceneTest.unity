@@ -376,9 +376,17 @@ MonoBehaviour:
   testSpeed: 10
   launchLifeTime: 5
   impactLifeTime: 5
-  launchToTest: {fileID: 1585177424}
-  trailToTest: {fileID: 1959894511}
-  impactToTest: {fileID: 443056512}
+  launchToTest:
+  - {fileID: 2007929367}
+  - {fileID: 444875344}
+  - {fileID: 1849318482}
+  - {fileID: 2076940458}
+  - {fileID: 2052792633}
+  - {fileID: 979884119}
+  trailToTest:
+  - {fileID: 1959894511}
+  impactToTest:
+  - {fileID: 443056512}
 --- !u!1 &443056512
 GameObject:
   m_ObjectHideFlags: 0
@@ -10168,7 +10176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 666bfb8c266586c4dafaff322b4180e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 0}
+  character: {fileID: 0}
+  lives: {fileID: 0}
 --- !u!1 &979523950
 GameObject:
   m_ObjectHideFlags: 0
@@ -10275,7 +10284,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testKey: 116
-  particleToTest: {fileID: 443056512}
+  particleToTest:
+  - {fileID: 0}
   lifeTime: 5
 --- !u!1 &979884119
 GameObject:
