@@ -77,6 +77,16 @@ namespace Team17.BallDash
 
         }
 
+        public virtual void OnPause()
+        {
+
+        }
+
+        public virtual void OnResume()
+        {
+
+        }
+
         #endregion
 
     }

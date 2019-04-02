@@ -5,13 +5,8 @@ using UnityEngine.SceneManagement;
 
 namespace Team17.BallDash
 {
-    public class PauseMenu : MonoBehaviour
+    public class PauseMenu : Entity
     {
-
-        void Start()
-        {
-            //Time.timeScale = 0f;
-        }
 
         public void ReturnToMenu()
         {
@@ -25,9 +20,16 @@ namespace Team17.BallDash
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
-        public void PauseFinish()
+        public void ResumeLevel()
         {
-            //Time.timeScale = 1f;
+            Debug.Log("Resume Level");
+            GameManager.state.CallOnResume();
+        }
+
+        public void GamePause()
+        {
+            Debug.Log("Pause Menu");
+            GameManager.state.CallOnPause();
         }
     }
 }
