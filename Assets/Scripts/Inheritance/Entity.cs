@@ -37,6 +37,11 @@ namespace Team17.BallDash
 
         #region Entity callbacks
 
+        public virtual void OnIntroLaunched()
+        {
+
+        }
+
         public virtual void OnPlayerTeleport()
         {
 

@@ -10,9 +10,18 @@ namespace Team17.BallDash
         [SerializeField] private LivesManager lives;
 
         private PlayerProjectile ball;
+        private bool shouldLaunchIntro = true;
+
 
         public void OnTouchBegin(Vector3 touchPos)
         {
+            if(shouldLaunchIntro)
+            {
+                GameManager.state.CallOnIntroLaunched();
+                shouldLaunchIntro = false;
+                return;
+            }
+
             if(ball != null && !ball.Destroyed)
             {
                 ball.StartCalculation();
@@ -31,12 +40,18 @@ namespace Team17.BallDash
 
         public void OnTouchHeld(Vector3 touchPos)
         {
-            ball.FeedBack(touchPos);
+            if(ball != null)
+            {
+                ball.FeedBack(touchPos);
+            }
         }
 
         public void OnTouchReleased(Vector3 touchPos)
         {
-            ball.Launch((touchPos - ball.transform.position));
+            if(ball != null)
+            {
+                ball.Launch((touchPos - ball.transform.position));
+            }
         }
 
         public PlayerProjectile Ball { get => ball; set => ball = value; }
