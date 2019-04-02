@@ -110,7 +110,6 @@ namespace Team17.BallDash
                     case BossState.Intro:
                         Attack(-1);
                         return;
-                        break;
 
                     case BossState.First:
                         for (int i = 0; i < firstPhaseAttacks.Length; i++)
@@ -190,6 +189,7 @@ namespace Team17.BallDash
         {
             bossState = BossState.First;
             canAttack = true;
+            GameManager.state.CallOnBossBeginsPattern();
         }
 
         private void AttackEnd()
