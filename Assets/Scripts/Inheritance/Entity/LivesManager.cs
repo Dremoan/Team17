@@ -18,6 +18,8 @@ namespace Team17.BallDash
             GameManager.state.LivesLeft = livesLeft;
         }
 
+
+
         public bool BallAvailable()
         {
             if(firstBall.Destroyed && secondBall.Destroyed && thirdBall.Destroyed && fourthBall.Destroyed)

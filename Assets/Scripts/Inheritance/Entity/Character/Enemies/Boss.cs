@@ -29,12 +29,12 @@ namespace Team17.BallDash
         [SerializeField] private Transform phaseTwoZero;
         [SerializeField] private Transform phaseThreeZero;
 
-        [Header("Intro move")]
-        [SerializeField] private BossAttack introMove;
-        [Header("Move list")]
-        [SerializeField] private BossAttack[] firstPhaseAttacks;
-        [SerializeField] private BossAttack[] secondPhaseAttacks;
-        [SerializeField] private BossAttack[] thirdPhaseAttacks;
+        [Header("Intro pattern")]
+        [SerializeField] private BossPattern introPattern;
+        [Header("Pattern list")]
+        [SerializeField] private BossPattern[] firstPhaseAttacks;
+        [SerializeField] private BossPattern[] secondPhaseAttacks;
+        [SerializeField] private BossPattern[] thirdPhaseAttacks;
 
         protected float currentHealthToNextState = 0f;
         protected int bossStateIndex = 0;
@@ -54,10 +54,16 @@ namespace Team17.BallDash
         {
             base.Update();
             ChooseAttack();
-            if(Input.GetKeyDown(KeyCode.A))
-            {
-                canAttack = true;
-            }
+        }
+
+        #endregion
+
+        #region Entity CallBacks
+
+        public override void OnIntroLaunched()
+        {
+            base.OnIntroLaunched();
+            canAttack = true;
         }
 
         #endregion
@@ -71,11 +77,11 @@ namespace Team17.BallDash
             if (currentHealthToNextState < 0) SwitchState();
         }
 
-        protected virtual void SwitchState()
+        private void SwitchState()
         {
             bossStateIndex++;
             
-            if (bossStateIndex > 2) Death();
+            if (bossStateIndex > 3) Death();
             else
             {
                 GameManager.state.CallOnBossChangeState();
@@ -84,7 +90,7 @@ namespace Team17.BallDash
             }
         }
 
-        protected virtual void Death()
+        private void Death()
         {
             GameManager.state.CallOnBossDeath();
         }
@@ -93,7 +99,7 @@ namespace Team17.BallDash
 
         #region Attacks management
 
-        protected virtual void ChooseAttack()
+        private void ChooseAttack()
         {
             if(canAttack)
             {
@@ -102,7 +108,8 @@ namespace Team17.BallDash
                 switch (bossState)
                 {
                     case BossState.Intro:
-
+                        Attack(-1);
+                        return;
                         break;
 
                     case BossState.First:
@@ -147,6 +154,7 @@ namespace Team17.BallDash
                         }
                         break;
                 }
+
                 if(index == -1)
                 {
                     return;
@@ -158,10 +166,14 @@ namespace Team17.BallDash
             }
         }
 
-        protected virtual void Attack(int index)
+        private void Attack(int index)
         {
+            canAttack = false;
             switch (bossState)
             {
+                case BossState.Intro:
+                    introPattern.LaunchAttack(IntroEnd);
+                    break;
                 case BossState.First:
                     firstPhaseAttacks[index].LaunchAttack(AttackEnd);
                     break;
@@ -174,15 +186,20 @@ namespace Team17.BallDash
             }
         }
 
-        
+        private void IntroEnd()
+        {
+            bossState = BossState.First;
+            canAttack = true;
+        }
 
-        protected virtual void AttackEnd()
+        private void AttackEnd()
         {
             canAttack = true;
         }
 
         private void SetMoveListsTimers()
         {
+            introPattern.Timers = timers;
             for (int i = 0; i < firstPhaseAttacks.Length; i++)
             {
                 firstPhaseAttacks[i].Timers = timers;
@@ -224,11 +241,10 @@ namespace Team17.BallDash
         public int BossStateIndex { get => bossStateIndex;}
 
         #endregion
-
     }
 
     [System.Serializable]
-    public class BossAttack
+    public class BossPattern
     {
         [Header ("Base parameter")]
         [SerializeField] private string name;
