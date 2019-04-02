@@ -55,6 +55,16 @@ namespace Team17.BallDash
             }
         }
 
+        IEnumerator DelayIntro()
+        {
+            for (int i = 0; i < snakeBodyParts.Length; i++)
+            {
+                snakeBodyParts[i].startPathFollowing = true;
+                snakeBodyParts[i].startPathFollowing = false;
+                yield return new WaitForSeconds(delayFollowSnakeChunks);
+            }
+        }
+
         public void PickMove()
         {
             snakeBodyParts[0].pathCreator = actualPath;
@@ -65,6 +75,18 @@ namespace Team17.BallDash
             }
 
             StartCoroutine(Delay());
+        }
+
+        public void PickMoveIntro()
+        {
+            snakeBodyParts[0].pathCreator = actualPath;
+
+            for (int i = 1; i < snakeBodyParts.Length; i++)
+            {
+                snakeBodyParts[i].pathCreator = snakeBodyParts[0].pathCreator;
+            }
+
+            StartCoroutine(DelayIntro());
         }
 
         public void GetPath(int index)

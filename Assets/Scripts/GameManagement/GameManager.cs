@@ -33,6 +33,22 @@ namespace Team17.BallDash
             }
         }
 
+        public void CallOnBossBeginsPattern()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBossBeginsPatterns();
+            }
+        }
+
+        public void CallOnIntroLaunched()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnIntroLaunched();
+            }
+        }
+
         public void CallOnBallShot()
         {
             for (int i = 0; i < entities.Count; i++)
