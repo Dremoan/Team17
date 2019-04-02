@@ -15,11 +15,11 @@ namespace Team17.BallDash
         [SerializeField] private Vector3 botLeft = new Vector3(-2, -2);
         private Vector3 realCenter;
 
-        public bool Contains(Vector3 pos)
+        public bool Contains(Transform roomCenter, Vector3 pos)
         {
             // from top right
-            Vector3 topRightTopLeft = (topLeft - topRight) * 0.5f;
-            Vector3 topRightBotRight = (botRight - topRight) * 0.5f;
+            Vector3 topRightTopLeft = roomCenter.position + ((topLeft - topRight) * 0.5f);
+            Vector3 topRightBotRight = roomCenter.position + ((botRight - topRight) * 0.5f);
 
             Vector3 center = topRight + new Vector3(topRightTopLeft.x, topRightBotRight.y, 0);
             realCenter = center;
