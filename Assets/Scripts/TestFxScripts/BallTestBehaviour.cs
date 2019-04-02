@@ -6,25 +6,33 @@ public class BallTestBehaviour : MonoBehaviour
 {
     [SerializeField] private Rigidbody body;
 
-    private GameObject particleLaunch;
-    private GameObject particleTrail;
-    private GameObject particleImpact;
+    private GameObject[] particleLaunch;
+    private GameObject[] particleTrail;
+    private GameObject[] particleImpact;
 
     private float impactLife;
 
-    public void Launch(float speed, float launchLifetime, float impactLifeTime, GameObject launchFx, GameObject trailFx, GameObject impactFx)
+    public void Launch(float speed, float launchLifetime, float impactLifeTime, GameObject[] launchFx, GameObject[] trailFx, GameObject[] impactFx)
     {
         particleLaunch = launchFx;
         particleTrail = trailFx;
         particleImpact = impactFx;
         impactLife = impactLifeTime;
         body.velocity = Vector3.right * speed;
-        GameObject launchClone = GameObject.Instantiate(launchFx, transform.position, Quaternion.identity);
-        PlayParticle(launchClone);
-        Destroy(launchClone, launchLifetime);
-        GameObject trailClone = GameObject.Instantiate(trailFx, transform.position, Quaternion.identity);
-        trailClone.transform.parent = transform;
-        PlayParticle(trailClone);
+
+        for (int i = 0; i < particleLaunch.Length; i++)
+        {
+            GameObject clone = GameObject.Instantiate(particleLaunch[i], transform.position, Quaternion.identity);
+            PlayParticle(clone);
+            Destroy(clone, launchLifetime);
+        }
+
+        for (int i = 0; i < particleTrail.Length; i++)
+        {
+            GameObject clone = GameObject.Instantiate(particleTrail[i], transform.position, Quaternion.identity);
+            clone.transform.parent = transform;
+            PlayParticle(clone);
+        }
     }
 
     private void PlayParticle(GameObject test)
@@ -41,9 +49,13 @@ public class BallTestBehaviour : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        GameObject impactClone = GameObject.Instantiate(particleImpact, transform.position, Quaternion.identity);
-        PlayParticle(impactClone);
-        Destroy(impactClone, impactLife);
+        for (int i = 0; i < particleImpact.Length; i++)
+        {
+            GameObject clone = GameObject.Instantiate(particleImpact[i], transform.position, Quaternion.identity);
+            PlayParticle(clone);
+            Destroy(clone, impactLife);
+        }
+
         Destroy(this.gameObject);
     }
 }

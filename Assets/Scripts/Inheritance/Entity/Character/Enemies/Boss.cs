@@ -15,15 +15,20 @@ namespace Team17.BallDash
         [SerializeField] protected float secondPhaseHealth = 75f;
         [SerializeField] protected float thirdPhaseHealth = 100f;
 
+        [Header("Rooms zeros")]
+        [SerializeField] protected Transform phaseOneZero;
+        [SerializeField] protected Transform phaseTwoZero;
+        [SerializeField] protected Transform phaseThreeZero;
+
         [Header("Move list")]
+        [SerializeField] protected UnityEngine.Events.UnityEvent introEvent;
         [SerializeField] protected BossAttack[] firstPhaseAttacks;
         [SerializeField] protected BossAttack[] secondPhaseAttacks;
         [SerializeField] protected BossAttack[] thirdPhaseAttacks;
 
         protected float currentHealthToNextState = 0f;
         protected int bossStateIndex = 0;
-        protected int nextAttackIndex = 0;
-        protected bool canAttack = true;
+        protected bool canAttack = false;
 
         #region Monobehaviour callbacks
 
@@ -39,7 +44,10 @@ namespace Team17.BallDash
         {
             base.Update();
             ChooseAttack();
-            Attack();
+            if(Input.GetKeyDown(KeyCode.A))
+            {
+                canAttack = true;
+            }
         }
 
         #endregion
@@ -77,73 +85,83 @@ namespace Team17.BallDash
 
         protected virtual void ChooseAttack()
         {
-            int index = -1;
-            int lastPriority = -1;
-            switch (bossState) 
-            {
-                case BossState.First:
-                    for (int i = 0; i < firstPhaseAttacks.Length; i++)
-                    {
-                        if(firstPhaseAttacks[i].IsUsableAndUseful(GameManager.state.PlayerGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena()))
-                        {
-                            if(firstPhaseAttacks[i].Priority > lastPriority)
-                            {
-                                index = i;
-                                lastPriority = firstPhaseAttacks[i].Priority;
-                            }
-                        }
-                    }
-                    break;
-
-                case BossState.Second:
-                    for (int i = 0; i < secondPhaseAttacks.Length; i++)
-                    {
-                        if (secondPhaseAttacks[i].IsUsableAndUseful(GameManager.state.PlayerGameObject.transform.position))
-                        {
-                            if (secondPhaseAttacks[i].Priority > lastPriority)
-                            {
-                                index = i;
-                                lastPriority = secondPhaseAttacks[i].Priority;
-                            }
-                        }
-                    }
-                    break;
-
-                case BossState.Third:
-                    for (int i = 0; i < thirdPhaseAttacks.Length; i++)
-                    {
-                        if (thirdPhaseAttacks[i].IsUsableAndUseful(GameManager.state.PlayerGameObject.transform.position))
-                        {
-                            if (thirdPhaseAttacks[i].Priority > lastPriority)
-                            {
-                                index = i;
-                                lastPriority = thirdPhaseAttacks[i].Priority;
-                            }
-                        }
-                    }
-                    break;
-            }
-            if (index == -1) return;
-            nextAttackIndex = index;
-        }
-
-        protected virtual void Attack()
-        {
             if(canAttack)
             {
+                int index = -1;
+                int lastPriority = -1;
                 switch (bossState)
                 {
+                    case BossState.Intro:
+                        introEvent.Invoke();
+                        bossState = BossState.First;
+                        break;
+
                     case BossState.First:
-                        firstPhaseAttacks[nextAttackIndex].LaunchAttack(AttackEnd);
+                        for (int i = 0; i < firstPhaseAttacks.Length; i++)
+                        {
+                            if (firstPhaseAttacks[i].IsUsableAndUseful(phaseOneZero, GameManager.state.PlayerGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena()))
+                            {
+                                if (firstPhaseAttacks[i].Priority > lastPriority)
+                                {
+                                    index = i;
+                                    lastPriority = firstPhaseAttacks[i].Priority;
+                                }
+                            }
+                        }
                         break;
+
                     case BossState.Second:
-                        secondPhaseAttacks[nextAttackIndex].LaunchAttack(AttackEnd);
+                        for (int i = 0; i < secondPhaseAttacks.Length; i++)
+                        {
+                            if (secondPhaseAttacks[i].IsUsableAndUseful(phaseTwoZero, GameManager.state.PlayerGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena()))
+                            {
+                                if (secondPhaseAttacks[i].Priority > lastPriority)
+                                {
+                                    index = i;
+                                    lastPriority = secondPhaseAttacks[i].Priority;
+                                }
+                            }
+                        }
                         break;
+
                     case BossState.Third:
-                        thirdPhaseAttacks[nextAttackIndex].LaunchAttack(AttackEnd);
+                        for (int i = 0; i < thirdPhaseAttacks.Length; i++)
+                        {
+                            if (thirdPhaseAttacks[i].IsUsableAndUseful(phaseThreeZero, GameManager.state.PlayerGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena()))
+                            {
+                                if (thirdPhaseAttacks[i].Priority > lastPriority)
+                                {
+                                    index = i;
+                                    lastPriority = thirdPhaseAttacks[i].Priority;
+                                }
+                            }
+                        }
                         break;
                 }
-                canAttack = false;
+                if(index == -1)
+                {
+                    return;
+                }
+                else
+                {
+                    Attack(index);
+                }
+            }
+        }
+
+        protected virtual void Attack(int index)
+        {
+            switch (bossState)
+            {
+                case BossState.First:
+                    firstPhaseAttacks[index].LaunchAttack(AttackEnd);
+                    break;
+                case BossState.Second:
+                    secondPhaseAttacks[index].LaunchAttack(AttackEnd);
+                    break;
+                case BossState.Third:
+                    thirdPhaseAttacks[index].LaunchAttack(AttackEnd);
+                    break;
             }
         }
 
@@ -236,10 +254,10 @@ namespace Team17.BallDash
             canBeUsed = true;
         }
 
-        public bool IsUsableAndUseful(Vector3 targetPos)
+        public bool IsUsableAndUseful(Transform zero, Vector3 targetPos)
         {
             if (!canBeUsed) return false;
-            if (zone.Contains(targetPos)) return true;
+            if (zone.Contains(zero, targetPos)) return true;
             return false;
         }
 
@@ -251,8 +269,9 @@ namespace Team17.BallDash
 
     public enum BossState
     {
-        First = 0,
-        Second = 1,
-        Third = 2
+        Intro = 0,
+        First = 1,
+        Second = 2,
+        Third = 3
     };
 }
