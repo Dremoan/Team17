@@ -89,6 +89,22 @@ namespace Team17.BallDash
             }
         }
 
+        public void CallOnPause()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnPause();
+            }
+        }
+
+        public void CallOnResume()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnResume();
+            }
+        }
+
         public GameObject PlayerGameObject { get => playerGameObject; set => playerGameObject = value; }
         public int LivesLeft { get => livesLeft; set => livesLeft = value; }
     }
