@@ -15,6 +15,11 @@ namespace Team17.BallDash
         [SerializeField] protected float secondPhaseHealth = 75f;
         [SerializeField] protected float thirdPhaseHealth = 100f;
 
+        [Header("Rooms zeros")]
+        [SerializeField] protected Transform phaseOneZero;
+        [SerializeField] protected Transform phaseTwoZero;
+        [SerializeField] protected Transform phaseThreeZero;
+
         [Header("Move list")]
         [SerializeField] protected BossAttack[] firstPhaseAttacks;
         [SerializeField] protected BossAttack[] secondPhaseAttacks;
@@ -84,7 +89,7 @@ namespace Team17.BallDash
                 case BossState.First:
                     for (int i = 0; i < firstPhaseAttacks.Length; i++)
                     {
-                        if(firstPhaseAttacks[i].IsUsableAndUseful(GameManager.state.PlayerGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena()))
+                        if(firstPhaseAttacks[i].IsUsableAndUseful(phaseOneZero, GameManager.state.PlayerGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena()))
                         {
                             if(firstPhaseAttacks[i].Priority > lastPriority)
                             {
@@ -98,7 +103,7 @@ namespace Team17.BallDash
                 case BossState.Second:
                     for (int i = 0; i < secondPhaseAttacks.Length; i++)
                     {
-                        if (secondPhaseAttacks[i].IsUsableAndUseful(GameManager.state.PlayerGameObject.transform.position))
+                        if (secondPhaseAttacks[i].IsUsableAndUseful(phaseTwoZero, GameManager.state.PlayerGameObject.transform.position))
                         {
                             if (secondPhaseAttacks[i].Priority > lastPriority)
                             {
@@ -112,7 +117,7 @@ namespace Team17.BallDash
                 case BossState.Third:
                     for (int i = 0; i < thirdPhaseAttacks.Length; i++)
                     {
-                        if (thirdPhaseAttacks[i].IsUsableAndUseful(GameManager.state.PlayerGameObject.transform.position))
+                        if (thirdPhaseAttacks[i].IsUsableAndUseful(phaseThreeZero, GameManager.state.PlayerGameObject.transform.position))
                         {
                             if (thirdPhaseAttacks[i].Priority > lastPriority)
                             {
@@ -236,10 +241,10 @@ namespace Team17.BallDash
             canBeUsed = true;
         }
 
-        public bool IsUsableAndUseful(Vector3 targetPos)
+        public bool IsUsableAndUseful(Transform zero, Vector3 targetPos)
         {
             if (!canBeUsed) return false;
-            if (zone.Contains(targetPos)) return true;
+            if (zone.Contains(zero, targetPos)) return true;
             return false;
         }
 
