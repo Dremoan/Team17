@@ -84,7 +84,7 @@ namespace Team17.BallDash
                 case BossState.First:
                     for (int i = 0; i < firstPhaseAttacks.Length; i++)
                     {
-                        if(firstPhaseAttacks[i].IsUsableAndUseful(GameManager.state.PlayerGameObject.transform.position))
+                        if(firstPhaseAttacks[i].IsUsableAndUseful(GameManager.state.PlayerGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena()))
                         {
                             if(firstPhaseAttacks[i].Priority > lastPriority)
                             {

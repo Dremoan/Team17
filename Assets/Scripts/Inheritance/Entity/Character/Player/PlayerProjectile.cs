@@ -9,6 +9,7 @@ namespace Team17.BallDash
         [Header("Components")]
         [SerializeField] private Rigidbody body;
         [SerializeField] private TimersCalculator timer;
+
         [Header("Feedbacks")]
         [SerializeField] private Transform timerFeedback;
         [SerializeField] private Transform trajectory;
@@ -21,6 +22,11 @@ namespace Team17.BallDash
         [SerializeField] private AnimationCurve timeToHit;
         [SerializeField] private AnimationCurve powerGained;
         [SerializeField] private float powerLostOnBounce = 5f;
+
+        [Header("Trajectory calculation")]
+        [SerializeField] private LayerMask trajectoryCalculationMask;
+
+
         private float power = 0;
         private int reHitTimer;
         private bool destroyed = false;
@@ -44,7 +50,7 @@ namespace Team17.BallDash
             Debug.DrawRay(lastContact, lastNormal.normalized * 3, Color.magenta);
             Debug.DrawRay(lastContact, -lastEnter.normalized * 3, Color.blue);
             Debug.DrawRay(lastContact, lastNewDir.normalized * 3, Color.red);
-            Debug.DrawRay(transform.position, body.velocity, Color.green);
+            FuturPositionInArena();
         }
 
         protected override void OnEnable()
@@ -152,8 +158,32 @@ namespace Team17.BallDash
 
         public Vector3 FuturPositionInArena()
         {
+            float dist = body.velocity.magnitude;
+            float remainingDist = dist;
+            Vector3 rayStart = transform.position;
+            Vector3 futurMovementDir = body.velocity.normalized;
+            Vector3 futurPos = Vector3.zero;
 
-            return Vector3.zero;
+            while(remainingDist > 0)
+            {
+                RaycastHit hit = new RaycastHit();
+                Physics.Raycast(rayStart, futurMovementDir, out hit, remainingDist, trajectoryCalculationMask);
+                Debug.DrawRay(rayStart, futurMovementDir.normalized * remainingDist, Color.green);
+                if(hit.collider != null)
+                {
+                    rayStart = hit.point;
+                    futurMovementDir = Vector3.Reflect(futurMovementDir, hit.normal);
+                    remainingDist -= hit.distance;
+                    futurPos = rayStart + (futurMovementDir * remainingDist);
+                }
+                else
+                {
+                    futurPos = rayStart + (futurMovementDir * remainingDist);
+                    break;
+                }
+            }
+            Debug.DrawLine(transform.position, futurPos, Color.yellow);
+            return futurPos;
         }
 
         public bool Destroyed { get => destroyed; set => destroyed = value; }
