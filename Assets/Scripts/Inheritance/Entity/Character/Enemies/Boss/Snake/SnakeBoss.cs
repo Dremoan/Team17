@@ -75,6 +75,7 @@ namespace Team17.BallDash
 
         public PathCreator AssignPath()
         {
+            ResetPositionsEvent();
             actualPath = pathPull[indexPath];
             return actualPath;
         }

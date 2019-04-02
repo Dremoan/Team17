@@ -1,30 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Team17.BallDash
 {
+    /*
+    [System.Serializable]
+    public class MyCustomCoolEvent : UnityEvent<Transform, Rigidbody, Animator>
+    {
+
+    }
+    /* */
+
     [RequireComponent(typeof(TimersCalculator))]
     public class Boss : Character, IBallHitable
     {
         [Header("Components")]
-        [SerializeField] protected TimersCalculator timers;
+        [SerializeField] private TimersCalculator timers;
         [Header("Health and state")]
-        [SerializeField] protected BossState bossState = BossState.First;
-        [SerializeField] protected float firstPhaseHealth = 50f;
-        [SerializeField] protected float secondPhaseHealth = 75f;
-        [SerializeField] protected float thirdPhaseHealth = 100f;
+        [SerializeField] private BossState bossState = BossState.First;
+        [SerializeField] private float firstPhaseHealth = 50f;
+        [SerializeField] private float secondPhaseHealth = 75f;
+        [SerializeField] private float thirdPhaseHealth = 100f;
 
         [Header("Rooms zeros")]
-        [SerializeField] protected Transform phaseOneZero;
-        [SerializeField] protected Transform phaseTwoZero;
-        [SerializeField] protected Transform phaseThreeZero;
+        [SerializeField] private Transform phaseOneZero;
+        [SerializeField] private Transform phaseTwoZero;
+        [SerializeField] private Transform phaseThreeZero;
 
+        [Header("Intro move")]
+        [SerializeField] private BossAttack introMove;
         [Header("Move list")]
-        [SerializeField] protected UnityEngine.Events.UnityEvent introEvent;
-        [SerializeField] protected BossAttack[] firstPhaseAttacks;
-        [SerializeField] protected BossAttack[] secondPhaseAttacks;
-        [SerializeField] protected BossAttack[] thirdPhaseAttacks;
+        [SerializeField] private BossAttack[] firstPhaseAttacks;
+        [SerializeField] private BossAttack[] secondPhaseAttacks;
+        [SerializeField] private BossAttack[] thirdPhaseAttacks;
 
         protected float currentHealthToNextState = 0f;
         protected int bossStateIndex = 0;
@@ -92,8 +102,7 @@ namespace Team17.BallDash
                 switch (bossState)
                 {
                     case BossState.Intro:
-                        introEvent.Invoke();
-                        bossState = BossState.First;
+
                         break;
 
                     case BossState.First:
@@ -165,6 +174,8 @@ namespace Team17.BallDash
             }
         }
 
+        
+
         protected virtual void AttackEnd()
         {
             canAttack = true;
@@ -228,7 +239,7 @@ namespace Team17.BallDash
         [SerializeField] private float timeToEnd = 3f;
         [Tooltip("Time it takes for the attack to be considered usable again after the boss used it once. During this time, the boss will ignore this attack.")]
         [SerializeField] private float coolDown = 4f;
-        [SerializeField] private UnityEngine.Events.UnityEvent attack;
+        [SerializeField] private UnityEngine.Events.UnityEvent pattern;
 
         private TimersCalculator timers;
         private bool canBeUsed = true;
@@ -237,7 +248,7 @@ namespace Team17.BallDash
         public void LaunchAttack(System.Action endAct)
         {
             Debug.Log(name);
-            attack.Invoke();
+            pattern.Invoke();
             endAction = endAct;
             canBeUsed = false;
             timers.LaunchNewTimer(timeToEnd, EndAttack);
