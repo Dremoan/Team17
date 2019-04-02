@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -5544,7 +5544,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824470804}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: -10}
+  m_LocalPosition: {x: 0, y: 5.1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5654,7 +5654,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 666bfb8c266586c4dafaff322b4180e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 1074050481}
+  character: {fileID: 0}
+  lives: {fileID: 0}
 --- !u!1 &946467218
 GameObject:
   m_ObjectHideFlags: 0
@@ -5837,18 +5838,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 948679796}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1074050481 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3656237024080787918, guid: 1d7d8698125f9844c8139764c4c000a7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1618312284594600675}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccacf9967edeac146974491b2e713c5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1324743955
 GameObject:
   m_ObjectHideFlags: 0
@@ -5984,12 +5973,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &1456457502 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3656237024080787912, guid: 1d7d8698125f9844c8139764c4c000a7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1618312284594600675}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1591522615
 GameObject:
   m_ObjectHideFlags: 0
@@ -6613,7 +6596,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5a6b0941a25ae24ea7a268da22d458d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 1917381212}
   timers: {fileID: 1917381211}
   bossState: 0
   firstPhaseHealth: 50
@@ -6900,7 +6882,6 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
   secondPhaseAttacks: []
   thirdPhaseAttacks: []
-  testTarget: {fileID: 1456457502}
 --- !u!114 &1917381211
 MonoBehaviour:
   m_ObjectHideFlags: 0
