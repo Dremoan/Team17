@@ -29,9 +29,122 @@ Transform:
   m_Children:
   - {fileID: 1776619240}
   - {fileID: 2052500341}
+  - {fileID: 1420057783}
   m_Father: {fileID: 8712853280126158478}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1420057782
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1420057783}
+  - component: {fileID: 1420057784}
+  m_Layer: 0
+  m_Name: IntroPath
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1420057783
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420057782}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 798650914}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1420057784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420057782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5ac92bc18f545cc84cd886ece82b4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  editorData:
+    _bezierPath:
+      points:
+      - {x: 8.927209, y: -6.458501, z: 0}
+      - {x: 7.385398, y: -6.3400774, z: 0}
+      - {x: 5.358691, y: -6.869289, z: 0}
+      - {x: 4.4563656, y: -7.047418, z: 0}
+      - {x: 3.55404, y: -7.2255473, z: 0}
+      - {x: 2.124218, y: -6.556181, z: 0}
+      - {x: 1.9376888, y: -5.723732, z: 0}
+      - {x: 1.7511597, y: -4.891283, z: 0}
+      - {x: 2.1509647, y: -3.7863975, z: 0}
+      - {x: 3.1361032, y: -3.11122, z: 0}
+      - {x: 4.1212416, y: -2.4360423, z: 0}
+      - {x: 3.4748936, y: -0.076061726, z: 0}
+      - {x: 1.9372704, y: 0.038735867, z: 0}
+      - {x: 0.39964724, y: 0.15353346, z: 0}
+      - {x: -1.1679556, y: -0.270339, z: 0}
+      - {x: -1.892947, y: -1.8866358, z: 0}
+      - {x: -2.6179388, y: -3.5029325, z: 0}
+      - {x: -2.4433908, y: -5.844958, z: 0}
+      - {x: -2.3845594, y: -7.9381924, z: 0}
+      - {x: -2.325728, y: -10.031427, z: 0}
+      - {x: -2.0933123, y: -15.208405, z: 0}
+      - {x: -1.7375278, y: -19.005186, z: 0}
+      isClosed: 0
+      localPosition: {x: 0.52511096, y: 7.008346, z: 0}
+      space: 1
+      controlMode: 1
+      autoControlLength: 0.3
+      boundsUpToDate: 1
+      pivot: {x: 3.7656922, y: -2.466066, z: 0}
+      bounds:
+        m_Center: {x: 3.7656922, y: -2.466066, z: 0}
+        m_Extent: {x: 5.686628, y: 9.530773, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: -1.0376573, y: 1, z: 0}
+      perAnchorNormalsAngle:
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      globalNormalsAngle: 0
+      flipNormals: 0
+    vertexPathUpToDate: 0
+    vertexPathMaxAngleError: 0.3
+    vertexPathMinVertexSpacing: 0.01
+    pathTransformationEnabled: 0
+    showPathBounds: 0
+    showPerSegmentBounds: 0
+    displayAnchorPoints: 1
+    displayControlPoints: 1
+    bezierHandleScale: 1
+    globalDisplaySettingsFoldout: 0
+    keepConstantHandleSize: 1
+    vertexHandleSize: 0.2
+    showNormalsInVertexMode: 0
+    showDisplayOptions: 1
+    showPathOptions: 1
+    showVertexPathDisplayOptions: 0
+    showVertexPathOptions: 1
+    showNormals: 0
+    showNormalsHelpInfo: 0
+    tabIndex: 0
+  initialized: 1
 --- !u!1 &1776619239
 GameObject:
   m_ObjectHideFlags: 0
@@ -5518,26 +5631,26 @@ MonoBehaviour:
   phaseOneZero: {fileID: 0}
   phaseTwoZero: {fileID: 0}
   phaseThreeZero: {fileID: 0}
+  introPattern:
+    name: Intro
+    zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
+    priority: 0
+    timeToEnd: 2
+    coolDown: 0
+    pattern:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
   firstPhaseAttacks:
   - name: Move Right 1
     zone: {fileID: 11400000, guid: 315023730e68de840a679638e7b786ea, type: 2}
     priority: 10
-    timeToEnd: 5
+    timeToEnd: 6
     coolDown: 8
-    attack:
+    pattern:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8712853280126158473}
-          m_MethodName: ResetPositionsEvent
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 8712853280126158473}
           m_MethodName: GetPath
           m_Mode: 3
@@ -5565,22 +5678,11 @@ MonoBehaviour:
   - name: Move Left 1
     zone: {fileID: 11400000, guid: aa2343c597d8f7d44ab5f34b8deb9a00, type: 2}
     priority: 10
-    timeToEnd: 5
+    timeToEnd: 6
     coolDown: 8
-    attack:
+    pattern:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8712853280126158473}
-          m_MethodName: ResetPositionsEvent
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 1
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 8712853280126158473}
           m_MethodName: GetPath
           m_Mode: 3
@@ -5610,7 +5712,7 @@ MonoBehaviour:
     priority: 5
     timeToEnd: 2
     coolDown: 3
-    attack:
+    pattern:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 8712853280126158473}
@@ -5642,7 +5744,7 @@ MonoBehaviour:
     priority: 3
     timeToEnd: 2
     coolDown: 3
-    attack:
+    pattern:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 8712853280126158473}
@@ -5652,7 +5754,7 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 1
-            m_FloatArgument: 1
+            m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -5674,7 +5776,7 @@ MonoBehaviour:
     priority: 5
     timeToEnd: 2
     coolDown: 3
-    attack:
+    pattern:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 8712853280126158473}
@@ -5684,7 +5786,7 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 2
-            m_FloatArgument: 2
+            m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -5706,7 +5808,7 @@ MonoBehaviour:
     priority: 5
     timeToEnd: 2
     coolDown: 3
-    attack:
+    pattern:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 8712853280126158473}
@@ -5716,7 +5818,7 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 3
-            m_FloatArgument: 3
+            m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -5738,7 +5840,7 @@ MonoBehaviour:
     priority: 3
     timeToEnd: 2
     coolDown: 3
-    attack:
+    pattern:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 8712853280126158473}
@@ -5748,7 +5850,7 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 4
-            m_FloatArgument: 4
+            m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -5770,7 +5872,7 @@ MonoBehaviour:
     priority: 5
     timeToEnd: 2
     coolDown: 3
-    attack:
+    pattern:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 8712853280126158473}
@@ -5780,7 +5882,7 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 5
-            m_FloatArgument: 5
+            m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -5820,6 +5922,7 @@ MonoBehaviour:
   pathPull:
   - {fileID: 1776619241}
   - {fileID: 2052500342}
+  - {fileID: 1420057784}
   snakeHead: {fileID: 8712853280435664437}
   snakeAnim: {fileID: 8712853280126158474}
   delayFollowSnakeChunks: 0.2

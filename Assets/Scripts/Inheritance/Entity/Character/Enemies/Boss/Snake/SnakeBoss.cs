@@ -41,7 +41,8 @@ namespace Team17.BallDash
 
         void Start()
         {
-            ResetPositionsEvent();
+            GetPath(2);
+            PickMoveIntro();
         }
 
         IEnumerator Delay()
@@ -59,7 +60,10 @@ namespace Team17.BallDash
         {
             for (int i = 0; i < snakeBodyParts.Length; i++)
             {
+                snakeBodyParts[i].speed = 10f;
+                delayFollowSnakeChunks = 0.2f;
                 snakeBodyParts[i].startPathFollowing = true;
+                yield return null;
                 snakeBodyParts[i].startPathFollowing = false;
                 yield return new WaitForSeconds(delayFollowSnakeChunks);
             }
