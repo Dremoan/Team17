@@ -15,9 +15,9 @@ namespace Team17.BallDash
         [SerializeField] private float impactLifeTime = 5f;
 
         [Header("Partcles")]
-        [SerializeField] private GameObject launchToTest;
-        [SerializeField] private GameObject trailToTest;
-        [SerializeField] private GameObject impactToTest;
+        [SerializeField] private GameObject[] launchToTest;
+        [SerializeField] private GameObject[] trailToTest;
+        [SerializeField] private GameObject[] impactToTest;
 
         private void Update()
         {
