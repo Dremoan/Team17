@@ -44,6 +44,7 @@ namespace Team17.BallDash
             Debug.DrawRay(lastContact, lastNormal.normalized * 3, Color.magenta);
             Debug.DrawRay(lastContact, -lastEnter.normalized * 3, Color.blue);
             Debug.DrawRay(lastContact, lastNewDir.normalized * 3, Color.red);
+            Debug.DrawRay(transform.position, body.velocity, Color.green);
         }
 
         protected override void OnEnable()
@@ -107,6 +108,7 @@ namespace Team17.BallDash
             trajectory.gameObject.SetActive(false);
             character.Physicate(true);
             gameObject.SetActive(false);
+            destroyed = true;
             GameManager.state.CallOnBallDestroyed();
         }
 
@@ -146,6 +148,12 @@ namespace Team17.BallDash
             {
                 coll.gameObject.GetComponent<IBallHitable>().Hit(power);
             }
+        }
+
+        public Vector3 FuturPositionInArena()
+        {
+
+            return Vector3.zero;
         }
 
         public bool Destroyed { get => destroyed; set => destroyed = value; }

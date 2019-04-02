@@ -13,6 +13,7 @@ namespace Team17.BallDash
     {
         private List<Entity> entities = new List<Entity>();
         private GameObject playerGameObject;
+        private int livesLeft;
 
         public void RegisterEntity(Entity ent)
         {
@@ -89,5 +90,6 @@ namespace Team17.BallDash
         }
 
         public GameObject PlayerGameObject { get => playerGameObject; set => playerGameObject = value; }
+        public int LivesLeft { get => livesLeft; set => livesLeft = value; }
     }
 }

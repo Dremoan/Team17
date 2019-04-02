@@ -4,12 +4,10 @@ using UnityEngine;
 
 namespace Team17.BallDash
 {
-    [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(TimersCalculator))]
     public class Boss : Character, IBallHitable
     {
         [Header("Components")]
-        [SerializeField] protected Rigidbody body;
         [SerializeField] protected TimersCalculator timers;
         [Header("Health and state")]
         [SerializeField] protected BossState bossState = BossState.First;

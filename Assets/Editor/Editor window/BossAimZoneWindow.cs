@@ -78,7 +78,11 @@ namespace Team17.BallDash
             DrawBackgroud();
 
             DrawGrid(20, 0.2f, Color.gray);
+
             DrawWalls();
+
+            DrawHorizontalAndVerticalRulers(0.25f, 0.5f, 35, Color.white);
+            DrawHorizontalAndVerticalRulers(0.5f, 0.7f, 45, Color.white);
 
             bossAimZoneCenter.Draw();
             bossAimZoneArea.Draw();
@@ -103,8 +107,8 @@ namespace Team17.BallDash
 
         private void DrawGrid(float gridSpacing, float gridOpacity, Color gridColor)
         {
-            int widthDivs = Mathf.CeilToInt(position.width / gridSpacing);
-            int heightDivs = Mathf.CeilToInt(position.height / gridSpacing);
+            int widthDivs = Mathf.RoundToInt(position.width / gridSpacing);
+            int heightDivs = Mathf.RoundToInt(position.height / gridSpacing);
 
             Handles.BeginGUI();
             Handles.color = new Color(gridColor.r, gridColor.g, gridColor.b, gridOpacity);
@@ -148,6 +152,32 @@ namespace Team17.BallDash
             {
                 Handles.DrawLine(new Vector3(minSize.x - i, 0), new Vector3(minSize.x - i, minSize.y));
             }
+            Handles.color = Color.white;
+            Handles.EndGUI();
+        }
+
+        private void DrawHorizontalAndVerticalRulers(float ratio, float rulerOpacity, float rulerLength, Color rulerColor)
+        {
+            int widthDivs = Mathf.CeilToInt(1/ratio);
+            int heightDivs = Mathf.CeilToInt(1/ratio);
+
+            Handles.BeginGUI();
+            Handles.color = new Color(rulerColor.r, rulerColor.g, rulerColor.b, rulerOpacity);
+
+            for (int i = 1; i < widthDivs; i++)
+            {
+                //Handles.DrawLine(new Vector3(gridSpacing * i, -gridSpacing, 0), new Vector3(gridSpacing * i, position.height, 0f));
+                Handles.DrawLine(new Vector3(ratio * i * position.width, 0, 0), new Vector3(ratio * i * position.width, rulerLength, 0));
+                Handles.DrawLine(new Vector3(ratio * i * position.width, position.height + wallWidth, 0), new Vector3(ratio * i * position.width, position.height - rulerLength, 0));
+            }
+
+            for (int i = 1; i < heightDivs; i++)
+            {
+                //Handles.DrawLine(new Vector3(-gridSpacing, gridSpacing * i, 0), new Vector3(position.width, gridSpacing * i, 0));
+                Handles.DrawLine(new Vector3(0, ratio * i * position.height, 0), new Vector3(rulerLength, ratio * i * position.height, 0));
+                Handles.DrawLine(new Vector3(position.width, ratio * i * position.height, 0), new Vector3(position.width - rulerLength, ratio * i * position.height, 0));
+            }
+
             Handles.color = Color.white;
             Handles.EndGUI();
         }

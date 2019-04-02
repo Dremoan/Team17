@@ -15,7 +15,7 @@ namespace Team17.BallDash
         protected override void Start()
         {
             base.Start();
-
+            GameManager.state.LivesLeft = livesLeft;
         }
 
         public bool BallAvailable()
@@ -29,10 +29,26 @@ namespace Team17.BallDash
 
         public PlayerProjectile GetNextBall()
         {
-            if (livesLeft == 4) return firstBall;
-            if (livesLeft == 3) return secondBall;
-            if (livesLeft == 2) return thirdBall;
-            if (livesLeft == 1) return fourthBall;
+            if (livesLeft == 4)
+            {
+                firstBall.gameObject.SetActive(true);
+                return firstBall;
+            }
+            if (livesLeft == 3)
+            {
+                secondBall.gameObject.SetActive(true);
+                return secondBall;
+            }
+            if (livesLeft == 2)
+            {
+                thirdBall.gameObject.SetActive(true);
+                return thirdBall;
+            }
+            if (livesLeft == 1)
+            {
+                fourthBall.gameObject.SetActive(true);
+                return fourthBall;
+            }
             return null;
         }
 
@@ -40,11 +56,7 @@ namespace Team17.BallDash
         {
             base.OnBallDestroyed();
             livesLeft--;
-            if (livesLeft == 4) firstBall.gameObject.SetActive(true);
-            if (livesLeft == 3) secondBall.gameObject.SetActive(true);
-            if (livesLeft == 2) thirdBall.gameObject.SetActive(true);
-            if (livesLeft == 1) fourthBall.gameObject.SetActive(true);
-
+            GameManager.state.LivesLeft = livesLeft;
             if (livesLeft == 0)
             {
 
