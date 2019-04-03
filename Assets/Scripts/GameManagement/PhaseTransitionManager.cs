@@ -3,24 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class PhaseTransitionManager : MonoBehaviour
+namespace Team17.BallDash
 {
-
-    [SerializeField] private PlayableDirector[] transitionPhases;
-    [SerializeField] private int indexPhase = 0;
-
-
-    private void Update()
+    public class PhaseTransitionManager : MonoBehaviour
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+
+        [SerializeField] private PlayableDirector[] transitionPhases;
+        [SerializeField] private int indexPhase = 0;
+
+        private void Start()
         {
-            TriggerPhase();
+            indexPhase = 0;   
         }
-    }
-    public void TriggerPhase()
-    {
-        transitionPhases[indexPhase].Play();
-        indexPhase++;
+
+
+        public void TriggerPhase()
+        {
+            transitionPhases[indexPhase].Play();
+            indexPhase++;
+        }
     }
 }
 
