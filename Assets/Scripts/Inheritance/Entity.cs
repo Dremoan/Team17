@@ -87,6 +87,11 @@ namespace Team17.BallDash
 
         }
 
+        public virtual void OnCharacterStartStrikeAnim()
+        {
+
+        }
+
         public virtual void OnBossDeath()
         {
 

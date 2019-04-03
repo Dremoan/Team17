@@ -106,6 +106,7 @@ namespace Team17.BallDash
             trajectory.gameObject.SetActive(true);
             character.Physicate(false);
             wasCanceled = false;
+
             GameManager.state.CallOnPlayerTeleport();
         }
 
@@ -120,7 +121,7 @@ namespace Team17.BallDash
             character.PrepareStrike(transform.position, touchPos);
         }
 
-        public void Launch(Vector3 newDirection)
+        public void GetNewDirection(Vector3 newDirection)
         {
             if(wasCanceled)
             {
@@ -129,23 +130,32 @@ namespace Team17.BallDash
             }
             body.useGravity = false;
             Timer t = timer.GetTimerFromUserIndex(reHitTimer);
+
             power += powerGained.Evaluate(t.Inc);
             movementDirection = newDirection.normalized * (speed * speedMultiplier.Evaluate(power));
+
             Debug.Log("Gained : " + powerGained.Evaluate(t.Inc) + " Power : " + power + " Speed : " + speed * speedMultiplier.Evaluate(power));
-            body.velocity = movementDirection;
+
             timer.DeleteTimer(reHitTimer);
+
             timerFeedback.gameObject.SetActive(false);
             trajectory.gameObject.SetActive(false);
+
             character.Physicate(true);
             character.Strike();
 
             SelectFeedBackgroup(power);
             usedFeedbackGroup.Launch.Play();
 
-            GameManager.state.CallOnBallShot();
+            GameManager.state.CallOnCharacterStartStrikeAnim();
         }
 
+        public void LaunchBall()
+        {
+            body.velocity = movementDirection;
 
+            GameManager.state.CallOnBallShot();
+        }
 
         #endregion
 

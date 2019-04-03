@@ -50,7 +50,7 @@ namespace Team17.BallDash
         {
             if(ball != null)
             {
-                ball.Launch((touchPos - ball.transform.position));
+                ball.GetNewDirection((touchPos - ball.transform.position));
             }
         }
 
