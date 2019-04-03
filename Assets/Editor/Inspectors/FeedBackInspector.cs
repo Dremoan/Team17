@@ -16,15 +16,28 @@ namespace Team17.BallDash
 
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("particles"), new GUIContent("Use particles"));
+            EditorGUILayout.LabelField("Base parameters", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("looping"), new GUIContent("Looping"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("hardFollowingTransform"));
+            if(feedBack.HardFollowingTransform)
+            {
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("transformToHardFollow"));
+            }
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("tpOnTransformOnPlay"));
+            if(feedBack.TpOnTransformOnPlay)
+            {
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("transformToTPToOnPlay"));
+            }
 
+            EditorGUILayout.LabelField("Particles parameters", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("particles"), new GUIContent("Use particles"));
             if(feedBack.Particles)
             {
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("particlesSystems"), true);
             }
-            EditorGUILayout.LabelField("");
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("shake"), new GUIContent("Use shake"));
 
+            EditorGUILayout.LabelField("Shake parameters", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("shake"), new GUIContent("Use shake"));
             if(feedBack.Shake)
             {
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("useSpecificTransform"));
