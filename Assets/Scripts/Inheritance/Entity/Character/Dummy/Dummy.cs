@@ -106,7 +106,7 @@ namespace Team17.BallDash
             base.OnBallDestroyed();
             if (tutorialEnding == false)
             {
-                textDisplay = "Be careful! Balls are limited.";
+                textDisplay = "Don't be too greedy! Balls are limited";
                 colorRed = true;
                 SetActiveText(textDisplay);
                 shotNbre = 0;
