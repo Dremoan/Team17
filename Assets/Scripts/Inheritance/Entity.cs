@@ -28,7 +28,7 @@ namespace Team17.BallDash
             GameManager.state.RegisterEntity(this);
         }
 
-        protected void OnDisable()
+        protected virtual void OnDisable()
         {
             GameManager.state.UnregisterEntity(this);
         }
@@ -58,6 +58,11 @@ namespace Team17.BallDash
         }
 
         public virtual void OnBallDestroyed()
+        {
+
+        }
+
+        public virtual void OnBallHit(float hitPower)
         {
 
         }
