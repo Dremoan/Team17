@@ -14,6 +14,8 @@ namespace Team17.BallDash
         [SerializeField] private Transform timerFeedback;
         [SerializeField] private Transform trajectory;
         [SerializeField] private PlayerCharacter character;
+        [Tooltip ("The power threshold of the group must be sorted from the smallest to highest.")]
+        [SerializeField] private FeedbackGroup[] feedbackGroups;
 
         [Header("Parameters")]
         [SerializeField] private float speed = 50f;
@@ -37,11 +39,15 @@ namespace Team17.BallDash
         private Vector3 lastNormal;
         private Vector3 lastContact;
         private Vector3 lastNewDir;
+        private FeedbackGroup usedFeedbackGroup;
+
+        #region Monobehaviour callbacks
 
         protected override void Start()
         {
             base.Start();
             initialFeedbackScale = timerFeedback.localScale;
+            SelectFeedBackgroup(power);
         }
 
         protected override void Update()
@@ -58,6 +64,39 @@ namespace Team17.BallDash
             base.OnEnable();
             GameManager.state.PlayerGameObject = this.gameObject;
         }
+
+        private void OnCollisionEnter(Collision coll)
+        {
+            if (coll.gameObject.GetComponent<BallCanceler>() != null)
+            {
+                CancelBall();
+            }
+            else
+            {
+                lastNormal = coll.contacts[0].normal;
+                lastContact = coll.contacts[0].point;
+                lastEnter = movementDirection;
+                Bounce(movementDirection, coll.contacts[0].normal);
+            }
+        }
+
+        private void OnTriggerEnter(Collider coll)
+        {
+            if (coll.gameObject.GetComponent<BallCanceler>() != null)
+            {
+                CancelBall();
+            }
+
+            if (coll.gameObject.GetComponent<IBallHitable>() != null)
+            {
+                coll.gameObject.GetComponent<IBallHitable>().Hit(power);
+                Hit();
+            }
+        }
+
+        #endregion
+
+        #region Launching methods
 
         public void StartCalculation()
         {
@@ -99,8 +138,16 @@ namespace Team17.BallDash
             trajectory.gameObject.SetActive(false);
             character.Physicate(true);
             character.Strike();
+
+            SelectFeedBackgroup(power);
+            usedFeedbackGroup.Launch.Play();
+
             GameManager.state.CallOnBallShot();
         }
+
+
+
+        #endregion
 
         #region Ball interactions
 
@@ -113,6 +160,9 @@ namespace Team17.BallDash
             character.Physicate(true);
             gameObject.SetActive(false);
             destroyed = true;
+
+            usedFeedbackGroup.Hit.Play();
+
             GameManager.state.CallOnBallHit(power);
         }
 
@@ -125,6 +175,9 @@ namespace Team17.BallDash
             character.Physicate(true);
             gameObject.SetActive(false);
             destroyed = true;
+
+            usedFeedbackGroup.Destroyed.Play();
+
             GameManager.state.CallOnBallDestroyed();
         }
 
@@ -138,39 +191,16 @@ namespace Team17.BallDash
             Debug.Log("Power after bounce : " + power);
             movementDirection = newDir.normalized * (speed * speedMultiplier.Evaluate(power));
             body.velocity = movementDirection;
+
+            SelectFeedBackgroup(power);
+            usedFeedbackGroup.Bounce.Play();
+
             GameManager.state.CallOnBallBounced();
         }
 
         #endregion
 
-        private void OnCollisionEnter(Collision coll)
-        {
-            if(coll.gameObject.GetComponent<BallCanceler>() != null)
-            {
-                CancelBall();
-            }
-            else
-            {
-                lastNormal = coll.contacts[0].normal;
-                lastContact = coll.contacts[0].point;
-                lastEnter = movementDirection;
-                Bounce(movementDirection, coll.contacts[0].normal);
-            }
-        }
-
-        private void OnTriggerEnter(Collider coll)
-        {
-            if (coll.gameObject.GetComponent<BallCanceler>() != null)
-            {
-                CancelBall();
-            }
-
-            if (coll.gameObject.GetComponent<IBallHitable>() != null)
-            {
-                coll.gameObject.GetComponent<IBallHitable>().Hit(power);
-                Hit();
-            }
-        }
+        #region Trajectory management
 
         public Vector3 FuturPositionInArena()
         {
@@ -202,6 +232,23 @@ namespace Team17.BallDash
             return futurPos;
         }
 
+        #endregion
+
+        #region Feedbacks
+
+        private void SelectFeedBackgroup(float actualPower)
+        {
+            for (int i = 0; i < feedbackGroups.Length; i++)
+            {
+                if (power > feedbackGroups[i].PowerThreshold)
+                {
+                    usedFeedbackGroup = feedbackGroups[i];
+                }
+            }
+        }
+
+        #endregion
+
         public bool Destroyed { get => destroyed; set => destroyed = value; }
 
     }
@@ -209,5 +256,25 @@ namespace Team17.BallDash
     public interface IBallHitable
     {
         void Hit(float dmgs);
+    }
+
+    [System.Serializable]
+    public struct FeedbackGroup
+    {
+        [SerializeField] private string name;
+        [Tooltip("Define the power threshold at which this group will be used. If the power of the ball is higher than this threshold, it will be used.")]
+        [SerializeField] private float powerThreshold;
+        [SerializeField] private FeedBack launch;
+        [SerializeField] private FeedBack bounce;
+        [SerializeField] private FeedBack trail;
+        [SerializeField] private FeedBack destroyed;
+        [SerializeField] private FeedBack hit;
+
+        public float PowerThreshold { get => powerThreshold; }
+        public FeedBack Launch { get => launch; }
+        public FeedBack Bounce { get => bounce; }
+        public FeedBack Trail { get => trail; }
+        public FeedBack Destroyed { get => destroyed; }
+        public FeedBack Hit { get => hit; }
     }
 }

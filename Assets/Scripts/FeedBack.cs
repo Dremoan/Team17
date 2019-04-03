@@ -18,8 +18,8 @@ namespace Team17.BallDash
         [SerializeField] private bool shake = false;
         [SerializeField] private bool useSpecificTransform = false;
         [SerializeField] private Transform[] specificTransformToShake;
-        [SerializeField] private float shakeAmplitude = 5f;
-        [SerializeField] private float shakeTime = 2f;
+        [SerializeField] private float shakeAmplitude = 0.2f;
+        [SerializeField] private float shakeTime = 0.1f;
 
         private Transform[] usedTransform;
         private bool isShaking = false;
