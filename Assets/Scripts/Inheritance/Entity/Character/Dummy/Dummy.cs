@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace Team17.BallDash
 {
@@ -14,6 +15,8 @@ namespace Team17.BallDash
 
         string textDisplay;
         int shotNbre;
+        bool tutorialEnding = false;
+        bool colorRed = false;
 
         [Header("Power thresholds")]
         [SerializeField, Range(0, 400)] float smallThresholdPower = 2;
@@ -21,38 +24,55 @@ namespace Team17.BallDash
         [SerializeField, Range(0, 400)] float strongThresholdPower = 8;
         [SerializeField, Range(0, 400)] float eliteThresholdPower = 10;
 
+        [Header("Color sentences"), Range(0,255)] public float Rb;
+        [Range(0, 255)] public float Gb, Bb, Ab, Rg, Gg, Bg, Ag;
+
         protected override void Start()
         {
             base.Start();
-            textDisplay = "Hold and release !";
+            textDisplay = "Hold and release!";
             SetActiveText(textDisplay);
         }
 
         public void Hit(float dmgs)
         {
-            if (dmgs < smallThresholdPower)
+            if (tutorialEnding == false)
             {
-                Debug.Log("smallPower : " + smallThresholdPower);
-                textDisplay = "Hit the ball to accumulate power before attack.";
-                SetActiveText(textDisplay);
-            }
-            else if (dmgs < mediumThresholdPower)
-            {
-                Debug.Log("mediumPower : " + mediumThresholdPower);
-                textDisplay = "Hit the ball more ! Balls are limited.";
-                SetActiveText(textDisplay);
-            }
-            else if (dmgs < strongThresholdPower)
-            {
-                Debug.Log("strongPower : " + strongThresholdPower);
-                textDisplay = "You can even do better !";
-                SetActiveText(textDisplay);
-            }
-            else
-            {
-                Debug.Log("elitePower : " + eliteThresholdPower);
-                textDisplay = "That's a big strike !";
-                SetActiveText(textDisplay);
+                if (dmgs < smallThresholdPower)
+                {
+                    //Debug.Log("smallPower : " + smallThresholdPower);
+                    textDisplay = "Hit the ball several times before attack.";
+                    colorRed = true;
+                    SetActiveText(textDisplay);
+                    shotNbre = 0;
+                }
+                else if (dmgs < mediumThresholdPower)
+                {
+                    //Debug.Log("mediumPower : " + mediumThresholdPower);
+                    textDisplay = "You need more power!";
+                    colorRed = true;
+                    SetActiveText(textDisplay);
+                    shotNbre = 0;
+                }
+                else if (dmgs < strongThresholdPower)
+                {
+                    //Debug.Log("strongPower : " + strongThresholdPower);
+                    textDisplay = "You can do better!";
+                    colorRed = true;
+                    SetActiveText(textDisplay);
+                    shotNbre = 0;
+                }
+                else
+                {
+                    //Debug.Log("elitePower : " + eliteThresholdPower);
+                    textDisplay = "That's an elite strike!";
+                    textTutorial.text = textDisplay;
+                    animatorTutorialText.SetTrigger("animBigStrike");
+                    //SetActiveText(textDisplay);
+                    shotNbre = 0;
+                    tutorialEnding = true;
+
+                }
             }
         }
 
@@ -67,6 +87,15 @@ namespace Team17.BallDash
             if (!textTutorial.IsActive())
             {
                 textTutorial.text = textToDisplay;
+                if (colorRed == true)
+                {
+                    textTutorial.color = new Color(Rb/255, Gb/255, Bb/255, Ab/255);
+                }
+                else
+                {
+                    textTutorial.color = new Color(Rg/255, Gg/255, Bg/255, Ag/255);
+                }
+
                 textTutorial.gameObject.SetActive(true);
                 uIcanvas.SetActive(true);
             }
@@ -75,21 +104,33 @@ namespace Team17.BallDash
         public override void OnBallDestroyed()
         {
             base.OnBallDestroyed();
-            textDisplay = "Don't forget to strike ! Balls are limited.";
-            SetActiveText(textDisplay);
-            shotNbre = 0;
+            if (tutorialEnding == false)
+            {
+                textDisplay = "Be careful! Balls are limited.";
+                colorRed = true;
+                SetActiveText(textDisplay);
+                shotNbre = 0;
+            }
         }
 
         public override void OnBallShot()
         {
             base.OnBallShot();
-            shotNbre += 1;
-            if(shotNbre == 8)
+            if (tutorialEnding == false)
             {
-                textDisplay = "Wait the last moment to accumulate more power.";
-                SetActiveText(textDisplay);
+                shotNbre += 1;
+                Debug.Log("shotNbre : " + shotNbre);
+                if (shotNbre == 8)
+                {
+                    textDisplay = "Strike at the last moment for maximum power.";
+                    SetActiveText(textDisplay);
+                }
             }
+        }
 
+        public void LoadMenu(int index)
+        {
+            SceneManager.LoadScene(index);
         }
     }
 }

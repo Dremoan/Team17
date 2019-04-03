@@ -16,6 +16,13 @@ namespace Team17.BallDash
             indexPhase = 0;   
         }
 
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                TriggerPhase();
+            }
+        }
 
         public void TriggerPhase()
         {
