@@ -19,7 +19,7 @@ public class CustomAnimEvents : MonoBehaviour
 [System.Serializable]
 public class AnimEvent
 {
-    public string animEventName;
+    public string EventName;
     public UnityEvent eventTrigger;
 }
 }
