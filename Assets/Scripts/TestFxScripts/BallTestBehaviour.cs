@@ -57,7 +57,7 @@ namespace Team17.BallDash
             for (int i = 0; i < particleImpact.Length; i++)
             {
                 GameObject clone = GameObject.Instantiate(particleImpact[i], transform.position, Quaternion.identity);
-                impactFB.PlayFeedBack();
+                impactFB.Play();
                 PlayParticle(clone);
                 Destroy(clone, impactLife);
             }

@@ -6,6 +6,11 @@ namespace Team17.BallDash
 {
     public class FeedBack : MonoBehaviour
     {
+        [SerializeField] private bool looping = false;
+        [SerializeField] private bool hardFollowingTransform;
+        [SerializeField] private Transform transformToHardFollow;
+        [SerializeField] private bool tpOnTransformOnPlay;
+        [SerializeField] private Transform transformToTPToOnPlay;
         //Particles
         [SerializeField] private bool particles = false;
         [SerializeField] private ParticleSystem[] particlesSystems;
@@ -23,11 +28,16 @@ namespace Team17.BallDash
         private void Update()
         {
             ShakeManagement();
+            PositionManagement();
         }
 
-        [ContextMenu("Test feedback")]
-        public void PlayFeedBack()
+        [ContextMenu("Play")]
+        public void Play()
         {
+            if(tpOnTransformOnPlay)
+            {
+                transform.position = transformToTPToOnPlay.position;
+            }
             if(particles)
             {
                 for (int i = 0; i < particlesSystems.Length; i++)
@@ -54,14 +64,33 @@ namespace Team17.BallDash
             }
         }
 
+        [ContextMenu("Stop")]
+        public void Stop()
+        {
+            if(looping)
+            {
+                if (particles)
+                {
+                    for (int i = 0; i < particlesSystems.Length; i++)
+                    {
+                        particlesSystems[i].Stop();
+                    }
+                }
+                if (shake)
+                {
+                    shakeDecrementer = shakeTime;
+                    isShaking = false;
+                }
+            }
+        }
+
         private void ShakeManagement()
         {
             if (isShaking)
             {
-
                 if(shakeDecrementer > 0)
                 {
-                    shakeDecrementer -= Time.deltaTime; 
+                    if(!looping) shakeDecrementer -= Time.deltaTime; 
                     for (int i = 0; i < usedTransform.Length; i++)
                     {
                         Vector3 newPos = (Random.insideUnitCircle * shakeAmplitude * Mathf.InverseLerp(0, shakeTime, shakeDecrementer));
@@ -76,8 +105,18 @@ namespace Team17.BallDash
             }
         }
 
+        private void PositionManagement()
+        {
+            if(hardFollowingTransform)
+            {
+                transform.position = transformToHardFollow.position;
+            }
+        }
+
         public bool Particles { get => particles; }
         public bool Shake { get => shake; }
         public bool UseSpecificTransform { get => useSpecificTransform; }
+        public bool HardFollowingTransform { get => hardFollowingTransform; }
+        public bool TpOnTransformOnPlay { get => tpOnTransformOnPlay; }
     }
 }

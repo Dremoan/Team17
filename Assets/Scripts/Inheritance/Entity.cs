@@ -62,6 +62,11 @@ namespace Team17.BallDash
 
         }
 
+        public virtual void OnBallHit(float hitPower)
+        {
+
+        }
+
         public virtual void OnBallSlowed()
         {
 

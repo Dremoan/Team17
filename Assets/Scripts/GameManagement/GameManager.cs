@@ -78,6 +78,14 @@ namespace Team17.BallDash
             }
         }
 
+        public void CallOnBallHit(float hitPower)
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBallHit(hitPower);
+            }
+        }
+
         public void CallOnBallDestroyed()
         {
             for (int i = 0; i < entities.Count; i++)
