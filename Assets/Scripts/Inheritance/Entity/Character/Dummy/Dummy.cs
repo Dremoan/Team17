@@ -14,6 +14,7 @@ namespace Team17.BallDash
 
         string textDisplay;
         int shotNbre;
+        bool tutorialEnding = false;
 
         [Header("Power thresholds")]
         [SerializeField, Range(0, 400)] float smallThresholdPower = 2;
@@ -24,35 +25,45 @@ namespace Team17.BallDash
         protected override void Start()
         {
             base.Start();
-            textDisplay = "Hold and release !";
+            textDisplay = "Hold and release!";
             SetActiveText(textDisplay);
         }
 
         public void Hit(float dmgs)
         {
-            if (dmgs < smallThresholdPower)
+            if (tutorialEnding == false)
             {
-                Debug.Log("smallPower : " + smallThresholdPower);
-                textDisplay = "Hit the ball to accumulate power before attack.";
-                SetActiveText(textDisplay);
-            }
-            else if (dmgs < mediumThresholdPower)
-            {
-                Debug.Log("mediumPower : " + mediumThresholdPower);
-                textDisplay = "Hit the ball more ! Balls are limited.";
-                SetActiveText(textDisplay);
-            }
-            else if (dmgs < strongThresholdPower)
-            {
-                Debug.Log("strongPower : " + strongThresholdPower);
-                textDisplay = "You can even do better !";
-                SetActiveText(textDisplay);
-            }
-            else
-            {
-                Debug.Log("elitePower : " + eliteThresholdPower);
-                textDisplay = "That's a big strike !";
-                SetActiveText(textDisplay);
+                if (dmgs < smallThresholdPower)
+                {
+                    //Debug.Log("smallPower : " + smallThresholdPower);
+                    textDisplay = "Hit the ball to stack power.";
+                    SetActiveText(textDisplay);
+                    shotNbre = 0;
+                }
+                else if (dmgs < mediumThresholdPower)
+                {
+                    //Debug.Log("mediumPower : " + mediumThresholdPower);
+                    textDisplay = "You need more power!";
+                    SetActiveText(textDisplay);
+                    shotNbre = 0;
+                }
+                else if (dmgs < strongThresholdPower)
+                {
+                    //Debug.Log("strongPower : " + strongThresholdPower);
+                    textDisplay = "You can do better!";
+                    SetActiveText(textDisplay);
+                    shotNbre = 0;
+                }
+                else
+                {
+                    //Debug.Log("elitePower : " + eliteThresholdPower);
+                    textDisplay = "That's an elite strike!";
+                    animatorTutorialText.SetTrigger("animBigStrike");
+                    //SetActiveText(textDisplay);
+                    shotNbre = 0;
+                    tutorialEnding = true;
+
+                }
             }
         }
 
@@ -75,21 +86,27 @@ namespace Team17.BallDash
         public override void OnBallDestroyed()
         {
             base.OnBallDestroyed();
-            textDisplay = "Don't forget to strike ! Balls are limited.";
-            SetActiveText(textDisplay);
-            shotNbre = 0;
+            if (tutorialEnding == false)
+            {
+                textDisplay = "Be careful! Balls are limited.";
+                SetActiveText(textDisplay);
+                shotNbre = 0;
+            }
         }
 
         public override void OnBallShot()
         {
             base.OnBallShot();
-            shotNbre += 1;
-            if(shotNbre == 8)
+            if (tutorialEnding == false)
             {
-                textDisplay = "Wait the last moment to accumulate more power.";
-                SetActiveText(textDisplay);
+                shotNbre += 1;
+                Debug.Log("shotNbre : " + shotNbre);
+                if (shotNbre == 8)
+                {
+                    textDisplay = "Last moment is always stronger!";
+                    SetActiveText(textDisplay);
+                }
             }
-
         }
     }
 }
