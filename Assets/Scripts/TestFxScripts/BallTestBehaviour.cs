@@ -15,6 +15,8 @@ namespace Team17.BallDash
 
         private float impactLife;
 
+        public FeedBack ImpactFB { get => impactFB; set => impactFB = value; }
+
         public void Launch(float speed, float launchLifetime, float impactLifeTime, GameObject[] launchFx, GameObject[] trailFx, GameObject[] impactFx)
         {
             particleLaunch = launchFx;
