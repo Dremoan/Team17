@@ -58,12 +58,13 @@ namespace Team17.BallDash
         {
             if (isShaking)
             {
+
                 if(shakeDecrementer > 0)
                 {
                     shakeDecrementer -= Time.deltaTime; 
                     for (int i = 0; i < usedTransform.Length; i++)
                     {
-                        Vector3 newPos = (Random.insideUnitCircle * shakeAmplitude * shakeDecrementer);
+                        Vector3 newPos = (Random.insideUnitCircle * shakeAmplitude * Mathf.InverseLerp(0, shakeTime, shakeDecrementer));
                         usedTransform[i].localPosition = new Vector3(newPos.x, newPos.y, usedTransform[i].localPosition.z);
                     }
                 }
