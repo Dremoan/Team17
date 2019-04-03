@@ -2,47 +2,135 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 namespace Team17.BallDash
 {
     public class Dummy : Character, IBallHitable
     {
-        public GameObject[] ask;
-        [SerializeField] float smallThresholdPower = 2;
-        [SerializeField] float mediumThresholdPower = 5;
-        [SerializeField] float strongThresholdPower = 8;
-        [SerializeField] float eliteThresholdPower = 10;
+        [Header("UI Elements")]
+        public TextMeshProUGUI textTutorial;
+        public GameObject uIcanvas;
+        public Animator animatorTutorialText;
+
+        string textDisplay;
+        int shotNbre;
+        bool tutorialEnding = false;
+        bool colorRed = false;
+
+        [Header("Power thresholds")]
+        [SerializeField, Range(0, 400)] float smallThresholdPower = 2;
+        [SerializeField, Range(0, 400)] float mediumThresholdPower = 5;
+        [SerializeField, Range(0, 400)] float strongThresholdPower = 8;
+        [SerializeField, Range(0, 400)] float eliteThresholdPower = 10;
+
+        [Header("Color sentences"), Range(0,255)] public float Rb;
+        [Range(0, 255)] public float Gb, Bb, Ab, Rg, Gg, Bg, Ag;
+
+        protected override void Start()
+        {
+            base.Start();
+            textDisplay = "Hold and release!";
+            SetActiveText(textDisplay);
+        }
 
         public void Hit(float dmgs)
         {
-            if (dmgs < smallThresholdPower)
+            if (tutorialEnding == false)
             {
-                Debug.Log("smallPower : " + smallThresholdPower);
-                ask[0].gameObject.SetActive(true);
+                if (dmgs < smallThresholdPower)
+                {
+                    //Debug.Log("smallPower : " + smallThresholdPower);
+                    textDisplay = "Hit the ball several times before attack.";
+                    colorRed = true;
+                    SetActiveText(textDisplay);
+                    shotNbre = 0;
+                }
+                else if (dmgs < mediumThresholdPower)
+                {
+                    //Debug.Log("mediumPower : " + mediumThresholdPower);
+                    textDisplay = "You need more power!";
+                    colorRed = true;
+                    SetActiveText(textDisplay);
+                    shotNbre = 0;
+                }
+                else if (dmgs < strongThresholdPower)
+                {
+                    //Debug.Log("strongPower : " + strongThresholdPower);
+                    textDisplay = "You can do better!";
+                    colorRed = true;
+                    SetActiveText(textDisplay);
+                    shotNbre = 0;
+                }
+                else
+                {
+                    //Debug.Log("elitePower : " + eliteThresholdPower);
+                    textDisplay = "That's an elite strike!";
+                    textTutorial.text = textDisplay;
+                    animatorTutorialText.SetTrigger("animBigStrike");
+                    //SetActiveText(textDisplay);
+                    shotNbre = 0;
+                    tutorialEnding = true;
+
+                }
             }
-            else if (dmgs < mediumThresholdPower)
+        }
+
+        void SetActiveText(string textToDisplay)
+        {
+            if (textTutorial.IsActive())
             {
-                Debug.Log("mediumPower : " + mediumThresholdPower);
-                ask[1].gameObject.SetActive(true);
+                textTutorial.gameObject.SetActive(false); //Declanche l'anim de fin de texte avant de lancer la nouvelle.
+                animatorTutorialText.SetTrigger("animTextDisappear");
+                uIcanvas.SetActive(false);
             }
-            else if (dmgs < strongThresholdPower)
+            if (!textTutorial.IsActive())
             {
-                Debug.Log("strongPower : " + strongThresholdPower);
-                ask[2].gameObject.SetActive(true);
-            }
-            else
-            {
-                Debug.Log("elitePower : " + eliteThresholdPower);
-                ask[3].gameObject.SetActive(true);
+                textTutorial.text = textToDisplay;
+                if (colorRed == true)
+                {
+                    textTutorial.color = new Color(Rb/255, Gb/255, Bb/255, Ab/255);
+                }
+                else
+                {
+                    textTutorial.color = new Color(Rg/255, Gg/255, Bg/255, Ag/255);
+                }
+
+                textTutorial.gameObject.SetActive(true);
+                uIcanvas.SetActive(true);
             }
         }
 
         public override void OnBallDestroyed()
         {
             base.OnBallDestroyed();
-            ask[4].gameObject.SetActive(true);
+            if (tutorialEnding == false)
+            {
+                textDisplay = "Don't be too greedy! Balls are limited";
+                colorRed = true;
+                SetActiveText(textDisplay);
+                shotNbre = 0;
+            }
         }
 
-        //Faire une fonction pour activer le texte qui l'efface au bout d'un moment.
+        public override void OnBallShot()
+        {
+            base.OnBallShot();
+            if (tutorialEnding == false)
+            {
+                shotNbre += 1;
+                Debug.Log("shotNbre : " + shotNbre);
+                if (shotNbre == 8)
+                {
+                    textDisplay = "Strike at the last moment for maximum power.";
+                    SetActiveText(textDisplay);
+                }
+            }
+        }
+
+        public void LoadMenu(int index)
+        {
+            SceneManager.LoadScene(index);
+        }
     }
 }
