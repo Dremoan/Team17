@@ -12,8 +12,11 @@ namespace Team17.BallDash
     public class GameState
     {
         private List<Entity> entities = new List<Entity>();
+        private List<VirtualCameraTarget> virtualCameraTargets = new List<VirtualCameraTarget>();
         private GameObject playerGameObject;
         private int livesLeft;
+
+        #region Entity registration
 
         public void RegisterEntity(Entity ent)
         {
@@ -24,6 +27,24 @@ namespace Team17.BallDash
         {
             entities.Remove(ent);
         }
+
+        #endregion
+
+        #region Virtual camera targets registration
+
+        public void RegisterVirtualCameraTarget(VirtualCameraTarget target)
+        {
+            virtualCameraTargets.Add(target);
+        }
+
+        public void UnregisterVirtualCameraTarget(VirtualCameraTarget target)
+        {
+            virtualCameraTargets.Remove(target);
+        }
+
+        #endregion
+
+        #region Entity events
 
         public void CallOnPlayerTeleport()
         {
@@ -121,7 +142,20 @@ namespace Team17.BallDash
             }
         }
 
+        #endregion
+
+        /// <summary>
+        /// Clear all attributes of the GameState. Call this method before loading a new scene.
+        /// </summary>
+        public void ResetState()
+        {
+            entities.Clear();
+            livesLeft = 0;
+            playerGameObject = null;
+        }
+
         public GameObject PlayerGameObject { get => playerGameObject; set => playerGameObject = value; }
         public int LivesLeft { get => livesLeft; set => livesLeft = value; }
+        public List<VirtualCameraTarget> VirtualCameraTargets { get => virtualCameraTargets; }
     }
 }

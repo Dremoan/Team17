@@ -28,7 +28,7 @@ namespace Team17.BallDash
             GameManager.state.RegisterEntity(this);
         }
 
-        protected void OnDisable()
+        protected virtual void OnDisable()
         {
             GameManager.state.UnregisterEntity(this);
         }
