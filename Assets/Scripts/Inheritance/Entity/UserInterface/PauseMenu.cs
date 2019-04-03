@@ -8,10 +8,10 @@ namespace Team17.BallDash
     public class PauseMenu : Entity
     {
 
-        public void ReturnToMenu()
+        public void ReturnToMenu(int menuIndex)
         {
             Debug.Log("Load main menu scene");
-            //SceneManager.LoadScene(0);
+            SceneManager.LoadScene(menuIndex);
         }
 
         public void RetryLevel()
