@@ -104,11 +104,21 @@ namespace Team17.BallDash
 
         #region Ball interactions
 
+        private void Hit()
+        {
+            power = 0;
+            wasCanceled = true;
+            timerFeedback.gameObject.SetActive(false);
+            trajectory.gameObject.SetActive(false);
+            character.Physicate(true);
+            gameObject.SetActive(false);
+            destroyed = true;
+            GameManager.state.CallOnBallHit(power);
+        }
+
         private void CancelBall()
         {
             power = 0;
-            body.velocity = body.velocity * 0.7f;
-            body.useGravity = true;
             wasCanceled = true;
             timerFeedback.gameObject.SetActive(false);
             trajectory.gameObject.SetActive(false);
@@ -158,6 +168,7 @@ namespace Team17.BallDash
             if (coll.gameObject.GetComponent<IBallHitable>() != null)
             {
                 coll.gameObject.GetComponent<IBallHitable>().Hit(power);
+                Hit();
             }
         }
 
