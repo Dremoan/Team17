@@ -150,6 +150,11 @@ namespace Team17.BallDash
 
         private void OnTriggerEnter(Collider coll)
         {
+            if (coll.gameObject.GetComponent<BallCanceler>() != null)
+            {
+                CancelBall();
+            }
+
             if (coll.gameObject.GetComponent<IBallHitable>() != null)
             {
                 coll.gameObject.GetComponent<IBallHitable>().Hit(power);
