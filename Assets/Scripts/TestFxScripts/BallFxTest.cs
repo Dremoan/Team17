@@ -6,7 +6,7 @@ namespace Team17.BallDash
 {
     public class BallFxTest : MonoBehaviour
     {
-
+        [SerializeField] private FeedBack impactFB;
         [SerializeField] private GameObject ballTestPrefab;
 
         [SerializeField] private KeyCode testKey = KeyCode.L;
@@ -24,6 +24,7 @@ namespace Team17.BallDash
             if(Input.GetKeyDown(testKey))
             {
                 GameObject clone = GameObject.Instantiate(ballTestPrefab, transform.position, Quaternion.identity);
+                clone.GetComponent<BallTestBehaviour>().ImpactFB = impactFB;
                 clone.GetComponent<BallTestBehaviour>().Launch(testSpeed, launchLifeTime, impactLifeTime, launchToTest, trailToTest, impactToTest);
             }
         }
