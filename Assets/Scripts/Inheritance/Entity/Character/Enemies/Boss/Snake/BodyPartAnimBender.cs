@@ -26,8 +26,8 @@ namespace Team17.BallDash
         {
             base.Update();
             bendAnimator.transform.localPosition = Vector3.zero;
-            bendAnimator.SetFloat("LeftBend", leftBend);
-            bendAnimator.SetFloat("RightBend", rightBend);
+            bendAnimator.SetFloat("RightBend", leftBend);
+            bendAnimator.SetFloat("LeftBend", rightBend);
             CalculateRightBend();
         }
 
@@ -35,7 +35,8 @@ namespace Team17.BallDash
         {
             Vector3 centerTangent = transform.right * initialDistFromRight;
             float bendDist = Vector3.Distance(centerTangent, rightTip.position);
-            Debug.Log(bendDist);
+            float upDist = Vector3.Distance(transform.up, transform.up + transform.up * bendDist);
+            Debug.Log("Dist : " + bendDist + " Updist : " + upDist + " Tip is up : " + (upDist < bendDist));
         }
 
         public float LeftBend { get => leftBend; set => leftBend = value; }

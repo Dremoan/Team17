@@ -80,6 +80,11 @@ namespace Team17.BallDash
 
         public void CallOnBallHit(float hitPower)
         {
+            livesLeft--;
+            if (livesLeft == 0)
+            {
+                //game over;
+            }
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].OnBallHit(hitPower);
@@ -88,6 +93,11 @@ namespace Team17.BallDash
 
         public void CallOnBallDestroyed()
         {
+            livesLeft--;
+            if(livesLeft == 0)
+            {
+                //game over;
+            }
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].OnBallDestroyed();

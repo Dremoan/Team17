@@ -31,25 +31,25 @@ namespace Team17.BallDash
 
         public PlayerProjectile GetNextBall()
         {
-            if (livesLeft == 4)
+            if (GameManager.state.LivesLeft == 4)
             {
                 firstBall.gameObject.SetActive(true);
                 playerCharacter.actualBall = firstBall.GetComponent<PlayerProjectile>();
                 return firstBall;
             }
-            if (livesLeft == 3)
+            if (GameManager.state.LivesLeft == 3)
             {
                 secondBall.gameObject.SetActive(true);
                 playerCharacter.actualBall = secondBall.GetComponent<PlayerProjectile>();
                 return secondBall;
             }
-            if (livesLeft == 2)
+            if (GameManager.state.LivesLeft == 2)
             {
                 thirdBall.gameObject.SetActive(true);
                 playerCharacter.actualBall = thirdBall.GetComponent<PlayerProjectile>();
                 return thirdBall;
             }
-            if (livesLeft == 1)
+            if (GameManager.state.LivesLeft == 1)
             {
                 fourthBall.gameObject.SetActive(true);
                 playerCharacter.actualBall = fourthBall.GetComponent<PlayerProjectile>();
@@ -58,32 +58,10 @@ namespace Team17.BallDash
             return null;
         }
 
-        public override void OnBallDestroyed()
-        {
-            base.OnBallDestroyed();
-            livesLeft--;
-            GameManager.state.LivesLeft = livesLeft;
-            if (livesLeft == 0)
-            {
-
-            }// game over;
-        }
-
         public override void OnBossDeath()
         {
             base.OnBossDeath();
             bossDead = true;
-        }
-
-        public override void OnBallHit(float hitPower)
-        {
-            base.OnBallHit(hitPower);
-            livesLeft--;
-            GameManager.state.LivesLeft = livesLeft;
-            if (livesLeft == 0 && !bossDead)
-            {
-
-            }// game over;
         }
     }
 }
