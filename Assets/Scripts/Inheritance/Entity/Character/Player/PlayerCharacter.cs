@@ -10,6 +10,7 @@ namespace Team17.BallDash
         [SerializeField] private Collider hardCollider;
         [SerializeField] private Animator anim;
         [SerializeField] private float distFromBall = 1.2f;
+        public PlayerProjectile actualBall;
 
         private bool negativeAngle = false;
         private float angle = 0;
@@ -38,5 +39,11 @@ namespace Team17.BallDash
         {
             anim.SetTrigger("shoot");
         }
+
+        public void TriggerLaunchBall()
+        {
+            actualBall.LaunchBall();
+        }
+
     }
 }

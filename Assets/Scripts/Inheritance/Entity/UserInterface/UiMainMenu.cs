@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace Team17.BallDash
 {
-    public class UiMainMenu : MonoBehaviour
+    public class UiMainMenu : Entity
     {
         public void LoadScene(int index)
         {

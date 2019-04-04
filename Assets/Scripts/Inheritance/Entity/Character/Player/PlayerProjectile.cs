@@ -7,7 +7,7 @@ namespace Team17.BallDash
     public class PlayerProjectile : Character
     {
         [Header("Components")]
-        [SerializeField] private Rigidbody body;
+        public Rigidbody body;
         [SerializeField] private TimersCalculator timer;
 
         [Header("Feedbacks")]
@@ -145,7 +145,6 @@ namespace Team17.BallDash
             character.Strike();
 
             SelectFeedBackgroup(power);
-            usedFeedbackGroup.Launch.Play();
 
             GameManager.state.CallOnCharacterStartStrikeAnim();
         }
@@ -153,6 +152,7 @@ namespace Team17.BallDash
         public void LaunchBall()
         {
             body.velocity = movementDirection;
+            usedFeedbackGroup.Launch.Play();
 
             GameManager.state.CallOnBallShot();
         }
