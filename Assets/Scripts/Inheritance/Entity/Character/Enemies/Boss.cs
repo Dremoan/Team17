@@ -80,11 +80,11 @@ namespace Team17.BallDash
         private void SwitchState()
         {
             bossStateIndex++;
-            
             if (bossStateIndex > 3) Death();
             else
             {
                 bossState = (Team17.BallDash.BossState) bossStateIndex;
+                Debug.Log("Switched to " + bossState);
                 GameManager.state.CallOnBossChangeState(bossState);
                 SetHealth();
             }
@@ -192,9 +192,10 @@ namespace Team17.BallDash
 
         private void IntroEnd()
         {
-            bossState = BossState.First;
+            
             canAttack = true;
             GameManager.state.CallOnBossBeginsPattern();
+            SwitchState();
         }
 
         private void AttackEnd()
