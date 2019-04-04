@@ -119,7 +119,7 @@ namespace Team17.BallDash
             if (tutorialEnding == false)
             {
                 shotNbre += 1;
-                Debug.Log("shotNbre : " + shotNbre);
+                //Debug.Log("shotNbre : " + shotNbre);
                 if (shotNbre == 8)
                 {
                     textDisplay = "Strike at the last moment for maximum power.";
