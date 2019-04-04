@@ -113,10 +113,12 @@ namespace Team17.BallDash
                 switch (bossState)
                 {
                     case BossState.Intro:
+                        Debug.Log("Launched intro pattern");
                         Attack(-1);
                         return;
 
                     case BossState.First:
+                        Debug.Log("Launched first phase attack");
                         for (int i = 0; i < firstPhaseAttacks.Length; i++)
                         {
                             if (firstPhaseAttacks[i].IsUsableAndUseful(phaseOneZero, GameManager.state.PlayerGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena()))
@@ -190,9 +192,8 @@ namespace Team17.BallDash
             }
         }
 
-        private void IntroEnd()
+        public void IntroEnd()
         {
-            
             canAttack = true;
             GameManager.state.CallOnBossBeginsPattern();
             SwitchState();
