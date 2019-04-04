@@ -5,29 +5,25 @@ using UnityEngine.Playables;
 
 namespace Team17.BallDash
 {
-    public class PhaseTransitionManager : MonoBehaviour
+    public class PhaseTransitionManager : Entity
     {
 
         [SerializeField] private PlayableDirector[] transitionPhases;
-        [SerializeField] private int indexPhase = 0;
 
-        private void Start()
+        protected override void Start()
         {
-            indexPhase = 0;   
+            base.Start();
         }
 
-        private void Update()
+        public override void OnBossChangeState(BossState targetState)
         {
-            if(Input.GetKeyDown(KeyCode.Space))
-            {
-                TriggerPhase();
-            }
+            base.OnBossChangeState(targetState);
+            TriggerPhase(targetState);
         }
 
-        public void TriggerPhase()
+        public void TriggerPhase(BossState actualState)
         {
-            transitionPhases[indexPhase].Play();
-            indexPhase++;
+            transitionPhases[(int)actualState].Play();
         }
     }
 }
