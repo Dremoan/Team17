@@ -1,13 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace Team17.BallDash
 {
-    public class GuiHealthPoints : Entity
+    public class UiManager : SceneLinks
     {
-        [SerializeField] private GameObject[] nbreBallsArray;
-        int nbreBall = 0; //variable temporaire des HP du joueur (à remplacer par la vrai variable).
+        // ------ Player Health Management ------
+        [Header("End Level Ui"), SerializeField] private GameObject EndLevelUi;
+        [SerializeField] private TextMeshProUGUI textEndGame;
+        [Header("Health Management"), SerializeField] private GameObject[] nbreBallsArray;
+        int nbreBall = 0;
+        bool endLevelVictory = false;
+
+        protected override void Update()
+        {
+            if(GameManager.state.LivesLeft <= 0)
+            {
+                GUiEndLevel(endLevelVictory);
+            }
+        }
 
         public override void OnBallHit(float hitPower)
         {
@@ -35,6 +48,14 @@ namespace Team17.BallDash
             {
                 Debug.LogWarning("Balls number can't be under 0 !");
             }
+        }
+        private void GUiEndLevel(bool endLevelVictory)
+        {
+            textEndGame.text = "Defeat !";
+            textEndGame.text = "Victory !";
+
+            EndLevelUi.SetActive(true);
+
         }
     }
 }
