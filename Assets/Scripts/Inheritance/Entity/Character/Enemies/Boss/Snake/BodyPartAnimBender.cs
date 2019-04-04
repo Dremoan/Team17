@@ -7,8 +7,20 @@ namespace Team17.BallDash
     public class BodyPartAnimBender : Entity
     {
         [SerializeField] private Animator bendAnimator;
+        [SerializeField] private Transform leftTip;
+        [SerializeField] private Transform rightTip;
         [SerializeField] [Range(0, 1)] private float leftBend = 0.5f;
         [SerializeField] [Range(0, 1)] private float rightBend = 0.5f;
+
+        private float initialDistFromRight = 1f;
+        private float initialDistFromLeft = 1f;
+
+        protected override void Start()
+        {
+            base.Start();
+            initialDistFromRight = Vector3.Distance(transform.position, rightTip.position);
+            initialDistFromLeft = Vector3.Distance(transform.position, leftTip.position);
+        }
 
         protected override void Update()
         {
@@ -16,6 +28,17 @@ namespace Team17.BallDash
             bendAnimator.transform.localPosition = Vector3.zero;
             bendAnimator.SetFloat("LeftBend", leftBend);
             bendAnimator.SetFloat("RightBend", rightBend);
+            CalculateRightBend();
         }
+
+        private void CalculateRightBend()
+        {
+            Vector3 centerTangent = transform.right * initialDistFromRight;
+            float bendDist = Vector3.Distance(centerTangent, rightTip.position);
+            Debug.Log(bendDist);
+        }
+
+        public float LeftBend { get => leftBend; set => leftBend = value; }
+        public float RightBend { get => rightBend; set => rightBend = value; }
     }
 }
