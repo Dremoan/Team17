@@ -80,11 +80,11 @@ namespace Team17.BallDash
         private void SwitchState()
         {
             bossStateIndex++;
-            
             if (bossStateIndex > 3) Death();
             else
             {
                 bossState = (Team17.BallDash.BossState) bossStateIndex;
+                Debug.Log("Switched to " + bossState);
                 GameManager.state.CallOnBossChangeState(bossState);
                 SetHealth();
             }
@@ -113,10 +113,12 @@ namespace Team17.BallDash
                 switch (bossState)
                 {
                     case BossState.Intro:
+                        Debug.Log("Launched intro pattern");
                         Attack(-1);
                         return;
 
                     case BossState.First:
+                        Debug.Log("Launched first phase attack");
                         for (int i = 0; i < firstPhaseAttacks.Length; i++)
                         {
                             if (firstPhaseAttacks[i].IsUsableAndUseful(phaseOneZero, GameManager.state.PlayerGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena()))
@@ -190,11 +192,11 @@ namespace Team17.BallDash
             }
         }
 
-        private void IntroEnd()
+        public void IntroEnd()
         {
-            bossState = BossState.First;
             canAttack = true;
             GameManager.state.CallOnBossBeginsPattern();
+            SwitchState();
         }
 
         private void AttackEnd()
