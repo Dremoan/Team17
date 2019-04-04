@@ -97,6 +97,11 @@ namespace Team17.BallDash
 
         }
 
+        public virtual void OnLevelEnd()
+        {
+
+        }
+
         public virtual void OnPause()
         {
 
