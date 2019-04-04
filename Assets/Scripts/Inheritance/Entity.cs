@@ -82,7 +82,7 @@ namespace Team17.BallDash
 
         }
 
-        public virtual void OnBossChangeState()
+        public virtual void OnBossChangeState(BossState targetState)
         {
 
         }
