@@ -84,8 +84,8 @@ namespace Team17.BallDash
             if (bossStateIndex > 3) Death();
             else
             {
-                GameManager.state.CallOnBossChangeState();
                 bossState = (Team17.BallDash.BossState) bossStateIndex;
+                GameManager.state.CallOnBossChangeState(bossState);
                 SetHealth();
             }
         }
