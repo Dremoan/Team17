@@ -33,6 +33,7 @@ namespace Team17.BallDash
         private int reHitTimer;
         private bool destroyed = false;
         private bool wasCanceled = false;
+        private bool isStriking = false;
         private Vector3 movementDirection;
         private Vector3 initialFeedbackScale;
         private Vector3 lastEnter;
@@ -62,6 +63,8 @@ namespace Team17.BallDash
         protected override void OnEnable()
         {
             base.OnEnable();
+            SelectFeedBackgroup(power);
+            initialFeedbackScale = timerFeedback.localScale;
             GameManager.state.PlayerGameObject = this.gameObject;
         }
 
@@ -106,6 +109,7 @@ namespace Team17.BallDash
             trajectory.gameObject.SetActive(true);
             character.Physicate(false);
             wasCanceled = false;
+            isStriking = true;
 
             GameManager.state.CallOnPlayerTeleport();
         }
@@ -134,8 +138,6 @@ namespace Team17.BallDash
             power += powerGained.Evaluate(t.Inc);
             movementDirection = newDirection.normalized * (speed * speedMultiplier.Evaluate(power));
 
-            Debug.Log("Gained : " + powerGained.Evaluate(t.Inc) + " Power : " + power + " Speed : " + speed * speedMultiplier.Evaluate(power));
-
             timer.DeleteTimer(reHitTimer);
 
             timerFeedback.gameObject.SetActive(false);
@@ -153,6 +155,8 @@ namespace Team17.BallDash
         {
             body.velocity = movementDirection;
             usedFeedbackGroup.Launch.Play();
+            usedFeedbackGroup.Trail.Play();
+            isStriking = false;
 
             GameManager.state.CallOnBallShot();
         }
@@ -172,6 +176,7 @@ namespace Team17.BallDash
             destroyed = true;
 
             usedFeedbackGroup.Hit.Play();
+            usedFeedbackGroup.Trail.Stop();
 
             GameManager.state.CallOnBallHit(power);
         }
@@ -187,6 +192,7 @@ namespace Team17.BallDash
             destroyed = true;
 
             usedFeedbackGroup.Destroyed.Play();
+            usedFeedbackGroup.Trail.Stop();
 
             GameManager.state.CallOnBallDestroyed();
         }
@@ -198,12 +204,14 @@ namespace Team17.BallDash
             lastNewDir = newDir;
             power -= powerLostOnBounce;
             if (power < 0) power = 0;
-            Debug.Log("Power after bounce : " + power);
-            movementDirection = newDir.normalized * (speed * speedMultiplier.Evaluate(power));
+            if(isStriking) movementDirection = newDir.normalized * (speed * slowedTimeScale * speedMultiplier.Evaluate(power));
+            else movementDirection = newDir.normalized * (speed * speedMultiplier.Evaluate(power));
+
             body.velocity = movementDirection;
 
             SelectFeedBackgroup(power);
             usedFeedbackGroup.Bounce.Play();
+            usedFeedbackGroup.Trail.Play();
 
             GameManager.state.CallOnBallBounced();
         }
