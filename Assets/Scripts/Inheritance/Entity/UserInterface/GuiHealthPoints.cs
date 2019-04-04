@@ -6,12 +6,18 @@ namespace Team17.BallDash
 {
     public class GuiHealthPoints : Entity
     {
-        public GameObject[] nbreBallsArray;
+        [SerializeField] private GameObject[] nbreBallsArray;
         [SerializeField] int nbreBall = 4; //variable temporaire des HP du joueur (à remplacer par la vrai variable).
 
         public override void OnBallDestroyed()
         {
             base.OnBallDestroyed();
+            GuiNbreBalls();
+        }
+
+        public override void OnBallHit(float hitPower)
+        {
+            base.OnBallHit(hitPower);
             GuiNbreBalls();
         }
 
@@ -22,7 +28,7 @@ namespace Team17.BallDash
             Debug.Log("GameManager.state.LivesLeft : " + GameManager.state.LivesLeft);
             if ((nbreBall-1) >= 0)
             {
-                nbreBallsArray[nbreBall-1].SetActive(false);
+                nbreBallsArray[nbreBall-2].SetActive(false);
             }
             else if (nbreBall < 0)
             {
