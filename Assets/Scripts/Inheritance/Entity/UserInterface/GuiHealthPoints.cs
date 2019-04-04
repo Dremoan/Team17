@@ -24,11 +24,12 @@ namespace Team17.BallDash
         private void GuiNbreBalls()
         {
             nbreBall = GameManager.state.LivesLeft;
-            //Debug.Log("nbreBall : " + nbreBall);
+            nbreBall -= 1;
             //Debug.Log("GameManager.state.LivesLeft : " + GameManager.state.LivesLeft);
-            if ((nbreBall) > 0)
+            //Debug.Log("nbreBall : " + nbreBall);
+            if ((nbreBall) >= 0)
             {
-                nbreBallsArray[nbreBall-1].SetActive(false);
+                nbreBallsArray[nbreBall].SetActive(false);
             }
             else if (nbreBall < 0)
             {
