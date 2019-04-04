@@ -22,6 +22,13 @@ namespace Team17.BallDash
             }
         }
 
+        public override void OnLevelEnd()
+        {
+            base.OnLevelEnd();
+            endLevelVictory = true;
+            GUiEndLevel(endLevelVictory);
+        }
+
         public override void OnBallHit(float hitPower)
         {
             base.OnBallHit(hitPower);
@@ -51,11 +58,16 @@ namespace Team17.BallDash
         }
         private void GUiEndLevel(bool endLevelVictory)
         {
-            textEndGame.text = "Defeat !";
-            textEndGame.text = "Victory !";
-
-            EndLevelUi.SetActive(true);
-
+            if(endLevelVictory == false)
+            {
+                textEndGame.text = "Defeat !";
+                EndLevelUi.SetActive(true);
+            }
+            else
+            {
+                textEndGame.text = "Victory !";
+                EndLevelUi.SetActive(true);
+            }
         }
     }
 }
