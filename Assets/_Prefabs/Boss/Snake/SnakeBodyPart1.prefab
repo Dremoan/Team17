@@ -28,7 +28,7 @@ Transform:
   m_LocalPosition: {x: 4.33, y: 4.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4380750097023762908}
+  - {fileID: 3635743393004918717}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1350c3448d45af14c8acc68b63479982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bendAnimator: {fileID: 4380750097014255166}
+  bendAnimator: {fileID: 0}
   leftBend: 0.5
   rightBend: 0.5
---- !u!1001 &4380750097023638366
+--- !u!1001 &3635743393005309247
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -58,6 +58,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossCorps1_BendAnim
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 5530bf21377ac174a92de0c96fd0e3fd, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: bde6eb601ef97ab489d54faee0cb84a5, type: 2}
     - target: {fileID: 400002, guid: 5530bf21377ac174a92de0c96fd0e3fd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -102,21 +106,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: 5530bf21377ac174a92de0c96fd0e3fd, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: bde6eb601ef97ab489d54faee0cb84a5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5530bf21377ac174a92de0c96fd0e3fd, type: 3}
---- !u!4 &4380750097023762908 stripped
+--- !u!4 &3635743393004918717 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 5530bf21377ac174a92de0c96fd0e3fd,
     type: 3}
-  m_PrefabInstance: {fileID: 4380750097023638366}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &4380750097014255166 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 9500000, guid: 5530bf21377ac174a92de0c96fd0e3fd,
-    type: 3}
-  m_PrefabInstance: {fileID: 4380750097023638366}
+  m_PrefabInstance: {fileID: 3635743393005309247}
   m_PrefabAsset: {fileID: 0}
