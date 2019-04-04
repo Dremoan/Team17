@@ -37,7 +37,6 @@ namespace Team17.BallDash
             for (int i = 0; i < headFollowers.Length; i++)
             {
                 headFollowers[i].DistFromHeadAtStart = Vector3.Distance(transform.position, headFollowers[i].Transform.position);
-                Debug.Log("Initial dist for " + headFollowers[i].Name + " : " + headFollowers[i].DistFromHeadAtStart);
             }
         }
 
