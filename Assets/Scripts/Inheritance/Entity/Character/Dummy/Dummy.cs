@@ -10,7 +10,6 @@ namespace Team17.BallDash
     {
         [Header("UI Elements")]
         [SerializeField] TextMeshProUGUI textTutorial;
-        [SerializeField] GameObject endGame;
         [SerializeField] GameObject uIcanvas;
         [SerializeField] Animator animatorTutorialText;
 
@@ -35,14 +34,6 @@ namespace Team17.BallDash
             base.Start();
             textDisplay = "Hold and release!";
             SetActiveText(textDisplay);
-        }
-
-        protected override void Update()
-        {
-            if(GameManager.state.LivesLeft <= 0)
-            {
-                endGame.SetActive(true);
-            }
         }
 
         public void Hit(float dmgs)

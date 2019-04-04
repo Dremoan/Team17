@@ -5,18 +5,17 @@ using UnityEngine.SceneManagement;
 
 namespace Team17.BallDash
 {
-    public class PauseMenu : Entity
+    public class SceneLinks : Entity
     {
-
-        public void ReturnToMenu(int menuIndex)
+        public void LoadSceneIndex(int index)
         {
-            Debug.Log("Load main menu scene");
-            SceneManager.LoadScene(menuIndex);
+            Debug.Log("Load scene");
+            SceneManager.LoadScene(index);
         }
 
-        public void RetryLevel()
+        public void ReloadActualScene()
         {
-            Debug.Log("Reload Level");
+            Debug.Log("Reload actual scene");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
