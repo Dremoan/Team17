@@ -15,6 +15,12 @@ namespace Team17.BallDash
             GuiNbreBalls();
         }
 
+        public override void OnBallDestroyed()
+        {
+            base.OnBallDestroyed();
+            GuiNbreBalls();
+        }
+
         private void GuiNbreBalls()
         {
             nbreBall = GameManager.state.LivesLeft;
