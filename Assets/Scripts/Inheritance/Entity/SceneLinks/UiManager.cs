@@ -10,13 +10,24 @@ namespace Team17.BallDash
         // ------ Player Health Management ------
         [Header("End Level Ui"), SerializeField] private GameObject EndLevelUi;
         [SerializeField] private TextMeshProUGUI textEndGame;
+        [SerializeField] private Animator animatorUiEndLevel;
         [Header("Health Management"), SerializeField] private GameObject[] nbreBallsArray;
         int nbreBall = 0;
         bool endLevelVictory = false;
 
+        public void LoadMenuScene()
+        {
+            animatorUiEndLevel.SetTrigger("animEndLevelMenu");
+        }
+
+        public void ReloadScene()
+        {
+            animatorUiEndLevel.SetTrigger("animEndLevelReload");
+        }
+
         protected override void Update()
         {
-            if(GameManager.state.LivesLeft <= 0)
+            if (GameManager.state.LivesLeft <= 0)
             {
                 GUiEndLevel(endLevelVictory);
             }
@@ -58,14 +69,16 @@ namespace Team17.BallDash
         }
         private void GUiEndLevel(bool endLevelVictory)
         {
-            if(endLevelVictory == false)
+            if (endLevelVictory == false)
             {
-                textEndGame.text = "Defeat !";
+                textEndGame.color = new Color(186 / 255, 0 / 255, 2 / 255);
+                textEndGame.text = "Defeat!";
                 EndLevelUi.SetActive(true);
             }
             else
             {
-                textEndGame.text = "Victory !";
+                textEndGame.color = new Color(20 / 255, 220 / 255, 0 / 255);
+                textEndGame.text = "Victory!";
                 EndLevelUi.SetActive(true);
             }
         }
