@@ -279,8 +279,42 @@ MonoBehaviour:
     eventTrigger:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1701120183}
-          m_MethodName: LaunchBall
+        - m_Target: {fileID: 770370296}
+          m_MethodName: TriggerLaunchBall
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  - EventName: Shoot
+    eventTrigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 770370296}
+          m_MethodName: TriggerLaunchBall
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  - EventName: Shoot
+    eventTrigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 770370296}
+          m_MethodName: TriggerLaunchBall
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -818,6 +852,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6643e2c8b7ec0e4ebc2b738800f488d, type: 3}
+--- !u!114 &770370296 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3769057665707726450, guid: 1d7d8698125f9844c8139764c4c000a7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1618312284594600675}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3e59577a35e9174ebddf1a4a7ac2f7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &997215684 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3803910044386786090, guid: 6a4d325f8acf8ba4d9713d41d69817df,
@@ -889,18 +935,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1701120183 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1354917076802958734, guid: 1d7d8698125f9844c8139764c4c000a7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1618312284594600675}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccacf9967edeac146974491b2e713c5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1829894433 stripped
@@ -4975,5 +5009,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4509791874626630717, guid: 1d7d8698125f9844c8139764c4c000a7,
+        type: 3}
+      propertyPath: playerCharacter
+      value: 
+      objectReference: {fileID: 770370296}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d7d8698125f9844c8139764c4c000a7, type: 3}

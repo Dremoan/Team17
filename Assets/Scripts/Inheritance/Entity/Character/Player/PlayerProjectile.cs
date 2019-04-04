@@ -7,7 +7,7 @@ namespace Team17.BallDash
     public class PlayerProjectile : Character
     {
         [Header("Components")]
-        [SerializeField] private Rigidbody body;
+        public Rigidbody body;
         [SerializeField] private TimersCalculator timer;
 
         [Header("Feedbacks")]
