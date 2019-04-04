@@ -80,6 +80,11 @@ namespace Team17.BallDash
 
         public void CallOnBallHit(float hitPower)
         {
+            livesLeft--;
+            if (livesLeft == 0)
+            {
+                //game over;
+            }
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].OnBallHit(hitPower);
@@ -88,6 +93,11 @@ namespace Team17.BallDash
 
         public void CallOnBallDestroyed()
         {
+            livesLeft--;
+            if(livesLeft == 0)
+            {
+                //game over;
+            }
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].OnBallDestroyed();
@@ -118,11 +128,11 @@ namespace Team17.BallDash
             }
         }
 
-        public void CallOnBossChangeState()
+        public void CallOnBossChangeState(BossState targetState)
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                entities[i].OnBossChangeState();
+                entities[i].OnBossChangeState(targetState);
             }
         }
 
@@ -163,6 +173,7 @@ namespace Team17.BallDash
         /// <summary>
         /// Clear all attributes of the GameState. Call this method before loading a new scene.
         /// </summary>
+        
         public void ResetState()
         {
             entities.Clear();

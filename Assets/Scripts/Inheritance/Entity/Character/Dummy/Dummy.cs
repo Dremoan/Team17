@@ -9,9 +9,10 @@ namespace Team17.BallDash
     public class Dummy : Character, IBallHitable
     {
         [Header("UI Elements")]
-        public TextMeshProUGUI textTutorial;
-        public GameObject uIcanvas;
-        public Animator animatorTutorialText;
+        [SerializeField] TextMeshProUGUI textTutorial;
+        [SerializeField] GameObject endGame;
+        [SerializeField] GameObject uIcanvas;
+        [SerializeField] Animator animatorTutorialText;
 
         string textDisplay;
         int shotNbre;
@@ -24,14 +25,24 @@ namespace Team17.BallDash
         [SerializeField, Range(0, 400)] float strongThresholdPower = 8;
         [SerializeField, Range(0, 400)] float eliteThresholdPower = 10;
 
-        [Header("Color sentences"), Range(0,255)] public float Rb;
-        [Range(0, 255)] public float Gb, Bb, Ab, Rg, Gg, Bg, Ag;
+        [Header("Color bad instructions"), Range(0,255), SerializeField] float Rb;
+        [Range(0, 255),SerializeField] float Gb, Bb, Ab;
+        [Header("Color good instructions"), Range(0, 255), SerializeField] float Rg;
+        [Range(0, 255), SerializeField] float Gg, Bg, Ag;
 
         protected override void Start()
         {
             base.Start();
             textDisplay = "Hold and release!";
             SetActiveText(textDisplay);
+        }
+
+        protected override void Update()
+        {
+            if(GameManager.state.LivesLeft <= 0)
+            {
+                endGame.SetActive(true);
+            }
         }
 
         public void Hit(float dmgs)
@@ -66,6 +77,7 @@ namespace Team17.BallDash
                 {
                     //Debug.Log("elitePower : " + eliteThresholdPower);
                     textDisplay = "That's an elite strike!";
+                    colorRed = false;
                     textTutorial.text = textDisplay;
                     animatorTutorialText.SetTrigger("animBigStrike");
                     //SetActiveText(textDisplay);
@@ -123,6 +135,7 @@ namespace Team17.BallDash
                 if (shotNbre == 8)
                 {
                     textDisplay = "Strike at the last moment for maximum power.";
+                    colorRed = false;
                     SetActiveText(textDisplay);
                 }
             }

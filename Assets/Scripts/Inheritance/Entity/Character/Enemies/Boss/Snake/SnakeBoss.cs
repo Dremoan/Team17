@@ -7,26 +7,6 @@ namespace Team17.BallDash
 {
     public class SnakeBoss : Entity
     {
-        #region NotNow
-        /*
-                [Header("Snake parameters")]
-                [SerializeField] private BossAimZone zone;
-                [SerializeField] private SnakeBossPattern[] patterns;
-                [SerializeField] private BossAimZone[] zones;
-
-                protected override void Update()
-                {
-                    base.Update();
-                }
-
-                [ContextMenu("Add")]
-                public void Add()
-                {
-                    zones = new BossAimZone[1];
-                    zones[0] = new BossAimZone();
-                }
-            */
-        #endregion
         [SerializeField] private FollowPath[] snakeBodyParts;
         [SerializeField] private PathCreator[] pathPull;
         private PathCreator actualPath;
@@ -38,12 +18,13 @@ namespace Team17.BallDash
         [SerializeField] private float delayFollowSnakeChunks = 0.25f;
         private int indexPath;
 
-
-        void Start()
+        protected override void Start()
         {
             GetPath(2);
             PickMoveIntro();
         }
+
+        #region Spline movement
 
         IEnumerator Delay()
         {
@@ -114,13 +95,6 @@ namespace Team17.BallDash
             }
         }
 
-        public void AssignAttack(int indexToAssign)
-        {
-            snakeAnim.SetFloat("AttackZoneIndex", 0f);
-            ResetPositionsEvent();
-            snakeAnim.SetInteger("AttackZoneIndex", indexToAssign);
-        }
-
         public void StopMovingSnake()
         {
             for (int i = 0; i < snakeBodyParts.Length; i++)
@@ -141,6 +115,15 @@ namespace Team17.BallDash
         public void StartMovingSnake()
         {
             StartCoroutine(Delay());
+        }
+
+        #endregion
+
+        public void AssignAttack(int indexToAssign)
+        {
+            snakeAnim.SetFloat("AttackZoneIndex", 0f);
+            ResetPositionsEvent();
+            snakeAnim.SetInteger("AttackZoneIndex", indexToAssign);
         }
     }
 }

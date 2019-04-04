@@ -11,6 +11,7 @@ namespace Team17.BallDash
         public PathCreator pathCreator;
         public float speed = 5f;
         public bool startPathFollowing;
+
         private float distanceTravelled;
         private Vector3 initialPos;
         private Quaternion initialRot;
@@ -19,7 +20,7 @@ namespace Team17.BallDash
         {
             initialPos = transform.localPosition;
             initialRot = transform.localRotation;
-            ResetPositions();
+            ResetTransform();
         }
 
         public void Update()
@@ -41,12 +42,12 @@ namespace Team17.BallDash
 
         public void EndSplineResetValues()
         {
-            ResetPositions();
+            ResetTransform();
             startPathFollowing = false;
             distanceTravelled = 0f;
         }
 
-        public void ResetPositions()
+        public void ResetTransform()
         {
             transform.localPosition = initialPos;
             transform.localRotation = initialRot;
