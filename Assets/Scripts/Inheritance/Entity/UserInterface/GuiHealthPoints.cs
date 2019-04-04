@@ -24,8 +24,8 @@ namespace Team17.BallDash
         private void GuiNbreBalls()
         {
             nbreBall = GameManager.state.LivesLeft;
-            Debug.Log("nbreBall : " + nbreBall);
-            Debug.Log("GameManager.state.LivesLeft : " + GameManager.state.LivesLeft);
+            //Debug.Log("nbreBall : " + nbreBall);
+            //Debug.Log("GameManager.state.LivesLeft : " + GameManager.state.LivesLeft);
             if ((nbreBall) > 0)
             {
                 nbreBallsArray[nbreBall-1].SetActive(false);
