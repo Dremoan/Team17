@@ -34,25 +34,25 @@ namespace Team17.BallDash
             if (GameManager.state.LivesLeft == 4)
             {
                 firstBall.gameObject.SetActive(true);
-                playerCharacter.actualBall = firstBall.GetComponent<PlayerProjectile>();
+                playerCharacter.ActualBall = firstBall;
                 return firstBall;
             }
             if (GameManager.state.LivesLeft == 3)
             {
                 secondBall.gameObject.SetActive(true);
-                playerCharacter.actualBall = secondBall.GetComponent<PlayerProjectile>();
+                playerCharacter.ActualBall = secondBall;
                 return secondBall;
             }
             if (GameManager.state.LivesLeft == 2)
             {
                 thirdBall.gameObject.SetActive(true);
-                playerCharacter.actualBall = thirdBall.GetComponent<PlayerProjectile>();
+                playerCharacter.ActualBall = thirdBall;
                 return thirdBall;
             }
             if (GameManager.state.LivesLeft == 1)
             {
                 fourthBall.gameObject.SetActive(true);
-                playerCharacter.actualBall = fourthBall.GetComponent<PlayerProjectile>();
+                playerCharacter.ActualBall = fourthBall;
                 return fourthBall;
             }
             return null;
