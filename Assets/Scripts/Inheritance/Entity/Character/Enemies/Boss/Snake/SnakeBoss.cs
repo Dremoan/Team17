@@ -7,7 +7,7 @@ namespace Team17.BallDash
 {
     public class SnakeBoss : Entity
     {
-        [SerializeField] private FollowPath[] snakeBodyParts;
+        [SerializeField] private SnakeHead[] snakeBodyParts;
         [SerializeField] private PathCreator[] pathPull;
         private PathCreator actualPath;
         
