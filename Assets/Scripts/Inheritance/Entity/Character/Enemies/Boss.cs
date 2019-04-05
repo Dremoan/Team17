@@ -78,6 +78,7 @@ namespace Team17.BallDash
             if (currentHealthToNextState < 0) SwitchState();
         }
 
+        [ContextMenu("Force switch state")]
         private void SwitchState()
         {
             bossStateIndex++;
