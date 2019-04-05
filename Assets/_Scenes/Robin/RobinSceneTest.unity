@@ -866,12 +866,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bde51f8b92c73649a441e94eb7d3d0d, type: 3}
---- !u!320 &272492836 stripped
-PlayableDirector:
-  m_CorrespondingSourceObject: {fileID: 1890019536, guid: 51beeab627229584abac172773d07dec,
-    type: 3}
-  m_PrefabInstance: {fileID: 572732447}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &311325014 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 586451478745613047, guid: 1d7d8698125f9844c8139764c4c000a7,
@@ -885,6 +879,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 311325014}
     m_Modifications:
+    - target: {fileID: 2472208946095096158, guid: cb8d49f13103ce74e95a0b1079d42e9e,
+        type: 3}
+      propertyPath: m_Name
+      value: launch
+      objectReference: {fileID: 0}
     - target: {fileID: 2472208946095096157, guid: cb8d49f13103ce74e95a0b1079d42e9e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -939,11 +938,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2472208946095096158, guid: cb8d49f13103ce74e95a0b1079d42e9e,
-        type: 3}
-      propertyPath: m_Name
-      value: launch
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb8d49f13103ce74e95a0b1079d42e9e, type: 3}
@@ -1168,41 +1162,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3803910045701232105, guid: 51beeab627229584abac172773d07dec,
-        type: 3}
-      propertyPath: transitionPhases.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3803910045701232105, guid: 51beeab627229584abac172773d07dec,
-        type: 3}
-      propertyPath: transitionPhases.Array.data[3]
-      value: 
-      objectReference: {fileID: 897975467}
-    - target: {fileID: 3803910045701232105, guid: 51beeab627229584abac172773d07dec,
-        type: 3}
-      propertyPath: transitionPhases.Array.data[2]
-      value: 
-      objectReference: {fileID: 272492836}
-    - target: {fileID: 3803910045701232105, guid: 51beeab627229584abac172773d07dec,
-        type: 3}
-      propertyPath: transitionPhases.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3803910044309587241, guid: 51beeab627229584abac172773d07dec,
-        type: 3}
-      propertyPath: m_InitialState
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3803910044309587243, guid: 51beeab627229584abac172773d07dec,
-        type: 3}
-      propertyPath: animEventsArray.Array.data[1].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 402165578}
-    - target: {fileID: 3803910044309587243, guid: 51beeab627229584abac172773d07dec,
-        type: 3}
-      propertyPath: animEventsArray.Array.data[1].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartMovingSnake
-      objectReference: {fileID: 0}
     - target: {fileID: 3803910044309587243, guid: 51beeab627229584abac172773d07dec,
         type: 3}
       propertyPath: animEventsArray.Array.data[0].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1210,24 +1169,14 @@ PrefabInstance:
       objectReference: {fileID: 402165578}
     - target: {fileID: 3803910044309587243, guid: 51beeab627229584abac172773d07dec,
         type: 3}
-      propertyPath: animEventsArray.Array.data[0].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StopMovingSnake
-      objectReference: {fileID: 0}
-    - target: {fileID: 3803910044309587243, guid: 51beeab627229584abac172773d07dec,
-        type: 3}
-      propertyPath: animEventsArray.Array.data[2].EventName
-      value: End Intro
-      objectReference: {fileID: 0}
+      propertyPath: animEventsArray.Array.data[1].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 402165578}
     - target: {fileID: 3803910044309587243, guid: 51beeab627229584abac172773d07dec,
         type: 3}
       propertyPath: animEventsArray.Array.data[2].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 402165579}
-    - target: {fileID: 3803910044309587243, guid: 51beeab627229584abac172773d07dec,
-        type: 3}
-      propertyPath: animEventsArray.Array.data[2].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: IntroEnd
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51beeab627229584abac172773d07dec, type: 3}
 --- !u!1001 &616213133
@@ -1299,12 +1248,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6643e2c8b7ec0e4ebc2b738800f488d, type: 3}
---- !u!320 &897975467 stripped
-PlayableDirector:
-  m_CorrespondingSourceObject: {fileID: 1313267630, guid: 51beeab627229584abac172773d07dec,
-    type: 3}
-  m_PrefabInstance: {fileID: 572732447}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1220930376 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3561031007227143999, guid: a6643e2c8b7ec0e4ebc2b738800f488d,
