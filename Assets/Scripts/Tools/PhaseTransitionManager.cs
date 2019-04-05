@@ -23,7 +23,7 @@ namespace Team17.BallDash
 
         public void TriggerPhase(BossState actualState)
         {
-            transitionPhases[(int)actualState].Play();
+            if(transitionPhases[(int)actualState] != null) transitionPhases[(int)actualState].Play();
         }
     }
 }

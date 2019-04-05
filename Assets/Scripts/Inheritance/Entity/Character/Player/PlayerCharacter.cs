@@ -10,11 +10,14 @@ namespace Team17.BallDash
         [SerializeField] private Collider hardCollider;
         [SerializeField] private Animator anim;
         [SerializeField] private float distFromBall = 1.2f;
-        public PlayerProjectile actualBall;
+        [SerializeField] private FeedBack tpFeedback;
 
+        private PlayerProjectile actualBall;
         private bool negativeAngle = false;
         private float angle = 0;
         private bool aiming = false;
+        private bool playedTp = false;
+
 
         public void Physicate(bool physicate)
         {
@@ -28,6 +31,11 @@ namespace Team17.BallDash
         public void PrepareStrike(Vector3 ballPos, Vector3 touchPos)
         {
             transform.position = ballPos + (ballPos - touchPos).normalized * distFromBall;
+            if (!playedTp)
+            {
+                tpFeedback.Play();
+                playedTp = true;
+            }
             angle = Vector3.SignedAngle(Vector3.up, (ballPos - touchPos), Vector3.forward);
             negativeAngle = (angle < 0);
             angle = Mathf.Abs(angle);
@@ -37,6 +45,7 @@ namespace Team17.BallDash
 
         public void Strike()
         {
+            playedTp = false;
             anim.SetTrigger("shoot");
         }
 
@@ -45,5 +54,7 @@ namespace Team17.BallDash
             actualBall.LaunchBall();
         }
 
+        public FeedBack TpFeedback { get => tpFeedback; }
+        public PlayerProjectile ActualBall { get => actualBall; set => actualBall = value; }
     }
 }

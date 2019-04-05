@@ -6,6 +6,7 @@ namespace Team17.BallDash
 {
     public class FeedBack : MonoBehaviour
     {
+        [SerializeField] private bool playOnStart = false;
         [SerializeField] private bool looping = false;
         [SerializeField] private bool hardFollowingTransform;
         [SerializeField] private Transform transformToHardFollow;
@@ -14,6 +15,9 @@ namespace Team17.BallDash
         //Particles
         [SerializeField] private bool particles = false;
         [SerializeField] private ParticleSystem[] particlesSystems;
+        //Trail
+        [SerializeField] private bool trails = false;
+        [SerializeField] private TrailRenderer[] trailRenderers;
         //shake
         [SerializeField] private bool shake = false;
         [SerializeField] private bool useSpecificTransform = false;
@@ -24,6 +28,12 @@ namespace Team17.BallDash
         private Transform[] usedTransform;
         private bool isShaking = false;
         private float shakeDecrementer;
+
+        private void Start()
+        {
+            if (playOnStart) Play();
+            else Stop();
+        }
 
         private void Update()
         {
@@ -43,6 +53,13 @@ namespace Team17.BallDash
                 for (int i = 0; i < particlesSystems.Length; i++)
                 {
                     particlesSystems[i].Play();
+                }
+            }
+            if(trails)
+            {
+                for (int i = 0; i < trailRenderers.Length; i++)
+                {
+                    trailRenderers[i].enabled = true;
                 }
             }
             if(shake)
@@ -74,6 +91,13 @@ namespace Team17.BallDash
                     for (int i = 0; i < particlesSystems.Length; i++)
                     {
                         particlesSystems[i].Stop();
+                    }
+                }
+                if (trails)
+                {
+                    for (int i = 0; i < trailRenderers.Length; i++)
+                    {
+                        trailRenderers[i].enabled = false;
                     }
                 }
                 if (shake)
@@ -118,5 +142,6 @@ namespace Team17.BallDash
         public bool UseSpecificTransform { get => useSpecificTransform; }
         public bool HardFollowingTransform { get => hardFollowingTransform; }
         public bool TpOnTransformOnPlay { get => tpOnTransformOnPlay; }
+        public bool Trails { get => trails; }
     }
 }
