@@ -64,5 +64,13 @@ namespace Team17.BallDash
             bossDead = true;
         }
 
+        public void TeleportBallsTo(Transform targetPlace)
+        {
+            firstBall.transform.position = targetPlace.position;
+            secondBall.transform.position = targetPlace.position;
+            thirdBall.transform.position = targetPlace.position;
+            fourthBall.transform.position = targetPlace.position;
+            playerCharacter.transform.position = targetPlace.position;
+        }
     }
 }

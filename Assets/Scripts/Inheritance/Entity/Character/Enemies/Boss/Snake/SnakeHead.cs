@@ -71,6 +71,10 @@ namespace Team17.BallDash
             transform.localRotation = initialRot;
         }
 
+        public void SetSpeed(float newSpeed)
+        {
+            speed = newSpeed;
+        }
     }
 
     [System.Serializable]

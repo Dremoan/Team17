@@ -86,7 +86,7 @@ namespace Team17.BallDash
             else
             {
                 bossState = (Team17.BallDash.BossState) bossStateIndex;
-                Debug.Log("Switched to " + bossState);
+                Debug.Log("Switched to " + bossState + " can attack : " + canAttack);
                 GameManager.state.CallOnBossChangeState(bossState);
                 SetHealth();
             }
@@ -239,6 +239,17 @@ namespace Team17.BallDash
                     currentHealthToNextState = thirdPhaseHealth;
                     break;
             }
+        }
+
+        public void StopAllAttacks()
+        {
+            timers.DeleteAllTimers();
+            canAttack = false;
+        }
+
+        public void ResumeAllAttacks()
+        {
+            canAttack = true;
         }
 
         #endregion
