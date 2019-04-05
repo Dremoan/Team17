@@ -95,6 +95,11 @@ namespace Team17.BallDash
             GameManager.state.CallOnBossDeath();
         }
 
+        public void EndLevel()
+        {
+            GameManager.state.CallOnLevelEnd();
+        }
+
         #endregion
 
         #region Attacks management

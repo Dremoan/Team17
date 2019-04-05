@@ -11,6 +11,7 @@ namespace Team17.BallDash
         [SerializeField] private Transform rightTip;
         [SerializeField] [Range(0, 1)] private float leftBend = 0.5f;
         [SerializeField] [Range(0, 1)] private float rightBend = 0.5f;
+        [SerializeField] private bool showDebug = false;
 
         private float initialDistFromRight = 1f;
         private float initialDistFromLeft = 1f;
@@ -26,17 +27,37 @@ namespace Team17.BallDash
         {
             base.Update();
             bendAnimator.transform.localPosition = Vector3.zero;
-            bendAnimator.SetFloat("RightBend", leftBend);
-            bendAnimator.SetFloat("LeftBend", rightBend);
+            CalculateLeftBend();
             CalculateRightBend();
         }
 
         private void CalculateRightBend()
         {
             Vector3 centerTangent = transform.right * initialDistFromRight;
-            float bendDist = Vector3.Distance(centerTangent, rightTip.position);
-            float upDist = Vector3.Distance(transform.up, transform.up + transform.up * bendDist);
-            Debug.Log("Dist : " + bendDist + " Updist : " + upDist + " Tip is up : " + (upDist < bendDist));
+
+            float bendDist = Vector3.Distance(transform.position + centerTangent, rightTip.position);
+            float upDist = Vector3.Distance(transform.position + transform.up, rightTip.position);
+            float downDist = Vector3.Distance(transform.position - transform.up, rightTip.position);
+
+
+            float clampedBendDist = Mathf.Clamp(bendDist, 0, 1);
+            if (upDist > downDist) clampedBendDist *= -1;
+
+            bendAnimator.SetFloat("LeftBend", Mathf.InverseLerp(-1, 1, clampedBendDist));
+        }
+
+        private void CalculateLeftBend()
+        {
+            Vector3 centerTangent = -transform.right * initialDistFromLeft;
+
+            float bendDist = Vector3.Distance(transform.position + centerTangent, leftTip.position);
+            float upDist = Vector3.Distance(transform.position + transform.up, leftTip.position);
+            float downDist = Vector3.Distance(transform.position - transform.up, leftTip.position);
+
+            float clampedBendDist = Mathf.Clamp(bendDist, 0, 1);
+            if (upDist > downDist) clampedBendDist *= -1;
+
+            bendAnimator.SetFloat("RightBend", Mathf.InverseLerp(-1, 1, clampedBendDist));
         }
 
         public float LeftBend { get => leftBend; set => leftBend = value; }

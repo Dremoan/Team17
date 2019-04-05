@@ -144,6 +144,14 @@ namespace Team17.BallDash
             }
         }
 
+        public void CallOnLevelEnd()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnLevelEnd();
+            }
+        }
+
         public void CallOnCharacterStartStrikeAnim()
         {
             for (int i = 0; i < entities.Count; i++)
