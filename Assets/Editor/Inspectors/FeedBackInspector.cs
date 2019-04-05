@@ -17,6 +17,7 @@ namespace Team17.BallDash
             serializedObject.Update();
 
             EditorGUILayout.LabelField("Base parameters", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("playOnStart"), new GUIContent("Play on start"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("looping"), new GUIContent("Looping"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("hardFollowingTransform"));
             if(feedBack.HardFollowingTransform)
@@ -34,6 +35,13 @@ namespace Team17.BallDash
             if(feedBack.Particles)
             {
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("particlesSystems"), true);
+            }
+
+            EditorGUILayout.LabelField("Trails parameters", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("trails"), new GUIContent("Use trails"));
+            if(feedBack.Trails)
+            {
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("trailRenderers"), true);
             }
 
             EditorGUILayout.LabelField("Shake parameters", EditorStyles.boldLabel);

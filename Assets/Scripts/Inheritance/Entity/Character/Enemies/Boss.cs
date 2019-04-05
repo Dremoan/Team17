@@ -74,6 +74,7 @@ namespace Team17.BallDash
         {
             currentHealthToNextState -= dmgs;
             GameManager.state.CallOnBossHurt();
+            Debug.Log(gameObject.name + " has " + currentHealthToNextState + " hp. Damaged " + dmgs);
             if (currentHealthToNextState < 0) SwitchState();
         }
 
