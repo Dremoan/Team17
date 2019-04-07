@@ -37,7 +37,7 @@ namespace Team17.BallDash
 
         #region Entity callbacks
 
-        public virtual void OnIntroLaunched()
+        public virtual void OnBossEnters()
         {
 
         }
@@ -82,7 +82,7 @@ namespace Team17.BallDash
 
         }
 
-        public virtual void OnBossChangeState(BossState targetState)
+        public virtual void OnBossChangeState()
         {
 
         }

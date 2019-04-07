@@ -46,6 +46,8 @@ namespace Team17.BallDash
 
         #region Entity events
 
+        #region Player Events
+
         public void CallOnPlayerTeleport()
         {
             for (int i = 0; i < entities.Count; i++)
@@ -54,19 +56,11 @@ namespace Team17.BallDash
             }
         }
 
-        public void CallOnBossBeginsPattern()
+        public void CallOnCharacterStartStrikeAnim()
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                entities[i].OnBossBeginsPatterns();
-            }
-        }
-
-        public void CallOnIntroLaunched()
-        {
-            for (int i = 0; i < entities.Count; i++)
-            {
-                entities[i].OnIntroLaunched();
+                entities[i].OnCharacterStartStrikeAnim();
             }
         }
 
@@ -75,32 +69,6 @@ namespace Team17.BallDash
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].OnBallShot();
-            }
-        }
-
-        public void CallOnBallHit(float hitPower)
-        {
-            livesLeft--;
-            if (livesLeft == 0)
-            {
-                //game over;
-            }
-            for (int i = 0; i < entities.Count; i++)
-            {
-                entities[i].OnBallHit(hitPower);
-            }
-        }
-
-        public void CallOnBallDestroyed()
-        {
-            livesLeft--;
-            if(livesLeft == 0)
-            {
-                //game over;
-            }
-            for (int i = 0; i < entities.Count; i++)
-            {
-                entities[i].OnBallDestroyed();
             }
         }
 
@@ -120,6 +88,52 @@ namespace Team17.BallDash
             }
         }
 
+        public void CallOnBallHit(float hitPower)
+        {
+            livesLeft--;
+            if (livesLeft == 0)
+            {
+                //game over;
+            }
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBallHit(hitPower);
+            }
+        }
+
+        public void CallOnBallDestroyed()
+        {
+            livesLeft--;
+            if (livesLeft == 0)
+            {
+                //game over;
+            }
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBallDestroyed();
+            }
+        }
+
+        #endregion
+
+        #region Boss events
+
+        public void CallOnBossEnters()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBossEnters();
+            }
+        }
+
+        public void CallOnBossBeginsPattern()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBossBeginsPatterns();
+            }
+        }
+
         public void CallOnBossHurt()
         {
             for (int i = 0; i < entities.Count; i++)
@@ -128,11 +142,11 @@ namespace Team17.BallDash
             }
         }
 
-        public void CallOnBossChangeState(BossState targetState)
+        public void CallOnBossChangeState()
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                entities[i].OnBossChangeState(targetState);
+                entities[i].OnBossChangeState();
             }
         }
 
@@ -152,13 +166,9 @@ namespace Team17.BallDash
             }
         }
 
-        public void CallOnCharacterStartStrikeAnim()
-        {
-            for (int i = 0; i < entities.Count; i++)
-            {
-                entities[i].OnCharacterStartStrikeAnim();
-            }
-        }
+        #endregion
+
+        #region Game management events
 
         public void CallOnPause()
         {
@@ -178,10 +188,12 @@ namespace Team17.BallDash
 
         #endregion
 
+        #endregion
+
         /// <summary>
         /// Clear all attributes of the GameState. Call this method before loading a new scene.
         /// </summary>
-        
+
         public void ResetState()
         {
             entities.Clear();

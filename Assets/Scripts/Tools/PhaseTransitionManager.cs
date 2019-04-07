@@ -7,7 +7,6 @@ namespace Team17.BallDash
 {
     public class PhaseTransitionManager : Entity
     {
-
         [SerializeField] private PlayableDirector[] transitionPhases;
 
         protected override void Start()
@@ -15,13 +14,7 @@ namespace Team17.BallDash
             base.Start();
         }
 
-        public override void OnBossChangeState(BossState targetState)
-        {
-            base.OnBossChangeState(targetState);
-            TriggerPhase(targetState);
-        }
-
-        public void TriggerPhase(BossState actualState)
+        public void TriggerPhase(BossGlobalState actualState)
         {
             if(transitionPhases[(int)actualState] != null) transitionPhases[(int)actualState].Play();
         }

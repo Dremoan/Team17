@@ -20,8 +20,8 @@ namespace Team17.BallDash
 
         protected override void Start()
         {
-            GetPath(2);
-            PickMoveIntro();
+            //GetPath(2);
+            //PickMoveIntro();
         }
 
         #region Spline movement
@@ -70,7 +70,6 @@ namespace Team17.BallDash
             {
                 snakeBodyParts[i].pathCreator = snakeBodyParts[0].pathCreator;
             }
-
             StartCoroutine(DelayIntro());
         }
 
@@ -110,7 +109,6 @@ namespace Team17.BallDash
                 snakeBodyParts[i].startPathFollowing = true;
             }
         }
-
 
         public void StartMovingSnake()
         {

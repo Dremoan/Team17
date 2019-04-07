@@ -17,7 +17,7 @@ namespace Team17.BallDash
         {
             if(shouldLaunchIntro)
             {
-                GameManager.state.CallOnIntroLaunched();
+                GameManager.state.CallOnBossEnters();
                 shouldLaunchIntro = false;
                 return;
             }
