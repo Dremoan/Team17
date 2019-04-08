@@ -87,6 +87,26 @@ namespace Team17.BallDash
 
         }
 
+        public virtual void OnStateIntroBegins(FightGlobalState state)
+        {
+
+        }
+
+        public virtual void OnStateIntroEnds(FightGlobalState state)
+        {
+
+        }
+
+        public virtual void OnStateExitBegins(FightGlobalState state)
+        {
+
+        }
+
+        public virtual void OnStateExitEnds(FightGlobalState state)
+        {
+
+        }
+
         public virtual void OnCharacterStartStrikeAnim()
         {
 

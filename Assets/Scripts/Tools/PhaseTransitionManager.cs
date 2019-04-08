@@ -14,7 +14,7 @@ namespace Team17.BallDash
             base.Start();
         }
 
-        public void TriggerPhase(BossGlobalState actualState)
+        public void TriggerPhase(FightGlobalState actualState)
         {
             if(transitionPhases[(int)actualState] != null) transitionPhases[(int)actualState].Play();
         }

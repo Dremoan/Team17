@@ -161,6 +161,12 @@ namespace Team17.BallDash
             GameManager.state.CallOnBallShot();
         }
 
+        public void PauseBehavior()
+        {
+            body.velocity = Vector3.zero;
+            gameObject.SetActive(false);
+        }
+
         #endregion
 
         #region Ball interactions

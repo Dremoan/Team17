@@ -12,7 +12,7 @@ namespace Team17.BallDash
         [SerializeField] private float distFromBall = 1.2f;
         [SerializeField] private FeedBack tpFeedback;
 
-        private PlayerProjectile actualBall;
+        private PlayerProjectile currentBall;
         private bool negativeAngle = false;
         private float angle = 0;
         private bool aiming = false;
@@ -51,10 +51,17 @@ namespace Team17.BallDash
 
         public void TriggerLaunchBall()
         {
-            actualBall.LaunchBall();
+            currentBall.LaunchBall();
+        }
+
+        public void TeleportToRoom(Transform spawnPoint)
+        {
+            transform.position = spawnPoint.position;
+            if(currentBall != null) currentBall.PauseBehavior();
+            tpFeedback.Play();
         }
 
         public FeedBack TpFeedback { get => tpFeedback; }
-        public PlayerProjectile ActualBall { get => actualBall; set => actualBall = value; }
+        public PlayerProjectile CurrentBall { get => currentBall; set => currentBall = value; }
     }
 }

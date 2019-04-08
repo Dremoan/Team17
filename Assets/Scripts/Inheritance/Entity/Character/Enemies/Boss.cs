@@ -113,6 +113,7 @@ namespace Team17.BallDash
                     patternList[index].LaunchAttack(AttackEnd);
                     break;
                 case BossPhaseState.Exit:
+                    //call exit begins
                     exitPattern.LaunchAttack(ExitEnd);
                     break;
 
@@ -134,6 +135,7 @@ namespace Team17.BallDash
         private void ExitEnd()
         {
             canAttack = false;
+            //call exit end
             GameManager.state.CallOnBossChangeState();
             gameObject.SetActive(false);
         }
@@ -181,7 +183,7 @@ namespace Team17.BallDash
         [SerializeField] private BossAimZone zone;
         [SerializeField] private int priority = 0;
         [Header ("Attack parameter")]
-        [Tooltip("Time it takes for the attack to be considered finished. After that time, the boss considers that he can choose and launch another attack.")]
+        [Tooltip("Time it takes for the attack to be considered finished. After that time, the boss can choose and launch another attack.")]
         [SerializeField] private float timeToEnd = 3f;
         [Tooltip("Time it takes for the attack to be considered usable again after the boss used it once. During this time, the boss will ignore this attack.")]
         [SerializeField] private float coolDown = 4f;

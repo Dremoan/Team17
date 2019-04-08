@@ -4048,7 +4048,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timers: {fileID: 454053342}
   currentState: 0
-  health: 50
+  health: 20
   roomZero: {fileID: 3561031006747512242}
   entryPattern:
     name: Phase One Snake entry
@@ -4207,9 +4207,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BindingMode: 1
   m_FollowOffset: {x: 0, y: 0, z: -10}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
+  m_XDamping: 0
+  m_YDamping: 0
+  m_ZDamping: 0
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -9611,9 +9611,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BindingMode: 1
   m_FollowOffset: {x: 0, y: 0, z: -10}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
+  m_XDamping: 0
+  m_YDamping: 0
+  m_ZDamping: 0
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -11356,7 +11356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timers: {fileID: 847305802}
   currentState: 0
-  health: 50
+  health: 20
   roomZero: {fileID: 3561031007102380237}
   entryPattern:
     name: Phase One Snake entry
@@ -23454,6 +23454,18 @@ MonoBehaviour:
     showNormalsHelpInfo: 0
     tabIndex: 0
   initialized: 1
+--- !u!114 &1858818328 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3769057665707726450, guid: 1d7d8698125f9844c8139764c4c000a7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1618312284594600675}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3e59577a35e9174ebddf1a4a7ac2f7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1860010895
 GameObject:
   m_ObjectHideFlags: 0
@@ -23499,9 +23511,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BindingMode: 1
   m_FollowOffset: {x: 0, y: 0, z: -10}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
+  m_XDamping: 0
+  m_YDamping: 0
+  m_ZDamping: 0
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -28696,8 +28708,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3803910044534265568}
   - component: {fileID: 3803910044534265576}
+  - component: {fileID: 3803910044534265577}
   m_Layer: 0
-  m_Name: Staging
+  m_Name: Boss Stage manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28716,9 +28729,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actualState: 0
+  character: {fileID: 1858818328}
+  timer: {fileID: 3803910044534265577}
   firstPhaseBoss: {fileID: 8712853280227238618}
   secondPhaseBoss: {fileID: 454053341}
   thirdPhaseBoss: {fileID: 847305801}
+  firstSpawnPoint: {fileID: 848136249}
+  secondSpawnPoint: {fileID: 575640983}
+  thirdSpawnPoint: {fileID: 1463069887}
+  firstCamera: {fileID: 3803910046049847191}
+  secondCamera: {fileID: 3803910044955037493}
+  thirdCamera: {fileID: 3803910046301178305}
+  travelTime: 2.3
+--- !u!114 &3803910044534265577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3803910044534265575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0018885d2e976ff4ab8a7f2a269f07e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &3803910044955037492
 Transform:
   m_ObjectHideFlags: 0
@@ -28839,7 +28873,7 @@ MonoBehaviour:
   m_WorldUpOverride: {fileID: 0}
   m_UpdateMethod: 2
   m_DefaultBlend:
-    m_Style: 0
+    m_Style: 6
     m_Time: 2
     m_CustomCurve:
       serializedVersion: 2
@@ -36090,7 +36124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timers: {fileID: 8712853280227238619}
   currentState: 0
-  health: 50
+  health: 20
   roomZero: {fileID: 3561031007102380237}
   entryPattern:
     name: Phase One Snake entry

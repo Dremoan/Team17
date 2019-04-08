@@ -150,6 +150,38 @@ namespace Team17.BallDash
             }
         }
 
+        public void CallOnStateIntroBegins(FightGlobalState state)
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnStateIntroBegins(state);
+            }
+        }
+
+        public void CallOnStateIntroEnds(FightGlobalState state)
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnStateIntroEnds(state);
+            }
+        }
+
+        public void CallOnStateExitBegins(FightGlobalState state)
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnStateExitBegins(state);
+            }
+        }
+
+        public void CallOnStateExitEnds(FightGlobalState state)
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnStateExitEnds(state);
+            }
+        }
+
         public void CallOnBossDeath()
         {
             for (int i = 0; i < entities.Count; i++)
