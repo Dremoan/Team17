@@ -17,9 +17,9 @@ namespace Team17.BallDash
             beginGameText.SetActive(true);
         }
 
-        public override void OnBossEnters()
+        public override void OnIntroCutScene()
         {
-            base.OnBossEnters();
+            base.OnIntroCutScene();
             beginGameText.SetActive(false);
         }
 

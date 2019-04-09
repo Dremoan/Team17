@@ -46,6 +46,74 @@ namespace Team17.BallDash
 
         #region Entity events
 
+        #region Cutscenes events
+
+        public void CallOnIntroCutScene()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnIntroCutScene();
+            }
+        }
+
+        public void CallOnIntroCutSceneEnds()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnIntroCutSceneEnds();
+            }
+        }
+
+        public void CallOnPhaseTwoCutScene()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnPhaseTwoCutScene();
+            }
+        }
+
+        public void CallOnPhaseTwoCutSceneEnds()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnPhaseTwoCutSceneEnds();
+            }
+        }
+
+        public void CallOnPhaseThreeCutScene()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnPhaseThreeCutScene();
+            }
+        }
+
+        public void CallOnPhaseThreeCutSceneEnds()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnPhaseThreeCutSceneEnds();
+            }
+        }
+
+        public void CallOnEndCutScene()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnEndCutScene();
+            }
+        }
+
+        public void CallOnEndCutSceneEnds()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnEndCutSceneEnds();
+            }
+        }
+
+        #endregion
+
         #region Player Events
 
         public void CallOnPlayerTeleport()
@@ -122,7 +190,7 @@ namespace Team17.BallDash
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                entities[i].OnBossEnters();
+                entities[i].OnIntroCutScene();
             }
         }
 
@@ -147,38 +215,6 @@ namespace Team17.BallDash
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].OnBossChangeState();
-            }
-        }
-
-        public void CallOnStateIntroBegins(FightGlobalState state)
-        {
-            for (int i = 0; i < entities.Count; i++)
-            {
-                entities[i].OnStateIntroBegins(state);
-            }
-        }
-
-        public void CallOnStateIntroEnds(FightGlobalState state)
-        {
-            for (int i = 0; i < entities.Count; i++)
-            {
-                entities[i].OnStateIntroEnds(state);
-            }
-        }
-
-        public void CallOnStateExitBegins(FightGlobalState state)
-        {
-            for (int i = 0; i < entities.Count; i++)
-            {
-                entities[i].OnStateExitBegins(state);
-            }
-        }
-
-        public void CallOnStateExitEnds(FightGlobalState state)
-        {
-            for (int i = 0; i < entities.Count; i++)
-            {
-                entities[i].OnStateExitEnds(state);
             }
         }
 
