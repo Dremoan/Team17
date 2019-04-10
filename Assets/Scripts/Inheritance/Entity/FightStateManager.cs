@@ -44,7 +44,7 @@ namespace Team17.BallDash
             }
             actualState = (FightGlobalState)actualStateIndex;
         }
-
+        //modif
         [ContextMenu("Activate actual boss")]
         private void ActivateCurrentStateBoss()
         {
