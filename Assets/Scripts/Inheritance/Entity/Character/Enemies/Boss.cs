@@ -22,6 +22,11 @@ namespace Team17.BallDash
         [SerializeField] private BossPattern[] patternList;
         [SerializeField] private BossPattern exitPattern;
 
+        private CutSceneEvent entryBeginsEvent;
+        private CutSceneEvent entryEndsEvent;
+        private CutSceneEvent exitBeginsEvent;
+        private CutSceneEvent exitEndsEvent;
+
         protected float currentHealth = 0f;
         protected bool canAttack = false;
 
@@ -107,6 +112,7 @@ namespace Team17.BallDash
             switch(currentState)
             {
                 case BossPhaseState.Entry:
+                    if(entryBeginsEvent != null) entryBeginsEvent.Invoke();
                     entryPattern.LaunchAttack(EntryEnd);
                     break;
                 case BossPhaseState.Attacking:
@@ -114,6 +120,7 @@ namespace Team17.BallDash
                     break;
                 case BossPhaseState.Exit:
                     //call exit begins
+                    if(exitBeginsEvent != null)exitBeginsEvent.Invoke();
                     exitPattern.LaunchAttack(ExitEnd);
                     break;
 
@@ -124,6 +131,7 @@ namespace Team17.BallDash
         private void EntryEnd()
         {
             canAttack = true;
+            if(entryBeginsEvent != null)entryEndsEvent.Invoke();
             currentState = BossPhaseState.Attacking;
         }
 
@@ -137,6 +145,7 @@ namespace Team17.BallDash
             canAttack = false;
             //call exit end
             GameManager.state.CallOnBossChangeState();
+            if(exitEndsEvent != null) exitEndsEvent.Invoke();
             gameObject.SetActive(false);
         }
 
@@ -171,6 +180,10 @@ namespace Team17.BallDash
         #region Properties
 
         public float CurrentHealthToNextState { get => currentHealth;}
+        public CutSceneEvent EntryBeginsEvent { get => entryBeginsEvent; set => entryBeginsEvent = value; }
+        public CutSceneEvent EntryEndsEvent { get => entryEndsEvent; set => entryEndsEvent = value; }
+        public CutSceneEvent ExitBeginsEvent { get => exitBeginsEvent; set => exitBeginsEvent = value; }
+        public CutSceneEvent ExitEndsEvent { get => exitEndsEvent; set => exitEndsEvent = value; }
 
         #endregion
     }

@@ -15,6 +15,7 @@ namespace Team17.BallDash
         [SerializeField] private Boss thirdPhaseBoss;
 
         [Header("Rooms spawn points")]
+        [SerializeField] private PlayerCharacter character;
         [SerializeField] private Transform firstSpawnPoint;
         [SerializeField] private Transform secondSpawnPoint;
         [SerializeField] private Transform thirdSpawnPoint;
@@ -27,10 +28,23 @@ namespace Team17.BallDash
 
         private int actualStateIndex = 0;
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            LinkCutScenesEvents();
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            UnlinkCutScenesEvents();
+        }
+
         protected override void Start()
         {
             base.Start();
             actualStateIndex = (int)actualState;
+            ActivateCurrentStateBoss();
         }
 
         public override void OnBossChangeState()
@@ -52,14 +66,80 @@ namespace Team17.BallDash
             {
                 case FightGlobalState.First:
                     firstPhaseBoss.gameObject.SetActive(true);
+                    character.TeleportToRoom(firstSpawnPoint);
                     break;
                 case FightGlobalState.Second:
                     secondPhaseBoss.gameObject.SetActive(true);
+                    character.TeleportToRoom(secondSpawnPoint);
                     break;
                 case FightGlobalState.Third:
                     thirdPhaseBoss.gameObject.SetActive(true);
+                    character.TeleportToRoom(thirdSpawnPoint);
                     break;
             }
+        }
+
+        private void LinkCutScenesEvents()
+        {
+            firstPhaseBoss.EntryBeginsEvent += introCutScene.Play;
+            firstPhaseBoss.EntryBeginsEvent += GameManager.state.CallOnIntroCutScene;
+            firstPhaseBoss.EntryEndsEvent += introCutScene.Stop;
+            firstPhaseBoss.EntryEndsEvent += GameManager.state.CallOnIntroCutSceneEnds;
+
+            // phase one fight
+
+            firstPhaseBoss.ExitBeginsEvent += phaseTwoCutScene.Play;
+            firstPhaseBoss.ExitBeginsEvent += GameManager.state.CallOnPhaseTwoCutScene;
+            firstPhaseBoss.ExitEndsEvent += ActivateCurrentStateBoss; // second boss active
+            firstPhaseBoss.ExitEndsEvent += GameManager.state.CallOnPhaseTwoCutSceneEnds;
+
+
+            // phase two fight
+
+            secondPhaseBoss.ExitBeginsEvent += phaseThreeCutScene.Play;
+            secondPhaseBoss.ExitBeginsEvent += GameManager.state.CallOnPhaseThreeCutScene;
+            secondPhaseBoss.ExitEndsEvent += ActivateCurrentStateBoss; // third boss active
+            secondPhaseBoss.ExitEndsEvent += GameManager.state.CallOnPhaseThreeCutSceneEnds;
+
+            // phase three fight
+
+            thirdPhaseBoss.ExitBeginsEvent += endCutScene.Play;
+            thirdPhaseBoss.ExitBeginsEvent += GameManager.state.CallOnEndCutScene;
+            thirdPhaseBoss.ExitEndsEvent += GameManager.state.CallOnEndCutSceneEnds;
+
+            // fight end
+
+        }
+
+        private void UnlinkCutScenesEvents()
+        {
+            firstPhaseBoss.EntryBeginsEvent -= introCutScene.Play;
+            firstPhaseBoss.EntryBeginsEvent -= GameManager.state.CallOnIntroCutScene;
+            firstPhaseBoss.EntryEndsEvent -= introCutScene.Stop;
+            firstPhaseBoss.EntryEndsEvent -= GameManager.state.CallOnIntroCutSceneEnds;
+
+            // phase one fight
+
+            firstPhaseBoss.ExitBeginsEvent -= phaseTwoCutScene.Play;
+            firstPhaseBoss.ExitBeginsEvent -= GameManager.state.CallOnPhaseTwoCutScene;
+            firstPhaseBoss.ExitEndsEvent -= ActivateCurrentStateBoss; // second boss active
+            firstPhaseBoss.ExitEndsEvent -= GameManager.state.CallOnPhaseTwoCutSceneEnds;
+
+
+            // phase two fight
+
+            secondPhaseBoss.ExitBeginsEvent -= phaseThreeCutScene.Play;
+            secondPhaseBoss.ExitBeginsEvent -= GameManager.state.CallOnPhaseThreeCutScene;
+            secondPhaseBoss.ExitEndsEvent -= ActivateCurrentStateBoss; // third boss active
+            secondPhaseBoss.ExitEndsEvent -= GameManager.state.CallOnPhaseThreeCutSceneEnds;
+
+            // phase three fight
+
+            thirdPhaseBoss.ExitBeginsEvent -= endCutScene.Play;
+            thirdPhaseBoss.ExitBeginsEvent -= GameManager.state.CallOnEndCutScene;
+            thirdPhaseBoss.ExitEndsEvent -= GameManager.state.CallOnEndCutSceneEnds;
+
+            // fight end
         }
     }
 
@@ -76,4 +156,6 @@ namespace Team17.BallDash
         Attacking = 1,
         Exit = 2
     };
+
+    public delegate void CutSceneEvent();
 }

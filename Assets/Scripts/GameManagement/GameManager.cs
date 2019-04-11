@@ -50,6 +50,7 @@ namespace Team17.BallDash
 
         public void CallOnIntroCutScene()
         {
+            Debug.Log("Intro cut scene");
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].OnIntroCutScene();
@@ -58,6 +59,7 @@ namespace Team17.BallDash
 
         public void CallOnIntroCutSceneEnds()
         {
+            Debug.Log("Intro cut scene ends");
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].OnIntroCutSceneEnds();
@@ -66,6 +68,7 @@ namespace Team17.BallDash
 
         public void CallOnPhaseTwoCutScene()
         {
+            Debug.Log("Phase two cut scene");
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].OnPhaseTwoCutScene();
@@ -74,6 +77,7 @@ namespace Team17.BallDash
 
         public void CallOnPhaseTwoCutSceneEnds()
         {
+            Debug.Log("Phase two cut scene ends");
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].OnPhaseTwoCutSceneEnds();
@@ -82,6 +86,7 @@ namespace Team17.BallDash
 
         public void CallOnPhaseThreeCutScene()
         {
+            Debug.Log("Phase three cut scene");
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].OnPhaseThreeCutScene();
@@ -90,6 +95,7 @@ namespace Team17.BallDash
 
         public void CallOnPhaseThreeCutSceneEnds()
         {
+            Debug.Log("Phase three cut scene ends");
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].OnPhaseThreeCutSceneEnds();
@@ -98,6 +104,7 @@ namespace Team17.BallDash
 
         public void CallOnEndCutScene()
         {
+            Debug.Log("End cut scene");
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].OnEndCutScene();
@@ -106,6 +113,7 @@ namespace Team17.BallDash
 
         public void CallOnEndCutSceneEnds()
         {
+            Debug.Log("End cut scene ends");
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].OnEndCutSceneEnds();
