@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace Team17.BallDash
 {
-    public class SceneLinks : Entity
+    public class UiSceneManagement : UiElement
     {
         public void LoadSceneIndex(int index)
         {

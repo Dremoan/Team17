@@ -5,7 +5,7 @@ using TMPro;
 
 namespace Team17.BallDash
 {
-    public class UiManager : SceneLinks
+    public class UiManager : UiElement
     {
         // ------ Player Health Management ------
         [Header("End Level Ui"), SerializeField] private GameObject EndLevelUi;
