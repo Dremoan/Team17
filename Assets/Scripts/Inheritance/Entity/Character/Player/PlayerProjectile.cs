@@ -168,7 +168,7 @@ namespace Team17.BallDash
 
         private void SelectPowerGroup(float actualPower)
         {
-            for (int i = 0; i < powerGroups.Length; i++)
+            for (int i = 0; i < powerGroups.Length - 1; i++)
             {
                 if (power > powerGroups[i].PowerThreshold)
                 {
@@ -258,6 +258,8 @@ namespace Team17.BallDash
             }
             usedPowerGroup = powerGroups[usedPowergroupIndex];
             power = usedPowerGroup.PowerThreshold;
+            movementDirection = body.velocity.normalized * (usedPowerGroup.Speed);
+            body.velocity = movementDirection;
             Debug.Log(usedPowerGroup.Name);
         }
 
