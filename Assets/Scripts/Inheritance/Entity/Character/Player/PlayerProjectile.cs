@@ -230,7 +230,7 @@ namespace Team17.BallDash
             SelectPowerGroup(power);
             if (power < 0) power = 0;
             if(isStriking) movementDirection = newDir.normalized * (usedPowerGroup.Speed);
-            else movementDirection = newDir.normalized * (speed * usedPowerGroup.Speed * slowedTimeScale);
+            else movementDirection = newDir.normalized * (usedPowerGroup.Speed);
 
             body.velocity = movementDirection;
 
