@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace Team17.BallDash
 {
-    public class UiMainMenu : SceneLinks
+    public class UiMainMenu : UiElement
     {
         [SerializeField] Animator animatorMainMenu;
         [SerializeField] Animator animatorPlayMenu;
