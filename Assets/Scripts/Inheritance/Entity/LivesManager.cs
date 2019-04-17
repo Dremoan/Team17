@@ -6,56 +6,33 @@ namespace Team17.BallDash
 {
     public class LivesManager : Entity
     {
-        [SerializeField] private PlayerProjectile firstBall;
-        [SerializeField] private PlayerProjectile secondBall;
-        [SerializeField] private PlayerProjectile thirdBall;
-        [SerializeField] private PlayerProjectile fourthBall;
         [SerializeField] private PlayerCharacter playerCharacter;
-        private int livesLeft = 4;
+        [SerializeField] private PlayerProjectile[] projectiles;
+
         private bool bossDead = false;
 
         protected override void Start()
         {
             base.Start();
-            GameManager.state.LivesLeft = livesLeft;
+            GameManager.state.LivesLeft = projectiles.Length;
+            GameManager.state.PlayerGameObject = projectiles[0].gameObject;
         }
 
         public bool BallAvailable()
         {
-            if(firstBall.Destroyed && secondBall.Destroyed && thirdBall.Destroyed && fourthBall.Destroyed)
+            for (int i = 0; i < projectiles.Length; i++)
             {
-                return false;
+                if(!projectiles[i].Destroyed)
+                {
+                    return true;
+                }
             }
-            return true;
+            return false;
         }
 
         public PlayerProjectile GetNextBall()
         {
-            if (GameManager.state.LivesLeft == 4)
-            {
-                firstBall.gameObject.SetActive(true);
-                playerCharacter.ActualBall = firstBall;
-                return firstBall;
-            }
-            if (GameManager.state.LivesLeft == 3)
-            {
-                secondBall.gameObject.SetActive(true);
-                playerCharacter.ActualBall = secondBall;
-                return secondBall;
-            }
-            if (GameManager.state.LivesLeft == 2)
-            {
-                thirdBall.gameObject.SetActive(true);
-                playerCharacter.ActualBall = thirdBall;
-                return thirdBall;
-            }
-            if (GameManager.state.LivesLeft == 1)
-            {
-                fourthBall.gameObject.SetActive(true);
-                playerCharacter.ActualBall = fourthBall;
-                return fourthBall;
-            }
-            return null;
+            return projectiles[GameManager.state.LivesLeft - 1];
         }
 
         public override void OnBossDeath()
@@ -64,5 +41,9 @@ namespace Team17.BallDash
             bossDead = true;
         }
 
+        public void TeleportBallsTo(Transform targetPlace)
+        { 
+            playerCharacter.transform.position = targetPlace.position;
+        }
     }
 }

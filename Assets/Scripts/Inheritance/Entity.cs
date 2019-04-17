@@ -32,12 +32,47 @@ namespace Team17.BallDash
         {
             GameManager.state.UnregisterEntity(this);
         }
-    
+
         #endregion
 
         #region Entity callbacks
 
-        public virtual void OnIntroLaunched()
+        public virtual void OnIntroCutScene()
+        {
+
+        }
+
+        public virtual void OnIntroCutSceneEnds()
+        {
+
+        }
+
+        public virtual void OnPhaseTwoCutScene()
+        {
+
+        }
+
+        public virtual void OnPhaseTwoCutSceneEnds()
+        {
+
+        }
+
+        public virtual void OnPhaseThreeCutScene()
+        {
+
+        }
+
+        public virtual void OnPhaseThreeCutSceneEnds()
+        {
+
+        }
+
+        public virtual void OnEndCutScene()
+        {
+
+        }
+
+        public virtual void OnEndCutSceneEnds()
         {
 
         }
@@ -82,7 +117,7 @@ namespace Team17.BallDash
 
         }
 
-        public virtual void OnBossChangeState(BossState targetState)
+        public virtual void OnBossChangeState()
         {
 
         }

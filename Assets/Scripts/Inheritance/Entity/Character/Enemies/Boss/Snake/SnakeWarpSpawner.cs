@@ -52,15 +52,19 @@ namespace Team17.BallDash
             if(hit.collider != null)
             {
                 warpPoint.position = hit.point;
+                warpFB.Play();
                 if (shouldPlay)
                 {
-                    warpFB.Play();
                     shouldPlay = false;
                 }
             }
             else
             {
-                warpFB.Stop();
+                if(!shouldPlay)
+                {
+                    warpFB.Stop();
+                    shouldPlay = true;
+                }
             }
         }
 

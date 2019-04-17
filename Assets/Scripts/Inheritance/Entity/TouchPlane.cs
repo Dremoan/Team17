@@ -12,24 +12,25 @@ namespace Team17.BallDash
         private PlayerProjectile ball;
         private bool shouldLaunchIntro = true;
 
-
         public void OnTouchBegin(Vector3 touchPos)
         {
             if(shouldLaunchIntro)
             {
-                GameManager.state.CallOnIntroLaunched();
+                GameManager.state.CallOnBossEnters();
                 shouldLaunchIntro = false;
                 return;
             }
 
-            if(ball != null && !ball.Destroyed)
+            if(ball != null && !ball.Destroyed && ball.gameObject.activeSelf)
             {
                 ball.StartCalculation();
             }
             else if(lives.BallAvailable())
             {
                 ball = lives.GetNextBall();
+                character.CurrentBall = lives.GetNextBall();
                 ball.transform.position = character.transform.position;
+                ball.gameObject.SetActive(true);
                 ball.StartCalculation();
             }
             else
