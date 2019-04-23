@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
     [RequireComponent(typeof(TimersCalculator))]
     public class Boss : Character, IBallHitable
@@ -88,7 +88,7 @@ namespace Team17.BallDash
                 {
                     if(patternList[i].Priority > lastPriority)
                     {
-                        if (patternList[i].IsUsableAndUseful(roomZero, GameManager.state.PlayerGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena()))
+                        if (patternList[i].IsUsableAndUseful(roomZero, GameManager.state.BallGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena()))
                         {
                             index = i;
                             lastPriority = patternList[i].Priority;
@@ -196,11 +196,12 @@ namespace Team17.BallDash
         [SerializeField] private BossAimZone zone;
         [SerializeField] private int priority = 0;
         [Header ("Attack parameter")]
-        [Tooltip("Time it takes for the attack to be considered finished. After that time, the boss can choose and launch another attack.")]
+        [Tooltip ("Time it takes for the attack to be considered finished. After that time, the boss can choose and launch another attack.")]
         [SerializeField] private float timeToEnd = 3f;
-        [Tooltip("Time it takes for the attack to be considered usable again after the boss used it once. During this time, the boss will ignore this attack.")]
+        [Tooltip ("Time it takes for the attack to be considered usable again after the boss used it once. During this time, the boss will ignore this attack.")]
         [SerializeField] private float coolDown = 4f;
         [SerializeField] private UnityEngine.Events.UnityEvent pattern;
+        [SerializeField] private PortalPlacement[] portals;
 
         private TimersCalculator timers;
         private bool canBeUsed = true;
@@ -212,7 +213,6 @@ namespace Team17.BallDash
             pattern.Invoke();
             endAction = endAct;
             canBeUsed = false;
-            if (timers == null) Debug.Log("null");
             timers.LaunchNewTimer(timeToEnd, EndAttack);
         }
 
@@ -237,5 +237,15 @@ namespace Team17.BallDash
         public bool CanBeUsed { get => canBeUsed; }
         public TimersCalculator Timers { get => timers; set => timers = value; }
         public int Priority { get => priority; }
+    }
+
+    [System.Serializable]
+    public struct PortalPlacement
+    {
+        [SerializeField] private Vector3 position;
+        [SerializeField] private float rotation;
+
+        public Vector3 Position { get => position; set => position = value; }
+        public float Rotation { get => rotation; set => rotation = value; }
     }
 }

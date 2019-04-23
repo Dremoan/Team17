@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
     public class PhaseTransitionManager : Entity
     {

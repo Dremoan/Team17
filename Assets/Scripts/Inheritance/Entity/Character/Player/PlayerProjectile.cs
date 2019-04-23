@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
     public class PlayerProjectile : Character
     {
@@ -66,7 +66,7 @@ namespace Team17.BallDash
             base.OnEnable();
             SelectPowerGroup(power);
             initialFeedbackScale = timerFeedback.localScale;
-            GameManager.state.PlayerGameObject = this.gameObject;
+            GameManager.state.BallGameObject = this.gameObject;
         }
 
         private void OnCollisionEnter(Collision coll)

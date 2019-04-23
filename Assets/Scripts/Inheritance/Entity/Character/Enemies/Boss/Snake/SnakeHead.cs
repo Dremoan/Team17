@@ -4,7 +4,7 @@ using UnityEngine;
 using PathCreation;
 using UnityEngine.Events;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
     public class SnakeHead : Character
     {

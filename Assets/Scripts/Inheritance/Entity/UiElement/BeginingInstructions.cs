@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
     public class BeginingInstructions : UiElement
     {

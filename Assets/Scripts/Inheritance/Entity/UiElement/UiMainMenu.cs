@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
     public class UiMainMenu : UiElement
     {

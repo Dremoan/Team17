@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
     public class GameManager : MonoBehaviour
     {
@@ -13,7 +13,7 @@ namespace Team17.BallDash
     {
         private List<Entity> entities = new List<Entity>();
         private List<VirtualCameraTarget> virtualCameraTargets = new List<VirtualCameraTarget>();
-        private GameObject playerGameObject;
+        private GameObject ballGameObject;
         private int livesLeft;
 
         #region Entity registration
@@ -269,15 +269,15 @@ namespace Team17.BallDash
         /// <summary>
         /// Clear all attributes of the GameState. Call this method before loading a new scene.
         /// </summary>
-
         public void ResetState()
         {
             entities.Clear();
+            virtualCameraTargets.Clear();
             livesLeft = 0;
-            playerGameObject = null;
+            ballGameObject = null;
         }
 
-        public GameObject PlayerGameObject { get => playerGameObject; set => playerGameObject = value; }
+        public GameObject BallGameObject { get => ballGameObject; set => ballGameObject = value; }
         public int LivesLeft { get => livesLeft; set => livesLeft = value; }
         public List<VirtualCameraTarget> VirtualCameraTargets { get => virtualCameraTargets; }
     }

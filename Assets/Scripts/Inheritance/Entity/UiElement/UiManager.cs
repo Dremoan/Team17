@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
     public class UiManager : UiElement
     {

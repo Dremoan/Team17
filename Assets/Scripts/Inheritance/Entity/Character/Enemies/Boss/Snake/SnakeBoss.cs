@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
     public class SnakeBoss : Entity
     {
