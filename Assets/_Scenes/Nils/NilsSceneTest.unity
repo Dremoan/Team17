@@ -112,6 +112,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &7728959 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7775972242506654245, guid: 1d7d8698125f9844c8139764c4c000a7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1618312284594600675}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08e2b87d1d22ee449b461df5cb6b0f5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9602922
 GameObject:
   m_ObjectHideFlags: 0
@@ -4047,6 +4059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timers: {fileID: 454053342}
+  portalManager: {fileID: 0}
   currentState: 0
   health: 20
   roomZero: {fileID: 3561031006747512242}
@@ -4055,6 +4068,7 @@ MonoBehaviour:
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
     priority: 0
     timeToEnd: 3
+    timeForPortalsToDisapear: 2.5
     coolDown: 4
     pattern:
       m_PersistentCalls:
@@ -4083,11 +4097,13 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
+    portals: []
   patternList:
   - name: Test attack pattern
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
     priority: 5
     timeToEnd: 5
+    timeForPortalsToDisapear: 2.5
     coolDown: 2
     pattern:
       m_PersistentCalls:
@@ -4116,17 +4132,20 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
+    portals: []
   exitPattern:
     name: Test end pattern
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
     priority: 5
     timeToEnd: 3
+    timeForPortalsToDisapear: 2.5
     coolDown: 4
     pattern:
       m_PersistentCalls:
         m_Calls: []
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
+    portals: []
 --- !u!114 &454053342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11476,6 +11495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timers: {fileID: 847305802}
+  portalManager: {fileID: 0}
   currentState: 0
   health: 20
   roomZero: {fileID: 3561031007102380237}
@@ -11484,6 +11504,7 @@ MonoBehaviour:
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
     priority: 0
     timeToEnd: 3
+    timeForPortalsToDisapear: 2.5
     coolDown: 4
     pattern:
       m_PersistentCalls:
@@ -11512,11 +11533,13 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
+    portals: []
   patternList:
   - name: Test attack pattern
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
     priority: 5
     timeToEnd: 5
+    timeForPortalsToDisapear: 2.5
     coolDown: 2
     pattern:
       m_PersistentCalls:
@@ -11545,17 +11568,20 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
+    portals: []
   exitPattern:
     name: Test end pattern
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
     priority: 5
     timeToEnd: 3
+    timeForPortalsToDisapear: 2.5
     coolDown: 4
     pattern:
       m_PersistentCalls:
         m_Calls: []
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
+    portals: []
 --- !u!114 &847305802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26082,85 +26108,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkedBoss: {fileID: 8712853280227238618}
---- !u!1001 &1076825330191702417
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1076825329525645875, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_Name
-      value: SpeedPortal
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645875, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.43
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1798772278973419546, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: placementSpeed
-      value: 0.25
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 711c6332748f9484d8ba5b2dcc87bffc, type: 3}
 --- !u!114 &1127354331815522809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26576,7 +26523,7 @@ PrefabInstance:
     - target: {fileID: 7407564158975760487, guid: 1d7d8698125f9844c8139764c4c000a7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3455242873607892154, guid: 1d7d8698125f9844c8139764c4c000a7,
         type: 3}
@@ -26637,6 +26584,11 @@ PrefabInstance:
         type: 3}
       propertyPath: speedPortalPrecision
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7775972242506654235, guid: 1d7d8698125f9844c8139764c4c000a7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d7d8698125f9844c8139764c4c000a7, type: 3}
@@ -36490,6 +36442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timers: {fileID: 8712853280227238619}
+  portalManager: {fileID: 7728959}
   currentState: 0
   health: 20
   roomZero: {fileID: 3561031007102380237}
@@ -36498,6 +36451,7 @@ MonoBehaviour:
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
     priority: 0
     timeToEnd: 3
+    timeForPortalsToDisapear: 2.5
     coolDown: 4
     pattern:
       m_PersistentCalls:
@@ -36526,11 +36480,13 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
+    portals: []
   patternList:
   - name: Test attack pattern
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
     priority: 5
     timeToEnd: 5
+    timeForPortalsToDisapear: 2.5
     coolDown: 2
     pattern:
       m_PersistentCalls:
@@ -36559,17 +36515,20 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
+    portals: []
   exitPattern:
     name: Test end pattern
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
     priority: 5
     timeToEnd: 3
+    timeForPortalsToDisapear: 2.5
     coolDown: 4
     pattern:
       m_PersistentCalls:
         m_Calls: []
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
+    portals: []
 --- !u!114 &8712853280227238619
 MonoBehaviour:
   m_ObjectHideFlags: 0

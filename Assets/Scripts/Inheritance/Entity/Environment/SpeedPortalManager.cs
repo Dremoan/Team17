@@ -4,18 +4,37 @@ using UnityEngine;
 
 namespace Team17.StreetHunt
 {
-    public class SpeedPortalManager : MonoBehaviour
+    public class SpeedPortalManager : Entity
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        [SerializeField] private SpeedPortal[] portalPool;
 
+        protected override void Update()
+        {
+            base.Update();
+            transform.localScale = new Vector3(1 / transform.parent.localScale.x, 1 / transform.parent.localScale.y, 1 / transform.parent.localScale.z);
         }
 
-        // Update is called once per frame
-        void Update()
+        public void SpawnPortal(Vector3 pos, float rot)
         {
+            for (int i = 0; i < portalPool.Length; i++)
+            {
+                if(portalPool[i].Available)
+                {
+                    portalPool[i].gameObject.SetActive(true);
+                    portalPool[i].SetTargets(pos, rot); // also sets portal[i].Available to false
+                    return;
+                }
+            }
+        }
 
+        public void DeactivateAllPortals()
+        {
+            for (int i = 0; i < portalPool.Length; i++)
+            {
+                portalPool[i].Available = true;
+                portalPool[i].gameObject.SetActive(false);
+                portalPool[i].transform.localPosition = Vector3.zero;
+            }
         }
     }
 }
