@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
     public class Dummy : Character, IBallHitable
     {

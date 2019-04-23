@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
     public class LivesManager : Entity
     {
@@ -15,7 +15,7 @@ namespace Team17.BallDash
         {
             base.Start();
             GameManager.state.LivesLeft = projectiles.Length;
-            GameManager.state.PlayerGameObject = projectiles[0].gameObject;
+            GameManager.state.BallGameObject = projectiles[0].gameObject;
         }
 
         public bool BallAvailable()

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
     [CreateAssetMenu(fileName = "New Boss Aim Zone", menuName = "Ball Dash/Boss aim zone")]
     public class BossAimZone : ScriptableObject
