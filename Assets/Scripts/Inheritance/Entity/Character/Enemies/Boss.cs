@@ -10,6 +10,7 @@ namespace Team17.StreetHunt
     {
         [Header("Components")]
         [SerializeField] private TimersCalculator timers;
+        [SerializeField] private SpeedPortalManager portalManager;
         [Header("Health and state")]
         [SerializeField] private BossPhaseState currentState = BossPhaseState.Entry;
         [SerializeField] private float health = 50f;
@@ -41,7 +42,7 @@ namespace Team17.StreetHunt
         {
             base.OnEnable();
             SetHealth();
-            SetMoveListsTimers();
+            SetMoveListsAttributes();
             Attack(-1);
         }
 
@@ -149,7 +150,7 @@ namespace Team17.StreetHunt
             gameObject.SetActive(false);
         }
 
-        private void SetMoveListsTimers()
+        private void SetMoveListsAttributes()
         {
             entryPattern.Timers = timers;
             for (int i = 0; i < patternList.Length; i++)
@@ -157,6 +158,13 @@ namespace Team17.StreetHunt
                 patternList[i].Timers = timers;
             }
             exitPattern.Timers = timers;
+
+            entryPattern.PortalManager = portalManager;
+            for (int i = 0; i < patternList.Length; i++)
+            {
+                patternList[i].PortalManager = portalManager;
+            }
+            exitPattern.PortalManager = portalManager;
         }
 
         private void SetHealth()
@@ -186,6 +194,12 @@ namespace Team17.StreetHunt
         public CutSceneEvent ExitEndsEvent { get => exitEndsEvent; set => exitEndsEvent = value; }
 
         #endregion
+
+        [ContextMenu("Reference portal manager")]
+        public void ReferencePortalManager()
+        {
+            portalManager = GameObject.Find("SpeedPortalsManager").GetComponent<SpeedPortalManager>();
+        }
     }
 
     [System.Serializable]
@@ -198,11 +212,14 @@ namespace Team17.StreetHunt
         [Header ("Attack parameter")]
         [Tooltip ("Time it takes for the attack to be considered finished. After that time, the boss can choose and launch another attack.")]
         [SerializeField] private float timeToEnd = 3f;
+        [Tooltip ("Time it takes for spawned portal to disapear.")]
+        [SerializeField] private float timeForPortalsToDisapear = 2.5f;
         [Tooltip ("Time it takes for the attack to be considered usable again after the boss used it once. During this time, the boss will ignore this attack.")]
         [SerializeField] private float coolDown = 4f;
         [SerializeField] private UnityEngine.Events.UnityEvent pattern;
         [SerializeField] private PortalPlacement[] portals;
 
+        private SpeedPortalManager portalManager;
         private TimersCalculator timers;
         private bool canBeUsed = true;
         private System.Action endAction;
@@ -213,11 +230,17 @@ namespace Team17.StreetHunt
             pattern.Invoke();
             endAction = endAct;
             canBeUsed = false;
+            for (int i = 0; i < portals.Length; i++)
+            {
+                portalManager.SpawnPortal(portals[i].Position, portals[i].Rotation);
+            }
+            //timers.LaunchNewTimer(timeForPortalsToDisapear, portalManager.DeactivateAllPortals);
             timers.LaunchNewTimer(timeToEnd, EndAttack);
         }
 
         private void EndAttack()
         {
+            portalManager.DeactivateAllPortals();
             endAction.Invoke();
             timers.LaunchNewTimer(coolDown, ResetAttack);
         }
@@ -237,6 +260,7 @@ namespace Team17.StreetHunt
         public bool CanBeUsed { get => canBeUsed; }
         public TimersCalculator Timers { get => timers; set => timers = value; }
         public int Priority { get => priority; }
+        public SpeedPortalManager PortalManager { get => portalManager; set => portalManager = value; }
     }
 
     [System.Serializable]
