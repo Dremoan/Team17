@@ -35,6 +35,10 @@ namespace Team17.StreetHunt
             if(feedBack.Particles)
             {
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("particlesSystems"), true);
+                if(GUILayout.Button("Find Particles"))
+                {
+                    feedBack.ParticlesSystems = feedBack.gameObject.GetComponentsInChildren<ParticleSystem>(true);
+                }
             }
 
             EditorGUILayout.LabelField("Trails parameters", EditorStyles.boldLabel);
@@ -42,6 +46,10 @@ namespace Team17.StreetHunt
             if(feedBack.Trails)
             {
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("trailRenderers"), true);
+                if (GUILayout.Button("Find Trails"))
+                {
+                    feedBack.TrailRenderers =  feedBack.gameObject.GetComponentsInChildren<TrailRenderer>(true);
+                }
             }
 
             EditorGUILayout.LabelField("Shake parameters", EditorStyles.boldLabel);

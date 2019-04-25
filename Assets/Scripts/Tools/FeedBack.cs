@@ -138,10 +138,12 @@ namespace Team17.StreetHunt
         }
 
         public bool Particles { get => particles; }
+        public bool Trails { get => trails; }
         public bool Shake { get => shake; }
         public bool UseSpecificTransform { get => useSpecificTransform; }
         public bool HardFollowingTransform { get => hardFollowingTransform; }
         public bool TpOnTransformOnPlay { get => tpOnTransformOnPlay; }
-        public bool Trails { get => trails; }
+        public ParticleSystem[] ParticlesSystems { get => particlesSystems; set => particlesSystems = value; }
+        public TrailRenderer[] TrailRenderers { get => trailRenderers; set => trailRenderers = value; }
     }
 }
