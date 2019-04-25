@@ -97,7 +97,7 @@ namespace Team17.StreetHunt
 
         }
 
-        public virtual void OnBallHit(float hitPower)
+        public virtual void OnBallHit(int powerGroupIndex, float hitPower)
         {
 
         }
@@ -112,7 +112,7 @@ namespace Team17.StreetHunt
 
         }
 
-        public virtual void OnBossHurt()
+        public virtual void OnBossHurt(int powerGroupIndex, float hitPower)
         {
 
         }

@@ -40,9 +40,9 @@ namespace Team17.StreetHunt
             GUiEndLevel(endLevelVictory);
         }
 
-        public override void OnBallHit(float hitPower)
+        public override void OnBallHit(int powerGroupIndex, float hitPower)
         {
-            base.OnBallHit(hitPower);
+            base.OnBallHit(powerGroupIndex, hitPower);
             GuiNbreBalls();
         }
 

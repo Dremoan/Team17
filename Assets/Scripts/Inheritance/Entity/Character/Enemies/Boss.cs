@@ -60,10 +60,10 @@ namespace Team17.StreetHunt
 
         #region State management
 
-        public void Hit(float dmgs)
+        public void Hit(int index, float dmgs)
         {
             currentHealth -= dmgs;
-            GameManager.state.CallOnBossHurt();
+            GameManager.state.CallOnBossHurt(index, dmgs);
             Debug.Log(gameObject.name + " has " + currentHealth + " hp. Damaged " + dmgs);
             if (currentHealth < 0) Death();
         }

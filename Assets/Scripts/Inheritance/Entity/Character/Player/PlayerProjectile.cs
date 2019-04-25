@@ -98,7 +98,7 @@ namespace Team17.StreetHunt
 
             if (coll.gameObject.GetComponent<IBallHitable>() != null)
             {
-                coll.gameObject.GetComponent<IBallHitable>().Hit(power);
+                coll.gameObject.GetComponent<IBallHitable>().Hit(usedPowergroupIndex, power);
                 Hit();
             }
         }
@@ -202,7 +202,7 @@ namespace Team17.StreetHunt
             usedPowerGroup.Hit.Play();
             usedPowerGroup.Trail.Stop();
 
-            GameManager.state.CallOnBallHit(power);
+            GameManager.state.CallOnBallHit(usedPowergroupIndex, power);
         }
 
         private void CancelBall()
@@ -299,14 +299,23 @@ namespace Team17.StreetHunt
 
         #endregion
 
+        [ContextMenu ("Setup score manager")]
+        public void SetupScoreManager()
+        {
+            ScoreManager manager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
+            manager.ScoreHits = new ScoreHit[powerGroups.Length];
+            for (int i = 0; i < manager.ScoreHits.Length; i++)
+            {
+                manager.ScoreHits[i].Name = powerGroups[i].Name;
+            }
+        }
 
         public bool Destroyed { get => destroyed; set => destroyed = value; }
-
     }
 
     public interface IBallHitable
     {
-        void Hit(float dmgs);
+        void Hit(int index, float dmgs);
     }
 
     [System.Serializable]

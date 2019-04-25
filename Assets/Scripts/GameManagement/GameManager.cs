@@ -164,7 +164,7 @@ namespace Team17.StreetHunt
             }
         }
 
-        public void CallOnBallHit(float hitPower)
+        public void CallOnBallHit(int powerGroupIndex, float hitPower)
         {
             livesLeft--;
             if (livesLeft == 0)
@@ -173,7 +173,7 @@ namespace Team17.StreetHunt
             }
             for (int i = 0; i < entities.Count; i++)
             {
-                entities[i].OnBallHit(hitPower);
+                entities[i].OnBallHit(powerGroupIndex, hitPower);
             }
         }
 
@@ -210,11 +210,11 @@ namespace Team17.StreetHunt
             }
         }
 
-        public void CallOnBossHurt()
+        public void CallOnBossHurt(int powerGroupIndex, float hitPower)
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                entities[i].OnBossHurt();
+                entities[i].OnBossHurt(powerGroupIndex, hitPower);
             }
         }
 

@@ -36,7 +36,7 @@ namespace Team17.StreetHunt
             SetActiveText(textDisplay);
         }
 
-        public void Hit(float dmgs)
+        public void Hit(int index, float dmgs)
         {
             if (tutorialEnding == false)
             {
