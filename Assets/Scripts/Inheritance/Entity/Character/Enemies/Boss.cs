@@ -14,13 +14,16 @@ namespace Team17.StreetHunt
         [Header("Health and state")]
         [SerializeField] private BossPhaseState currentState = BossPhaseState.Entry;
         [SerializeField] private float health = 50f;
+        [SerializeField] private BossAttackState currentAttackState = BossAttackState.Easy;
 
         [Header("Rooms zero")]
         [SerializeField] private Transform roomZero;
 
         [Header("Patterns")]
         [SerializeField] private BossPattern entryPattern;
-        [SerializeField] private BossPattern[] patternList;
+        [SerializeField] private BossPattern[] easyPatterns;
+        [SerializeField] private BossPattern[] mediumPatterns;
+        [SerializeField] private BossPattern[] hardPatterns;
         [SerializeField] private BossPattern exitPattern;
 
         private CutSceneEvent entryBeginsEvent;
@@ -28,6 +31,7 @@ namespace Team17.StreetHunt
         private CutSceneEvent exitBeginsEvent;
         private CutSceneEvent exitEndsEvent;
 
+        private int currentAttackStateIndex = 0;
         protected float currentHealth = 0f;
         protected bool canAttack = false;
 
@@ -85,16 +89,49 @@ namespace Team17.StreetHunt
                 int lastPriority = -1;
 
                 // go through all patterns and choose;
-                for (int i = 0; i < patternList.Length; i++)
+                switch(currentAttackState)
                 {
-                    if(patternList[i].Priority > lastPriority)
-                    {
-                        if (patternList[i].IsUsableAndUseful(roomZero, GameManager.state.BallGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena()))
+                    case BossAttackState.Easy:
+                        for (int i = 0; i < easyPatterns.Length; i++)
                         {
-                            index = i;
-                            lastPriority = patternList[i].Priority;
+                            if (easyPatterns[i].Priority > lastPriority)
+                            {
+                                if (easyPatterns[i].IsUsableAndUseful(roomZero, GameManager.state.BallGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena()))
+                                {
+                                    index = i;
+                                    lastPriority = easyPatterns[i].Priority;
+                                }
+                            }
                         }
-                    }
+                        break;
+
+                    case BossAttackState.Medium:
+                        for (int i = 0; i < mediumPatterns.Length; i++)
+                        {
+                            if (mediumPatterns[i].Priority > lastPriority)
+                            {
+                                if (mediumPatterns[i].IsUsableAndUseful(roomZero, GameManager.state.BallGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena()))
+                                {
+                                    index = i;
+                                    lastPriority = mediumPatterns[i].Priority;
+                                }
+                            }
+                        }
+                        break;
+
+                    case BossAttackState.Hard:
+                        for (int i = 0; i < hardPatterns.Length; i++)
+                        {
+                            if (hardPatterns[i].Priority > lastPriority)
+                            {
+                                if (hardPatterns[i].IsUsableAndUseful(roomZero, GameManager.state.BallGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena()))
+                                {
+                                    index = i;
+                                    lastPriority = hardPatterns[i].Priority;
+                                }
+                            }
+                        }
+                        break;
                 }
 
                 if(index == -1)
@@ -117,7 +154,29 @@ namespace Team17.StreetHunt
                     entryPattern.LaunchAttack(EntryEnd);
                     break;
                 case BossPhaseState.Attacking:
-                    patternList[index].LaunchAttack(AttackEnd);
+                    //easyPatterns[index].LaunchAttack(AttackEnd);
+
+                    switch(currentAttackState)
+                    {
+                        case BossAttackState.Easy:
+                            easyPatterns[index].LaunchAttack(AttackEnd);
+                            currentAttackStateIndex++;
+                            currentAttackState = (BossAttackState)currentAttackStateIndex;
+                            break;
+
+                        case BossAttackState.Medium:
+                            mediumPatterns[index].LaunchAttack(AttackEnd);
+                            currentAttackStateIndex++;
+                            currentAttackState = (BossAttackState)currentAttackStateIndex;
+                            break;
+
+                        case BossAttackState.Hard:
+                            hardPatterns[index].LaunchAttack(AttackEnd);
+                            currentAttackStateIndex = 0;
+                            currentAttackState = (BossAttackState)currentAttackStateIndex;
+                            break;
+                    }
+
                     break;
                 case BossPhaseState.Exit:
                     //call exit begins
@@ -153,17 +212,41 @@ namespace Team17.StreetHunt
         private void SetMoveListsAttributes()
         {
             entryPattern.Timers = timers;
-            for (int i = 0; i < patternList.Length; i++)
+
+            for (int i = 0; i < easyPatterns.Length; i++)
             {
-                patternList[i].Timers = timers;
+                easyPatterns[i].Timers = timers;
             }
+
+            for (int i = 0; i < mediumPatterns.Length; i++)
+            {
+                mediumPatterns[i].Timers = timers;
+            }
+
+            for (int i = 0; i < hardPatterns.Length; i++)
+            {
+                hardPatterns[i].Timers = timers;
+            }
+
             exitPattern.Timers = timers;
 
             entryPattern.PortalManager = portalManager;
-            for (int i = 0; i < patternList.Length; i++)
+
+            for (int i = 0; i < easyPatterns.Length; i++)
             {
-                patternList[i].PortalManager = portalManager;
+                easyPatterns[i].PortalManager = portalManager;
             }
+
+            for (int i = 0; i < mediumPatterns.Length; i++)
+            {
+                mediumPatterns[i].PortalManager = portalManager;
+            }
+
+            for (int i = 0; i < hardPatterns.Length; i++)
+            {
+                hardPatterns[i].PortalManager = portalManager;
+            }
+
             exitPattern.PortalManager = portalManager;
         }
 
@@ -271,5 +354,12 @@ namespace Team17.StreetHunt
 
         public Vector3 Position { get => position; set => position = value; }
         public float Rotation { get => rotation; set => rotation = value; }
+    }
+
+    public enum BossAttackState
+    {
+        Easy = 0,
+        Medium = 1,
+        Hard = 2,
     }
 }
