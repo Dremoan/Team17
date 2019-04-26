@@ -132,6 +132,14 @@ namespace Team17.StreetHunt
             }
         }
 
+        public void CallOnCharacterStunned()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnCharacterStunned();
+            }
+        }
+
         public void CallOnCharacterStartStrikeAnim()
         {
             for (int i = 0; i < entities.Count; i++)

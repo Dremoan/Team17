@@ -22,8 +22,10 @@ namespace Team17.StreetHunt
         [SerializeField] private float slowedTimeScale = 0.2f;
         [SerializeField] private AnimationCurve timeToHit;
         [SerializeField] private AnimationCurve powerGained;
+        [SerializeField] private AnimationCurve feedBackRadius;
         [SerializeField] private float powerLostOnBounce = 5f;
         [SerializeField] private float speedPortalPrecision = 2f;
+        [SerializeField] private float stunTime = 1.5f;
 
         [Header("Trajectory calculation")]
         [SerializeField] private LayerMask trajectoryCalculationMask;
@@ -32,6 +34,7 @@ namespace Team17.StreetHunt
         private float power = 0;
         private int reHitTimer;
         private int usedPowergroupIndex = 0;
+        private bool canStrike = true;
         private bool destroyed = false;
         private bool wasCanceled = false;
         private bool isStriking = false;
@@ -109,51 +112,60 @@ namespace Team17.StreetHunt
 
         public void StartCalculation()
         {
-            body.velocity *= slowedTimeScale;
-            reHitTimer = timer.LaunchNewTimer(timeToHit.Evaluate(power), CancelBall);
-            timerFeedback.gameObject.SetActive(true);
-            trajectory.gameObject.SetActive(true);
-            character.Physicate(false);
-            wasCanceled = false;
-            isStriking = true;
+            if(canStrike)
+            {
+                body.velocity *= slowedTimeScale;
+                reHitTimer = timer.LaunchNewTimer(timeToHit.Evaluate(power), StunCharacter);
+                timerFeedback.gameObject.SetActive(true);
+                trajectory.gameObject.SetActive(true);
+                character.Physicate(false);
+                wasCanceled = false;
+                isStriking = true;
 
-            GameManager.state.CallOnPlayerTeleport();
+                GameManager.state.CallOnPlayerTeleport();
+            }
         }
 
         public void FeedBack(Vector3 touchPos)
         {
-            Timer t = timer.GetTimerFromUserIndex(reHitTimer);
-            timerFeedback.localScale = (Mathf.InverseLerp(0, t.MaxTime, t.TimeLeft) * initialFeedbackScale) + Vector3.one;
-            trajectory.position = Vector3.Lerp(transform.position, touchPos, 0.5f);
-            float zRot = Vector3.SignedAngle(transform.up, (touchPos - transform.position), Vector3.forward);
-            trajectory.rotation = Quaternion.Euler(0, 0, zRot);
-            trajectory.localScale = new Vector3(1, Vector3.Distance(transform.position, touchPos) * 2, 1);
-            character.PrepareStrike(transform.position, touchPos);
+            if(canStrike)
+            {
+                Timer t = timer.GetTimerFromUserIndex(reHitTimer);
+                timerFeedback.localScale = (feedBackRadius.Evaluate(Mathf.InverseLerp(0, t.MaxTime, t.TimeLeft)) * initialFeedbackScale) + Vector3.one;
+                trajectory.position = Vector3.Lerp(transform.position, touchPos, 0.5f);
+                float zRot = Vector3.SignedAngle(transform.up, (touchPos - transform.position), Vector3.forward);
+                trajectory.rotation = Quaternion.Euler(0, 0, zRot);
+                trajectory.localScale = new Vector3(1, Vector3.Distance(transform.position, touchPos) * 2, 1);
+                character.PrepareStrike(transform.position, touchPos);
+            }
         }
 
         public void GetNewDirection(Vector3 newDirection)
         {
-            if(wasCanceled)
+            if(canStrike)
             {
-                wasCanceled = false;
-                return;
+                if (wasCanceled)
+                {
+                    wasCanceled = false;
+                    return;
+                }
+                body.useGravity = false;
+                Timer t = timer.GetTimerFromUserIndex(reHitTimer);
+
+                power += powerGained.Evaluate(t.Inc);
+                SelectPowerGroup(power);
+                movementDirection = newDirection.normalized * (usedPowerGroup.Speed);
+
+                timer.DeleteTimer(reHitTimer);
+
+                timerFeedback.gameObject.SetActive(false);
+                trajectory.gameObject.SetActive(false);
+
+                character.Physicate(true);
+                character.Strike();
+
+                GameManager.state.CallOnCharacterStartStrikeAnim();
             }
-            body.useGravity = false;
-            Timer t = timer.GetTimerFromUserIndex(reHitTimer);
-
-            power += powerGained.Evaluate(t.Inc);
-            SelectPowerGroup(power);
-            movementDirection = newDirection.normalized * (usedPowerGroup.Speed);
-
-            timer.DeleteTimer(reHitTimer);
-
-            timerFeedback.gameObject.SetActive(false);
-            trajectory.gameObject.SetActive(false);
-
-            character.Physicate(true);
-            character.Strike();
-
-            GameManager.state.CallOnCharacterStartStrikeAnim();
         }
 
         public void LaunchBall()
@@ -174,7 +186,7 @@ namespace Team17.StreetHunt
                 {
                     usedPowerGroup = powerGroups[i];
                     usedPowergroupIndex = i;
-                    Debug.Log(usedPowerGroup.Name);
+                    Debug.Log("P: " + power + ": " + usedPowerGroup.Name);
                 }
             }
         }
@@ -221,6 +233,22 @@ namespace Team17.StreetHunt
             GameManager.state.CallOnBallDestroyed();
         }
 
+        private void StunCharacter()
+        {
+            isStriking = false;
+            body.velocity = movementDirection;
+            timerFeedback.gameObject.SetActive(false);
+            trajectory.gameObject.SetActive(false);
+            character.Physicate(true);
+            canStrike = false;
+            timer.LaunchNewTimer(stunTime, RecoverCharacter);
+        }
+
+        private void RecoverCharacter()
+        {
+            canStrike = true;
+        }
+
         private void Bounce(Vector3 enterVector, Vector3 collisionNormal)
         {
             if (body.useGravity) return;
@@ -229,7 +257,7 @@ namespace Team17.StreetHunt
             power -= powerLostOnBounce;
             SelectPowerGroup(power);
             if (power < 0) power = 0;
-            if(isStriking) movementDirection = newDir.normalized * (usedPowerGroup.Speed);
+            if(isStriking) movementDirection = newDir.normalized * (usedPowerGroup.Speed) * slowedTimeScale;
             else movementDirection = newDir.normalized * (usedPowerGroup.Speed);
 
             body.velocity = movementDirection;
@@ -260,7 +288,7 @@ namespace Team17.StreetHunt
             power = usedPowerGroup.PowerThreshold;
             movementDirection = body.velocity.normalized * (usedPowerGroup.Speed);
             body.velocity = movementDirection;
-            Debug.Log(usedPowerGroup.Name);
+            Debug.Log("P: " + power + ": " + usedPowerGroup.Name);
         }
 
         #endregion
@@ -311,6 +339,7 @@ namespace Team17.StreetHunt
         }
 
         public bool Destroyed { get => destroyed; set => destroyed = value; }
+        public bool CanStrike { get => canStrike; set => canStrike = value; }
     }
 
     public interface IBallHitable

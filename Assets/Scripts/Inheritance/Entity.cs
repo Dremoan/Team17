@@ -92,6 +92,11 @@ namespace Team17.StreetHunt
 
         }
 
+        public virtual void OnCharacterStunned()
+        {
+
+        }
+
         public virtual void OnBallDestroyed()
         {
 
