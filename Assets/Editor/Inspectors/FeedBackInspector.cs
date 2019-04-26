@@ -68,6 +68,17 @@ namespace Team17.StreetHunt
             }
             EditorGUILayout.Space();
 
+            EditorGUILayout.LabelField("Zoom parameters", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("zoom"), new GUIContent("Use zoom"));
+            if(feedBack.Zoom)
+            {
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("zoomInCurve"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("zoomOutCurve"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("zoomedDist"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("zoomSpeed"));
+            }
+            EditorGUILayout.Space();
+
             EditorGUILayout.LabelField("Rumble parameters", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("rumble"), new GUIContent("Use rumble"));
             if(feedBack.Rumble)
