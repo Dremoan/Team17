@@ -12,7 +12,8 @@ namespace Team17.StreetHunt
     public class GameState
     {
         private List<Entity> entities = new List<Entity>();
-        private List<VirtualCameraTarget> virtualCameraTargets = new List<VirtualCameraTarget>();
+        private List<VirtualCameraShakeTarget> virtualCameraShakeTargets = new List<VirtualCameraShakeTarget>();
+        private List<VirtualCameraZoomTarget> virtualCameraZoomTargets = new List<VirtualCameraZoomTarget>();
         private GameObject ballGameObject;
         private int livesLeft;
 
@@ -32,14 +33,24 @@ namespace Team17.StreetHunt
 
         #region Virtual camera targets registration
 
-        public void RegisterVirtualCameraTarget(VirtualCameraTarget target)
+        public void RegisterVirtualCameraShakeTarget(VirtualCameraShakeTarget target)
         {
-            virtualCameraTargets.Add(target);
+            virtualCameraShakeTargets.Add(target);
         }
 
-        public void UnregisterVirtualCameraTarget(VirtualCameraTarget target)
+        public void UnregisterVirtualCameraShakeTarget(VirtualCameraShakeTarget target)
         {
-            virtualCameraTargets.Remove(target);
+            virtualCameraShakeTargets.Remove(target);
+        }
+
+        public void RegisterVirtualCameraZoomTarget(VirtualCameraZoomTarget target)
+        {
+            virtualCameraZoomTargets.Add(target);
+        }
+
+        public void UnregisterVirtualCameraZoomTarget(VirtualCameraZoomTarget target)
+        {
+            virtualCameraZoomTargets.Remove(target);
         }
 
         #endregion
@@ -280,13 +291,15 @@ namespace Team17.StreetHunt
         public void ResetState()
         {
             entities.Clear();
-            virtualCameraTargets.Clear();
+            virtualCameraShakeTargets.Clear();
+            virtualCameraZoomTargets.Clear();
             livesLeft = 0;
             ballGameObject = null;
         }
 
         public GameObject BallGameObject { get => ballGameObject; set => ballGameObject = value; }
         public int LivesLeft { get => livesLeft; set => livesLeft = value; }
-        public List<VirtualCameraTarget> VirtualCameraTargets { get => virtualCameraTargets; }
+        public List<VirtualCameraShakeTarget> VirtualCameraShakeTargets { get => virtualCameraShakeTargets; }
+        public List<VirtualCameraZoomTarget> VirtualCameraZoomTargets { get => virtualCameraZoomTargets; }
     }
 }

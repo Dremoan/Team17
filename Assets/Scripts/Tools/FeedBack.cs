@@ -24,9 +24,20 @@ namespace Team17.StreetHunt
         [SerializeField] private Transform[] specificTransformToShake;
         [SerializeField] private float shakeAmplitude = 0.2f;
         [SerializeField] private float shakeTime = 0.1f;
+        //zoom
+        [SerializeField] private bool zoom = false;
+        [SerializeField] private AnimationCurve zoomInCurve;
+        [SerializeField] private AnimationCurve zoomOutCurve;
+        [SerializeField] private float speed = 0.1f;
+        //rumble
+        [SerializeField] private bool rumble = false;
+        [SerializeField] private long rumbleTime = 5;
+
 
         private Transform[] usedTransform;
         private bool isShaking = false;
+        private bool isRumbling = false;
+        private bool isZooming = false;
         private float shakeDecrementer;
 
         private void Start()
@@ -48,6 +59,7 @@ namespace Team17.StreetHunt
             {
                 transform.position = transformToTPToOnPlay.position;
             }
+
             if(particles)
             {
                 for (int i = 0; i < particlesSystems.Length; i++)
@@ -55,6 +67,7 @@ namespace Team17.StreetHunt
                     particlesSystems[i].Play();
                 }
             }
+
             if(trails)
             {
                 for (int i = 0; i < trailRenderers.Length; i++)
@@ -62,6 +75,7 @@ namespace Team17.StreetHunt
                     trailRenderers[i].enabled = true;
                 }
             }
+
             if(shake)
             {
                 if(useSpecificTransform)
@@ -70,14 +84,26 @@ namespace Team17.StreetHunt
                 }
                 else
                 {
-                    usedTransform = new Transform[GameManager.state.VirtualCameraTargets.Count];
+                    usedTransform = new Transform[GameManager.state.VirtualCameraShakeTargets.Count];
                     for (int i = 0; i < usedTransform.Length; i++)
                     {
-                        usedTransform[i] = GameManager.state.VirtualCameraTargets[i].transform;
+                        usedTransform[i] = GameManager.state.VirtualCameraShakeTargets[i].transform;
                     }
                 }
                 shakeDecrementer = shakeTime;
                 isShaking = true;
+            }
+
+            if(rumble)
+            {
+                if(looping)
+                {
+                    isRumbling = true;
+                }
+                else
+                {
+                    Vibration.Vibrate(rumbleTime);
+                }
             }
         }
 
@@ -105,6 +131,10 @@ namespace Team17.StreetHunt
                     shakeDecrementer = shakeTime;
                     isShaking = false;
                 }
+                if(rumble)
+                {
+                    isRumbling = false;
+                }
             }
         }
 
@@ -128,6 +158,14 @@ namespace Team17.StreetHunt
                 }
             }
         }
+        
+        private void VibrationManager()
+        {
+            if(isRumbling && looping)
+            {
+                Vibration.Vibrate(50);
+            }
+        }
 
         private void PositionManagement()
         {
@@ -145,5 +183,6 @@ namespace Team17.StreetHunt
         public bool TpOnTransformOnPlay { get => tpOnTransformOnPlay; }
         public ParticleSystem[] ParticlesSystems { get => particlesSystems; set => particlesSystems = value; }
         public TrailRenderer[] TrailRenderers { get => trailRenderers; set => trailRenderers = value; }
+        public bool Rumble { get => rumble; }
     }
 }
