@@ -14,10 +14,12 @@ namespace Team17.StreetHunt
         [Header("Health and state")]
         [SerializeField] private BossPhaseState currentState = BossPhaseState.Entry;
         [SerializeField] private float health = 50f;
-        [SerializeField] private BossAttackState currentAttackState = BossAttackState.Easy;
 
         [Header("Rooms zero")]
         [SerializeField] private Transform roomZero;
+
+        [Header("Patterns states serie")]
+        [SerializeField] private BossAttackState[] attackStates;
 
         [Header("Patterns")]
         [SerializeField] private BossPattern entryPattern;
@@ -89,7 +91,7 @@ namespace Team17.StreetHunt
                 int lastPriority = -1;
 
                 // go through all patterns and choose;
-                switch(currentAttackState)
+                switch(attackStates[currentAttackStateIndex])
                 {
                     case BossAttackState.Easy:
                         for (int i = 0; i < easyPatterns.Length; i++)
@@ -154,26 +156,25 @@ namespace Team17.StreetHunt
                     entryPattern.LaunchAttack(EntryEnd);
                     break;
                 case BossPhaseState.Attacking:
-                    //easyPatterns[index].LaunchAttack(AttackEnd);
 
-                    switch(currentAttackState)
+                    switch(attackStates[currentAttackStateIndex])
                     {
                         case BossAttackState.Easy:
                             easyPatterns[index].LaunchAttack(AttackEnd);
                             currentAttackStateIndex++;
-                            currentAttackState = (BossAttackState)currentAttackStateIndex;
+                            if (currentAttackStateIndex > attackStates.Length - 1) currentAttackStateIndex = 0;
                             break;
 
                         case BossAttackState.Medium:
                             mediumPatterns[index].LaunchAttack(AttackEnd);
                             currentAttackStateIndex++;
-                            currentAttackState = (BossAttackState)currentAttackStateIndex;
+                            if (currentAttackStateIndex > attackStates.Length - 1) currentAttackStateIndex = 0;
                             break;
 
                         case BossAttackState.Hard:
                             hardPatterns[index].LaunchAttack(AttackEnd);
-                            currentAttackStateIndex = 0;
-                            currentAttackState = (BossAttackState)currentAttackStateIndex;
+                            currentAttackStateIndex++;
+                            if (currentAttackStateIndex > attackStates.Length - 1) currentAttackStateIndex = 0;
                             break;
                     }
 
