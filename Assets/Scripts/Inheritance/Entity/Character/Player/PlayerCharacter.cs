@@ -25,6 +25,7 @@ namespace Team17.StreetHunt
                 anim.SetTrigger("Grounded");
             }
         }
+
         public void Physicate(bool physicate)
         {
             body.useGravity = physicate;
