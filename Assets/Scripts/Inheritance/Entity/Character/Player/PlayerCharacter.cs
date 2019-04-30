@@ -18,7 +18,13 @@ namespace Team17.StreetHunt
         private bool aiming = false;
         private bool playedTp = false;
 
-
+        private void OnCollisionEnter(Collision collision)
+        {
+            if(collision.gameObject.tag == "Ground")
+            {
+                anim.SetTrigger("Grounded");
+            }
+        }
         public void Physicate(bool physicate)
         {
             body.useGravity = physicate;
