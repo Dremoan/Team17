@@ -14,7 +14,6 @@ namespace Team17.StreetHunt
         private PathCreator actualPath;
         
         [SerializeField] private Transform snakeHead;
-        [SerializeField] private Animator snakeAnim;
         
 
         [SerializeField] private float delayFollowSnakeChunks = 0.25f;
@@ -101,13 +100,6 @@ namespace Team17.StreetHunt
         }
 
         #endregion
-
-        public void AssignAttack(int indexToAssign)
-        {
-            snakeAnim.SetFloat("AttackZoneIndex", 0f);
-            ResetPositionsEvent();
-            snakeAnim.SetInteger("AttackZoneIndex", indexToAssign);
-        }
     }
 }
 
