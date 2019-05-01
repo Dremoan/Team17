@@ -78,12 +78,23 @@ namespace Team17.StreetHunt
             {
                 CancelBall();
             }
+
+            if (coll.gameObject.GetComponent<IBallHitable>() != null)
+            {
+                lastNormal = coll.contacts[0].normal;
+                lastContact = coll.contacts[0].point;
+                lastEnter = movementDirection;
+                Bounce(movementDirection, coll.contacts[0].normal);
+                coll.gameObject.GetComponent<IBallHitable>().Hit(usedPowergroupIndex, power);
+                //Hit();
+            }
             else
             {
                 lastNormal = coll.contacts[0].normal;
                 lastContact = coll.contacts[0].point;
                 lastEnter = movementDirection;
                 Bounce(movementDirection, coll.contacts[0].normal);
+
             }
         }
 

@@ -9,6 +9,8 @@ namespace Team17.StreetHunt
     {
         [SerializeField] private SnakeHead[] snakeBodyParts;
         [SerializeField] private PathCreator[] pathPull;
+        [SerializeField] private WarpManager[] warpPull;
+        private WarpManager actualWarps;
         private PathCreator actualPath;
         
         [SerializeField] private Transform snakeHead;
@@ -20,8 +22,7 @@ namespace Team17.StreetHunt
 
         protected override void Start()
         {
-            //GetPath(2);
-            //PickMoveIntro();
+
         }
 
         #region Spline movement
@@ -52,14 +53,21 @@ namespace Team17.StreetHunt
         
         public void GetPath(int index)
         {
+            for (int i = 0; i < warpPull.Length; i++)
+            {
+                warpPull[i].ResetAllWarps();
+            }
+
             indexPath = index;
             AssignPath();
+            actualWarps.SpawnWarps();
         }
 
         public PathCreator AssignPath()
         {
             ResetPositionsEvent();
             actualPath = pathPull[indexPath];
+            actualWarps = warpPull[indexPath];
             return actualPath;
         }
 
