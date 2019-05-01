@@ -35,11 +35,18 @@ namespace Team17.StreetHunt
             if(feedBack.Particles)
             {
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("particlesSystems"), true);
+                
                 if(GUILayout.Button("Find Particles"))
                 {
                     feedBack.ParticlesSystems = feedBack.gameObject.GetComponentsInChildren<ParticleSystem>(true);
                 }
             }
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("particleRotation"), new GUIContent("Use Rotation"));
+            if (feedBack.ParticleRotation)
+            {
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("particleSystemsToRotate"), true);
+            }
+
             EditorGUILayout.Space();
 
             EditorGUILayout.LabelField("Trails parameters", EditorStyles.boldLabel);
