@@ -52,7 +52,7 @@ namespace Team17.StreetHunt
         {
             base.Start();
             initialFeedbackScale = timerFeedback.localScale;
-            SelectPowerGroup(power);
+            usedPowerGroup = powerGroups[0];
         }
 
         protected override void Update()
@@ -165,11 +165,8 @@ namespace Team17.StreetHunt
                 power += powerGained.Evaluate(t.Inc);
                 SelectPowerGroup(power);
                 movementDirection = newDirection.normalized * (usedPowerGroup.Speed);
-
                 usedPowerGroup.Trail.RotateTrails(GetRotationFromDirection(newDirection));
-
                 timer.DeleteTimer(reHitTimer);
-
                 timerFeedback.gameObject.SetActive(false);
                 trajectory.gameObject.SetActive(false);
 
@@ -198,6 +195,7 @@ namespace Team17.StreetHunt
             {
                 if (power > powerGroups[i].PowerThreshold)
                 {
+                    usedPowerGroup.Trail.Stop();
                     usedPowerGroup = powerGroups[i];
                     usedPowergroupIndex = i;
                     Debug.Log("P: " + power + ": " + usedPowerGroup.Name);
