@@ -259,6 +259,16 @@ namespace Team17.StreetHunt
             }
         }
 
+        public void RotateFX(float newRotZ)
+        {
+            for (int i = 0; i < particleSystemsToRotate.Length; i++)
+            {
+                ParticleSystem.MainModule module = particleSystemsToRotate[i].main;
+                module.startRotationZ = newRotZ;
+
+            }
+        }
+
         public bool Particles { get => particles; }
         public bool ParticleRotation { get => particleRotation; }
         public bool Trails { get => trails; }
