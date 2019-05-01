@@ -14,7 +14,9 @@ namespace Team17.StreetHunt
         [SerializeField] private Transform transformToTPToOnPlay;
         //Particles
         [SerializeField] private bool particles = false;
+        [SerializeField] private bool particleRotation = false;
         [SerializeField] private ParticleSystem[] particlesSystems;
+        [SerializeField] private ParticleSystem[] particleSystemsToRotate;
         //Trail
         [SerializeField] private bool trails = false;
         [SerializeField] private TrailRenderer[] trailRenderers;
@@ -248,13 +250,24 @@ namespace Team17.StreetHunt
             }
         }
 
+        public void RotateTrails(float newRotX)
+        {
+            for (int i = 0; i < particleSystemsToRotate.Length ; i++)
+            {
+                var shapeModule = particleSystemsToRotate[i].shape;
+                shapeModule.rotation = new Vector3(newRotX,-90f,0);
+            }
+        }
+
         public bool Particles { get => particles; }
+        public bool ParticleRotation { get => particleRotation; }
         public bool Trails { get => trails; }
         public bool Shake { get => shake; }
         public bool UseSpecificTransform { get => useSpecificTransform; }
         public bool HardFollowingTransform { get => hardFollowingTransform; }
         public bool TpOnTransformOnPlay { get => tpOnTransformOnPlay; }
         public ParticleSystem[] ParticlesSystems { get => particlesSystems; set => particlesSystems = value; }
+        public ParticleSystem[] ParticleSystemsToRotate { get => particleSystemsToRotate; set => particleSystemsToRotate = value; }
         public TrailRenderer[] TrailRenderers { get => trailRenderers; set => trailRenderers = value; }
         public bool Rumble { get => rumble; }
         public bool Zoom { get => zoom; }

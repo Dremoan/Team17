@@ -94,7 +94,6 @@ namespace Team17.StreetHunt
                 lastContact = coll.contacts[0].point;
                 lastEnter = movementDirection;
                 Bounce(movementDirection, coll.contacts[0].normal);
-
             }
         }
 
@@ -167,6 +166,8 @@ namespace Team17.StreetHunt
                 SelectPowerGroup(power);
                 movementDirection = newDirection.normalized * (usedPowerGroup.Speed);
 
+                usedPowerGroup.Trail.RotateTrails(GetRotationFromDirection(newDirection));
+
                 timer.DeleteTimer(reHitTimer);
 
                 timerFeedback.gameObject.SetActive(false);
@@ -181,12 +182,14 @@ namespace Team17.StreetHunt
 
         public void LaunchBall()
         {
+
             body.velocity = movementDirection;
             usedPowerGroup.Launch.Play();
             usedPowerGroup.Trail.Play();
             isStriking = false;
 
             GameManager.state.CallOnBallShot();
+            
         }
 
         private void SelectPowerGroup(float actualPower)
@@ -265,6 +268,7 @@ namespace Team17.StreetHunt
             if (body.useGravity) return;
             Vector3 newDir = Vector3.Reflect(enterVector, collisionNormal);
             lastNewDir = newDir;
+
             power -= powerLostOnBounce;
             SelectPowerGroup(power);
             if (power < 0) power = 0;
@@ -273,11 +277,21 @@ namespace Team17.StreetHunt
 
             body.velocity = movementDirection;
 
+            usedPowerGroup.Trail.RotateTrails(GetRotationFromDirection(newDir));
             usedPowerGroup.Bounce.Play();
+            usedPowerGroup.Hit.Play();
             usedPowerGroup.Trail.Play();
 
             GameManager.state.CallOnBallBounced();
         }
+
+
+        public float GetRotationFromDirection(Vector3 lookDirection)
+        {
+            float rotZ = Mathf.Atan2(lookDirection.x, lookDirection.y) * Mathf.Rad2Deg;
+            return 90 - rotZ;
+        }
+
 
         private void PassThroughSpeedPortal(Vector3 entryVelocity, Vector3 portalRight)
         {
