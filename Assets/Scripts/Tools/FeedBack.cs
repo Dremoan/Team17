@@ -259,12 +259,21 @@ namespace Team17.StreetHunt
             }
         }
 
-        public void Rotate3DStartRotation(float newRotZ)
+        public void Rotate3DStartRotationZ(float newRotZ)
         {
             for (int i = 0; i < particleSystemsToRotate.Length; i++)
             {
                 ParticleSystem.MainModule module = particleSystemsToRotate[i].main;
-                module.startRotationZ = newRotZ;
+                module.startRotationZ = newRotZ * Mathf.Deg2Rad;
+            }
+        }
+
+        public void Rotate3DStartRotationX(float newRotX)
+        {
+            for (int i = 0; i < particleSystemsToRotate.Length; i++)
+            {
+                ParticleSystem.MainModule module = particleSystemsToRotate[i].main;
+                module.startRotationX = newRotX * Mathf.Deg2Rad;
             }
         }
 
