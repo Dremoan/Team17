@@ -250,7 +250,7 @@ namespace Team17.StreetHunt
             }
         }
 
-        public void RotateTrails(float newRotX)
+        public void RotateShapeEmitter(float newRotX)
         {
             for (int i = 0; i < particleSystemsToRotate.Length ; i++)
             {
@@ -259,13 +259,12 @@ namespace Team17.StreetHunt
             }
         }
 
-        public void RotateFX(float newRotZ)
+        public void Rotate3DStartRotation(float newRotZ)
         {
             for (int i = 0; i < particleSystemsToRotate.Length; i++)
             {
                 ParticleSystem.MainModule module = particleSystemsToRotate[i].main;
                 module.startRotationZ = newRotZ;
-
             }
         }
 
