@@ -691,7 +691,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &716596283
 Transform:
   m_ObjectHideFlags: 0
@@ -1483,6 +1483,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1076825329525645875, guid: 711c6332748f9484d8ba5b2dcc87bffc,
+        type: 3}
+      propertyPath: m_Name
+      value: SpeedPortal
+      objectReference: {fileID: 0}
+    - target: {fileID: 1076825329525645875, guid: 711c6332748f9484d8ba5b2dcc87bffc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1536,16 +1546,6 @@ PrefabInstance:
     - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645875, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_Name
-      value: SpeedPortal
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645875, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2393,11 +2393,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SnakeBossOne
       objectReference: {fileID: 0}
-    - target: {fileID: 2840939439129170540, guid: 9c5ff747c1f33544f88cef43f310e5e1,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2840939439129170542, guid: 9c5ff747c1f33544f88cef43f310e5e1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2465,6 +2460,18 @@ PrefabInstance:
       objectReference: {fileID: 3561031007102380237}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c5ff747c1f33544f88cef43f310e5e1, type: 3}
+--- !u!114 &2840939440073444161 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6883557121161636250, guid: 9c5ff747c1f33544f88cef43f310e5e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 2840939440073444160}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5a6b0941a25ae24ea7a268da22d458d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3561031005340601988
 GameObject:
   m_ObjectHideFlags: 0
@@ -3787,9 +3794,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fa88bfa776188548b1b6da2cbab3e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actualState: 2
-  firstPhaseBoss: {fileID: 2701890313858903794}
-  secondPhaseBoss: {fileID: 2701890313858903794}
+  actualState: 1
+  firstPhaseBoss: {fileID: 2840939440073444161}
+  secondPhaseBoss: {fileID: 5756798372789745310}
   thirdPhaseBoss: {fileID: 2701890313858903794}
   character: {fileID: 1858818328}
   firstSpawnPoint: {fileID: 848136249}
@@ -3842,7 +3849,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 15
+  m_Priority: 21
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 1995041368}
@@ -3907,7 +3914,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3803910045400762944}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 100, y: -95, z: -10}
+  m_LocalPosition: {x: 100, y: 5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3803910044534265568}
@@ -4222,7 +4229,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 21
+  m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 66881015}
@@ -4271,6 +4278,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SnakeBossTwo
+      objectReference: {fileID: 0}
+    - target: {fileID: 8300155711299718575, guid: ff126a46a6ccaed46b7cb557984e9225,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2330250225451049752, guid: ff126a46a6ccaed46b7cb557984e9225,
         type: 3}
@@ -4327,8 +4339,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1428417058107449534, guid: ff126a46a6ccaed46b7cb557984e9225,
+        type: 3}
+      propertyPath: portalManager
+      value: 
+      objectReference: {fileID: 994882990}
+    - target: {fileID: 1428417058107449534, guid: ff126a46a6ccaed46b7cb557984e9225,
+        type: 3}
+      propertyPath: roomZero
+      value: 
+      objectReference: {fileID: 3561031006747512242}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff126a46a6ccaed46b7cb557984e9225, type: 3}
+--- !u!114 &5756798372789745310 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1428417058107449534, guid: ff126a46a6ccaed46b7cb557984e9225,
+    type: 3}
+  m_PrefabInstance: {fileID: 5756798372789745309}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5a6b0941a25ae24ea7a268da22d458d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7293393458837400773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4340,6 +4374,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SnakeBossThree
+      objectReference: {fileID: 0}
+    - target: {fileID: 7999859923531386608, guid: dec8b0c3bc52a22439ce1727ea30ee7a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2701890313858903794, guid: dec8b0c3bc52a22439ce1727ea30ee7a,
         type: 3}
