@@ -98,7 +98,7 @@ namespace Team17.StreetHunt
                         {
                             if (easyPatterns[i].Priority > lastPriority)
                             {
-                                if (easyPatterns[i].IsUsableAndUseful(roomZero, GameManager.state.BallGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena()))
+                                if (easyPatterns[i].IsUsableAndUseful(roomZero, GameManager.state.BallGameObject.transform.position))
                                 {
                                     index = i;
                                     lastPriority = easyPatterns[i].Priority;
@@ -112,7 +112,7 @@ namespace Team17.StreetHunt
                         {
                             if (mediumPatterns[i].Priority > lastPriority)
                             {
-                                if (mediumPatterns[i].IsUsableAndUseful(roomZero, GameManager.state.BallGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena()))
+                                if (mediumPatterns[i].IsUsableAndUseful(roomZero, GameManager.state.BallGameObject.transform.position))
                                 {
                                     index = i;
                                     lastPriority = mediumPatterns[i].Priority;
@@ -126,7 +126,7 @@ namespace Team17.StreetHunt
                         {
                             if (hardPatterns[i].Priority > lastPriority)
                             {
-                                if (hardPatterns[i].IsUsableAndUseful(roomZero, GameManager.state.BallGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena()))
+                                if (hardPatterns[i].IsUsableAndUseful(roomZero, GameManager.state.BallGameObject.transform.position))
                                 {
                                     index = i;
                                     lastPriority = hardPatterns[i].Priority;

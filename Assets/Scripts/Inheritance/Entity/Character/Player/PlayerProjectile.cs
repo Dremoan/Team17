@@ -166,9 +166,9 @@ namespace Team17.StreetHunt
                 power += powerGained.Evaluate(t.Inc);
                 SelectPowerGroup(power);
                 movementDirection = newDirection.normalized * (usedPowerGroup.Speed);
-                usedPowerGroup.Hit.RotateFX(GetRotationFromDirection(newDirection));
-                usedPowerGroup.Launch.RotateFX(GetRotationFromDirection(newDirection));
-                usedPowerGroup.Trail.RotateTrails(GetRotationFromDirection(newDirection));
+                usedPowerGroup.Hit.Rotate3DStartRotation(GetRotationFromDirection(newDirection));
+                usedPowerGroup.Launch.Rotate3DStartRotation(GetRotationFromDirection(newDirection));
+                usedPowerGroup.Trail.RotateShapeEmitter(GetRotationFromDirection(newDirection));
                 timer.DeleteTimer(reHitTimer);
                 timerFeedback.gameObject.SetActive(false);
                 trajectory.gameObject.SetActive(false);
@@ -278,10 +278,10 @@ namespace Team17.StreetHunt
 
             body.velocity = movementDirection;
 
-            usedPowerGroup.Trail.RotateTrails(GetRotationFromDirection(newDir));
+            usedPowerGroup.Trail.RotateShapeEmitter(GetRotationFromDirection(newDir));
             usedPowerGroup.Bounce.Play();
-            usedPowerGroup.Hit.RotateFX(GetRotationFromDirection(newDir));
-            usedPowerGroup.Launch.RotateFX(GetRotationFromDirection(newDir));
+            usedPowerGroup.Hit.Rotate3DStartRotation(GetRotationFromDirection(newDir));
+            usedPowerGroup.Launch.Rotate3DStartRotation(GetRotationFromDirection(newDir));
             usedPowerGroup.Hit.Play();
             usedPowerGroup.Trail.Play();
 
