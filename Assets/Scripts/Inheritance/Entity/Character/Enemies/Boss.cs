@@ -276,6 +276,7 @@ namespace Team17.StreetHunt
         public CutSceneEvent EntryEndsEvent { get => entryEndsEvent; set => entryEndsEvent = value; }
         public CutSceneEvent ExitBeginsEvent { get => exitBeginsEvent; set => exitBeginsEvent = value; }
         public CutSceneEvent ExitEndsEvent { get => exitEndsEvent; set => exitEndsEvent = value; }
+        public Transform RoomZero { get => roomZero; }
 
         #endregion
 
