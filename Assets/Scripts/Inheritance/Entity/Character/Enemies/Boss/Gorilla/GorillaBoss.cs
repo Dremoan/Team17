@@ -6,23 +6,33 @@ namespace Team17.StreetHunt
 {
     public class GorillaBoss : Entity
     {
+        [Header("Components")]
         [SerializeField] private Boss assignedBossScript;
         [SerializeField] private Transform jumpTarget;
         [SerializeField] private Transform jumpSummit;
+        [Header("Jump parameters")]
         [SerializeField] private int jumpSteps = 7;
-        [SerializeField] private float jumpSpeed = 2f;
         [SerializeField] private float distToSwitchStep = 0.2f;
-        [SerializeField] private AnimationCurve[] speedCurves;
         [SerializeField] private float maxSummitHeight = 5f;
+        [SerializeField] private float lowJumpThreshHold = 3f;
+        [SerializeField] private float smallJumpThreshhold = 5f;
+        [SerializeField] private Transform[] possibleJumpTargets;
+        [Header("Speed parameters")]
+        [SerializeField] private float jumpSpeed = 2f;
+        [Tooltip("0 = small, 1 = long, 2 = low, 3 = high")]
+        [SerializeField] private AnimationCurve[] speedCurves;
+        [Header("FXs")]
+        [SerializeField] private FeedBack landingFB;
+
         private bool isJumping = false;
-        private Vector3[] path;
         private int pathStepTarget = 0;
+        private Vector3[] path;
         private Vector3 posRef;
-        private float jumpInc = 0f;
         private Vector3 jumpStart;
-        private AnimationCurve usedSpeedCurve;
+        private float jumpInc = 0f;
         private float jumpParcouredDist = 0f;
         private float jumpCalculatedDist = 0f;
+        private AnimationCurve usedSpeedCurve;
 
         protected override void Update()
         {
@@ -30,178 +40,55 @@ namespace Team17.StreetHunt
             JumpManagement();
         }
 
-        public void SetTargetPos(Vector3 pos)
-        {
-            jumpTarget.position = assignedBossScript.RoomZero.position + pos;
-        }
-
         [ContextMenu ("Launch jump")]
-        public void LaunchJump()
+        public void LaunchJump(GameObject target)
         {
+            jumpTarget.position = target.transform.position;
+
             usedSpeedCurve = speedCurves[0];
-            // calculate summit pos
+
             Vector3 vectorToTarget = (jumpTarget.position - transform.position);
             Vector3 middlePoint = transform.position + (vectorToTarget * 0.5f);
-            Vector3 normal = (Vector3.Cross(vectorToTarget, Vector3.forward).normalized) * vectorToTarget.magnitude * 0.5f;
-         
-            if(transform.position.x < jumpTarget.position.x) // gorilla pos is to the left
+
+            jumpSummit.position = new Vector3(middlePoint.x, jumpSummit.position.y, 0);
+
+            if (Mathf.Abs(transform.position.x - jumpTarget.position.x) > smallJumpThreshhold) // jump is long
             {
-                jumpSummit.position = middlePoint - normal;
-                if (jumpSummit.position.x < transform.position.x)
-                {
-                    jumpSummit.position = new Vector3(transform.position.x, jumpSummit.position.y, 0);
-                }
-                if(jumpSummit.position.x > jumpTarget.position.x)
-                {
-                    jumpSummit.position = new Vector3(jumpTarget.position.x, jumpSummit.position.y, 0);
-                }
+                usedSpeedCurve = speedCurves[1];
             }
-            else // gorilla to the right
+            else // jump is low
             {
-                jumpSummit.position = middlePoint + normal;
-                if (jumpSummit.position.x < jumpTarget.position.x)
-                {
-                    jumpSummit.position = new Vector3(jumpTarget.position.x, jumpSummit.position.y, 0);
-                }
-                if (jumpSummit.position.x > transform.position.x)
-                {
-                    jumpSummit.position = new Vector3(transform.position.x, jumpSummit.position.y, 0);
-                }
+                usedSpeedCurve = speedCurves[0];
             }
 
-            if(jumpSummit.position.y > assignedBossScript.RoomZero.position.y + maxSummitHeight)
+            if (Mathf.Abs(transform.position.y - jumpTarget.position.y) < lowJumpThreshHold) // jump is low
             {
-                jumpSummit.position = new Vector3(jumpSummit.position.x, assignedBossScript.RoomZero.position.y + maxSummitHeight, 0);
+                jumpSummit.position = new Vector3(jumpSummit.position.x, jumpTarget.position.y + 8f, 0f);
+                usedSpeedCurve = speedCurves[2];
+            }
+            else // jump is high
+            {
+                if (transform.position.y > jumpTarget.position.y)
+                {
+                    jumpSummit.position = new Vector3(jumpSummit.position.x, transform.position.y * 2, 0);
+                }
+                else
+                {
+                    jumpSummit.position = new Vector3(jumpSummit.position.x, jumpTarget.position.y * 2, 0);
+                }
+                usedSpeedCurve = speedCurves[3];
+            }
+
+            if (jumpSummit.position.y > assignedBossScript.RoomZero.position.y + maxSummitHeight * 2)
+            {
+                jumpSummit.position = new Vector3(jumpSummit.position.x, assignedBossScript.RoomZero.position.y + maxSummitHeight * 2, 0);
             }
             if(jumpSummit.position.y < 0)
             {
-                jumpSummit.position = new Vector3(jumpSummit.position.x, 0, 0);
-            }
-            //
-            path = new Vector3[jumpSteps];
-            for (int i = 0; i < path.Length; i++)
-            {
-                float t = Mathf.InverseLerp(0, jumpSteps - 1, i);
-                path[i] = Vector3.Lerp(Vector3.Lerp(transform.position, jumpSummit.position, t), Vector3.Lerp(jumpSummit.position, jumpTarget.position, t), t);
-            }
-            for (int i = 0; i < path.Length; i++)
-            {
-                if (i < path.Length - 1)
-                {
-                    jumpCalculatedDist += Vector3.Distance(path[i], path[i + 1]);
-                }
-            }
-            jumpParcouredDist = 0f;
-            pathStepTarget = 0;
-            jumpStart = transform.position;
-            jumpInc = 0;
-            isJumping = true;
-        }
-
-        public void LaunchJump(int curveIndex)
-        {
-            usedSpeedCurve = speedCurves[curveIndex];
-            // calculate summit pos
-            Vector3 vectorToTarget = (jumpTarget.position - transform.position);
-            Vector3 middlePoint = transform.position + (vectorToTarget * 0.5f);
-            Vector3 normal = (Vector3.Cross(vectorToTarget, Vector3.forward).normalized) * vectorToTarget.magnitude * 0.5f;
-
-            if (transform.position.x < jumpTarget.position.x) // gorilla pos is to the left
-            {
-                jumpSummit.position = middlePoint - normal;
-                if (jumpSummit.position.x < transform.position.x)
-                {
-                    jumpSummit.position = new Vector3(transform.position.x, jumpSummit.position.y, 0);
-                }
-                if (jumpSummit.position.x > jumpTarget.position.x)
-                {
-                    jumpSummit.position = new Vector3(jumpTarget.position.x, jumpSummit.position.y, 0);
-                }
-            }
-            else // gorilla to the right
-            {
-                jumpSummit.position = middlePoint + normal;
-                if (jumpSummit.position.x < jumpTarget.position.x)
-                {
-                    jumpSummit.position = new Vector3(jumpTarget.position.x, jumpSummit.position.y, 0);
-                }
-                if (jumpSummit.position.x > transform.position.x)
-                {
-                    jumpSummit.position = new Vector3(transform.position.x, jumpSummit.position.y, 0);
-                }
+                 jumpSummit.position = new Vector3(jumpSummit.position.x, 0, 0);
             }
 
-            if (jumpSummit.position.y > assignedBossScript.RoomZero.position.y + maxSummitHeight)
-            {
-                jumpSummit.position = new Vector3(jumpSummit.position.x, assignedBossScript.RoomZero.position.y + maxSummitHeight, 0);
-            }
-            if (jumpSummit.position.y < 0)
-            {
-                jumpSummit.position = new Vector3(jumpSummit.position.x, 0, 0);
-            }
-            //
-            path = new Vector3[jumpSteps];
-            for (int i = 0; i < path.Length; i++)
-            {
-                float t = Mathf.InverseLerp(0, jumpSteps - 1, i);
-                path[i] = Vector3.Lerp(Vector3.Lerp(transform.position, jumpSummit.position, t), Vector3.Lerp(jumpSummit.position, jumpTarget.position, t), t);
-            }
-            for (int i = 0; i < path.Length; i++)
-            {
-                if (i < path.Length - 1)
-                {
-                    jumpCalculatedDist += Vector3.Distance(path[i], path[i + 1]);
-                }
-            }
-            jumpParcouredDist = 0f;
-            pathStepTarget = 0;
-            jumpStart = transform.position;
-            jumpInc = 0;
-            isJumping = true;
-        }
 
-        public void LaunchJump(int curveIndex, float summitHeight)
-        {
-            usedSpeedCurve = speedCurves[curveIndex];
-            // calculate summit pos
-            Vector3 vectorToTarget = (jumpTarget.position - transform.position);
-            Vector3 middlePoint = transform.position + (vectorToTarget * 0.5f);
-            Vector3 normal = (Vector3.Cross(vectorToTarget, Vector3.forward).normalized) * summitHeight;
-
-            if (transform.position.x < jumpTarget.position.x) // gorilla pos is to the left
-            {
-                jumpSummit.position = middlePoint - normal;
-                if (jumpSummit.position.x < transform.position.x)
-                {
-                    jumpSummit.position = new Vector3(transform.position.x, jumpSummit.position.y, 0);
-                }
-                if (jumpSummit.position.x > jumpTarget.position.x)
-                {
-                    jumpSummit.position = new Vector3(jumpTarget.position.x, jumpSummit.position.y, 0);
-                }
-            }
-            else // gorilla to the right
-            {
-                jumpSummit.position = middlePoint + normal;
-                if (jumpSummit.position.x < jumpTarget.position.x)
-                {
-                    jumpSummit.position = new Vector3(jumpTarget.position.x, jumpSummit.position.y, 0);
-                }
-                if (jumpSummit.position.x > transform.position.x)
-                {
-                    jumpSummit.position = new Vector3(transform.position.x, jumpSummit.position.y, 0);
-                }
-            }
-
-            if (jumpSummit.position.y > assignedBossScript.RoomZero.position.y + maxSummitHeight)
-            {
-                jumpSummit.position = new Vector3(jumpSummit.position.x, assignedBossScript.RoomZero.position.y + maxSummitHeight, 0);
-            }
-            if (jumpSummit.position.y < 0)
-            {
-                jumpSummit.position = new Vector3(jumpSummit.position.x, 0, 0);
-            }
-            //
             path = new Vector3[jumpSteps];
             for (int i = 0; i < path.Length; i++)
             {
@@ -226,7 +113,7 @@ namespace Team17.StreetHunt
         {
             if (isJumping)
             {
-                /**///debug
+                //debug
                 for (int i = 0; i < path.Length; i++)
                 {
                     if (i < path.Length - 1)
@@ -250,6 +137,7 @@ namespace Team17.StreetHunt
                         isJumping = false;
                         jumpCalculatedDist = 0;
                         jumpParcouredDist = 0;
+                        landingFB.Play();
                     }
                     else
                     {
