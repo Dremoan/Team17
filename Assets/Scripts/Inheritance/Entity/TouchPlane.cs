@@ -15,13 +15,6 @@ namespace Team17.StreetHunt
 
         public void OnTouchBegin(Vector3 touchPos)
         {
-            if(shouldLaunchIntro)
-            {
-                GameManager.state.CallOnBossEnters();
-                shouldLaunchIntro = false;
-                return;
-            }
-
             if(ball != null && !ball.Destroyed && ball.gameObject.activeSelf && ball.CanStrike)
             {
                 ball.StartCalculation();
