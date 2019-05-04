@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
     public class PlayerCharacter : Entity
     {
@@ -10,10 +10,21 @@ namespace Team17.BallDash
         [SerializeField] private Collider hardCollider;
         [SerializeField] private Animator anim;
         [SerializeField] private float distFromBall = 1.2f;
+        [SerializeField] private FeedBack tpFeedback;
 
+        private PlayerProjectile currentBall;
         private bool negativeAngle = false;
         private float angle = 0;
         private bool aiming = false;
+        private bool playedTp = false;
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if(collision.gameObject.tag == "Ground")
+            {
+                anim.SetTrigger("Grounded");
+            }
+        }
 
         public void Physicate(bool physicate)
         {
@@ -27,6 +38,11 @@ namespace Team17.BallDash
         public void PrepareStrike(Vector3 ballPos, Vector3 touchPos)
         {
             transform.position = ballPos + (ballPos - touchPos).normalized * distFromBall;
+            if (!playedTp)
+            {
+                tpFeedback.Play();
+                playedTp = true;
+            }
             angle = Vector3.SignedAngle(Vector3.up, (ballPos - touchPos), Vector3.forward);
             negativeAngle = (angle < 0);
             angle = Mathf.Abs(angle);
@@ -36,7 +52,23 @@ namespace Team17.BallDash
 
         public void Strike()
         {
+            playedTp = false;
             anim.SetTrigger("shoot");
         }
+
+        public void TriggerLaunchBall()
+        {
+            currentBall.LaunchBall();
+        }
+
+        public void TeleportToRoom(Transform spawnPoint)
+        {
+            transform.position = spawnPoint.position;
+            if(currentBall != null) currentBall.PauseBehavior();
+            tpFeedback.Play();
+        }
+
+        public FeedBack TpFeedback { get => tpFeedback; }
+        public PlayerProjectile CurrentBall { get => currentBall; set => currentBall = value; }
     }
 }

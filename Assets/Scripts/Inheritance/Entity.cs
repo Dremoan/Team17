@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
     public class Entity : MonoBehaviour
     {
@@ -32,12 +32,47 @@ namespace Team17.BallDash
         {
             GameManager.state.UnregisterEntity(this);
         }
-    
+
         #endregion
 
         #region Entity callbacks
 
-        public virtual void OnIntroLaunched()
+        public virtual void OnIntroCutScene()
+        {
+
+        }
+
+        public virtual void OnIntroCutSceneEnds()
+        {
+
+        }
+
+        public virtual void OnPhaseTwoCutScene()
+        {
+
+        }
+
+        public virtual void OnPhaseTwoCutSceneEnds()
+        {
+
+        }
+
+        public virtual void OnPhaseThreeCutScene()
+        {
+
+        }
+
+        public virtual void OnPhaseThreeCutSceneEnds()
+        {
+
+        }
+
+        public virtual void OnEndCutScene()
+        {
+
+        }
+
+        public virtual void OnEndCutSceneEnds()
         {
 
         }
@@ -57,12 +92,17 @@ namespace Team17.BallDash
 
         }
 
+        public virtual void OnCharacterStunned()
+        {
+
+        }
+
         public virtual void OnBallDestroyed()
         {
 
         }
 
-        public virtual void OnBallHit(float hitPower)
+        public virtual void OnBallHit(int powerGroupIndex, float hitPower)
         {
 
         }
@@ -77,7 +117,7 @@ namespace Team17.BallDash
 
         }
 
-        public virtual void OnBossHurt()
+        public virtual void OnBossHurt(int powerGroupIndex, float hitPower)
         {
 
         }
@@ -93,6 +133,11 @@ namespace Team17.BallDash
         }
 
         public virtual void OnBossDeath()
+        {
+
+        }
+
+        public virtual void OnLevelEnd()
         {
 
         }

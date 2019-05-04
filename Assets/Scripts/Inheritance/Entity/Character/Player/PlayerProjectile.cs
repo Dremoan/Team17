@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
     public class PlayerProjectile : Character
     {
         [Header("Components")]
-        [SerializeField] private Rigidbody body;
+        public Rigidbody body;
         [SerializeField] private TimersCalculator timer;
 
         [Header("Feedbacks")]
@@ -15,15 +15,17 @@ namespace Team17.BallDash
         [SerializeField] private Transform trajectory;
         [SerializeField] private PlayerCharacter character;
         [Tooltip ("The power threshold of the group must be sorted from the smallest to highest.")]
-        [SerializeField] private FeedbackGroup[] feedbackGroups;
+        [SerializeField] private PowerGroups[] powerGroups;
 
         [Header("Parameters")]
         [SerializeField] private float speed = 50f;
         [SerializeField] private float slowedTimeScale = 0.2f;
-        [SerializeField] private AnimationCurve speedMultiplier;
         [SerializeField] private AnimationCurve timeToHit;
         [SerializeField] private AnimationCurve powerGained;
+        [SerializeField] private AnimationCurve feedBackRadius;
         [SerializeField] private float powerLostOnBounce = 5f;
+        [SerializeField] private float speedPortalPrecision = 2f;
+        [SerializeField] private float stunTime = 1.5f;
 
         [Header("Trajectory calculation")]
         [SerializeField] private LayerMask trajectoryCalculationMask;
@@ -31,15 +33,18 @@ namespace Team17.BallDash
 
         private float power = 0;
         private int reHitTimer;
+        private int usedPowergroupIndex = 0;
+        private bool canStrike = true;
         private bool destroyed = false;
         private bool wasCanceled = false;
+        private bool isStriking = false;
         private Vector3 movementDirection;
         private Vector3 initialFeedbackScale;
         private Vector3 lastEnter;
         private Vector3 lastNormal;
         private Vector3 lastContact;
         private Vector3 lastNewDir;
-        private FeedbackGroup usedFeedbackGroup;
+        private PowerGroups usedPowerGroup;
 
         #region Monobehaviour callbacks
 
@@ -47,7 +52,7 @@ namespace Team17.BallDash
         {
             base.Start();
             initialFeedbackScale = timerFeedback.localScale;
-            SelectFeedBackgroup(power);
+            usedPowerGroup = powerGroups[0];
         }
 
         protected override void Update()
@@ -62,7 +67,9 @@ namespace Team17.BallDash
         protected override void OnEnable()
         {
             base.OnEnable();
-            GameManager.state.PlayerGameObject = this.gameObject;
+            SelectPowerGroup(power);
+            initialFeedbackScale = timerFeedback.localScale;
+            GameManager.state.BallGameObject = this.gameObject;
         }
 
         private void OnCollisionEnter(Collision coll)
@@ -70,6 +77,16 @@ namespace Team17.BallDash
             if (coll.gameObject.GetComponent<BallCanceler>() != null)
             {
                 CancelBall();
+            }
+
+            if (coll.gameObject.GetComponent<IBallHitable>() != null)
+            {
+                lastNormal = coll.contacts[0].normal;
+                lastContact = coll.contacts[0].point;
+                lastEnter = movementDirection;
+                Bounce(movementDirection, coll.contacts[0].normal);
+                coll.gameObject.GetComponent<IBallHitable>().Hit(usedPowergroupIndex, power);
+                //Hit();
             }
             else
             {
@@ -87,9 +104,15 @@ namespace Team17.BallDash
                 CancelBall();
             }
 
+            if (coll.gameObject.GetComponent<SpeedPortal>() != null)
+            {
+                PassThroughSpeedPortal(body.velocity.normalized, coll.gameObject.transform.right);
+                coll.gameObject.SetActive(false);
+            }
+
             if (coll.gameObject.GetComponent<IBallHitable>() != null)
             {
-                coll.gameObject.GetComponent<IBallHitable>().Hit(power);
+                coll.gameObject.GetComponent<IBallHitable>().Hit(usedPowergroupIndex, power);
                 Hit();
             }
         }
@@ -100,61 +123,94 @@ namespace Team17.BallDash
 
         public void StartCalculation()
         {
-            body.velocity *= slowedTimeScale;
-            reHitTimer = timer.LaunchNewTimer(timeToHit.Evaluate(power), CancelBall);
-            timerFeedback.gameObject.SetActive(true);
-            trajectory.gameObject.SetActive(true);
-            character.Physicate(false);
-            wasCanceled = false;
+            if(canStrike)
+            {
+                body.velocity *= slowedTimeScale;
+                reHitTimer = timer.LaunchNewTimer(timeToHit.Evaluate(power), StunCharacter);
+                timerFeedback.gameObject.SetActive(true);
+                trajectory.gameObject.SetActive(true);
+                character.Physicate(false);
+                wasCanceled = false;
+                isStriking = true;
 
-            GameManager.state.CallOnPlayerTeleport();
+                GameManager.state.CallOnPlayerTeleport();
+            }
         }
 
         public void FeedBack(Vector3 touchPos)
         {
-            Timer t = timer.GetTimerFromUserIndex(reHitTimer);
-            timerFeedback.localScale = (Mathf.InverseLerp(0, t.MaxTime, t.TimeLeft) * initialFeedbackScale) + Vector3.one;
-            trajectory.position = Vector3.Lerp(transform.position, touchPos, 0.5f);
-            float zRot = Vector3.SignedAngle(transform.up, (touchPos - transform.position), Vector3.forward);
-            trajectory.rotation = Quaternion.Euler(0, 0, zRot);
-            trajectory.localScale = new Vector3(1, Vector3.Distance(transform.position, touchPos) * 2, 1);
-            character.PrepareStrike(transform.position, touchPos);
+            if(canStrike)
+            {
+                Timer t = timer.GetTimerFromUserIndex(reHitTimer);
+                timerFeedback.localScale = (feedBackRadius.Evaluate(Mathf.InverseLerp(0, t.MaxTime, t.TimeLeft)) * initialFeedbackScale) + Vector3.one;
+                trajectory.position = Vector3.Lerp(transform.position, touchPos, 0.5f);
+                float zRot = Vector3.SignedAngle(transform.up, (touchPos - transform.position), Vector3.forward);
+                trajectory.rotation = Quaternion.Euler(0, 0, zRot);
+                trajectory.localScale = new Vector3(1, Vector3.Distance(transform.position, touchPos) * 2, 1);
+                character.PrepareStrike(transform.position, touchPos);
+            }
         }
 
         public void GetNewDirection(Vector3 newDirection)
         {
-            if(wasCanceled)
+            if(canStrike)
             {
-                wasCanceled = false;
-                return;
+                if (wasCanceled)
+                {
+                    wasCanceled = false;
+                    return;
+                }
+                body.useGravity = false;
+                Timer t = timer.GetTimerFromUserIndex(reHitTimer);
+
+                power += powerGained.Evaluate(t.Inc);
+                SelectPowerGroup(power);
+                movementDirection = newDirection.normalized * (usedPowerGroup.Speed);
+
+                usedPowerGroup.Hit.Rotate3DStartRotationX(- GetRotationFromDirection(newDirection));
+                usedPowerGroup.Launch.Rotate3DStartRotationZ(- GetRotationFromDirection(newDirection));
+                usedPowerGroup.Trail.RotateShapeEmitter(GetRotationFromDirection(newDirection));
+
+                timer.DeleteTimer(reHitTimer);
+                timerFeedback.gameObject.SetActive(false);
+                trajectory.gameObject.SetActive(false);
+
+                character.Physicate(true);
+                character.Strike();
+
+                GameManager.state.CallOnCharacterStartStrikeAnim();
             }
-            body.useGravity = false;
-            Timer t = timer.GetTimerFromUserIndex(reHitTimer);
-
-            power += powerGained.Evaluate(t.Inc);
-            movementDirection = newDirection.normalized * (speed * speedMultiplier.Evaluate(power));
-
-            Debug.Log("Gained : " + powerGained.Evaluate(t.Inc) + " Power : " + power + " Speed : " + speed * speedMultiplier.Evaluate(power));
-
-            timer.DeleteTimer(reHitTimer);
-
-            timerFeedback.gameObject.SetActive(false);
-            trajectory.gameObject.SetActive(false);
-
-            character.Physicate(true);
-            character.Strike();
-
-            SelectFeedBackgroup(power);
-            usedFeedbackGroup.Launch.Play();
-
-            GameManager.state.CallOnCharacterStartStrikeAnim();
         }
 
         public void LaunchBall()
         {
             body.velocity = movementDirection;
+            usedPowerGroup.Launch.Play();
+            usedPowerGroup.Trail.Play();
+            isStriking = false;
 
             GameManager.state.CallOnBallShot();
+            
+        }
+
+        private void SelectPowerGroup(float actualPower)
+        {
+            for (int i = 0; i < powerGroups.Length - 1; i++)
+            {
+                if (power > powerGroups[i].PowerThreshold)
+                {
+                    usedPowerGroup.Trail.Stop();
+                    usedPowerGroup = powerGroups[i];
+                    usedPowergroupIndex = i;
+                    Debug.Log("P: " + power + ": " + usedPowerGroup.Name);
+                }
+            }
+        }
+
+        public void PauseBehavior()
+        {
+            body.velocity = Vector3.zero;
+            gameObject.SetActive(false);
         }
 
         #endregion
@@ -171,9 +227,10 @@ namespace Team17.BallDash
             gameObject.SetActive(false);
             destroyed = true;
 
-            usedFeedbackGroup.Hit.Play();
+            usedPowerGroup.Hit.Play();
+            usedPowerGroup.Trail.Stop();
 
-            GameManager.state.CallOnBallHit(power);
+            GameManager.state.CallOnBallHit(usedPowergroupIndex, power);
         }
 
         private void CancelBall()
@@ -186,9 +243,26 @@ namespace Team17.BallDash
             gameObject.SetActive(false);
             destroyed = true;
 
-            usedFeedbackGroup.Destroyed.Play();
+            usedPowerGroup.Destroyed.Play();
+            usedPowerGroup.Trail.Stop();
 
             GameManager.state.CallOnBallDestroyed();
+        }
+
+        private void StunCharacter()
+        {
+            isStriking = false;
+            body.velocity = movementDirection;
+            timerFeedback.gameObject.SetActive(false);
+            trajectory.gameObject.SetActive(false);
+            character.Physicate(true);
+            canStrike = false;
+            timer.LaunchNewTimer(stunTime, RecoverCharacter);
+        }
+
+        private void RecoverCharacter()
+        {
+            canStrike = true;
         }
 
         private void Bounce(Vector3 enterVector, Vector3 collisionNormal)
@@ -196,16 +270,52 @@ namespace Team17.BallDash
             if (body.useGravity) return;
             Vector3 newDir = Vector3.Reflect(enterVector, collisionNormal);
             lastNewDir = newDir;
+
             power -= powerLostOnBounce;
+            SelectPowerGroup(power);
             if (power < 0) power = 0;
-            Debug.Log("Power after bounce : " + power);
-            movementDirection = newDir.normalized * (speed * speedMultiplier.Evaluate(power));
+            if(isStriking) movementDirection = newDir.normalized * (usedPowerGroup.Speed) * slowedTimeScale;
+            else movementDirection = newDir.normalized * (usedPowerGroup.Speed);
+
             body.velocity = movementDirection;
 
-            SelectFeedBackgroup(power);
-            usedFeedbackGroup.Bounce.Play();
+            usedPowerGroup.Trail.RotateShapeEmitter(GetRotationFromDirection(newDir));
+            usedPowerGroup.Bounce.Play();
+            usedPowerGroup.Hit.Play();
+            usedPowerGroup.Trail.Play();
 
             GameManager.state.CallOnBallBounced();
+        }
+
+
+        public float GetRotationFromDirection(Vector3 lookDirection)
+        {
+            float rotZ = Mathf.Atan2(lookDirection.x, lookDirection.y) * Mathf.Rad2Deg;
+            return 90 - rotZ;
+        }
+
+
+        private void PassThroughSpeedPortal(Vector3 entryVelocity, Vector3 portalRight)
+        {
+            float sqrMag = Vector3.SqrMagnitude(entryVelocity - portalRight);
+
+            if(sqrMag < speedPortalPrecision)
+            {
+                //Speed up
+                if (usedPowergroupIndex > powerGroups.Length - 2) return;
+                usedPowergroupIndex++;
+            }
+            else
+            {
+                //Speed down
+                if (usedPowergroupIndex < 1) return;
+                usedPowergroupIndex--;
+            }
+            usedPowerGroup = powerGroups[usedPowergroupIndex];
+            power = usedPowerGroup.PowerThreshold;
+            movementDirection = body.velocity.normalized * (usedPowerGroup.Speed);
+            body.velocity = movementDirection;
+            Debug.Log("P: " + power + ": " + usedPowerGroup.Name);
         }
 
         #endregion
@@ -244,43 +354,42 @@ namespace Team17.BallDash
 
         #endregion
 
-        #region Feedbacks
-
-        private void SelectFeedBackgroup(float actualPower)
+        [ContextMenu ("Setup score manager")]
+        public void SetupScoreManager()
         {
-            for (int i = 0; i < feedbackGroups.Length; i++)
+            ScoreManager manager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
+            manager.ScoreHits = new ScoreHit[powerGroups.Length];
+            for (int i = 0; i < manager.ScoreHits.Length; i++)
             {
-                if (power > feedbackGroups[i].PowerThreshold)
-                {
-                    usedFeedbackGroup = feedbackGroups[i];
-                }
+                manager.ScoreHits[i].Name = powerGroups[i].Name;
             }
         }
 
-        #endregion
-
         public bool Destroyed { get => destroyed; set => destroyed = value; }
-
+        public bool CanStrike { get => canStrike; set => canStrike = value; }
     }
 
     public interface IBallHitable
     {
-        void Hit(float dmgs);
+        void Hit(int index, float dmgs);
     }
 
     [System.Serializable]
-    public struct FeedbackGroup
+    public struct PowerGroups
     {
         [SerializeField] private string name;
         [Tooltip("Define the power threshold at which this group will be used. If the power of the ball is higher than this threshold, it will be used.")]
         [SerializeField] private float powerThreshold;
+        [SerializeField] private float speed;
         [SerializeField] private FeedBack launch;
         [SerializeField] private FeedBack bounce;
         [SerializeField] private FeedBack trail;
         [SerializeField] private FeedBack destroyed;
         [SerializeField] private FeedBack hit;
 
+        public string Name { get => name;}
         public float PowerThreshold { get => powerThreshold; }
+        public float Speed { get => speed; }
         public FeedBack Launch { get => launch; }
         public FeedBack Bounce { get => bounce; }
         public FeedBack Trail { get => trail; }

@@ -76,6 +76,11 @@ public class TimersCalculator : MonoBehaviour
         }
     }
 
+    public void DeleteAllTimers()
+    {
+        timers.Clear();
+    }
+
     /// <summary>
     /// Add time to the time limit of a timer.
     /// </summary>

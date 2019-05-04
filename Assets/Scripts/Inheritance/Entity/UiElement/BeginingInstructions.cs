@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
     public class BeginingInstructions : UiElement
     {
@@ -17,9 +17,9 @@ namespace Team17.BallDash
             beginGameText.SetActive(true);
         }
 
-        public override void OnIntroLaunched()
+        public override void OnIntroCutScene()
         {
-            base.OnIntroLaunched();
+            base.OnIntroCutScene();
             beginGameText.SetActive(false);
         }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
     public class BossAimZoneWindow : EditorWindow
     {

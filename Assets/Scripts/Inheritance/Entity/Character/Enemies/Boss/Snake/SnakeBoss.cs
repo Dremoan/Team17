@@ -3,47 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
     public class SnakeBoss : Entity
     {
-        #region NotNow
-        /*
-                [Header("Snake parameters")]
-                [SerializeField] private BossAimZone zone;
-                [SerializeField] private SnakeBossPattern[] patterns;
-                [SerializeField] private BossAimZone[] zones;
-
-                protected override void Update()
-                {
-                    base.Update();
-                }
-
-                [ContextMenu("Add")]
-                public void Add()
-                {
-                    zones = new BossAimZone[1];
-                    zones[0] = new BossAimZone();
-                }
-            */
-        #endregion
-        [SerializeField] private FollowPath[] snakeBodyParts;
+        [SerializeField] private SnakeHead[] snakeBodyParts;
         [SerializeField] private PathCreator[] pathPull;
+        [SerializeField] private WarpManager[] warpPull;
+        private WarpManager actualWarps;
         private PathCreator actualPath;
         
         [SerializeField] private Transform snakeHead;
-        [SerializeField] private Animator snakeAnim;
         
 
         [SerializeField] private float delayFollowSnakeChunks = 0.25f;
         private int indexPath;
 
-
-        void Start()
+        protected override void Start()
         {
-            GetPath(2);
-            PickMoveIntro();
+
         }
+
+        #region Spline movement
 
         IEnumerator Delay()
         {
@@ -56,18 +37,6 @@ namespace Team17.BallDash
             }
         }
 
-        IEnumerator DelayIntro()
-        {
-            for (int i = 0; i < snakeBodyParts.Length; i++)
-            {
-                snakeBodyParts[i].speed = 10f;
-                delayFollowSnakeChunks = 0.2f;
-                snakeBodyParts[i].startPathFollowing = true;
-                yield return null;
-                snakeBodyParts[i].startPathFollowing = false;
-                yield return new WaitForSeconds(delayFollowSnakeChunks);
-            }
-        }
 
         public void PickMove()
         {
@@ -80,29 +49,24 @@ namespace Team17.BallDash
 
             StartCoroutine(Delay());
         }
-
-        public void PickMoveIntro()
-        {
-            snakeBodyParts[0].pathCreator = actualPath;
-
-            for (int i = 1; i < snakeBodyParts.Length; i++)
-            {
-                snakeBodyParts[i].pathCreator = snakeBodyParts[0].pathCreator;
-            }
-
-            StartCoroutine(DelayIntro());
-        }
-
+        
         public void GetPath(int index)
         {
+            for (int i = 0; i < warpPull.Length; i++)
+            {
+                warpPull[i].ResetAllWarps();
+            }
+
             indexPath = index;
             AssignPath();
+            actualWarps.SpawnWarps();
         }
 
         public PathCreator AssignPath()
         {
             ResetPositionsEvent();
             actualPath = pathPull[indexPath];
+            actualWarps = warpPull[indexPath];
             return actualPath;
         }
 
@@ -112,13 +76,6 @@ namespace Team17.BallDash
             {
                 snakeBodyParts[i].EndSplineResetValues();
             }
-        }
-
-        public void AssignAttack(int indexToAssign)
-        {
-            snakeAnim.SetFloat("AttackZoneIndex", 0f);
-            ResetPositionsEvent();
-            snakeAnim.SetInteger("AttackZoneIndex", indexToAssign);
         }
 
         public void StopMovingSnake()
@@ -137,11 +94,12 @@ namespace Team17.BallDash
             }
         }
 
-
         public void StartMovingSnake()
         {
             StartCoroutine(Delay());
         }
+
+        #endregion
     }
 }
 

@@ -2,65 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
     public class LivesManager : Entity
     {
-        [SerializeField] private PlayerProjectile firstBall;
-        [SerializeField] private PlayerProjectile secondBall;
-        [SerializeField] private PlayerProjectile thirdBall;
-        [SerializeField] private PlayerProjectile fourthBall;
-        private int livesLeft = 4;
+        [SerializeField] private PlayerCharacter playerCharacter;
+        [SerializeField] private PlayerProjectile[] projectiles;
+
+        private bool bossDead = false;
 
         protected override void Start()
         {
             base.Start();
-            GameManager.state.LivesLeft = livesLeft;
+            GameManager.state.LivesLeft = projectiles.Length;
+            GameManager.state.BallGameObject = projectiles[0].gameObject;
         }
 
         public bool BallAvailable()
         {
-            if(firstBall.Destroyed && secondBall.Destroyed && thirdBall.Destroyed && fourthBall.Destroyed)
+            for (int i = 0; i < projectiles.Length; i++)
             {
-                return false;
+                if(!projectiles[i].Destroyed)
+                {
+                    return true;
+                }
             }
-            return true;
+            return false;
         }
 
         public PlayerProjectile GetNextBall()
         {
-            if (livesLeft == 4)
-            {
-                firstBall.gameObject.SetActive(true);
-                return firstBall;
-            }
-            if (livesLeft == 3)
-            {
-                secondBall.gameObject.SetActive(true);
-                return secondBall;
-            }
-            if (livesLeft == 2)
-            {
-                thirdBall.gameObject.SetActive(true);
-                return thirdBall;
-            }
-            if (livesLeft == 1)
-            {
-                fourthBall.gameObject.SetActive(true);
-                return fourthBall;
-            }
-            return null;
+            return projectiles[GameManager.state.LivesLeft - 1];
         }
 
-        public override void OnBallDestroyed()
+        public override void OnBossDeath()
         {
-            base.OnBallDestroyed();
-            livesLeft--;
-            GameManager.state.LivesLeft = livesLeft;
-            if (livesLeft == 0)
-            {
+            base.OnBossDeath();
+            bossDead = true;
+        }
 
-            }// game over;
+        public void TeleportBallsTo(Transform targetPlace)
+        { 
+            playerCharacter.transform.position = targetPlace.position;
         }
     }
 }

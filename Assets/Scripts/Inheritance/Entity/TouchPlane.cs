@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
     public class TouchPlane : Entity, Touchable
     {
@@ -11,26 +11,26 @@ namespace Team17.BallDash
 
         private PlayerProjectile ball;
         private bool shouldLaunchIntro = true;
-
+        private bool touchBegan = false;
 
         public void OnTouchBegin(Vector3 touchPos)
         {
-            if(shouldLaunchIntro)
-            {
-                GameManager.state.CallOnIntroLaunched();
-                shouldLaunchIntro = false;
-                return;
-            }
-
-            if(ball != null && !ball.Destroyed)
+            if(ball != null && !ball.Destroyed && ball.gameObject.activeSelf && ball.CanStrike)
             {
                 ball.StartCalculation();
+                touchBegan = true;
             }
             else if(lives.BallAvailable())
             {
                 ball = lives.GetNextBall();
-                ball.transform.position = character.transform.position;
-                ball.StartCalculation();
+                if(ball != null && ball.CanStrike)
+                {
+                    character.CurrentBall = lives.GetNextBall();
+                    ball.transform.position = character.transform.position;
+                    ball.gameObject.SetActive(true);
+                    ball.StartCalculation();
+                    touchBegan = true;
+                }
             }
             else
             {
@@ -42,7 +42,10 @@ namespace Team17.BallDash
         {
             if(ball != null)
             {
-                ball.FeedBack(touchPos);
+                if(ball.CanStrike && touchBegan)
+                {
+                    ball.FeedBack(touchPos);
+                }
             }
         }
 
@@ -50,8 +53,12 @@ namespace Team17.BallDash
         {
             if(ball != null)
             {
-                ball.GetNewDirection((touchPos - ball.transform.position));
+                if(ball.CanStrike && touchBegan)
+                {
+                    ball.GetNewDirection((touchPos - ball.transform.position));
+                }
             }
+            touchBegan = false;
         }
 
         public PlayerProjectile Ball { get => ball; set => ball = value; }

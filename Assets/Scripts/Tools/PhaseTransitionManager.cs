@@ -3,31 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
-    public class PhaseTransitionManager : MonoBehaviour
+    public class PhaseTransitionManager : Entity
     {
-
         [SerializeField] private PlayableDirector[] transitionPhases;
-        [SerializeField] private int indexPhase = 0;
 
-        private void Start()
+        protected override void Start()
         {
-            indexPhase = 0;   
+            base.Start();
         }
 
-        private void Update()
+        public void TriggerPhase(FightGlobalState actualState)
         {
-            if(Input.GetKeyDown(KeyCode.Space))
-            {
-                TriggerPhase();
-            }
-        }
-
-        public void TriggerPhase()
-        {
-            transitionPhases[indexPhase].Play();
-            indexPhase++;
+            if(transitionPhases[(int)actualState] != null) transitionPhases[(int)actualState].Play();
         }
     }
 }

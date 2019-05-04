@@ -3,41 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
-    /*
-    [System.Serializable]
-    public class MyCustomCoolEvent : UnityEvent<Transform, Rigidbody, Animator>
-    {
-
-    }
-    /* */
-
     [RequireComponent(typeof(TimersCalculator))]
     public class Boss : Character, IBallHitable
     {
         [Header("Components")]
         [SerializeField] private TimersCalculator timers;
+        [SerializeField] private SpeedPortalManager portalManager;
         [Header("Health and state")]
-        [SerializeField] private BossState bossState = BossState.First;
-        [SerializeField] private float firstPhaseHealth = 50f;
-        [SerializeField] private float secondPhaseHealth = 75f;
-        [SerializeField] private float thirdPhaseHealth = 100f;
+        [SerializeField] private BossPhaseState currentState = BossPhaseState.Entry;
+        [SerializeField] private float health = 50f;
 
-        [Header("Rooms zeros")]
-        [SerializeField] private Transform phaseOneZero;
-        [SerializeField] private Transform phaseTwoZero;
-        [SerializeField] private Transform phaseThreeZero;
+        [Header("Rooms zero")]
+        [SerializeField] private Transform roomZero;
 
-        [Header("Intro pattern")]
-        [SerializeField] private BossPattern introPattern;
-        [Header("Pattern list")]
-        [SerializeField] private BossPattern[] firstPhaseAttacks;
-        [SerializeField] private BossPattern[] secondPhaseAttacks;
-        [SerializeField] private BossPattern[] thirdPhaseAttacks;
+        [Header("Patterns states serie")]
+        [SerializeField] private BossAttackState[] attackStates;
 
-        protected float currentHealthToNextState = 0f;
-        protected int bossStateIndex = 0;
+        [Header("Patterns")]
+        [SerializeField] private BossPattern entryPattern;
+        [SerializeField] private BossPattern[] easyPatterns;
+        [SerializeField] private BossPattern[] mediumPatterns;
+        [SerializeField] private BossPattern[] hardPatterns;
+        [SerializeField] private BossPattern exitPattern;
+
+        private CutSceneEvent entryBeginsEvent;
+        private CutSceneEvent entryEndsEvent;
+        private CutSceneEvent exitBeginsEvent;
+        private CutSceneEvent exitEndsEvent;
+
+        private int currentAttackStateIndex = 0;
+        protected float currentHealth = 0f;
         protected bool canAttack = false;
 
         #region Monobehaviour callbacks
@@ -45,9 +42,14 @@ namespace Team17.BallDash
         protected override void Start()
         {
             base.Start();
-            SetMoveListsTimers();
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
             SetHealth();
-            bossStateIndex = (int)bossState;
+            SetMoveListsAttributes();
+            Attack(-1);
         }
 
         protected override void Update()
@@ -60,39 +62,21 @@ namespace Team17.BallDash
 
         #region Entity CallBacks
 
-        public override void OnIntroLaunched()
-        {
-            base.OnIntroLaunched();
-            canAttack = true;
-        }
-
         #endregion
 
         #region State management
 
-        public void Hit(float dmgs)
+        public void Hit(int index, float dmgs)
         {
-            currentHealthToNextState -= dmgs;
-            GameManager.state.CallOnBossHurt();
-            if (currentHealthToNextState < 0) SwitchState();
-        }
-
-        private void SwitchState()
-        {
-            bossStateIndex++;
-            
-            if (bossStateIndex > 3) Death();
-            else
-            {
-                GameManager.state.CallOnBossChangeState();
-                bossState = (Team17.BallDash.BossState) bossStateIndex;
-                SetHealth();
-            }
+            currentHealth -= dmgs;
+            GameManager.state.CallOnBossHurt(index, dmgs);
+            Debug.Log(gameObject.name + " has " + currentHealth + " hp. Damaged " + dmgs);
+            if (currentHealth < 0) Death();
         }
 
         private void Death()
         {
-            GameManager.state.CallOnBossDeath();
+            currentState = BossPhaseState.Exit;
         }
 
         #endregion
@@ -105,49 +89,47 @@ namespace Team17.BallDash
             {
                 int index = -1;
                 int lastPriority = -1;
-                switch (bossState)
+
+                // go through all patterns and choose;
+                switch(attackStates[currentAttackStateIndex])
                 {
-                    case BossState.Intro:
-                        Attack(-1);
-                        return;
-
-                    case BossState.First:
-                        for (int i = 0; i < firstPhaseAttacks.Length; i++)
+                    case BossAttackState.Easy:
+                        for (int i = 0; i < easyPatterns.Length; i++)
                         {
-                            if (firstPhaseAttacks[i].IsUsableAndUseful(phaseOneZero, GameManager.state.PlayerGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena()))
+                            if (easyPatterns[i].Priority > lastPriority)
                             {
-                                if (firstPhaseAttacks[i].Priority > lastPriority)
+                                if (easyPatterns[i].IsUsableAndUseful(roomZero, GameManager.state.BallGameObject.transform.position))
                                 {
                                     index = i;
-                                    lastPriority = firstPhaseAttacks[i].Priority;
+                                    lastPriority = easyPatterns[i].Priority;
                                 }
                             }
                         }
                         break;
 
-                    case BossState.Second:
-                        for (int i = 0; i < secondPhaseAttacks.Length; i++)
+                    case BossAttackState.Medium:
+                        for (int i = 0; i < mediumPatterns.Length; i++)
                         {
-                            if (secondPhaseAttacks[i].IsUsableAndUseful(phaseTwoZero, GameManager.state.PlayerGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena()))
+                            if (mediumPatterns[i].Priority > lastPriority)
                             {
-                                if (secondPhaseAttacks[i].Priority > lastPriority)
+                                if (mediumPatterns[i].IsUsableAndUseful(roomZero, GameManager.state.BallGameObject.transform.position))
                                 {
                                     index = i;
-                                    lastPriority = secondPhaseAttacks[i].Priority;
+                                    lastPriority = mediumPatterns[i].Priority;
                                 }
                             }
                         }
                         break;
 
-                    case BossState.Third:
-                        for (int i = 0; i < thirdPhaseAttacks.Length; i++)
+                    case BossAttackState.Hard:
+                        for (int i = 0; i < hardPatterns.Length; i++)
                         {
-                            if (thirdPhaseAttacks[i].IsUsableAndUseful(phaseThreeZero, GameManager.state.PlayerGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena()))
+                            if (hardPatterns[i].Priority > lastPriority)
                             {
-                                if (thirdPhaseAttacks[i].Priority > lastPriority)
+                                if (hardPatterns[i].IsUsableAndUseful(roomZero, GameManager.state.BallGameObject.transform.position))
                                 {
                                     index = i;
-                                    lastPriority = thirdPhaseAttacks[i].Priority;
+                                    lastPriority = hardPatterns[i].Priority;
                                 }
                             }
                         }
@@ -167,29 +149,51 @@ namespace Team17.BallDash
 
         private void Attack(int index)
         {
-            canAttack = false;
-            switch (bossState)
+            switch(currentState)
             {
-                case BossState.Intro:
-                    introPattern.LaunchAttack(IntroEnd);
+                case BossPhaseState.Entry:
+                    if(entryBeginsEvent != null) entryBeginsEvent.Invoke();
+                    entryPattern.LaunchAttack(EntryEnd);
                     break;
-                case BossState.First:
-                    firstPhaseAttacks[index].LaunchAttack(AttackEnd);
+                case BossPhaseState.Attacking:
+
+                    switch(attackStates[currentAttackStateIndex])
+                    {
+                        case BossAttackState.Easy:
+                            easyPatterns[index].LaunchAttack(AttackEnd);
+                            currentAttackStateIndex++;
+                            if (currentAttackStateIndex > attackStates.Length - 1) currentAttackStateIndex = 0;
+                            break;
+
+                        case BossAttackState.Medium:
+                            mediumPatterns[index].LaunchAttack(AttackEnd);
+                            currentAttackStateIndex++;
+                            if (currentAttackStateIndex > attackStates.Length - 1) currentAttackStateIndex = 0;
+                            break;
+
+                        case BossAttackState.Hard:
+                            hardPatterns[index].LaunchAttack(AttackEnd);
+                            currentAttackStateIndex++;
+                            if (currentAttackStateIndex > attackStates.Length - 1) currentAttackStateIndex = 0;
+                            break;
+                    }
+
                     break;
-                case BossState.Second:
-                    secondPhaseAttacks[index].LaunchAttack(AttackEnd);
+                case BossPhaseState.Exit:
+                    //call exit begins
+                    if(exitBeginsEvent != null)exitBeginsEvent.Invoke();
+                    exitPattern.LaunchAttack(ExitEnd);
                     break;
-                case BossState.Third:
-                    thirdPhaseAttacks[index].LaunchAttack(AttackEnd);
-                    break;
+
             }
+            canAttack = false;
         }
 
-        private void IntroEnd()
+        private void EntryEnd()
         {
-            bossState = BossState.First;
             canAttack = true;
-            GameManager.state.CallOnBossBeginsPattern();
+            if(entryBeginsEvent != null)entryEndsEvent.Invoke();
+            currentState = BossPhaseState.Attacking;
         }
 
         private void AttackEnd()
@@ -197,50 +201,90 @@ namespace Team17.BallDash
             canAttack = true;
         }
 
-        private void SetMoveListsTimers()
+        private void ExitEnd()
         {
-            introPattern.Timers = timers;
-            for (int i = 0; i < firstPhaseAttacks.Length; i++)
+            canAttack = false;
+            //call exit end
+            GameManager.state.CallOnBossChangeState();
+            if(exitEndsEvent != null) exitEndsEvent.Invoke();
+            gameObject.SetActive(false);
+        }
+
+        private void SetMoveListsAttributes()
+        {
+            entryPattern.Timers = timers;
+
+            for (int i = 0; i < easyPatterns.Length; i++)
             {
-                firstPhaseAttacks[i].Timers = timers;
+                easyPatterns[i].Timers = timers;
             }
 
-            for (int i = 0; i < secondPhaseAttacks.Length; i++)
+            for (int i = 0; i < mediumPatterns.Length; i++)
             {
-                secondPhaseAttacks[i].Timers = timers;
+                mediumPatterns[i].Timers = timers;
             }
 
-            for (int i = 0; i < thirdPhaseAttacks.Length; i++)
+            for (int i = 0; i < hardPatterns.Length; i++)
             {
-                thirdPhaseAttacks[i].Timers = timers;
+                hardPatterns[i].Timers = timers;
             }
+
+            exitPattern.Timers = timers;
+
+            entryPattern.PortalManager = portalManager;
+
+            for (int i = 0; i < easyPatterns.Length; i++)
+            {
+                easyPatterns[i].PortalManager = portalManager;
+            }
+
+            for (int i = 0; i < mediumPatterns.Length; i++)
+            {
+                mediumPatterns[i].PortalManager = portalManager;
+            }
+
+            for (int i = 0; i < hardPatterns.Length; i++)
+            {
+                hardPatterns[i].PortalManager = portalManager;
+            }
+
+            exitPattern.PortalManager = portalManager;
         }
 
         private void SetHealth()
         {
-            switch(bossState)
-            {
-                case BossState.First:
-                    currentHealthToNextState = firstPhaseHealth;
-                    break;
-                case BossState.Second:
-                    currentHealthToNextState = secondPhaseHealth;
-                    break;
-                case BossState.Third:
-                    currentHealthToNextState = thirdPhaseHealth;
-                    break;
-            }
+            currentHealth = health;
+        }
+
+        public void StopAllAttacks()
+        {
+            timers.DeleteAllTimers();
+            canAttack = false;
+        }
+
+        public void ResumeAllAttacks()
+        {
+            canAttack = true;
         }
 
         #endregion
 
         #region Properties
 
-        public float CurrentHealthToNextState { get => currentHealthToNextState;}
-        public BossState BossState { get => bossState; }
-        public int BossStateIndex { get => bossStateIndex;}
+        public float CurrentHealthToNextState { get => currentHealth;}
+        public CutSceneEvent EntryBeginsEvent { get => entryBeginsEvent; set => entryBeginsEvent = value; }
+        public CutSceneEvent EntryEndsEvent { get => entryEndsEvent; set => entryEndsEvent = value; }
+        public CutSceneEvent ExitBeginsEvent { get => exitBeginsEvent; set => exitBeginsEvent = value; }
+        public CutSceneEvent ExitEndsEvent { get => exitEndsEvent; set => exitEndsEvent = value; }
+        public Transform RoomZero { get => roomZero; }
 
         #endregion
+
+        [ContextMenu("Reference portal manager")]
+        public void ReferencePortalManager()
+        {
+            portalManager = GameObject.Find("SpeedPortalsManager").GetComponent<SpeedPortalManager>();
+        }
     }
 
     [System.Serializable]
@@ -251,12 +295,16 @@ namespace Team17.BallDash
         [SerializeField] private BossAimZone zone;
         [SerializeField] private int priority = 0;
         [Header ("Attack parameter")]
-        [Tooltip("Time it takes for the attack to be considered finished. After that time, the boss considers that he can choose and launch another attack.")]
+        [Tooltip ("Time it takes for the attack to be considered finished. After that time, the boss can choose and launch another attack.")]
         [SerializeField] private float timeToEnd = 3f;
-        [Tooltip("Time it takes for the attack to be considered usable again after the boss used it once. During this time, the boss will ignore this attack.")]
+        [Tooltip ("Time it takes for spawned portal to disapear.")]
+        [SerializeField] private float timeForPortalsToDisapear = 2.5f;
+        [Tooltip ("Time it takes for the attack to be considered usable again after the boss used it once. During this time, the boss will ignore this attack.")]
         [SerializeField] private float coolDown = 4f;
         [SerializeField] private UnityEngine.Events.UnityEvent pattern;
+        [SerializeField] private PortalPlacement[] portals;
 
+        private SpeedPortalManager portalManager;
         private TimersCalculator timers;
         private bool canBeUsed = true;
         private System.Action endAction;
@@ -267,11 +315,16 @@ namespace Team17.BallDash
             pattern.Invoke();
             endAction = endAct;
             canBeUsed = false;
+            for (int i = 0; i < portals.Length; i++)
+            {
+                portalManager.SpawnPortal(portals[i].Position, portals[i].Rotation);
+            }
             timers.LaunchNewTimer(timeToEnd, EndAttack);
         }
 
         private void EndAttack()
         {
+            portalManager.DeactivateAllPortals();
             endAction.Invoke();
             timers.LaunchNewTimer(coolDown, ResetAttack);
         }
@@ -291,14 +344,23 @@ namespace Team17.BallDash
         public bool CanBeUsed { get => canBeUsed; }
         public TimersCalculator Timers { get => timers; set => timers = value; }
         public int Priority { get => priority; }
+        public SpeedPortalManager PortalManager { get => portalManager; set => portalManager = value; }
     }
 
-
-    public enum BossState
+    [System.Serializable]
+    public struct PortalPlacement
     {
-        Intro = 0,
-        First = 1,
-        Second = 2,
-        Third = 3
-    };
+        [SerializeField] private Vector3 position;
+        [SerializeField] private float rotation;
+
+        public Vector3 Position { get => position; set => position = value; }
+        public float Rotation { get => rotation; set => rotation = value; }
+    }
+
+    public enum BossAttackState
+    {
+        Easy = 0,
+        Medium = 1,
+        Hard = 2,
+    }
 }

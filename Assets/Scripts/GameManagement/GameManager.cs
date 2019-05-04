@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Team17.BallDash
+namespace Team17.StreetHunt
 {
     public class GameManager : MonoBehaviour
     {
@@ -12,8 +12,9 @@ namespace Team17.BallDash
     public class GameState
     {
         private List<Entity> entities = new List<Entity>();
-        private List<VirtualCameraTarget> virtualCameraTargets = new List<VirtualCameraTarget>();
-        private GameObject playerGameObject;
+        private List<VirtualCameraShakeTarget> virtualCameraShakeTargets = new List<VirtualCameraShakeTarget>();
+        private List<VirtualCameraZoomTarget> virtualCameraZoomTargets = new List<VirtualCameraZoomTarget>();
+        private GameObject ballGameObject;
         private int livesLeft;
 
         #region Entity registration
@@ -32,19 +33,107 @@ namespace Team17.BallDash
 
         #region Virtual camera targets registration
 
-        public void RegisterVirtualCameraTarget(VirtualCameraTarget target)
+        public void RegisterVirtualCameraShakeTarget(VirtualCameraShakeTarget target)
         {
-            virtualCameraTargets.Add(target);
+            virtualCameraShakeTargets.Add(target);
         }
 
-        public void UnregisterVirtualCameraTarget(VirtualCameraTarget target)
+        public void UnregisterVirtualCameraShakeTarget(VirtualCameraShakeTarget target)
         {
-            virtualCameraTargets.Remove(target);
+            virtualCameraShakeTargets.Remove(target);
+        }
+
+        public void RegisterVirtualCameraZoomTarget(VirtualCameraZoomTarget target)
+        {
+            virtualCameraZoomTargets.Add(target);
+        }
+
+        public void UnregisterVirtualCameraZoomTarget(VirtualCameraZoomTarget target)
+        {
+            virtualCameraZoomTargets.Remove(target);
         }
 
         #endregion
 
         #region Entity events
+
+        #region Cutscenes events
+
+        public void CallOnIntroCutScene()
+        {
+            Debug.Log("Intro cut scene");
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnIntroCutScene();
+            }
+        }
+
+        public void CallOnIntroCutSceneEnds()
+        {
+            Debug.Log("Intro cut scene ends");
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnIntroCutSceneEnds();
+            }
+        }
+
+        public void CallOnPhaseTwoCutScene()
+        {
+            Debug.Log("Phase two cut scene");
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnPhaseTwoCutScene();
+            }
+        }
+
+        public void CallOnPhaseTwoCutSceneEnds()
+        {
+            Debug.Log("Phase two cut scene ends");
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnPhaseTwoCutSceneEnds();
+            }
+        }
+
+        public void CallOnPhaseThreeCutScene()
+        {
+            Debug.Log("Phase three cut scene");
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnPhaseThreeCutScene();
+            }
+        }
+
+        public void CallOnPhaseThreeCutSceneEnds()
+        {
+            Debug.Log("Phase three cut scene ends");
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnPhaseThreeCutSceneEnds();
+            }
+        }
+
+        public void CallOnEndCutScene()
+        {
+            Debug.Log("End cut scene");
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnEndCutScene();
+            }
+        }
+
+        public void CallOnEndCutSceneEnds()
+        {
+            Debug.Log("End cut scene ends");
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnEndCutSceneEnds();
+            }
+        }
+
+        #endregion
+
+        #region Player Events
 
         public void CallOnPlayerTeleport()
         {
@@ -54,19 +143,19 @@ namespace Team17.BallDash
             }
         }
 
-        public void CallOnBossBeginsPattern()
+        public void CallOnCharacterStunned()
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                entities[i].OnBossBeginsPatterns();
+                entities[i].OnCharacterStunned();
             }
         }
 
-        public void CallOnIntroLaunched()
+        public void CallOnCharacterStartStrikeAnim()
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                entities[i].OnIntroLaunched();
+                entities[i].OnCharacterStartStrikeAnim();
             }
         }
 
@@ -75,22 +164,6 @@ namespace Team17.BallDash
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].OnBallShot();
-            }
-        }
-
-        public void CallOnBallHit(float hitPower)
-        {
-            for (int i = 0; i < entities.Count; i++)
-            {
-                entities[i].OnBallHit(hitPower);
-            }
-        }
-
-        public void CallOnBallDestroyed()
-        {
-            for (int i = 0; i < entities.Count; i++)
-            {
-                entities[i].OnBallDestroyed();
             }
         }
 
@@ -110,11 +183,57 @@ namespace Team17.BallDash
             }
         }
 
-        public void CallOnBossHurt()
+        public void CallOnBallHit(int powerGroupIndex, float hitPower)
+        {
+            livesLeft--;
+            if (livesLeft == 0)
+            {
+                //game over;
+            }
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBallHit(powerGroupIndex, hitPower);
+            }
+        }
+
+        public void CallOnBallDestroyed()
+        {
+            livesLeft--;
+            if (livesLeft == 0)
+            {
+                //game over;
+            }
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBallDestroyed();
+            }
+        }
+
+        #endregion
+
+        #region Boss events
+
+        public void CallOnBossEnters()
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                entities[i].OnBossHurt();
+                entities[i].OnIntroCutScene();
+            }
+        }
+
+        public void CallOnBossBeginsPattern()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBossBeginsPatterns();
+            }
+        }
+
+        public void CallOnBossHurt(int powerGroupIndex, float hitPower)
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBossHurt(powerGroupIndex, hitPower);
             }
         }
 
@@ -134,13 +253,17 @@ namespace Team17.BallDash
             }
         }
 
-        public void CallOnCharacterStartStrikeAnim()
+        public void CallOnLevelEnd()
         {
             for (int i = 0; i < entities.Count; i++)
             {
-                entities[i].OnCharacterStartStrikeAnim();
+                entities[i].OnLevelEnd();
             }
         }
+
+        #endregion
+
+        #region Game management events
 
         public void CallOnPause()
         {
@@ -160,18 +283,23 @@ namespace Team17.BallDash
 
         #endregion
 
+        #endregion
+
         /// <summary>
         /// Clear all attributes of the GameState. Call this method before loading a new scene.
         /// </summary>
         public void ResetState()
         {
             entities.Clear();
+            virtualCameraShakeTargets.Clear();
+            virtualCameraZoomTargets.Clear();
             livesLeft = 0;
-            playerGameObject = null;
+            ballGameObject = null;
         }
 
-        public GameObject PlayerGameObject { get => playerGameObject; set => playerGameObject = value; }
+        public GameObject BallGameObject { get => ballGameObject; set => ballGameObject = value; }
         public int LivesLeft { get => livesLeft; set => livesLeft = value; }
-        public List<VirtualCameraTarget> VirtualCameraTargets { get => virtualCameraTargets; }
+        public List<VirtualCameraShakeTarget> VirtualCameraShakeTargets { get => virtualCameraShakeTargets; }
+        public List<VirtualCameraZoomTarget> VirtualCameraZoomTargets { get => virtualCameraZoomTargets; }
     }
 }
