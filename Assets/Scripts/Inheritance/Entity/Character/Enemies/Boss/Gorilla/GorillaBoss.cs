@@ -40,7 +40,6 @@ namespace Team17.StreetHunt
             JumpManagement();
         }
 
-        [ContextMenu ("Launch jump")]
         public void LaunchJump(GameObject target)
         {
             jumpTarget.position = target.transform.position;
