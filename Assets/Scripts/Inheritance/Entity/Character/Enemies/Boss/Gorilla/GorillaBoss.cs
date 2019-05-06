@@ -26,7 +26,6 @@ namespace Team17.StreetHunt
         [SerializeField] private RockProjectile[] rocksPool;
         [SerializeField] private Animator leftSpikes;
         [SerializeField] private Animator rightSpikes;
-
         [Header("FXs")]
         [SerializeField] private FeedBack landingFB;
 

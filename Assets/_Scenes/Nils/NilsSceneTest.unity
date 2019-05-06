@@ -207,7 +207,7 @@ GameObject:
   m_Component:
   - component: {fileID: 85903995}
   m_Layer: 0
-  m_Name: Target (4)
+  m_Name: LeftWall(0.5)
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -225,7 +225,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1534754789}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &98862097
 GameObject:
@@ -739,7 +739,7 @@ GameObject:
   m_Component:
   - component: {fileID: 423419365}
   m_Layer: 0
-  m_Name: Target (3)
+  m_Name: RightWall(0.75)
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -757,7 +757,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1534754789}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &465490962
 MonoBehaviour:
@@ -1566,7 +1566,7 @@ MonoBehaviour:
   currentState: 0
   health: 50
   roomZero: {fileID: 3561031007102380237}
-  attackStates: 0000000001000000
+  attackStates: 
   entryPattern:
     name: Intro
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
@@ -1602,143 +1602,7 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     portals: []
-  easyPatterns:
-  - name: Rock
-    zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
-    priority: 2
-    timeToEnd: 3
-    timeForPortalsToDisapear: 5
-    coolDown: 6
-    pattern:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1362627019}
-          m_MethodName: LaunchJump
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1950550654}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1362627019}
-          m_MethodName: SetIdleType
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 1
-            m_FloatArgument: 1
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    portals: []
-  - name: Jump
-    zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
-    priority: 3
-    timeToEnd: 2
-    timeForPortalsToDisapear: 5
-    coolDown: 7
-    pattern:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1362627019}
-          m_MethodName: LaunchJump
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 423419364}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1362627019}
-          m_MethodName: SetIdleType
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0.75
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    portals: []
-  - name: BackFlip
-    zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
-    priority: 1
-    timeToEnd: 2
-    timeForPortalsToDisapear: 0
-    coolDown: 3
-    pattern:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1362627019}
-          m_MethodName: LaunchJump
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1331879057}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1362627019}
-          m_MethodName: SetIdleType
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 3
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    portals: []
-  - name: Sol
-    zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
-    priority: 4
-    timeToEnd: 3
-    timeForPortalsToDisapear: 0
-    coolDown: 6
-    pattern:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1362627019}
-          m_MethodName: LaunchJump
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1668794988}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1362627019}
-          m_MethodName: SetIdleType
-          m_Mode: 4
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 4
-            m_FloatArgument: 0.25
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    portals: []
+  easyPatterns: []
   mediumPatterns:
   - name: LaunchRock
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
@@ -1987,7 +1851,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1331879058}
   m_Layer: 0
-  m_Name: Target (1)
+  m_Name: BotLeft(0)
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -2017,7 +1881,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1353313909}
   m_Layer: 0
-  m_Name: Target
+  m_Name: IntroTarget (0)
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -2460,8 +2324,8 @@ Transform:
   - {fileID: 1353313909}
   - {fileID: 1331879058}
   - {fileID: 1668794989}
-  - {fileID: 423419365}
   - {fileID: 85903995}
+  - {fileID: 423419365}
   - {fileID: 1950550655}
   m_Father: {fileID: 3561031007102380237}
   m_RootOrder: 5
@@ -2550,7 +2414,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1668794989}
   m_Layer: 0
-  m_Name: Target (2)
+  m_Name: BotRight(0.25)
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -2569,6 +2433,137 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1534754789}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1760293634
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1760293636}
+  - component: {fileID: 1760293635}
+  m_Layer: 0
+  m_Name: test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1760293635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760293634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7be32b554ce1e04293ce2c45ca8e22e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnStart: 0
+  looping: 0
+  hardFollowingTransform: 0
+  transformToHardFollow: {fileID: 0}
+  tpOnTransformOnPlay: 0
+  transformToTPToOnPlay: {fileID: 0}
+  particles: 0
+  particleRotation: 0
+  particlesSystems: []
+  particleSystemsToRotate: []
+  trails: 0
+  trailRenderers: []
+  shake: 0
+  useSpecificTransform: 0
+  specificTransformToShake: []
+  shakeAmplitude: 0.2
+  shakeTime: 0.1
+  zoom: 1
+  zoomInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 0.090629034
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.5961875
+    - serializedVersion: 3
+      time: 0.19671632
+      value: 0.8636182
+      inSlope: 7.6114182
+      outSlope: 0.37562954
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.04410167
+      outWeight: 0.220041
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.017504789
+      outSlope: 1
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.28273833
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  zoomOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -5.9145246
+      outSlope: -5.9145246
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.1373785
+      value: 0.18747154
+      inSlope: -1
+      outSlope: -1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.2173277
+      outSlope: -0.2173277
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  zoomedDist: 4
+  zoomSpeed: 0.25
+  rumble: 0
+  rumbleTime: 5
+--- !u!4 &1760293636
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760293634}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1763306785
 GameObject:
@@ -2709,7 +2704,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1950550655}
   m_Layer: 0
-  m_Name: Target (7)
+  m_Name: Target (1)
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
