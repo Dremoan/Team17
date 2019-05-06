@@ -72,6 +72,7 @@ namespace Team17.StreetHunt
         public void TeleportAndTaunt(Transform tauntPoint)
         {
             transform.position = tauntPoint.position;
+            if (currentBall != null) currentBall.PauseBehavior();
             anim.Play("TauntIdle");
         }
 

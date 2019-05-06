@@ -7,6 +7,7 @@ namespace Team17.StreetHunt
     public class BossWeakPoint : Character, IBallHitable
     {
         [SerializeField] private Boss linkedBoss;
+        [SerializeField] private GameObject actualTouchPlane;
         [SerializeField] private FeedBack deathFeedback;
 
         public void Hit(int index, float dmgs)
@@ -17,6 +18,7 @@ namespace Team17.StreetHunt
         public override void OnBossDeath()
         {
             base.OnBossDeath();
+            actualTouchPlane.SetActive(false);
             deathFeedback.Play();
         }
     }

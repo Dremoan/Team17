@@ -212,7 +212,7 @@ namespace Team17.StreetHunt
         {
             body.velocity = Vector3.zero;
             usedPowerGroup.Trail.Stop();
-            //gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
 
         #endregion

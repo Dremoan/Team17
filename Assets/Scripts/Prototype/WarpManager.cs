@@ -19,7 +19,7 @@ namespace Team17.StreetHunt
             yield return new WaitForSeconds(.5f);
             for (int i = 0; i < warps.Length; i++)
             {
-                //warps[i].SetActive(true);
+                warps[i].SetActive(true);
                 yield return null;
             }
             snakeBossScript.PickMove();
