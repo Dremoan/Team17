@@ -8,23 +8,30 @@ namespace Team17.StreetHunt
     {
         [Header("Components")]
         [SerializeField] private Boss assignedBossScript;
+        [SerializeField] private Animator anim;
+        [Header("Jump parameters")]
         [SerializeField] private Transform jumpTarget;
         [SerializeField] private Transform jumpSummit;
-        [Header("Jump parameters")]
         [SerializeField] private int jumpSteps = 7;
         [SerializeField] private float distToSwitchStep = 0.2f;
         [SerializeField] private float maxSummitHeight = 5f;
         [SerializeField] private float lowJumpThreshHold = 3f;
         [SerializeField] private float smallJumpThreshhold = 5f;
-        [SerializeField] private Transform[] possibleJumpTargets;
         [Header("Speed parameters")]
         [SerializeField] private float jumpSpeed = 2f;
-        [Tooltip("0 = small, 1 = long, 2 = low, 3 = high")]
-        [SerializeField] private AnimationCurve[] speedCurves;
+        [Tooltip("0 = small, 1 = long, 2 = low, 3 = high")][SerializeField] private AnimationCurve[] speedCurves;
+        [Header("Attack parameters")]
+        [SerializeField] private Transform rightHand;
+        [SerializeField] private Transform leftHand;
+        [SerializeField] private RockProjectile[] rocksPool;
+        [SerializeField] private Animator leftSpikes;
+        [SerializeField] private Animator rightSpikes;
+
         [Header("FXs")]
         [SerializeField] private FeedBack landingFB;
 
         private bool isJumping = false;
+        private bool jumpingRight = false;
         private int pathStepTarget = 0;
         private Vector3[] path;
         private Vector3 posRef;
@@ -33,12 +40,16 @@ namespace Team17.StreetHunt
         private float jumpParcouredDist = 0f;
         private float jumpCalculatedDist = 0f;
         private AnimationCurve usedSpeedCurve;
+        private float currentIdleType;
+        private RockProjectile launchedRock;
 
         protected override void Update()
         {
             base.Update();
             JumpManagement();
         }
+
+        #region Jump calculation
 
         public void LaunchJump(GameObject target)
         {
@@ -106,6 +117,8 @@ namespace Team17.StreetHunt
             jumpStart = transform.position;
             jumpInc = 0;
             isJumping = true;
+            anim.SetBool("jumping", isJumping);
+            anim.SetBool("toTheRight", (transform.position.x < jumpTarget.position.x));
         }
 
         private void JumpManagement()
@@ -134,6 +147,7 @@ namespace Team17.StreetHunt
                     {
                         transform.position = path[path.Length - 1];
                         isJumping = false;
+                        anim.SetBool("jumping", isJumping);
                         jumpCalculatedDist = 0;
                         jumpParcouredDist = 0;
                         landingFB.Play();
@@ -150,5 +164,73 @@ namespace Team17.StreetHunt
             }
 
         }
+
+        #endregion
+
+        #region Attack
+
+        public void MediumAttack()
+        {
+            if(currentIdleType == 0.5f || currentIdleType == 0.75f) // rock launch
+            {
+                GetNewRock();
+                if(currentIdleType == 0.5f)
+                {
+                    launchedRock.HeldBy(rightHand);
+                    anim.SetBool("rightArmRockLaunch", true);
+                }
+                if(currentIdleType == 0.75f)
+                {
+                    launchedRock.HeldBy(leftHand);
+                    anim.SetBool("leftArmRockLaunch", true);
+                }
+            }
+            else if(currentIdleType == 0f) // right spikes
+            {
+                rightSpikes.SetTrigger("spikes");
+            }
+            else if(currentIdleType == 0.25f) // left spikes
+            {
+                leftSpikes.SetTrigger("spikes");
+            }
+        }
+
+        public void LaunchCurrentRock()
+        {
+            Vector3 dir = (GameManager.state.BallGameObject.transform.position - launchedRock.transform.position);
+            //Vector3 dir = (GameManager.state.BallGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena() - launchedRock.transform.position);
+            launchedRock.Launch(dir);
+        }
+
+        public void EndRockLaunch()
+        {
+            anim.SetBool("rightArmRockLaunch", false);
+            anim.SetBool("leftArmRockLaunch", false);
+        }
+
+        private void GetNewRock()
+        {
+            for (int i = 0; i < rocksPool.Length; i++)
+            {
+                if(rocksPool[i].Available)
+                {
+                    launchedRock = rocksPool[i];
+                    launchedRock.gameObject.SetActive(true);
+                    return;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Animations 
+
+        public void SetIdleType(float type)
+        {
+            currentIdleType = type;
+            anim.SetFloat("idle", currentIdleType);
+        }
+
+        #endregion
     }
 }

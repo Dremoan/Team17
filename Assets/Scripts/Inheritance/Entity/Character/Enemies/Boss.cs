@@ -56,7 +56,6 @@ namespace Team17.StreetHunt
         {
             base.Update();
             ChooseAttack();
-            Debug.Log(canAttack);
         }
 
         #endregion
