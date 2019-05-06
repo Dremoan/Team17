@@ -33,6 +33,4 @@ namespace Team17.StreetHunt
             }
         }
     }
-
-
 }
