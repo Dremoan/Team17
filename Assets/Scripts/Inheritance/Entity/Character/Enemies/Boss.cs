@@ -78,6 +78,7 @@ namespace Team17.StreetHunt
         private void Death()
         {
             currentState = BossPhaseState.Exit;
+            GameManager.state.CallOnBossDeath();
         }
 
         #endregion

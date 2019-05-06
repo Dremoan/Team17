@@ -69,6 +69,21 @@ namespace Team17.StreetHunt
             tpFeedback.Play();
         }
 
+        public void TeleportAndTaunt(Transform tauntPoint)
+        {
+            transform.position = tauntPoint.position;
+            anim.Play("TauntIdle");
+        }
+
+        public void TeleportAndActiveBall(Transform spawnPoint)
+        {
+            anim.SetTrigger("TauntToIdle");
+            transform.position = spawnPoint.position;
+            if (currentBall != null) currentBall.gameObject.SetActive(true);
+            currentBall.transform.position = spawnPoint.position + new Vector3(0.75f, 0.15f, 0f);
+            tpFeedback.Play();
+        }
+
         public FeedBack TpFeedback { get => tpFeedback; }
         public PlayerProjectile CurrentBall { get => currentBall; set => currentBall = value; }
     }
