@@ -51,6 +51,7 @@ namespace Team17.StreetHunt
         protected override void Start()
         {
             base.Start();
+            character.CurrentBall = this.GetComponent<PlayerProjectile>();
             initialFeedbackScale = timerFeedback.localScale;
             usedPowerGroup = powerGroups[0];
         }
@@ -210,7 +211,8 @@ namespace Team17.StreetHunt
         public void PauseBehavior()
         {
             body.velocity = Vector3.zero;
-            gameObject.SetActive(false);
+            usedPowerGroup.Trail.Stop();
+            //gameObject.SetActive(false);
         }
 
         #endregion
