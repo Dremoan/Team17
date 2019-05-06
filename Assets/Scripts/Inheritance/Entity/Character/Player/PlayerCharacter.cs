@@ -65,6 +65,7 @@ namespace Team17.StreetHunt
         {
             transform.position = spawnPoint.position;
             if(currentBall != null) currentBall.PauseBehavior();
+            currentBall.transform.position = spawnPoint.position + new Vector3(0.75f,0.15f,0f);
             tpFeedback.Play();
         }
 
