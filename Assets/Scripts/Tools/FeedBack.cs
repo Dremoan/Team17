@@ -190,7 +190,17 @@ namespace Team17.StreetHunt
             {
                 if(shakeDecrementer > 0)
                 {
-                    if(!looping) shakeDecrementer -= Time.deltaTime; 
+                    if(!looping)
+                    {
+                        if(slowMo)
+                        {
+                            shakeDecrementer -= Time.deltaTime / currentTimeScale;
+                        }
+                        else
+                        {
+                            shakeDecrementer -= Time.deltaTime;
+                        }
+                    }
                     for (int i = 0; i < usedShakeTransform.Length; i++)
                     {
                         Vector3 newPos = (Random.insideUnitCircle * shakeAmplitude * Mathf.InverseLerp(0, shakeTime, shakeDecrementer));
@@ -213,7 +223,7 @@ namespace Team17.StreetHunt
                 {
                     if (slowMo)
                     {
-                        zoomIncrementer += Time.deltaTime * zoomSpeed * currentTimeScale;
+                        zoomIncrementer += Time.deltaTime * (zoomSpeed / currentTimeScale);
                     }
                     else
                     {
@@ -249,7 +259,7 @@ namespace Team17.StreetHunt
                 {
                     if(slowMo)
                     {
-                        zoomIncrementer += Time.deltaTime * zoomSpeed * currentTimeScale;
+                        zoomIncrementer += Time.deltaTime * (zoomSpeed / currentTimeScale);
                     }
                     else
                     {
