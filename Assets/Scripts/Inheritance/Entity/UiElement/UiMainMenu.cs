@@ -12,7 +12,7 @@ namespace Team17.StreetHunt
 
         public void ClickOnPlayButton()
         {
-            animatorMainMenu.SetTrigger("animDisPlayMainMenu");
+            animatorMainMenu.SetTrigger("anim_Trans_MainMenu_PlayMenu");
         }
 
         public void ClickOnHuntButton()

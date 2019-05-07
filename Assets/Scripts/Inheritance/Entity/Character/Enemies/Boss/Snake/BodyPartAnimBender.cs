@@ -36,8 +36,8 @@ namespace Team17.StreetHunt
             Vector3 centerTangent = transform.right * initialDistFromRight;
 
             float bendDist = Vector3.Distance(transform.position + centerTangent, rightTip.position);
-            float upDist = Vector3.Distance(transform.position + transform.up, rightTip.position);
-            float downDist = Vector3.Distance(transform.position - transform.up, rightTip.position);
+            float upDist = Vector3.Distance(transform.position + transform.up * 0.1f, rightTip.position);
+            float downDist = Vector3.Distance(transform.position - transform.up * 0.1f, rightTip.position);
 
 
             float clampedBendDist = Mathf.Clamp(bendDist, 0, 1);
@@ -51,8 +51,8 @@ namespace Team17.StreetHunt
             Vector3 centerTangent = -transform.right * initialDistFromLeft;
 
             float bendDist = Vector3.Distance(transform.position + centerTangent, leftTip.position);
-            float upDist = Vector3.Distance(transform.position + transform.up, leftTip.position);
-            float downDist = Vector3.Distance(transform.position - transform.up, leftTip.position);
+            float upDist = Vector3.Distance(transform.position + transform.up * 0.1f, leftTip.position);
+            float downDist = Vector3.Distance(transform.position - transform.up * 0.1f, leftTip.position);
 
             float clampedBendDist = Mathf.Clamp(bendDist, 0, 1);
             if (upDist > downDist) clampedBendDist *= -1;

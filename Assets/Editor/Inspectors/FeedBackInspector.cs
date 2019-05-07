@@ -77,6 +77,17 @@ namespace Team17.StreetHunt
             }
             EditorGUILayout.Space();
 
+            EditorGUILayout.LabelField("Slow-Mo parameters", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("slowMo"), new GUIContent("Use slow-mo"));
+            if(feedBack.SlowMo)
+            {
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("targetTimeScale"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("slowMoSpeed"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("slowMoInCurve"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("slowMoOutCurve"));
+            }
+            EditorGUILayout.Space();
+
             EditorGUILayout.LabelField("Zoom parameters", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("zoom"), new GUIContent("Use zoom"));
             if(feedBack.Zoom)
