@@ -227,7 +227,7 @@ namespace Team17.StreetHunt
             trajectory.gameObject.SetActive(false);
             character.Physicate(true);
             gameObject.SetActive(false);
-            destroyed = true;
+            //destroyed = true;
 
             usedPowerGroup.Hit.Play();
             usedPowerGroup.Trail.Stop();
