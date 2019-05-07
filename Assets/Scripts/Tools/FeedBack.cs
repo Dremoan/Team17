@@ -213,7 +213,7 @@ namespace Team17.StreetHunt
                 {
                     if (slowMo)
                     {
-                        zoomIncrementer += Time.deltaTime * zoomSpeed * currentTimeScale;
+                        zoomIncrementer += Time.deltaTime * (zoomSpeed / currentTimeScale);
                     }
                     else
                     {
@@ -249,7 +249,7 @@ namespace Team17.StreetHunt
                 {
                     if(slowMo)
                     {
-                        zoomIncrementer += Time.deltaTime * zoomSpeed * currentTimeScale;
+                        zoomIncrementer += Time.deltaTime * (zoomSpeed / currentTimeScale);
                     }
                     else
                     {
