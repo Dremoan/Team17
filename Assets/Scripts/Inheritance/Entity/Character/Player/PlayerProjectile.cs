@@ -308,15 +308,13 @@ namespace Team17.StreetHunt
         {
             entryVelocity = new Vector3(Mathf.Abs(entryVelocity.x), entryVelocity.y, entryVelocity.z);
             float sqrMag = Vector3.SqrMagnitude(entryVelocity - portalRight);
-            Debug.Log(Mathf.Abs(sqrMag));
+
             if(Mathf.Abs(sqrMag) < speedPortalPrecision)
             {
                 //Speed up
-                Debug.Log("BOOSTED");
                 if (usedPowergroupIndex > powerGroups.Length - 2) return;
                 usedPowergroupIndex++;
-                usedPowerGroup.Hit.Play();
-                //portal.gameObject.SetActive(false);
+                portal.gameObject.SetActive(false);
             }
 
             usedPowerGroup = powerGroups[usedPowergroupIndex];
