@@ -6,15 +6,20 @@ namespace Team17.StreetHunt
 {
     public class BossWeakPoint : Character, IBallHitable
     {
+        [Header("Gameplay Fields")]
         [SerializeField] private Boss linkedBoss;
         [SerializeField] private GameObject actualTouchPlane;
+
+        [Header("Feedbacks")]
         [SerializeField] private FeedBack deathFeedback;
         [SerializeField] private FeedBack hitFeedback;
+        [SerializeField] private Animator canvasAnim;
+        [SerializeField] private float blinkTime = 0.1f;
+
+        [Header("Material Swap")]
         [SerializeField] private Material actualBossMat;
         [SerializeField] private Material newMaterial;
         [SerializeField] private SkinnedMeshRenderer skinWeakPoint;
-        [SerializeField] private Animator canvasAnim;
-        [SerializeField] private float blinkTime = 0.1f;
         [SerializeField] private float changeMaterialDelay = 2f;
         private bool alreadyDead;
         private bool isVulnerable = true;
