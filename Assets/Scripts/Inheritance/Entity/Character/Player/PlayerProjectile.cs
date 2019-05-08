@@ -164,6 +164,16 @@ namespace Team17.StreetHunt
                 Timer t = timer.GetTimerFromUserIndex(reHitTimer);
 
                 power += powerGained.Evaluate(t.Inc);
+
+                if(powerGained.Evaluate(t.Inc) > 8)
+                {
+                    character.CriticalShoot = true;
+                }
+                else
+                {
+                    character.CriticalShoot = false;
+                }
+
                 SelectPowerGroup(power);
                 movementDirection = newDirection.normalized * (usedPowerGroup.Speed);
 
