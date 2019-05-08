@@ -9,10 +9,13 @@ namespace Team17.StreetHunt
         [SerializeField] private Boss linkedBoss;
         [SerializeField] private GameObject actualTouchPlane;
         [SerializeField] private FeedBack deathFeedback;
+        [SerializeField] private FeedBack hitFeedback;
         [SerializeField] private Material actualBossMat;
         [SerializeField] private Material newMaterial;
         [SerializeField] private SkinnedMeshRenderer skinWeakPoint;
+        [SerializeField] private Animator canvasAnim;
         [SerializeField] private float blinkTime = 0.1f;
+        [SerializeField] private float changeMaterialDelay = 2f;
         private bool alreadyDead;
         private bool isVulnerable = true;
 
@@ -28,6 +31,7 @@ namespace Team17.StreetHunt
             if (isVulnerable && !alreadyDead)
             {
                 linkedBoss.Hit(index, dmgs);
+                hitFeedback.Play();
                 if (!alreadyDead)
                 {
                     StartCoroutine(Blink());
@@ -38,10 +42,7 @@ namespace Team17.StreetHunt
         public override void OnBossDeath()
         {
             base.OnBossDeath();
-            alreadyDead = true;
-            actualTouchPlane.SetActive(false);
-            deathFeedback.Play();
-            skinWeakPoint.material = newMaterial;
+            StartCoroutine(ExplosionWeakPoint());
         }
 
         IEnumerator Blink()
@@ -53,6 +54,17 @@ namespace Team17.StreetHunt
                 if (actualBossMat != null) actualBossMat.SetFloat("_Threshold", 0f);
                 yield return new WaitForSeconds(.1f);
             }
+        }
+
+        IEnumerator ExplosionWeakPoint()
+        {
+            alreadyDead = true;
+            actualTouchPlane.SetActive(false);
+            deathFeedback.Play();
+            yield return new WaitForSeconds(changeMaterialDelay);
+            hitFeedback.Play();
+            canvasAnim.Play("FlashBlanc");
+            skinWeakPoint.material = newMaterial;
         }
     }
 

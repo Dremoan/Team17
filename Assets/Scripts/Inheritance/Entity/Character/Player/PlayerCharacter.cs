@@ -11,6 +11,10 @@ namespace Team17.StreetHunt
         [SerializeField] private Animator anim;
         [SerializeField] private float distFromBall = 1.2f;
         [SerializeField] private FeedBack tpFeedback;
+        [Header("Ground check parameters")]
+        [SerializeField] private Vector3 feetPosition;
+        [SerializeField] private float feetlength = 0.25f;
+        [SerializeField] private LayerMask groundMask;
 
         private PlayerProjectile currentBall;
         private bool criticalShoot;
@@ -18,7 +22,20 @@ namespace Team17.StreetHunt
         private float angle = 0;
         private bool aiming = false;
         private bool playedTp = false;
+        private bool grounded = false;
 
+        protected override void Update()
+        {
+            base.Update();
+            GroundCheck();
+        }
+
+        private void GroundCheck()
+        {
+            grounded = Physics.Raycast(transform.position + feetPosition, Vector3.down, feetlength, groundMask);
+            Debug.DrawRay(transform.position + feetPosition, Vector3.down * feetlength, Color.red);
+            anim.SetBool("Grounded", grounded);
+        }
 
         public void Physicate(bool physicate)
         {
