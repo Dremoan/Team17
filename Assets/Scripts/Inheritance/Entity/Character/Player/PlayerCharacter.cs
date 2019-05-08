@@ -47,8 +47,8 @@ namespace Team17.StreetHunt
         public void Strike()
         {
             playedTp = false;
-            anim.SetBool("CriticalShoot", criticalShoot);
             anim.SetTrigger("shoot");
+            anim.SetBool("CriticalShoot", criticalShoot);
         }
 
         public void TriggerLaunchBall()

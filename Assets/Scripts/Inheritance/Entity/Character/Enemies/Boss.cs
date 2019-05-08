@@ -69,9 +69,15 @@ namespace Team17.StreetHunt
         public void Hit(int index, float dmgs)
         {
             currentHealth -= dmgs;
-            GameManager.state.CallOnBossHurt(index, dmgs);
             Debug.Log(gameObject.name + " has " + currentHealth + " hp. Damaged " + dmgs);
-            if (currentHealth < 0) Death();
+            if (currentHealth < 0)
+            {
+                Death();
+            }
+            else
+            {
+                GameManager.state.CallOnBossHurt(index, dmgs);
+            }
         }
 
         private void Death()
@@ -86,13 +92,13 @@ namespace Team17.StreetHunt
 
         private void ChooseAttack()
         {
-            if(canAttack)
+            if (canAttack)
             {
                 int index = -1;
                 int lastPriority = -1;
 
                 // go through all patterns and choose;
-                switch(attackStates[currentAttackStateIndex])
+                switch (attackStates[currentAttackStateIndex])
                 {
                     case BossAttackState.Easy:
                         for (int i = 0; i < easyPatterns.Length; i++)
@@ -137,7 +143,7 @@ namespace Team17.StreetHunt
                         break;
                 }
 
-                if(index == -1)
+                if (index == -1)
                 {
                     Debug.LogWarning("No useful attack found");
                     return;
@@ -151,15 +157,15 @@ namespace Team17.StreetHunt
 
         private void Attack(int index)
         {
-            switch(currentState)
+            switch (currentState)
             {
                 case BossPhaseState.Entry:
-                    if(entryBeginsEvent != null) entryBeginsEvent.Invoke();
+                    if (entryBeginsEvent != null) entryBeginsEvent.Invoke();
                     entryPattern.LaunchAttack(EntryEnd);
                     break;
                 case BossPhaseState.Attacking:
 
-                    switch(attackStates[currentAttackStateIndex])
+                    switch (attackStates[currentAttackStateIndex])
                     {
                         case BossAttackState.Easy:
                             easyPatterns[index].LaunchAttack(AttackEnd);
@@ -183,7 +189,7 @@ namespace Team17.StreetHunt
                     break;
                 case BossPhaseState.Exit:
                     //call exit begins
-                    if(exitBeginsEvent != null)exitBeginsEvent.Invoke();
+                    if (exitBeginsEvent != null) exitBeginsEvent.Invoke();
                     exitPattern.LaunchAttack(ExitEnd);
                     break;
 
@@ -194,7 +200,7 @@ namespace Team17.StreetHunt
         private void EntryEnd()
         {
             canAttack = true;
-            if(entryBeginsEvent != null)entryEndsEvent.Invoke();
+            if (entryBeginsEvent != null) entryEndsEvent.Invoke();
             currentState = BossPhaseState.Attacking;
         }
 
@@ -208,7 +214,7 @@ namespace Team17.StreetHunt
             canAttack = false;
             //call exit end
             GameManager.state.CallOnBossChangeState();
-            if(exitEndsEvent != null) exitEndsEvent.Invoke();
+            if (exitEndsEvent != null) exitEndsEvent.Invoke();
             gameObject.SetActive(false);
         }
 
@@ -273,7 +279,7 @@ namespace Team17.StreetHunt
 
         #region Properties
 
-        public float CurrentHealthToNextState { get => currentHealth;}
+        public float CurrentHealthToNextState { get => currentHealth; }
         public CutSceneEvent EntryBeginsEvent { get => entryBeginsEvent; set => entryBeginsEvent = value; }
         public CutSceneEvent EntryEndsEvent { get => entryEndsEvent; set => entryEndsEvent = value; }
         public CutSceneEvent ExitBeginsEvent { get => exitBeginsEvent; set => exitBeginsEvent = value; }
@@ -292,16 +298,16 @@ namespace Team17.StreetHunt
     [System.Serializable]
     public class BossPattern
     {
-        [Header ("Base parameter")]
+        [Header("Base parameter")]
         [SerializeField] private string name;
         [SerializeField] private BossAimZone zone;
         [SerializeField] private int priority = 0;
-        [Header ("Attack parameter")]
-        [Tooltip ("Time it takes for the attack to be considered finished. After that time, the boss can choose and launch another attack.")]
+        [Header("Attack parameter")]
+        [Tooltip("Time it takes for the attack to be considered finished. After that time, the boss can choose and launch another attack.")]
         [SerializeField] private float timeToEnd = 3f;
-        [Tooltip ("Time it takes for spawned portal to disapear.")]
+        [Tooltip("Time it takes for spawned portal to disapear.")]
         [SerializeField] private float timeForPortalsToDisapear = 2.5f;
-        [Tooltip ("Time it takes for the attack to be considered usable again after the boss used it once. During this time, the boss will ignore this attack.")]
+        [Tooltip("Time it takes for the attack to be considered usable again after the boss used it once. During this time, the boss will ignore this attack.")]
         [SerializeField] private float coolDown = 4f;
         [SerializeField] private UnityEngine.Events.UnityEvent pattern;
         [SerializeField] private PortalPlacement[] portals;
