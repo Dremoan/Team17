@@ -199,7 +199,7 @@ namespace Team17.StreetHunt
                     }
 
                     shakePosDecrementer -= Time.timeScale;
-                    Debug.Log(shakePosDecrementer);
+
                     if (shakePosDecrementer < 0)
                     {
                         shakePosDecrementer = 0.90f;
