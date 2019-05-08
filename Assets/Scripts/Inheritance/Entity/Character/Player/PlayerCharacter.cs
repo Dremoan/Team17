@@ -13,26 +13,12 @@ namespace Team17.StreetHunt
         [SerializeField] private FeedBack tpFeedback;
 
         private PlayerProjectile currentBall;
+        private bool criticalShoot;
         private bool negativeAngle = false;
         private float angle = 0;
         private bool aiming = false;
         private bool playedTp = false;
 
-        private void OnCollisionEnter(Collision collision)
-        {
-            if(collision.gameObject.tag == "Ground")
-            {
-                anim.SetTrigger("Grounded");
-            }
-        }
-
-        private void OnCollisionExit(Collision collision)
-        {
-            if (collision.gameObject.tag == "Ground")
-            {
-                anim.ResetTrigger("Grounded");
-            }
-        }
 
         public void Physicate(bool physicate)
         {
@@ -61,6 +47,7 @@ namespace Team17.StreetHunt
         public void Strike()
         {
             playedTp = false;
+            anim.SetBool("CriticalShoot", criticalShoot);
             anim.SetTrigger("shoot");
         }
 
@@ -72,8 +59,8 @@ namespace Team17.StreetHunt
         public void TeleportToRoom(Transform spawnPoint)
         {
             transform.position = spawnPoint.position;
-            if(currentBall != null) currentBall.PauseBehavior();
-            currentBall.transform.position = spawnPoint.position + new Vector3(0.75f,0.15f,0f);
+            if (currentBall != null) currentBall.PauseBehavior();
+            currentBall.transform.position = spawnPoint.position + new Vector3(0.75f, 0.15f, 0f);
             tpFeedback.Play();
         }
 
@@ -97,5 +84,6 @@ namespace Team17.StreetHunt
 
         public FeedBack TpFeedback { get => tpFeedback; }
         public PlayerProjectile CurrentBall { get => currentBall; set => currentBall = value; }
+        public bool CriticalShoot { get => criticalShoot; set => criticalShoot = value; }
     }
 }

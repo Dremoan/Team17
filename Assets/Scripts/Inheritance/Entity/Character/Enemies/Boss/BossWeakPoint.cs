@@ -15,6 +15,11 @@ namespace Team17.StreetHunt
         [SerializeField] private float blinkTime = 0.1f;
         private bool alreadyDead;
 
+        public void Start()
+        {
+            if (actualBossMat != null) actualBossMat.SetFloat("_Threshold", 0f);
+        }
+
         public void Hit(int index, float dmgs)
         {
             if (!alreadyDead)

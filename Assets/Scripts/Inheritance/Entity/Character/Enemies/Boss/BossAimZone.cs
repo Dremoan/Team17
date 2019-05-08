@@ -18,8 +18,11 @@ namespace Team17.StreetHunt
         public bool Contains(Transform roomCenter, Vector3 pos)
         {
             // from top right
-            Vector3 topRightTopLeft = roomCenter.position + ((topLeft - topRight) * 0.5f);
-            Vector3 topRightBotRight = roomCenter.position + ((botRight - topRight) * 0.5f);
+            Vector3 topRightTopLeft = ((topLeft - topRight) * 0.5f);
+            Vector3 topRightBotRight = ((botRight - topRight) * 0.5f);
+
+            //Vector3 topRightTopLeft = roomCenter.position + ((topLeft - topRight) * 0.5f);
+            //Vector3 topRightBotRight = roomCenter.position + ((botRight - topRight) * 0.5f);
 
             Vector3 center = topRight + new Vector3(topRightTopLeft.x, topRightBotRight.y, 0);
             realCenter = center;
@@ -27,7 +30,7 @@ namespace Team17.StreetHunt
             float height = Vector3.Distance(new Vector3(center.x, topRight.y, 0), center);
 
             Rect rect = new Rect(botLeft, new Vector2(width*2, height*2));
-            return rect.Contains(new Vector2(pos.x, pos.y));
+            return rect.Contains(new Vector2(pos.x - roomCenter.position.x, pos.y - roomCenter.position.y));
         }
 
         public Vector3 ZoneCenter { get => zoneCenter; set => zoneCenter = value; }
