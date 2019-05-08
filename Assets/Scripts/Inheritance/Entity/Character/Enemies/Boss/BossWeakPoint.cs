@@ -25,7 +25,7 @@ namespace Team17.StreetHunt
 
         public void Hit(int index, float dmgs)
         {
-            if (isVulnerable)
+            if (isVulnerable && !alreadyDead)
             {
                 linkedBoss.Hit(index, dmgs);
                 if (!alreadyDead)
