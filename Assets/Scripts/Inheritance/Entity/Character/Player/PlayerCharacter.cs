@@ -13,6 +13,7 @@ namespace Team17.StreetHunt
         [SerializeField] private FeedBack tpFeedback;
 
         private PlayerProjectile currentBall;
+        private bool criticalShoot;
         private bool negativeAngle = false;
         private float angle = 0;
         private bool aiming = false;
@@ -47,6 +48,7 @@ namespace Team17.StreetHunt
         {
             playedTp = false;
             anim.SetTrigger("shoot");
+            anim.SetBool("CriticalShoot", criticalShoot);
         }
 
         public void TriggerLaunchBall()
@@ -57,11 +59,31 @@ namespace Team17.StreetHunt
         public void TeleportToRoom(Transform spawnPoint)
         {
             transform.position = spawnPoint.position;
-            if(currentBall != null) currentBall.PauseBehavior();
+            if (currentBall != null) currentBall.PauseBehavior();
+            currentBall.transform.position = spawnPoint.position + new Vector3(0.75f, 0.15f, 0f);
             tpFeedback.Play();
         }
 
+        public void TeleportAndTaunt(Transform tauntPoint)
+        {
+            transform.position = tauntPoint.position;
+            if (currentBall != null) currentBall.PauseBehavior();
+            anim.Play("TauntIdle");
+            tpFeedback.Play();
+        }
+
+        public void TeleportAndActiveBall(Transform spawnPoint)
+        {
+            anim.SetTrigger("TauntToIdle");
+            transform.position = spawnPoint.position;
+            if (currentBall != null) currentBall.gameObject.SetActive(true);
+            currentBall.transform.position = spawnPoint.position + new Vector3(0.75f, 0.15f, 0f);
+            tpFeedback.Play();
+        }
+
+
         public FeedBack TpFeedback { get => tpFeedback; }
         public PlayerProjectile CurrentBall { get => currentBall; set => currentBall = value; }
+        public bool CriticalShoot { get => criticalShoot; set => criticalShoot = value; }
     }
 }

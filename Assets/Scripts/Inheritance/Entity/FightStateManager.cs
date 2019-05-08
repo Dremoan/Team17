@@ -66,15 +66,15 @@ namespace Team17.StreetHunt
             {
                 case FightGlobalState.First:
                     firstPhaseBoss.gameObject.SetActive(true);
-                    character.TeleportToRoom(firstSpawnPoint);
+                    //character.TeleportToRoom(firstSpawnPoint);
                     break;
                 case FightGlobalState.Second:
                     secondPhaseBoss.gameObject.SetActive(true);
-                    character.TeleportToRoom(secondSpawnPoint);
+                    //character.TeleportToRoom(secondSpawnPoint);
                     break;
                 case FightGlobalState.Third:
                     thirdPhaseBoss.gameObject.SetActive(true);
-                    character.TeleportToRoom(thirdSpawnPoint);
+                    //character.TeleportToRoom(thirdSpawnPoint);
                     break;
             }
         }

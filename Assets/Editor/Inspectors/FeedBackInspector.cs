@@ -35,11 +35,20 @@ namespace Team17.StreetHunt
             if(feedBack.Particles)
             {
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("particlesSystems"), true);
+                
                 if(GUILayout.Button("Find Particles"))
                 {
                     feedBack.ParticlesSystems = feedBack.gameObject.GetComponentsInChildren<ParticleSystem>(true);
                 }
+
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("particleRotation"), new GUIContent("Use Rotation"));
+
+                if (feedBack.ParticleRotation)
+                {
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("particleSystemsToRotate"), true);
+                }
             }
+
             EditorGUILayout.Space();
 
             EditorGUILayout.LabelField("Trails parameters", EditorStyles.boldLabel);
@@ -65,6 +74,17 @@ namespace Team17.StreetHunt
                 }
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("shakeAmplitude"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("shakeTime"));
+            }
+            EditorGUILayout.Space();
+
+            EditorGUILayout.LabelField("Slow-Mo parameters", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("slowMo"), new GUIContent("Use slow-mo"));
+            if(feedBack.SlowMo)
+            {
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("targetTimeScale"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("slowMoSpeed"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("slowMoInCurve"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("slowMoOutCurve"));
             }
             EditorGUILayout.Space();
 
