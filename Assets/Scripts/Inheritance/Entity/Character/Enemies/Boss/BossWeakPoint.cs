@@ -14,18 +14,24 @@ namespace Team17.StreetHunt
         [SerializeField] private SkinnedMeshRenderer skinWeakPoint;
         [SerializeField] private float blinkTime = 0.1f;
         private bool alreadyDead;
+        private bool isVulnerable = true;
+
 
         public void Start()
         {
+            base.Start();
             if (actualBossMat != null) actualBossMat.SetFloat("_Threshold", 0f);
         }
 
         public void Hit(int index, float dmgs)
         {
-            if (!alreadyDead)
+            if (isVulnerable)
             {
                 linkedBoss.Hit(index, dmgs);
-                StartCoroutine(Blink());
+                if (!alreadyDead)
+                {
+                    StartCoroutine(Blink());
+                }
             }
         }
 
