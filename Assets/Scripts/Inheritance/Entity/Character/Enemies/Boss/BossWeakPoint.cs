@@ -9,34 +9,39 @@ namespace Team17.StreetHunt
         [SerializeField] private Boss linkedBoss;
         [SerializeField] private GameObject actualTouchPlane;
         [SerializeField] private FeedBack deathFeedback;
-        [SerializeField] private Material healthBarMat;
-        [SerializeField] private Texture newTexture;
+        [SerializeField] private Material actualBossMat;
+        [SerializeField] private Material newMaterial;
+        [SerializeField] private SkinnedMeshRenderer skinWeakPoint;
         [SerializeField] private float blinkTime = 0.1f;
         private bool alreadyDead;
 
         public void Hit(int index, float dmgs)
         {
-            linkedBoss.Hit(index, dmgs);
-            StartCoroutine(Blink());
+            if (!alreadyDead)
+            {
+                linkedBoss.Hit(index, dmgs);
+                StartCoroutine(Blink());
+            }
         }
 
         public override void OnBossDeath()
         {
             base.OnBossDeath();
+            alreadyDead = true;
             actualTouchPlane.SetActive(false);
             deathFeedback.Play();
-            healthBarMat.SetTexture("_Tex", newTexture);
+            skinWeakPoint.material = newMaterial;
         }
 
         IEnumerator Blink()
         {
-            if (healthBarMat != null) healthBarMat.SetFloat("_Threshold", 1f);
-            yield return new WaitForSeconds(.1f);
-            if (healthBarMat != null) healthBarMat.SetFloat("_Threshold", 0f);
-            yield return new WaitForSeconds(.1f);
-            if (healthBarMat != null) healthBarMat.SetFloat("_Threshold", 1f);
-            yield return new WaitForSeconds(.1f);
-            if (healthBarMat != null) healthBarMat.SetFloat("_Threshold", 0f);
+            for (int i = 0; i < 2; i++)
+            {
+                if (actualBossMat != null) actualBossMat.SetFloat("_Threshold", 1f);
+                yield return new WaitForSeconds(.1f);
+                if (actualBossMat != null) actualBossMat.SetFloat("_Threshold", 0f);
+                yield return new WaitForSeconds(.1f);
+            }
         }
     }
 
