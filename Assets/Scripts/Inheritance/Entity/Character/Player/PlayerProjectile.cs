@@ -336,7 +336,7 @@ namespace Team17.StreetHunt
             {
                 RaycastHit hit = new RaycastHit();
                 Physics.Raycast(rayStart, futurMovementDir, out hit, remainingDist, trajectoryCalculationMask);
-                Debug.DrawRay(rayStart, futurMovementDir.normalized * remainingDist, Color.green);
+                //Debug.DrawRay(rayStart, futurMovementDir.normalized * remainingDist, Color.green);
                 if(hit.collider != null)
                 {
                     rayStart = hit.point;
@@ -350,7 +350,7 @@ namespace Team17.StreetHunt
                     break;
                 }
             }
-            Debug.DrawLine(transform.position, futurPos, Color.yellow);
+            //Debug.DrawLine(transform.position, futurPos, Color.yellow);
             return futurPos;
         }
 

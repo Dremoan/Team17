@@ -139,6 +139,7 @@ namespace Team17.StreetHunt
 
                 if(index == -1)
                 {
+                    Debug.LogWarning("No useful attack found");
                     return;
                 }
                 else
