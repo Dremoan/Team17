@@ -112,6 +112,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &7728959 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7775972242506654245, guid: 1d7d8698125f9844c8139764c4c000a7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1618312284594600675}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08e2b87d1d22ee449b461df5cb6b0f5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9602922
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,7 +457,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1012528463}
+  m_Father: {fileID: 1000157826}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &66881016
@@ -459,7 +471,7 @@ GameObject:
   - component: {fileID: 66881015}
   - component: {fileID: 66881014}
   m_Layer: 0
-  m_Name: Target
+  m_Name: Shake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1076,6 +1088,117 @@ Transform:
   - {fileID: 1386922272}
   m_Father: {fileID: 1926925369}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &171617129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 171617131}
+  - component: {fileID: 171617130}
+  m_Layer: 0
+  m_Name: feedback
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &171617130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171617129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7be32b554ce1e04293ce2c45ca8e22e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnStart: 0
+  looping: 1
+  hardFollowingTransform: 0
+  transformToHardFollow: {fileID: 0}
+  tpOnTransformOnPlay: 0
+  transformToTPToOnPlay: {fileID: 0}
+  particles: 0
+  particlesSystems: []
+  trails: 0
+  trailRenderers: []
+  shake: 0
+  useSpecificTransform: 0
+  specificTransformToShake: []
+  shakeAmplitude: 0.2
+  shakeTime: 0.1
+  zoom: 1
+  zoomInCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  zoomOutCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -1
+      outSlope: -1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1
+      outSlope: -1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  zoomedDist: 4
+  zoomSpeed: 0.1
+  rumble: 0
+  rumbleTime: 5
+--- !u!4 &171617131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171617129}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.43, y: 0.18, z: 0.39000893}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &175442502
 GameObject:
@@ -3651,7 +3774,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 947479523}
+  m_Father: {fileID: 673033759}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &383218701
@@ -3665,7 +3788,7 @@ GameObject:
   - component: {fileID: 383218700}
   - component: {fileID: 383218699}
   m_Layer: 0
-  m_Name: Target
+  m_Name: Shake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4047,14 +4170,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timers: {fileID: 454053342}
+  portalManager: {fileID: 0}
   currentState: 0
   health: 20
   roomZero: {fileID: 3561031006747512242}
+  attackStates: 
   entryPattern:
     name: Phase One Snake entry
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
     priority: 0
     timeToEnd: 3
+    timeForPortalsToDisapear: 2.5
     coolDown: 4
     pattern:
       m_PersistentCalls:
@@ -4083,50 +4209,23 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-  patternList:
-  - name: Test attack pattern
-    zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
-    priority: 5
-    timeToEnd: 5
-    coolDown: 2
-    pattern:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 743117898}
-          m_MethodName: GetPath
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 11
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 743117898}
-          m_MethodName: PickMove
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+    portals: []
+  easyPatterns: []
+  mediumPatterns: []
+  hardPatterns: []
   exitPattern:
     name: Test end pattern
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
     priority: 5
     timeToEnd: 3
+    timeForPortalsToDisapear: 2.5
     coolDown: 4
     pattern:
       m_PersistentCalls:
         m_Calls: []
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
+    portals: []
 --- !u!114 &454053342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10378,6 +10477,50 @@ Transform:
   m_Father: {fileID: 1883131321}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &673033758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 673033759}
+  - component: {fileID: 673033760}
+  m_Layer: 0
+  m_Name: Zoom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &673033759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673033758}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 383218700}
+  m_Father: {fileID: 947479523}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &673033760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673033758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486901f04f4dc9d4ab9f120fc430da15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &681448580
 GameObject:
   m_ObjectHideFlags: 0
@@ -11476,14 +11619,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timers: {fileID: 847305802}
+  portalManager: {fileID: 0}
   currentState: 0
   health: 20
   roomZero: {fileID: 3561031007102380237}
+  attackStates: 
   entryPattern:
     name: Phase One Snake entry
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
     priority: 0
     timeToEnd: 3
+    timeForPortalsToDisapear: 2.5
     coolDown: 4
     pattern:
       m_PersistentCalls:
@@ -11512,50 +11658,23 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-  patternList:
-  - name: Test attack pattern
-    zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
-    priority: 5
-    timeToEnd: 5
-    coolDown: 2
-    pattern:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1701292437}
-          m_MethodName: GetPath
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 21
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1701292437}
-          m_MethodName: PickMove
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+    portals: []
+  easyPatterns: []
+  mediumPatterns: []
+  hardPatterns: []
   exitPattern:
     name: Test end pattern
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
     priority: 5
     timeToEnd: 3
+    timeForPortalsToDisapear: 2.5
     coolDown: 4
     pattern:
       m_PersistentCalls:
         m_Calls: []
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
+    portals: []
 --- !u!114 &847305802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12460,7 +12579,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 383218700}
+  - {fileID: 673033759}
   m_Father: {fileID: 1827819714}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12895,6 +13014,50 @@ Transform:
   m_Father: {fileID: 1728406470}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &994497710
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 994497711}
+  - component: {fileID: 994497712}
+  m_Layer: 0
+  m_Name: Zoom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &994497711
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994497710}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1995041368}
+  m_Father: {fileID: 1615149889}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &994497712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994497710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486901f04f4dc9d4ab9f120fc430da15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &998894719
 GameObject:
   m_ObjectHideFlags: 0
@@ -12995,6 +13158,50 @@ MonoBehaviour:
     showNormalsHelpInfo: 0
     tabIndex: 0
   initialized: 1
+--- !u!1 &1000157825
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1000157826}
+  - component: {fileID: 1000157827}
+  m_Layer: 0
+  m_Name: Zoom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1000157826
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000157825}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 66881015}
+  m_Father: {fileID: 1012528463}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1000157827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000157825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486901f04f4dc9d4ab9f120fc430da15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1008700535
 GameObject:
   m_ObjectHideFlags: 0
@@ -13165,7 +13372,7 @@ Transform:
   m_LocalPosition: {x: 100, y: -95, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 66881015}
+  - {fileID: 1000157826}
   m_Father: {fileID: 1827819714}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -21708,7 +21915,7 @@ Transform:
   m_LocalPosition: {x: 100, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1995041368}
+  - {fileID: 994497711}
   m_Father: {fileID: 1827819714}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23469,7 +23676,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1827819714}
   m_Layer: 0
-  m_Name: ShakeTargets
+  m_Name: CamerasTargets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24536,7 +24743,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1989374103}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.505515, y: -4.41, z: -0.00000047683716}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -24665,7 +24872,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1615149889}
+  m_Father: {fileID: 994497711}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1995041369
@@ -24679,7 +24886,7 @@ GameObject:
   - component: {fileID: 1995041368}
   - component: {fileID: 1995041367}
   m_Layer: 0
-  m_Name: Target
+  m_Name: Shake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25904,12 +26111,12 @@ PrefabInstance:
     - target: {fileID: 456350702207272870, guid: d46a91fa83714084ba36e7f41c2938a9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.2224941
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 456350702207272870, guid: d46a91fa83714084ba36e7f41c2938a9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.0612125
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 456350702207272870, guid: d46a91fa83714084ba36e7f41c2938a9,
         type: 3}
@@ -26082,85 +26289,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkedBoss: {fileID: 8712853280227238618}
---- !u!1001 &1076825330191702417
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1076825329525645875, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_Name
-      value: SpeedPortal
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645875, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.43
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1076825329525645874, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1798772278973419546, guid: 711c6332748f9484d8ba5b2dcc87bffc,
-        type: 3}
-      propertyPath: placementSpeed
-      value: 0.25
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 711c6332748f9484d8ba5b2dcc87bffc, type: 3}
 --- !u!114 &1127354331815522809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26637,6 +26765,11 @@ PrefabInstance:
         type: 3}
       propertyPath: speedPortalPrecision
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7775972242506654235, guid: 1d7d8698125f9844c8139764c4c000a7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d7d8698125f9844c8139764c4c000a7, type: 3}
@@ -36490,14 +36623,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timers: {fileID: 8712853280227238619}
+  portalManager: {fileID: 7728959}
   currentState: 0
   health: 20
   roomZero: {fileID: 3561031007102380237}
+  attackStates: 
   entryPattern:
     name: Phase One Snake entry
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
     priority: 0
     timeToEnd: 3
+    timeForPortalsToDisapear: 2.5
     coolDown: 4
     pattern:
       m_PersistentCalls:
@@ -36526,50 +36662,23 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-  patternList:
-  - name: Test attack pattern
-    zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
-    priority: 5
-    timeToEnd: 5
-    coolDown: 2
-    pattern:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 474211568}
-          m_MethodName: GetPath
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 6
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 474211568}
-          m_MethodName: PickMove
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+    portals: []
+  easyPatterns: []
+  mediumPatterns: []
+  hardPatterns: []
   exitPattern:
     name: Test end pattern
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
     priority: 5
     timeToEnd: 3
+    timeForPortalsToDisapear: 2.5
     coolDown: 4
     pattern:
       m_PersistentCalls:
         m_Calls: []
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
+    portals: []
 --- !u!114 &8712853280227238619
 MonoBehaviour:
   m_ObjectHideFlags: 0

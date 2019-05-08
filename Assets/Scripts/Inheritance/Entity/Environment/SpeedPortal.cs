@@ -25,7 +25,8 @@ namespace Team17.StreetHunt
         private void PosRotManagement()
         {
             transform.rotation = Quaternion.Euler(0, 0, targetZRot);
-            transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref refTargetPos, placementSpeed);
+            //transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref refTargetPos, placementSpeed);
+            transform.position = targetPos;
         }
 
         public void SetTargets(Vector3 pos, float rot)

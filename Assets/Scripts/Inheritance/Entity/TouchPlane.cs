@@ -11,6 +11,7 @@ namespace Team17.StreetHunt
 
         private PlayerProjectile ball;
         private bool shouldLaunchIntro = true;
+        private bool touchBegan = false;
 
         public void OnTouchBegin(Vector3 touchPos)
         {
@@ -21,17 +22,22 @@ namespace Team17.StreetHunt
                 return;
             }
 
-            if(ball != null && !ball.Destroyed && ball.gameObject.activeSelf)
+            if(ball != null && !ball.Destroyed && ball.gameObject.activeSelf && ball.CanStrike)
             {
                 ball.StartCalculation();
+                touchBegan = true;
             }
             else if(lives.BallAvailable())
             {
                 ball = lives.GetNextBall();
-                character.CurrentBall = lives.GetNextBall();
-                ball.transform.position = character.transform.position;
-                ball.gameObject.SetActive(true);
-                ball.StartCalculation();
+                if(ball != null && ball.CanStrike)
+                {
+                    character.CurrentBall = lives.GetNextBall();
+                    ball.transform.position = character.transform.position;
+                    ball.gameObject.SetActive(true);
+                    ball.StartCalculation();
+                    touchBegan = true;
+                }
             }
             else
             {
@@ -43,7 +49,10 @@ namespace Team17.StreetHunt
         {
             if(ball != null)
             {
-                ball.FeedBack(touchPos);
+                if(ball.CanStrike && touchBegan)
+                {
+                    ball.FeedBack(touchPos);
+                }
             }
         }
 
@@ -51,8 +60,12 @@ namespace Team17.StreetHunt
         {
             if(ball != null)
             {
-                ball.GetNewDirection((touchPos - ball.transform.position));
+                if(ball.CanStrike && touchBegan)
+                {
+                    ball.GetNewDirection((touchPos - ball.transform.position));
+                }
             }
+            touchBegan = false;
         }
 
         public PlayerProjectile Ball { get => ball; set => ball = value; }

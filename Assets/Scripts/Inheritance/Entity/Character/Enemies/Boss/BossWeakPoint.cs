@@ -8,9 +8,9 @@ namespace Team17.StreetHunt
     {
         [SerializeField] private Boss linkedBoss;
 
-        public void Hit(float dmgs)
+        public void Hit(int index, float dmgs)
         {
-            linkedBoss.Hit(dmgs);
+            linkedBoss.Hit(index, dmgs);
         }
     }
 }
