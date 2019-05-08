@@ -11,19 +11,30 @@ namespace Team17.StreetHunt
         [SerializeField] private Animator anim;
         [SerializeField] private float distFromBall = 1.2f;
         [SerializeField] private FeedBack tpFeedback;
+        [Header("Ground check parameters")]
+        [SerializeField] private Vector3 feetPosition;
+        [SerializeField] private float feetlength = 0.25f;
+        [SerializeField] private LayerMask groundMask;
 
         private PlayerProjectile currentBall;
+        private bool criticalShoot;
         private bool negativeAngle = false;
         private float angle = 0;
         private bool aiming = false;
         private bool playedTp = false;
+        private bool grounded = false;
 
-        private void OnCollisionEnter(Collision collision)
+        protected override void Update()
         {
-            if(collision.gameObject.tag == "Ground")
-            {
-                anim.SetTrigger("Grounded");
-            }
+            base.Update();
+            GroundCheck();
+        }
+
+        private void GroundCheck()
+        {
+            grounded = Physics.Raycast(transform.position + feetPosition, Vector3.down, feetlength, groundMask);
+            Debug.DrawRay(transform.position + feetPosition, Vector3.down * feetlength, Color.red);
+            anim.SetBool("Grounded", grounded);
         }
 
         public void Physicate(bool physicate)
@@ -54,6 +65,7 @@ namespace Team17.StreetHunt
         {
             playedTp = false;
             anim.SetTrigger("shoot");
+            anim.SetBool("CriticalShoot", criticalShoot);
         }
 
         public void TriggerLaunchBall()
@@ -64,8 +76,8 @@ namespace Team17.StreetHunt
         public void TeleportToRoom(Transform spawnPoint)
         {
             transform.position = spawnPoint.position;
-            if(currentBall != null) currentBall.PauseBehavior();
-            currentBall.transform.position = spawnPoint.position + new Vector3(0.75f,0.15f,0f);
+            if (currentBall != null) currentBall.PauseBehavior();
+            currentBall.transform.position = spawnPoint.position + new Vector3(0.75f, 0.15f, 0f);
             tpFeedback.Play();
         }
 
@@ -86,7 +98,9 @@ namespace Team17.StreetHunt
             tpFeedback.Play();
         }
 
+
         public FeedBack TpFeedback { get => tpFeedback; }
         public PlayerProjectile CurrentBall { get => currentBall; set => currentBall = value; }
+        public bool CriticalShoot { get => criticalShoot; set => criticalShoot = value; }
     }
 }
