@@ -46,16 +46,18 @@ namespace Team17.StreetHunt
 
         private Transform[] usedShakeTransform;
         private Vector3[] initialZoomTargetsPos;
+        private Vector3 shakePosTarget;
         private bool isShaking = false;
         private bool isRumbling = false;
         private bool isZoomingIn = false;
         private bool isZoomingOut = false;
         private bool isSlowMoIn = false;
         private bool isSlowMoOut = false;
-        private float shakeDecrementer;
-        private float zoomIncrementer;
+        private float shakeTimerDecrementer = 1f;
+        private float shakePosDecrementer = 0.90f;
+        private float zoomIncrementer = 0f;
         private float currentTimeScale = 1f;
-        private float slowMoIncrementer;
+        private float slowMoIncrementer = 0f;
 
         private void Start()
         {
@@ -109,7 +111,8 @@ namespace Team17.StreetHunt
                         usedShakeTransform[i] = GameManager.state.VirtualCameraShakeTargets[i].transform;
                     }
                 }
-                shakeDecrementer = shakeTime;
+                shakePosTarget = Vector3.zero;
+                shakeTimerDecrementer = shakeTime;
                 isShaking = true;
             }
 
@@ -162,7 +165,7 @@ namespace Team17.StreetHunt
                 }
                 if (shake)
                 {
-                    shakeDecrementer = shakeTime;
+                    shakeTimerDecrementer = shakeTime;
                     isShaking = false;
                 }
                 if(slowMo)
@@ -188,28 +191,29 @@ namespace Team17.StreetHunt
         {
             if (isShaking)
             {
-                if(shakeDecrementer > 0)
+                if(shakeTimerDecrementer > 0)
                 {
                     if(!looping)
                     {
-                        if(slowMo)
-                        {
-                            shakeDecrementer -= Time.deltaTime / currentTimeScale;
-                        }
-                        else
-                        {
-                            shakeDecrementer -= Time.deltaTime;
-                        }
+                        shakeTimerDecrementer -= Time.deltaTime;
+                    }
+
+                    shakePosDecrementer -= Time.timeScale;
+                    Debug.Log(shakePosDecrementer);
+                    if (shakePosDecrementer < 0)
+                    {
+                        shakePosDecrementer = 0.90f;
+                        shakePosTarget = (Random.insideUnitCircle * shakeAmplitude * Mathf.InverseLerp(0, shakeTime, shakeTimerDecrementer) * ((Time.timeScale * 0.9f) + 0.1f));
                     }
                     for (int i = 0; i < usedShakeTransform.Length; i++)
                     {
-                        Vector3 newPos = (Random.insideUnitCircle * shakeAmplitude * Mathf.InverseLerp(0, shakeTime, shakeDecrementer));
-                        usedShakeTransform[i].localPosition = new Vector3(newPos.x, newPos.y, usedShakeTransform[i].localPosition.z);
+                        //usedShakeTransform[i].localPosition = new Vector3(newPos.x, newPos.y, usedShakeTransform[i].localPosition.z);
+                        usedShakeTransform[i].localPosition = Vector3.Lerp(usedShakeTransform[i].localPosition, new Vector3(shakePosTarget.x, shakePosTarget.y, usedShakeTransform[i].localPosition.z), 1 - shakePosDecrementer);
                     }
                 }
                 else
                 {
-                    shakeDecrementer = shakeTime;
+                    shakeTimerDecrementer = shakeTime;
                     isShaking = false;
                 }
             }
@@ -343,7 +347,6 @@ namespace Team17.StreetHunt
                     isSlowMoOut = false;
                     isSlowMoIn = false;
                 }
-                Debug.Log(currentTimeScale);
             }
         }
 
