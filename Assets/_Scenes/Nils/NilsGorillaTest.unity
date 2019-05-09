@@ -1584,8 +1584,7 @@ MonoBehaviour:
     name: Intro
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
     priority: 1
-    timeToEnd: 3
-    timeForPortalsToAppear: 1
+    timeToEnd: 10
     coolDown: 4
     pattern:
       m_PersistentCalls:
@@ -1615,15 +1614,20 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     portals:
-    - position: {x: 0, y: 5, z: 0}
+    - name: first
+      position: {x: 0, y: 5, z: 0}
       rotation: 45
+      apparitionTime: 3
+    - name: second
+      position: {x: 0, y: 5, z: 0}
+      rotation: -45
+      apparitionTime: 5
   easyPatterns: []
   mediumPatterns:
   - name: LaunchRock
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
     priority: 1
     timeToEnd: 2
-    timeForPortalsToAppear: 2.5
     coolDown: 2
     pattern:
       m_PersistentCalls:
@@ -1648,7 +1652,6 @@ MonoBehaviour:
     zone: {fileID: 0}
     priority: 0
     timeToEnd: 3
-    timeForPortalsToAppear: 2.5
     coolDown: 4
     pattern:
       m_PersistentCalls:

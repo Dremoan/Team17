@@ -308,8 +308,6 @@ namespace Team17.StreetHunt
         [Header("Attack parameter")]
         [Tooltip("Time it takes for the attack to be considered finished. After that time, the boss can choose and launch another attack.")]
         [SerializeField] private float timeToEnd = 3f;
-        [Tooltip("Time it takes for spawned portal to appear.")]
-        [SerializeField] private float timeForPortalsToAppear = 2.5f;
         [Tooltip("Time it takes for the attack to be considered usable again after the boss used it once. During this time, the boss will ignore this attack.")]
         [SerializeField] private float coolDown = 4f;
         [SerializeField] private UnityEngine.Events.UnityEvent pattern;
@@ -328,9 +326,8 @@ namespace Team17.StreetHunt
             canBeUsed = false;
             for (int i = 0; i < portals.Length; i++)
             {
-                portalManager.SpawnPortal(portals[i].Position, portals[i].Rotation, timeForPortalsToAppear);
+                portalManager.SpawnPortal(portals[i].Position, portals[i].Rotation, portals[i].ApparitionTime);
             }
-            portalManager.ApparitionEnabled = true;
             //enable apparition
             timers.LaunchNewTimer(timeToEnd, EndAttack);
         }
@@ -363,11 +360,15 @@ namespace Team17.StreetHunt
     [System.Serializable]
     public struct PortalPlacement
     {
+        [SerializeField] private string name;
         [SerializeField] private Vector3 position;
         [SerializeField] private float rotation;
+        [SerializeField] private float apparitionTime;
 
-        public Vector3 Position { get => position; set => position = value; }
-        public float Rotation { get => rotation; set => rotation = value; }
+        public string Name { get => name; }
+        public Vector3 Position { get => position; }
+        public float Rotation { get => rotation; }
+        public float ApparitionTime { get => apparitionTime; }
     }
 
     public enum BossAttackState
