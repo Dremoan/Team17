@@ -19,14 +19,10 @@ namespace Team17.StreetHunt
         [SerializeField] private float delayFollowSnakeChunks = 0.25f;
         private int indexPath;
 
-        protected override void Start()
-        {
 
-        }
+            #region Spline movement
 
-        #region Spline movement
-
-        IEnumerator Delay()
+            IEnumerator Delay()
         {
             snakeBodyParts[0].startPathFollowing = true;
             yield return new WaitForSeconds(delayFollowSnakeChunks);
