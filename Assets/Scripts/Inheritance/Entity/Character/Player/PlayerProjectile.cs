@@ -130,6 +130,7 @@ namespace Team17.StreetHunt
                 timerFeedback.gameObject.SetActive(true);
                 trajectory.gameObject.SetActive(true);
                 character.Physicate(false);
+                character.AimingParameterSetup(false);
                 wasCanceled = false;
                 isStriking = true;
 
@@ -185,7 +186,8 @@ namespace Team17.StreetHunt
                 timerFeedback.gameObject.SetActive(false);
                 trajectory.gameObject.SetActive(false);
 
-                character.Physicate(true);
+                //character.Physicate(true);
+                character.AimingParameterSetup(true);
                 character.Strike();
 
                 GameManager.state.CallOnCharacterStartStrikeAnim();
@@ -234,7 +236,7 @@ namespace Team17.StreetHunt
             wasCanceled = true;
             timerFeedback.gameObject.SetActive(false);
             trajectory.gameObject.SetActive(false);
-            character.Physicate(true);
+            //character.Physicate(true);
             gameObject.SetActive(false);
             //destroyed = true;
 

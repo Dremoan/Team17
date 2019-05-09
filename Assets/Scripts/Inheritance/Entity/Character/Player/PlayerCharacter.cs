@@ -43,7 +43,11 @@ namespace Team17.StreetHunt
             hardCollider.enabled = physicate;
             body.velocity = Vector3.zero;
             transform.rotation = Quaternion.Euler(0, 90, 0);
-            anim.SetBool("aiming", !physicate);
+        }
+
+        public void AimingParameterSetup(bool aiming)
+        {
+            anim.SetBool("aiming", !aiming);
         }
 
         public void PrepareStrike(Vector3 ballPos, Vector3 touchPos)
@@ -73,6 +77,8 @@ namespace Team17.StreetHunt
             currentBall.LaunchBall();
         }
 
+        #region TeleportFunctions
+
         public void TeleportToRoom(Transform spawnPoint)
         {
             transform.position = spawnPoint.position;
@@ -97,6 +103,7 @@ namespace Team17.StreetHunt
             currentBall.transform.position = spawnPoint.position + new Vector3(0.75f, 0.15f, 0f);
             tpFeedback.Play();
         }
+        #endregion
 
 
         public FeedBack TpFeedback { get => tpFeedback; }
