@@ -11,6 +11,7 @@ namespace Team17.StreetHunt
         [Header("Components")]
         [SerializeField] private TimersCalculator timers;
         [SerializeField] private SpeedPortalManager portalManager;
+        [SerializeField] private TouchPlane touchPlane;
         [Header("Health and state")]
         [SerializeField] private BossPhaseState currentState = BossPhaseState.Entry;
         [SerializeField] private float health = 50f;
@@ -83,6 +84,7 @@ namespace Team17.StreetHunt
         private void Death()
         {
             currentState = BossPhaseState.Exit;
+            touchPlane.gameObject.SetActive(false);
             GameManager.state.CallOnBossDeath();
         }
 
@@ -201,6 +203,7 @@ namespace Team17.StreetHunt
         {
             canAttack = true;
             if (entryBeginsEvent != null) entryEndsEvent.Invoke();
+            touchPlane.gameObject.SetActive(true);
             currentState = BossPhaseState.Attacking;
         }
 
