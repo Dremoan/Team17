@@ -1360,6 +1360,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &947182299 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6646031911183900036, guid: 1d7d8698125f9844c8139764c4c000a7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1618312284594600675}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 666bfb8c266586c4dafaff322b4180e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &947479523
 Transform:
   m_ObjectHideFlags: 0
@@ -1527,7 +1539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1043525080
 Transform:
   m_ObjectHideFlags: 0
@@ -1563,6 +1575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timers: {fileID: 1043525082}
   portalManager: {fileID: 7728959}
+  touchPlane: {fileID: 947182299}
   currentState: 0
   health: 50
   roomZero: {fileID: 3561031007102380237}
@@ -1572,7 +1585,7 @@ MonoBehaviour:
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
     priority: 1
     timeToEnd: 3
-    timeForPortalsToDisapear: 2.5
+    timeForPortalsToAppear: 1
     coolDown: 4
     pattern:
       m_PersistentCalls:
@@ -1601,14 +1614,16 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-    portals: []
+    portals:
+    - position: {x: 0, y: 5, z: 0}
+      rotation: 45
   easyPatterns: []
   mediumPatterns:
   - name: LaunchRock
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
     priority: 1
     timeToEnd: 2
-    timeForPortalsToDisapear: 0
+    timeForPortalsToAppear: 2.5
     coolDown: 2
     pattern:
       m_PersistentCalls:
@@ -1633,7 +1648,7 @@ MonoBehaviour:
     zone: {fileID: 0}
     priority: 0
     timeToEnd: 3
-    timeForPortalsToDisapear: 2.5
+    timeForPortalsToAppear: 2.5
     coolDown: 4
     pattern:
       m_PersistentCalls:
