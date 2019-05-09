@@ -12,6 +12,7 @@ namespace Team17.StreetHunt
         [Header("Feedbacks")]
         [SerializeField] private FeedBack deathFeedback;
         [SerializeField] private FeedBack hitFeedback;
+        [SerializeField] private GameObject weaknessFx;
         [SerializeField] private Animator canvasAnim;
         [SerializeField] private float blinkTime = 0.1f;
 
@@ -24,7 +25,7 @@ namespace Team17.StreetHunt
         private bool isVulnerable = true;
 
 
-        public void Start()
+        protected override void Start()
         {
             base.Start();
             if (actualBossMat != null) actualBossMat.SetFloat("_Threshold", 0f);
@@ -65,7 +66,8 @@ namespace Team17.StreetHunt
             alreadyDead = true;
             deathFeedback.Play();
             yield return new WaitForSeconds(changeMaterialDelay);
-            hitFeedback.Play();
+            hitFeedback.gameObject.SetActive(false);
+            weaknessFx.SetActive(false);
             canvasAnim.Play("FlashBlanc");
             skinWeakPoint.material = newMaterial;
         }

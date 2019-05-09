@@ -58,7 +58,14 @@ namespace Team17.StreetHunt
             }
         }
 
-        public void EndSplineResetValues()
+
+        public override void OnBossDeath()
+        {
+            base.OnBossDeath();
+            speed = 14f;
+        }
+
+            public void EndSplineResetValues()
         {
             ResetTransform();
             startPathFollowing = false;

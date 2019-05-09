@@ -115,14 +115,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkedBoss: {fileID: 0}
-  actualTouchPlane: {fileID: 0}
   deathFeedback: {fileID: 5729880092900489899}
   hitFeedback: {fileID: 3400415845018899168}
-  actualBossMat: {fileID: 0}
-  newMaterial: {fileID: 0}
-  skinWeakPoint: {fileID: 0}
+  weaknessFx: {fileID: 4828198047984942024}
   canvasAnim: {fileID: 0}
   blinkTime: 0.1
+  actualBossMat: {fileID: 2100000, guid: 5689b4e34386bf54ca7e367e823a496c, type: 2}
+  newMaterial: {fileID: 0}
+  skinWeakPoint: {fileID: 8882660785063926591}
   changeMaterialDelay: 0.5
 --- !u!1 &2506234993183046308
 GameObject:
@@ -247,7 +247,7 @@ MonoBehaviour:
   shake: 1
   useSpecificTransform: 0
   specificTransformToShake: []
-  shakeAmplitude: 0.05
+  shakeAmplitude: 0.5
   shakeTime: 0.25
   slowMo: 1
   targetTimeScale: 0.01
@@ -300,21 +300,12 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: -0.11064027
-      outSlope: -0.11064027
+      inSlope: -12.008495
+      outSlope: -12.008495
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.12620836
-    - serializedVersion: 3
-      time: 0.1
-      value: 0.9
-      inSlope: -2.5177188
-      outSlope: -2.5177188
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.25886148
-      outWeight: 0.16326527
+      outWeight: 0.048335124
     - serializedVersion: 3
       time: 0.2
       value: 0
@@ -1022,11 +1013,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 598198420111356908, guid: af4548a349832694b91b61e98fbce4b6,
+        type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7931725337115918158, guid: af4548a349832694b91b61e98fbce4b6,
+        type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8378362974364413423, guid: af4548a349832694b91b61e98fbce4b6,
+        type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4771717477727501522, guid: af4548a349832694b91b61e98fbce4b6,
+        type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af4548a349832694b91b61e98fbce4b6, type: 3}
 --- !u!4 &1520877346151277301 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4283170858363430581, guid: af4548a349832694b91b61e98fbce4b6,
+    type: 3}
+  m_PrefabInstance: {fileID: 3345009937272505408}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4828198047984942024 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7884369577523019656, guid: af4548a349832694b91b61e98fbce4b6,
     type: 3}
   m_PrefabInstance: {fileID: 3345009937272505408}
   m_PrefabAsset: {fileID: 0}
@@ -1175,16 +1192,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3327070409518902671, guid: be0f273cf95edd14fa760d80029a3e6b,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3327070409518902671, guid: be0f273cf95edd14fa760d80029a3e6b,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be0f273cf95edd14fa760d80029a3e6b, type: 3}
