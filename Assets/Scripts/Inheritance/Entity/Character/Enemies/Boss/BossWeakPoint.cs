@@ -8,7 +8,6 @@ namespace Team17.StreetHunt
     {
         [Header("Gameplay Fields")]
         [SerializeField] private Boss linkedBoss;
-        [SerializeField] private GameObject actualTouchPlane;
 
         [Header("Feedbacks")]
         [SerializeField] private FeedBack deathFeedback;
@@ -64,7 +63,6 @@ namespace Team17.StreetHunt
         IEnumerator ExplosionWeakPoint()
         {
             alreadyDead = true;
-            actualTouchPlane.SetActive(false);
             deathFeedback.Play();
             yield return new WaitForSeconds(changeMaterialDelay);
             hitFeedback.Play();
