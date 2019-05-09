@@ -39,6 +39,10 @@ namespace Team17.StreetHunt
         [SerializeField] private AnimationCurve zoomOutCurve;
         [SerializeField] private float zoomedDist = 4f;
         [SerializeField] private float zoomSpeed = 0.1f;
+        //freeze frame
+        [SerializeField] private bool freezeFrame = false;
+        [SerializeField] private float timeBeforeFreezedFrame = 1f;
+        [SerializeField] private float freezedFrameTime = 0.1f;
         //rumble
         [SerializeField] private bool rumble = false;
         [SerializeField] private long rumbleTime = 5;
@@ -53,11 +57,14 @@ namespace Team17.StreetHunt
         private bool isZoomingOut = false;
         private bool isSlowMoIn = false;
         private bool isSlowMoOut = false;
+        private bool isWaitingForFreeze = false;
+        private bool isFreezing = false;
         private float shakeTimerDecrementer = 1f;
         private float shakePosDecrementer = 0.90f;
         private float zoomIncrementer = 0f;
         private float currentTimeScale = 1f;
         private float slowMoIncrementer = 0f;
+        private float freezeDecrementer = 1f;
 
         private void Start()
         {
@@ -71,6 +78,7 @@ namespace Team17.StreetHunt
             ZoomManagement();
             PositionManagement();
             SlowMoManagement();
+            FreezeFrameManagement();
         }
 
         [ContextMenu("Play")]
@@ -119,6 +127,12 @@ namespace Team17.StreetHunt
             if(slowMo)
             {
                 isSlowMoIn = true;
+            }
+
+            if(freezeFrame)
+            {
+                isWaitingForFreeze = true;
+                freezeDecrementer = timeBeforeFreezedFrame;
             }
 
             if(zoom)
@@ -350,6 +364,38 @@ namespace Team17.StreetHunt
             }
         }
 
+        private void FreezeFrameManagement()
+        {
+            if(isWaitingForFreeze)
+            {
+                if(freezeDecrementer > 0)
+                {
+                    freezeDecrementer -= Time.deltaTime;
+                }
+                else
+                {
+                    isWaitingForFreeze = false;
+                    isFreezing = true;
+                    freezeDecrementer = freezedFrameTime;
+                }
+            }
+            if(isFreezing)
+            {
+                if(freezeDecrementer > 0)
+                {
+                    freezeDecrementer -= Time.fixedUnscaledDeltaTime;
+                    Time.timeScale = 0;
+                    Time.fixedDeltaTime = 0;
+                }
+                else
+                {
+                    isFreezing = false;
+                    Time.timeScale = currentTimeScale;
+                    Time.fixedDeltaTime = currentTimeScale * 0.02f;
+                }
+            }
+        }
+
         #endregion
 
         #region Rotation
@@ -396,5 +442,6 @@ namespace Team17.StreetHunt
         public bool Rumble { get => rumble; }
         public bool Zoom { get => zoom; }
         public bool SlowMo { get => slowMo; set => slowMo = value; }
+        public bool FreezeFrame { get => freezeFrame; }
     }
 }
