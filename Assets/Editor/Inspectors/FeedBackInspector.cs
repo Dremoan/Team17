@@ -99,6 +99,15 @@ namespace Team17.StreetHunt
             }
             EditorGUILayout.Space();
 
+            EditorGUILayout.LabelField("Freeze-frame parameters", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("freezeFrame"), new GUIContent("Use freeze-frame"));
+            if(feedBack.FreezeFrame)
+            {
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("timeBeforeFreezedFrame"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("freezedFrameTime"));
+            }
+            EditorGUILayout.Space();
+
             EditorGUILayout.LabelField("Rumble parameters", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("rumble"), new GUIContent("Use rumble"));
             if(feedBack.Rumble)
