@@ -17,12 +17,12 @@ namespace Team17.StreetHunt
         IEnumerator WarpsAppear()
         {
             //yield return new WaitForSeconds(.5f);
+            snakeBossScript.PickMove();
             for (int i = 0; i < warps.Length; i++)
             {
                 warps[i].SetActive(true);
                 yield return new WaitForSeconds(.5f);
             }
-            snakeBossScript.PickMove();
         }
 
         public void ResetAllWarps()
