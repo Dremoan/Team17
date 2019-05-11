@@ -8,6 +8,8 @@ namespace Team17.StreetHunt
     {
         [Header("Gameplay Fields")]
         [SerializeField] private Boss linkedBoss;
+        [SerializeField] private PlayerCharacter characterController;
+        [SerializeField] private Transform tauntPoint;
 
         [Header("Feedbacks")]
         [SerializeField] private FeedBack deathFeedback;
@@ -70,6 +72,7 @@ namespace Team17.StreetHunt
             weaknessFx.SetActive(false);
             canvasAnim.Play("FlashBlanc");
             skinWeakPoint.material = newMaterial;
+            characterController.TeleportAndTaunt(tauntPoint);
         }
     }
 
