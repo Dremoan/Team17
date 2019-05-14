@@ -11,19 +11,10 @@ namespace Team17.StreetHunt
         [Header("End Level Ui"), SerializeField] private GameObject EndLevelUi;
         [SerializeField] private TextMeshProUGUI textEndGame;
         [SerializeField] private Animator animatorUiEndLevel;
+
         [Header("Health Management"), SerializeField] private GameObject[] nbreBallsArray;
         int nbreBall = 0;
         bool endLevelVictory = false;
-
-        public void LoadMenuScene()
-        {
-            animatorUiEndLevel.SetTrigger("animEndLevelMenu");
-        }
-
-        public void ReloadScene()
-        {
-            animatorUiEndLevel.SetTrigger("animEndLevelReload");
-        }
 
         protected override void Update()
         {
@@ -45,7 +36,6 @@ namespace Team17.StreetHunt
             base.OnBallHit(powerGroupIndex, hitPower);
             GuiNbreBalls();
         }
-
         public override void OnBallDestroyed()
         {
             base.OnBallDestroyed();
@@ -55,7 +45,7 @@ namespace Team17.StreetHunt
         private void GuiNbreBalls()
         {
             nbreBall = GameManager.state.LivesLeft;
-            nbreBall -= 1;
+            //nbreBall -= 1;
             //Debug.Log("GameManager.state.LivesLeft : " + GameManager.state.LivesLeft);
             //Debug.Log("nbreBall : " + nbreBall);
             if ((nbreBall) >= 0)
@@ -82,5 +72,18 @@ namespace Team17.StreetHunt
                 EndLevelUi.SetActive(true);
             }
         }
+
+        // ------ Button management ------
+
+        public void LoadMenuScene()
+        {
+            animatorUiEndLevel.SetTrigger("animEndLevelMenu");
+        }
+
+        public void ReloadScene()
+        {
+            animatorUiEndLevel.SetTrigger("animEndLevelReload");
+        }
+
     }
 }
