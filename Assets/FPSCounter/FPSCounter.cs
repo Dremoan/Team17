@@ -33,7 +33,8 @@ namespace Otumn.FPSCounter
                 fps += fpsArray[i];
             }
             fps /= fpsArray.Length;
-            fpsText.text = fps.ToString("F") + " fps";
+            fps = Mathf.Round(fps);
+            fpsText.text = fps.ToString("F0") + " fps";
         }
     }
 }
