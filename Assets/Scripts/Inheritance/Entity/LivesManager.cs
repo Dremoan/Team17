@@ -7,32 +7,44 @@ namespace Team17.StreetHunt
     public class LivesManager : Entity
     {
         [SerializeField] private PlayerCharacter playerCharacter;
-        [SerializeField] private PlayerProjectile[] projectiles;
+        [SerializeField] private PlayerProjectile playerProjectile;
+        [SerializeField] private int lives = 4;
 
         private bool bossDead = false;
 
         protected override void Start()
         {
             base.Start();
-            GameManager.state.LivesLeft = projectiles.Length;
-            GameManager.state.BallGameObject = projectiles[0].gameObject;
+            GameManager.state.LivesLeft = lives;
+            GameManager.state.BallGameObject = playerProjectile.gameObject;
         }
 
         public bool BallAvailable()
         {
-            for (int i = 0; i < projectiles.Length; i++)
+            /*for (int i = 0; i < projectiles.Length; i++)
             {
                 if(!projectiles[i].Destroyed)
                 {
                     return true;
                 }
             }
-            return false;
+            return false;/**/
+
+            if(GameManager.state.LivesLeft > 0)
+            {
+                return true;
+            }else
+            {
+                return false;
+            }
         }
 
         public PlayerProjectile GetNextBall()
         {
-            return projectiles[GameManager.state.LivesLeft - 1];
+            //return projectiles[GameManager.state.LivesLeft - 1];
+            playerProjectile.Destroyed = false;
+            playerProjectile.CanStrike = true;
+            return playerProjectile;
         }
 
         public override void OnBossDeath()

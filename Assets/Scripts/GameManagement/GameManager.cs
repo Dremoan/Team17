@@ -185,11 +185,6 @@ namespace Team17.StreetHunt
 
         public void CallOnBallHit(int powerGroupIndex, float hitPower)
         {
-            livesLeft--;
-            if (livesLeft == 0)
-            {
-                //game over;
-            }
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].OnBallHit(powerGroupIndex, hitPower);

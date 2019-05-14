@@ -21,14 +21,16 @@ namespace Team17.StreetHunt
             base.Start();
             initialDistFromRight = Vector3.Distance(transform.position, rightTip.position);
             initialDistFromLeft = Vector3.Distance(transform.position, leftTip.position);
+            bendAnimator.SetFloat("LeftBend", 0.5f);
+            bendAnimator.SetFloat("RightBend", 0.5f);
         }
 
         protected override void Update()
         {
             base.Update();
             bendAnimator.transform.localPosition = Vector3.zero;
-            CalculateLeftBend();
-            CalculateRightBend();
+            //CalculateLeftBend();
+            //CalculateRightBend();
         }
 
         private void CalculateRightBend()

@@ -114,11 +114,10 @@ namespace Team17.StreetHunt
             {
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("rumbleTime"));
             }
-
-
+          
             serializedObject.ApplyModifiedProperties();
             EditorUtility.SetDirty(target);
-
         }
+
     }
 }

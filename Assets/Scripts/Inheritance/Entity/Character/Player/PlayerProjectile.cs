@@ -233,6 +233,7 @@ namespace Team17.StreetHunt
         private void Hit()
         {
             power = 0;
+            SelectPowerGroup(power);
             wasCanceled = true;
             timerFeedback.gameObject.SetActive(false);
             trajectory.gameObject.SetActive(false);
@@ -249,7 +250,11 @@ namespace Team17.StreetHunt
         private void CancelBall()
         {
             power = 0;
+            SelectPowerGroup(power);
+            body.velocity = Vector3.zero;
             wasCanceled = true;
+            isStriking = false;
+            timer.DeleteTimer(reHitTimer);
             timerFeedback.gameObject.SetActive(false);
             trajectory.gameObject.SetActive(false);
             character.Physicate(true);
