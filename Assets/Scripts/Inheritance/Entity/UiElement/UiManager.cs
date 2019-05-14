@@ -55,7 +55,6 @@ namespace Team17.StreetHunt
         private void GuiNbreBalls()
         {
             nbreBall = GameManager.state.LivesLeft;
-            nbreBall -= 1;
             //Debug.Log("GameManager.state.LivesLeft : " + GameManager.state.LivesLeft);
             //Debug.Log("nbreBall : " + nbreBall);
             if ((nbreBall) >= 0)
