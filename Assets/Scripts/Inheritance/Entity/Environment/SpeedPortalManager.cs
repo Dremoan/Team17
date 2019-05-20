@@ -30,7 +30,8 @@ namespace Team17.StreetHunt
         {
             for (int i = 0; i < portalPool.Length; i++)
             {
-                portalPool[i].Deactivate();
+                portalPool[i].gameObject.SetActive(true);
+                portalPool[i].GetReadyForReactivation();
             }
         }
     }
