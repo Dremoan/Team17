@@ -1647,7 +1647,7 @@ MonoBehaviour:
   - name: LaunchRock
     zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
     priority: 1
-    timeToEnd: 2
+    timeToEnd: 5
     coolDown: 2
     pattern:
       m_PersistentCalls:
@@ -1665,7 +1665,15 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-    portals: []
+    portals:
+    - name: one
+      position: {x: 0, y: 5, z: 0}
+      rotation: 45
+      apparitionTime: 2
+    - name: 
+      position: {x: 0, y: 2, z: 0}
+      rotation: -45
+      apparitionTime: 4
   hardPatterns: []
   exitPattern:
     name: 
@@ -3398,6 +3406,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5786893609116666359, guid: 1d7d8698125f9844c8139764c4c000a7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3455242873607892154, guid: 1d7d8698125f9844c8139764c4c000a7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3453,10 +3466,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6158806607178675505, guid: 1d7d8698125f9844c8139764c4c000a7,
+    - target: {fileID: 1025494600108493335, guid: 1d7d8698125f9844c8139764c4c000a7,
         type: 3}
-      propertyPath: speedPortalPrecision
-      value: 2
+      propertyPath: m_LocalPosition.x
+      value: 4.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 7775972242506654235, guid: 1d7d8698125f9844c8139764c4c000a7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4696806725701147859, guid: 1d7d8698125f9844c8139764c4c000a7,
         type: 3}
@@ -4188,25 +4206,15 @@ PrefabInstance:
       propertyPath: m_LocalRotation.w
       value: 0.96880484
       objectReference: {fileID: 0}
-    - target: {fileID: 1025494600108493335, guid: 1d7d8698125f9844c8139764c4c000a7,
+    - target: {fileID: 6158806607178675505, guid: 1d7d8698125f9844c8139764c4c000a7,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.93
+      propertyPath: speedPortalPrecision
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6695413421986277176, guid: 1d7d8698125f9844c8139764c4c000a7,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7775972242506654235, guid: 1d7d8698125f9844c8139764c4c000a7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5786893609116666359, guid: 1d7d8698125f9844c8139764c4c000a7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d7d8698125f9844c8139764c4c000a7, type: 3}
