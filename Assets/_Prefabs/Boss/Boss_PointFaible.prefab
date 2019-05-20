@@ -59,8 +59,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3780164969492123889}
-  - component: {fileID: 8662891382691016669}
   - component: {fileID: 7392113876472296759}
+  - component: {fileID: 4901426954208923517}
   m_Layer: 0
   m_Name: Boss_PointFaible
   m_TagString: Untagged
@@ -88,20 +88,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &8662891382691016669
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2218591216929269108}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.90843487
-  m_Height: 2.884298
-  m_Direction: 2
-  m_Center: {x: 1.0585191e-16, y: 0.020334959, z: 0.023801327}
 --- !u!114 &7392113876472296759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,6 +101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkedBoss: {fileID: 0}
+  characterController: {fileID: 0}
+  tauntPoint: {fileID: 0}
   deathFeedback: {fileID: 5729880092900489899}
   hitFeedback: {fileID: 3400415845018899168}
   weaknessFx: {fileID: 4828198047984942024}
@@ -124,6 +112,19 @@ MonoBehaviour:
   newMaterial: {fileID: 0}
   skinWeakPoint: {fileID: 8882660785063926591}
   changeMaterialDelay: 0.5
+--- !u!65 &4901426954208923517
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2218591216929269108}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5126927, y: 1.4826581, z: 2.112452}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2506234993183046308
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,6 +406,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   zoomedDist: 4
   zoomSpeed: 0.5
+  freezeFrame: 0
+  timeBeforeFreezedFrame: 1
+  freezedFrameTime: 0.1
   rumble: 0
   rumbleTime: 0
 --- !u!1 &3671985720178725023
@@ -636,6 +640,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   zoomedDist: 4
   zoomSpeed: 0.5
+  freezeFrame: 0
+  timeBeforeFreezedFrame: 1
+  freezedFrameTime: 0.1
   rumble: 0
   rumbleTime: 0
 --- !u!1 &3957968662099667951
