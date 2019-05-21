@@ -137,6 +137,11 @@ namespace Team17.StreetHunt
 
         }
 
+        public virtual void OnDummyDeath()
+        {
+
+        }
+
         public virtual void OnLevelEnd()
         {
 

@@ -57,7 +57,7 @@ namespace Team17.StreetHunt
 
         #region Entity events
 
-        #region Cutscenes events
+        #region Cutscenes Events
 
         public void CallOnIntroCutScene()
         {
@@ -206,7 +206,7 @@ namespace Team17.StreetHunt
 
         #endregion
 
-        #region Boss events
+        #region Boss Events
 
         public void CallOnBossEnters()
         {
@@ -258,7 +258,7 @@ namespace Team17.StreetHunt
 
         #endregion
 
-        #region Game management events
+        #region Game Management Events
 
         public void CallOnPause()
         {
@@ -278,6 +278,18 @@ namespace Team17.StreetHunt
 
         #endregion
 
+
+        #region Tutorial Events
+
+        public void CallOnDummyDeath()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnDummyDeath();
+            }
+        }
+
+        #endregion
         #endregion
 
         /// <summary>
