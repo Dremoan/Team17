@@ -18,6 +18,7 @@ namespace Team17.StreetHunt
             canvasAnimator.Play("FadeOut");
         }
 
+
         private IEnumerator TimelineEnding()
         {
             yield return new WaitForSeconds(timelinesFolders[indexTimeline].TimeToEnd);
@@ -35,9 +36,7 @@ namespace Team17.StreetHunt
 
         public void EnableTraining()
         {
-            tutorialCanvasAnimator.Play("FadeOutTransparent");
             tutorialCanvasAnimator.Play("FadeOutOpaque");
-
         }
 
         

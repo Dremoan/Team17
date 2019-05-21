@@ -11,7 +11,6 @@ namespace Team17.StreetHunt
         [SerializeField] private Animator anim;
         [SerializeField] private float distFromBall = 1.2f;
         [SerializeField] private FeedBack tpFeedback;
-        [SerializeField] private Transform tauntPoint;
         [Header("Ground check parameters")]
         [SerializeField] private Vector3 feetPosition;
         [SerializeField] private float feetlength = 0.25f;
