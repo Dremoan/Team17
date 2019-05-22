@@ -87,6 +87,12 @@ namespace Team17.StreetHunt
             currentBall.transform.position = spawnPoint.position + new Vector3(0.75f, 0.15f, 0f);
         }
 
+        public void TeleportPlayer(Transform teleportPos)
+        {
+            transform.position = teleportPos.position;
+            tpFeedback.Play();
+        }
+
         public void TeleportAndTaunt(Transform tauntPoint)
         {
             transform.position = tauntPoint.position;
