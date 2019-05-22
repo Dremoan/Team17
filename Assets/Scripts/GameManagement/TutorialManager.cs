@@ -34,10 +34,6 @@ namespace Team17.StreetHunt
             timelinesFolders[indexTimeline].Timeline.Play();
         }
 
-        public void EnableTraining()
-        {
-            tutorialCanvasAnimator.Play("FadeOutOpaque");
-        }
 
         
 
