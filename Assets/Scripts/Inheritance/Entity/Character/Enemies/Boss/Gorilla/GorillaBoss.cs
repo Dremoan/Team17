@@ -29,18 +29,19 @@ namespace Team17.StreetHunt
         [Header("FXs")]
         [SerializeField] private FeedBack landingFB;
 
-        private bool isJumping = false;
-        private bool jumpingRight = false;
-        private int pathStepTarget = 0;
+        private AnimationCurve usedSpeedCurve;
+        private RockProjectile launchedRock;
+        private GorillaJumpTarget currentJumpTarget;
         private Vector3[] path;
         private Vector3 posRef;
         private Vector3 jumpStart;
+        private bool isJumping = false;
+        private bool jumpingRight = false;
+        private int pathStepTarget = 0;
         private float jumpInc = 0f;
         private float jumpParcouredDist = 0f;
         private float jumpCalculatedDist = 0f;
-        private AnimationCurve usedSpeedCurve;
         private float currentIdleType;
-        private RockProjectile launchedRock;
 
         protected override void Update()
         {
@@ -50,8 +51,9 @@ namespace Team17.StreetHunt
 
         #region Jump calculation
 
-        public void LaunchJump(GameObject target)
+        public void LaunchJump(GorillaJumpTarget target)
         {
+            currentJumpTarget = target;
             jumpTarget.position = target.transform.position;
 
             usedSpeedCurve = speedCurves[0];
@@ -150,6 +152,7 @@ namespace Team17.StreetHunt
                         jumpCalculatedDist = 0;
                         jumpParcouredDist = 0;
                         landingFB.Play();
+                        SetIdleType(currentJumpTarget.GorillaIdleValue);
                     }
                     else
                     {

@@ -328,6 +328,7 @@ namespace Team17.StreetHunt
             {
                 portalManager.SpawnPortal(portals[i].Position, portals[i].Rotation, portals[i].ApparitionTime);
             }
+
             //enable apparition
             timers.LaunchNewTimer(timeToEnd, EndAttack);
         }
