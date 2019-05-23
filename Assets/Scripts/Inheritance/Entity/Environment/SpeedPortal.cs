@@ -28,8 +28,6 @@ namespace Team17.StreetHunt
                 PosRotManagement();
                 ActivationManagement();
             }
-            Debug.DrawRay(transform.position, transform.right * 5f, Color.red);
-            Debug.DrawRay(transform.position, new Vector3(Mathf.Abs(transform.right.x), Mathf.Abs(transform.right.y), transform.right.z) * 5f, Color.magenta);
         }
 
         private void PosRotManagement()

@@ -62,7 +62,6 @@ namespace Team17.StreetHunt
             Debug.DrawRay(lastContact, lastNormal.normalized * 3, Color.magenta);
             Debug.DrawRay(lastContact, -lastEnter.normalized * 3, Color.blue);
             Debug.DrawRay(lastContact, lastNewDir.normalized * 3, Color.red);
-            FuturPositionInArena();
         }
 
         protected override void OnEnable()
@@ -87,7 +86,7 @@ namespace Team17.StreetHunt
                 lastEnter = movementDirection;
                 Bounce(movementDirection, coll.contacts[0].normal);
                 coll.gameObject.GetComponent<IBallHitable>().Hit(usedPowergroupIndex, power);
-                //Hit();
+                Hit();
             }
             else
             {
@@ -260,6 +259,7 @@ namespace Team17.StreetHunt
             character.Physicate(true);
             gameObject.SetActive(false);
             destroyed = true;
+            timerFeedback.localScale = initialFeedbackScale;
 
             usedPowerGroup.Destroyed.Play();
             usedPowerGroup.Trail.Stop();
