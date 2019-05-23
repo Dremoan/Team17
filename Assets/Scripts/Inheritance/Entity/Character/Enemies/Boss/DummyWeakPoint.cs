@@ -58,6 +58,21 @@ namespace Team17.StreetHunt
             StartCoroutine(ExplosionWeakPoint());
         }
 
+        public void EndDummy()
+        {
+            hitFeedback.gameObject.SetActive(false);
+            weaknessFx.SetActive(false);
+            skinWeakPoint.material = newMaterial;
+        }
+
+        public void ResetDummy()
+        {
+            alreadyDead = false;
+            hitFeedback.gameObject.SetActive(true);
+            weaknessFx.SetActive(true);
+            skinWeakPoint.material = actualBossMat;
+        }
+
         IEnumerator Blink()
         {
             for (int i = 0; i < 2; i++)
@@ -71,6 +86,7 @@ namespace Team17.StreetHunt
 
         IEnumerator ExplosionWeakPoint()
         {
+            Debug.Log("Working");
             alreadyDead = true;
             deathFeedback.Play();
             yield return new WaitForSeconds(changeMaterialDelay);

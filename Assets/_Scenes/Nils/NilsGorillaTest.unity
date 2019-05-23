@@ -1575,7 +1575,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1043525080
 Transform:
   m_ObjectHideFlags: 0
@@ -1651,9 +1651,9 @@ MonoBehaviour:
   easyPatterns:
   - name: Jump to left wall (aimed top)
     zone: {fileID: 11400000, guid: b3489ea81c876604f8318e20edf4d83d, type: 2}
-    priority: 4
+    priority: 5
     timeToEnd: 3
-    coolDown: 7
+    coolDown: 6
     pattern:
       m_PersistentCalls:
         m_Calls:
@@ -1674,9 +1674,9 @@ MonoBehaviour:
     portals: []
   - name: Jump to right wall (aimed top)
     zone: {fileID: 11400000, guid: f1f2c1df1243b7b45a77bacbde44d226, type: 2}
-    priority: 4
+    priority: 5
     timeToEnd: 3
-    coolDown: 7
+    coolDown: 4
     pattern:
       m_PersistentCalls:
         m_Calls:
@@ -1699,7 +1699,99 @@ MonoBehaviour:
     zone: {fileID: 11400000, guid: d336d33b354801540aabec5e2340fd96, type: 2}
     priority: 4
     timeToEnd: 3
-    coolDown: 7
+    coolDown: 4
+    pattern:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1362627019}
+          m_MethodName: LaunchJump
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1331879059}
+            m_ObjectArgumentAssemblyTypeName: Team17.StreetHunt.GorillaJumpTarget,
+              Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    portals: []
+  - name: Jump to right ground (aimed bot)
+    zone: {fileID: 11400000, guid: 5512f78d117453b42a9eb13dba49d930, type: 2}
+    priority: 4
+    timeToEnd: 3
+    coolDown: 4
+    pattern:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1362627019}
+          m_MethodName: LaunchJump
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1668794990}
+            m_ObjectArgumentAssemblyTypeName: Team17.StreetHunt.GorillaJumpTarget,
+              Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    portals: []
+  - name: Jump to left wall (aimed bot)
+    zone: {fileID: 11400000, guid: d336d33b354801540aabec5e2340fd96, type: 2}
+    priority: 4
+    timeToEnd: 3
+    coolDown: 4
+    pattern:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1362627019}
+          m_MethodName: LaunchJump
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 85903996}
+            m_ObjectArgumentAssemblyTypeName: Team17.StreetHunt.GorillaJumpTarget,
+              Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    portals: []
+  - name: Jump to right wall (aimed bot)
+    zone: {fileID: 11400000, guid: 5512f78d117453b42a9eb13dba49d930, type: 2}
+    priority: 4
+    timeToEnd: 3
+    coolDown: 6
+    pattern:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1362627019}
+          m_MethodName: LaunchJump
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 423419366}
+            m_ObjectArgumentAssemblyTypeName: Team17.StreetHunt.GorillaJumpTarget,
+              Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    portals: []
+  - name: Jump to left ground (aimed top)
+    zone: {fileID: 11400000, guid: b3489ea81c876604f8318e20edf4d83d, type: 2}
+    priority: 5
+    timeToEnd: 3
+    coolDown: 4
     pattern:
       m_PersistentCalls:
         m_Calls:
@@ -1719,102 +1811,10 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
     portals: []
   - name: Jump to right ground (aimed top)
-    zone: {fileID: 11400000, guid: 5512f78d117453b42a9eb13dba49d930, type: 2}
-    priority: 4
+    zone: {fileID: 11400000, guid: f1f2c1df1243b7b45a77bacbde44d226, type: 2}
+    priority: 5
     timeToEnd: 3
-    coolDown: 7
-    pattern:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1362627019}
-          m_MethodName: LaunchJump
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1668794990}
-            m_ObjectArgumentAssemblyTypeName: Team17.StreetHunt.GorillaJumpTarget,
-              Assembly-CSharp
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    portals: []
-  - name: Jump to right ground (aimed bot)
-    zone: {fileID: 11400000, guid: 5512f78d117453b42a9eb13dba49d930, type: 2}
-    priority: 4
-    timeToEnd: 3
-    coolDown: 7
-    pattern:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1362627019}
-          m_MethodName: LaunchJump
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1668794990}
-            m_ObjectArgumentAssemblyTypeName: Team17.StreetHunt.GorillaJumpTarget,
-              Assembly-CSharp
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    portals: []
-  - name: Jump to right ground (aimed bot)
-    zone: {fileID: 11400000, guid: 5512f78d117453b42a9eb13dba49d930, type: 2}
-    priority: 4
-    timeToEnd: 3
-    coolDown: 7
-    pattern:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1362627019}
-          m_MethodName: LaunchJump
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1668794990}
-            m_ObjectArgumentAssemblyTypeName: Team17.StreetHunt.GorillaJumpTarget,
-              Assembly-CSharp
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    portals: []
-  - name: Jump to right ground (aimed bot)
-    zone: {fileID: 11400000, guid: 5512f78d117453b42a9eb13dba49d930, type: 2}
-    priority: 4
-    timeToEnd: 3
-    coolDown: 7
-    pattern:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1362627019}
-          m_MethodName: LaunchJump
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1668794990}
-            m_ObjectArgumentAssemblyTypeName: Team17.StreetHunt.GorillaJumpTarget,
-              Assembly-CSharp
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    portals: []
-  - name: Jump to right ground (aimed bot)
-    zone: {fileID: 11400000, guid: 5512f78d117453b42a9eb13dba49d930, type: 2}
-    priority: 4
-    timeToEnd: 3
-    coolDown: 7
+    coolDown: 4
     pattern:
       m_PersistentCalls:
         m_Calls:
@@ -2427,7 +2427,7 @@ Transform:
   m_LocalScale: {x: 1.6406, y: 1.6406, z: 1.6406}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1454157172
 GameObject:
@@ -2931,7 +2931,7 @@ MonoBehaviour:
   m_YawDamping: 0
   m_RollDamping: 0
   m_AngularDamping: 0
---- !u!1 &1890048380
+--- !u!1 &1923347120
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2939,129 +2939,102 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1890048381}
-  - component: {fileID: 1890048382}
+  - component: {fileID: 1923347124}
+  - component: {fileID: 1923347123}
+  - component: {fileID: 1923347122}
+  - component: {fileID: 1923347121}
+  - component: {fileID: 1923347125}
   m_Layer: 0
-  m_Name: TestFreezeFrame
+  m_Name: TestCanceler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1890048381
+--- !u!65 &1923347121
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923347120}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1923347122
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923347120}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 07232d0df186d1544991863f1f015b46, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &1923347123
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923347120}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1923347124
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1890048380}
+  m_GameObject: {fileID: 1923347120}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 3.7120655, y: 3.57, z: 0}
+  m_LocalScale: {x: 1, y: 4.4994, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1890048382
+--- !u!114 &1923347125
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1890048380}
+  m_GameObject: {fileID: 1923347120}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7be32b554ce1e04293ce2c45ca8e22e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b385fe6939c4fe4d8d4d20ea398303a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playOnStart: 0
-  looping: 0
-  hardFollowingTransform: 0
-  transformToHardFollow: {fileID: 0}
-  tpOnTransformOnPlay: 0
-  transformToTPToOnPlay: {fileID: 0}
-  particles: 0
-  particleRotation: 0
-  particlesSystems: []
-  particleSystemsToRotate: []
-  trails: 0
-  trailRenderers: []
-  shake: 0
-  useSpecificTransform: 0
-  specificTransformToShake: []
-  shakeAmplitude: 0.2
-  shakeTime: 0.1
-  slowMo: 1
-  targetTimeScale: 0.2
-  slowMoSpeed: 0.5
-  slowMoInCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  slowMoOutCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: -1
-      outSlope: -1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -1
-      outSlope: -1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  zoom: 0
-  zoomInCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  zoomOutCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  zoomedDist: 4
-  zoomSpeed: 0.1
-  freezeFrame: 1
-  timeBeforeFreezedFrame: 1
-  freezedFrameTime: 0.1
-  rumble: 0
-  rumbleTime: 5
 --- !u!1001 &1968734024
 PrefabInstance:
   m_ObjectHideFlags: 0
