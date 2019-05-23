@@ -335,7 +335,6 @@ namespace Team17.StreetHunt
                 }
                                
                 portal.gameObject.SetActive(false);
-                Debug.Log("passed through portal");
             }
 
             if(isStriking)
