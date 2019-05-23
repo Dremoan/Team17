@@ -214,7 +214,7 @@ namespace Team17.StreetHunt
                     usedPowerGroup.Trail.Stop();
                     usedPowerGroup = powerGroups[i];
                     usedPowergroupIndex = i;
-                    Debug.Log("P: " + power + ": " + usedPowerGroup.Name);
+                    //Debug.Log("P: " + power + ": " + usedPowerGroup.Name);
                 }
             }
         }
@@ -313,19 +313,31 @@ namespace Team17.StreetHunt
 
         private void PassThroughSpeedPortal(SpeedPortal portal, Vector3 entryVelocity, Vector3 portalRight)
         {
-            entryVelocity = new Vector3(Mathf.Abs(entryVelocity.x), entryVelocity.y, entryVelocity.z);
+            entryVelocity = new Vector3(Mathf.Abs(entryVelocity.x), Mathf.Abs(entryVelocity.y), entryVelocity.z);
+            portalRight = new Vector3(Mathf.Abs(portalRight.x), Mathf.Abs(portalRight.y), portalRight.z);
             float sqrMag = Vector3.SqrMagnitude(entryVelocity - portalRight);
 
             if(Mathf.Abs(sqrMag) < speedPortalPrecision)
             {
                 //Speed up
-                if (usedPowergroupIndex > powerGroups.Length - 2) return;
-                usedPowergroupIndex++;
+                if(usedPowergroupIndex < powerGroups.Length - 1)
+                {
+                    power = powerGroups[usedPowergroupIndex + 1].PowerThreshold + 10;
+                    SelectPowerGroup(powerGroups[usedPowergroupIndex + 1].PowerThreshold + 10);
+                }
+                else
+                {
+                    if(power < powerGroups[powerGroups.Length - 1].PowerThreshold)
+                    {
+                        power = powerGroups[powerGroups.Length - 1].PowerThreshold;
+                    }
+                    SelectPowerGroup(power);
+                }
+                               
                 portal.gameObject.SetActive(false);
+                Debug.Log("passed through portal");
             }
 
-            usedPowerGroup = powerGroups[usedPowergroupIndex];
-            power = usedPowerGroup.PowerThreshold;
             if(isStriking)
             {
                 movementDirection = body.velocity.normalized * (usedPowerGroup.Speed) * slowedTimeScale;
@@ -335,7 +347,6 @@ namespace Team17.StreetHunt
                 movementDirection = body.velocity.normalized * (usedPowerGroup.Speed);
             }
             body.velocity = movementDirection;
-            Debug.Log("P: " + power + ": " + usedPowerGroup.Name);
         }
 
         #endregion
