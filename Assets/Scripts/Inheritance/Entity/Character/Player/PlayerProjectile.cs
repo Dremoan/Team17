@@ -195,9 +195,9 @@ namespace Team17.StreetHunt
 
         public void LaunchBall()
         {
-            body.velocity = movementDirection;
             usedPowerGroup.Launch.Play();
             usedPowerGroup.Trail.Play();
+            body.velocity = movementDirection;
             isStriking = false;
 
             GameManager.state.CallOnBallShot();
