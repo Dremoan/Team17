@@ -112,7 +112,7 @@ namespace Team17.StreetHunt
             if (coll.gameObject.GetComponent<IBallHitable>() != null)
             {
                 coll.gameObject.GetComponent<IBallHitable>().Hit(usedPowergroupIndex, power);
-                Hit();
+                //Hit();
             }
         }
 
@@ -146,7 +146,7 @@ namespace Team17.StreetHunt
                 trajectory.position = Vector3.Lerp(transform.position, touchPos, 0.5f);
                 float zRot = Vector3.SignedAngle(transform.up, (touchPos - transform.position), Vector3.forward);
                 trajectory.rotation = Quaternion.Euler(0, 0, zRot);
-                trajectory.localScale = new Vector3(1, Vector3.Distance(transform.position, touchPos) * 2, 1);
+                trajectory.localScale = new Vector3(0.5f, Vector3.Distance(transform.position, touchPos) * 1f, 0.5f);
                 character.PrepareStrike(transform.position, touchPos);
             }
         }
@@ -236,9 +236,6 @@ namespace Team17.StreetHunt
             wasCanceled = true;
             timerFeedback.gameObject.SetActive(false);
             trajectory.gameObject.SetActive(false);
-            //character.Physicate(true);
-            gameObject.SetActive(false);
-            //destroyed = true;
 
             usedPowerGroup.Hit.Play();
             usedPowerGroup.Trail.Stop();
@@ -276,6 +273,17 @@ namespace Team17.StreetHunt
             character.Physicate(true);
             canStrike = false;
             timer.LaunchNewTimer(stunTime, RecoverCharacter);
+        }
+
+        public void StunCharacter(float time)
+        {
+            isStriking = false;
+            body.velocity = movementDirection;
+            timerFeedback.gameObject.SetActive(false);
+            trajectory.gameObject.SetActive(false);
+            character.Physicate(true);
+            canStrike = false;
+            timer.LaunchNewTimer(time, RecoverCharacter);
         }
 
         private void RecoverCharacter()
