@@ -10,7 +10,6 @@ namespace Team17.StreetHunt
         [SerializeField] private LivesManager lives;
 
         private PlayerProjectile ball;
-        private bool shouldLaunchIntro = true;
         private bool touchBegan = false;
 
         public void OnTouchBegin(Vector3 touchPos)
@@ -20,13 +19,18 @@ namespace Team17.StreetHunt
                 ball.StartCalculation();
                 touchBegan = true;
             }
+            else if(ball != null && !ball.CanStrike)
+            {
+                return;
+            }
             else if(lives.BallAvailable())
             {
                 ball = lives.GetNextBall();
-                if(ball != null && ball.CanStrike)
+                if(ball != null )
                 {
                     character.CurrentBall = lives.GetNextBall();
                     ball.transform.position = character.transform.position;
+                    Debug.Log("Spawned ball on player, canStrike = " + ball.CanStrike);
                     ball.gameObject.SetActive(true);
                     ball.StartCalculation();
                     touchBegan = true;
