@@ -114,6 +114,14 @@ namespace Team17.StreetHunt
                 coll.gameObject.GetComponent<IBallHitable>().Hit(usedPowergroupIndex, power);
                 //Hit();
             }
+
+            if(coll.gameObject.GetComponent<BallRelfecter>() != null)
+            {
+                Vector3 newDir = (transform.position - coll.transform.position).normalized * usedPowerGroup.Speed;
+                movementDirection = newDir;
+                body.velocity = newDir;
+                StunCharacter(coll.gameObject.GetComponent<BallRelfecter>().StunTime);
+            }
         }
 
         #endregion
@@ -248,6 +256,7 @@ namespace Team17.StreetHunt
             power = 0;
             SelectPowerGroup(power);
             body.velocity = Vector3.zero;
+            canStrike = true;
             wasCanceled = true;
             isStriking = false;
             timer.DeleteTimer(reHitTimer);

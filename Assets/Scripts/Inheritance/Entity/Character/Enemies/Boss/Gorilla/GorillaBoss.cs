@@ -13,7 +13,8 @@ namespace Team17.StreetHunt
         [SerializeField] private Transform jumpTarget;
         [SerializeField] private Transform jumpSummit;
         [SerializeField] private float jumpSpeed = 2f;
-        [Tooltip("0 = small, 1 = long, 2 = low, 3 = high")] [SerializeField] private AnimationCurve[] speedCurves;
+        [Tooltip("0 = small, 1 = long, 2 = low, 3 = high")]
+        [SerializeField] private AnimationCurve[] speedCurves;
         [SerializeField] private GorillaJumpTarget[] rightTargets;
         [SerializeField] private GorillaJumpTarget[] leftTargets;
         [SerializeField] private int jumpSteps = 7;
@@ -23,7 +24,7 @@ namespace Team17.StreetHunt
         [SerializeField] private float smallJumpThreshhold = 5f;
         [Header("Shout parameters")]
         [SerializeField] private Transform headTransform;
-        
+        [SerializeField] private GorillaShoutBehaviour shoutGO;
         [Header("Rocks parameters")]
         [SerializeField] private Transform rightHand;
         [SerializeField] private Transform leftHand;
@@ -218,6 +219,11 @@ namespace Team17.StreetHunt
                     anim.SetBool("leftArmRockLaunch", true);
                 }
             }
+            else
+            {
+                shoutGO.gameObject.SetActive(true);
+                shoutGO.transform.position = new Vector3(headTransform.position.x, headTransform.position.y, 0);
+            }
         }
 
         public void HardAttack()
@@ -235,7 +241,14 @@ namespace Team17.StreetHunt
             }
             else
             {
-                Debug.Log("Not implemented hard attack");
+                if(currentIdleType == 0f)
+                {
+                    rightSpikes.SetTrigger("spikes");
+                }
+                if (currentIdleType == 0.25f)
+                {
+                    leftSpikes.SetTrigger("spikes");
+                }
             }
         }
 

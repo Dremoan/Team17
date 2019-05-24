@@ -34,6 +34,7 @@ namespace Team17.StreetHunt
         private CutSceneEvent exitBeginsEvent;
         private CutSceneEvent exitEndsEvent;
 
+        private BossPattern currentPattern;
         private int currentAttackStateIndex = 0;
         protected float currentHealth = 0f;
         protected bool canAttack = false;
@@ -163,6 +164,7 @@ namespace Team17.StreetHunt
             {
                 case BossPhaseState.Entry:
                     if (entryBeginsEvent != null) entryBeginsEvent.Invoke();
+                    currentPattern = entryPattern;
                     entryPattern.LaunchAttack(EntryEnd);
                     break;
                 case BossPhaseState.Attacking:
@@ -170,18 +172,21 @@ namespace Team17.StreetHunt
                     switch (attackStates[currentAttackStateIndex])
                     {
                         case BossAttackState.Easy:
+                            currentPattern = easyPatterns[index];
                             easyPatterns[index].LaunchAttack(AttackEnd);
                             currentAttackStateIndex++;
                             if (currentAttackStateIndex > attackStates.Length - 1) currentAttackStateIndex = 0;
                             break;
 
                         case BossAttackState.Medium:
+                            currentPattern = mediumPatterns[index];
                             mediumPatterns[index].LaunchAttack(AttackEnd);
                             currentAttackStateIndex++;
                             if (currentAttackStateIndex > attackStates.Length - 1) currentAttackStateIndex = 0;
                             break;
 
                         case BossAttackState.Hard:
+                            currentPattern = hardPatterns[index];
                             hardPatterns[index].LaunchAttack(AttackEnd);
                             currentAttackStateIndex++;
                             if (currentAttackStateIndex > attackStates.Length - 1) currentAttackStateIndex = 0;
@@ -192,6 +197,7 @@ namespace Team17.StreetHunt
                 case BossPhaseState.Exit:
                     //call exit begins
                     if (exitBeginsEvent != null) exitBeginsEvent.Invoke();
+                    currentPattern = exitPattern;
                     exitPattern.LaunchAttack(ExitEnd);
                     break;
 
@@ -315,8 +321,10 @@ namespace Team17.StreetHunt
 
         private SpeedPortalManager portalManager;
         private TimersCalculator timers;
-        private bool canBeUsed = true;
         private System.Action endAction;
+        private bool canBeUsed = true;
+        private int cdTimerIndex;
+        private int endTimerIndex;
 
         public void LaunchAttack(System.Action endAct)
         {
@@ -330,19 +338,24 @@ namespace Team17.StreetHunt
             }
 
             //enable apparition
-            timers.LaunchNewTimer(timeToEnd, EndAttack);
+            endTimerIndex = timers.LaunchNewTimer(timeToEnd, EndAttack);
         }
 
         private void EndAttack()
         {
             portalManager.DeactivateAllPortals();
             endAction.Invoke();
-            timers.LaunchNewTimer(coolDown, ResetAttack);
+            cdTimerIndex = timers.LaunchNewTimer(coolDown, ResetAttack);
         }
 
         private void ResetAttack()
         {
             canBeUsed = true;
+        }
+
+        private void CancelAttack()
+        {
+
         }
 
         public bool IsUsableAndUseful(Transform zero, Vector3 targetPos)
