@@ -84,7 +84,7 @@ namespace Team17.StreetHunt
             transform.position = spawnPoint.position;
             if (currentBall != null) currentBall.PauseBehavior();
             tpFeedback.Play();
-            currentBall.transform.position = spawnPoint.position + new Vector3(0.75f, 0.15f, 0f);
+            currentBall.transform.position = spawnPoint.position + new Vector3(1.35f, 0.16f, 0f);
         }
 
         public void TeleportPlayer(Transform teleportPos)
@@ -95,17 +95,17 @@ namespace Team17.StreetHunt
 
         public void TeleportAndTaunt(Transform tauntPoint)
         {
-            transform.position = tauntPoint.position;
-            if (currentBall != null) currentBall.PauseBehavior();
-            anim.Play("TauntIdle");
-            tpFeedback.Play();
+            StartCoroutine(Taunt(tauntPoint));
         }
 
-        public void ActiveBall(Transform ballPosition)
+
+        IEnumerator Taunt(Transform tauntPos)
         {
-            anim.SetTrigger("TauntToIdle");
-            if (currentBall != null) currentBall.gameObject.SetActive(true);
-            currentBall.transform.position = ballPosition.position;
+            anim.Play("TauntIdle");
+            yield return null;
+            if (currentBall != null) currentBall.PauseBehavior();
+            transform.position = tauntPos.position;
+            tpFeedback.Play();
         }
         #endregion
 

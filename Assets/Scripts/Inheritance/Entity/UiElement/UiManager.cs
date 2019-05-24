@@ -7,6 +7,8 @@ namespace Team17.StreetHunt
 {
     public class UiManager : UiElement
     {
+
+        [SerializeField] private Animator transitionsCanvas;
         // ------ Player Health Management ------
         [Header("End Level Ui"), SerializeField] private GameObject EndLevelUi;
         [SerializeField] private TextMeshProUGUI textEndGame;
@@ -15,6 +17,12 @@ namespace Team17.StreetHunt
         [Header("Health Management"), SerializeField] private GameObject[] nbreBallsArray;
         int nbreBall = 0;
         bool endLevelVictory = false;
+
+        protected override void Start()
+        {
+            base.Start();
+            transitionsCanvas.Play("FadeOut");
+        }
 
         protected override void Update()
         {
