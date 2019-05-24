@@ -29,8 +29,8 @@ namespace Team17.StreetHunt
         {
             base.Update();
             bendAnimator.transform.localPosition = Vector3.zero;
-            //CalculateLeftBend();
-            //CalculateRightBend();
+            CalculateLeftBend();
+            CalculateRightBend();
         }
 
         private void CalculateRightBend()
