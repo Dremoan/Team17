@@ -71,7 +71,6 @@ namespace Team17.StreetHunt
         public void Hit(int index, float dmgs)
         {
             currentHealth -= dmgs;
-            currentPattern.CancelAttack();
             Debug.Log(gameObject.name + " has " + currentHealth + " hp. Damaged " + dmgs);
             if (currentHealth < 0)
             {
@@ -87,6 +86,7 @@ namespace Team17.StreetHunt
         {
             currentState = BossPhaseState.Exit;
             touchPlane.gameObject.SetActive(false);
+            currentPattern.CancelAttack();
             GameManager.state.CallOnBossDeath();
         }
 
@@ -317,7 +317,7 @@ namespace Team17.StreetHunt
         [SerializeField] private float timeToEnd = 3f;
         [Tooltip("Time it takes for the attack to be considered usable again after the boss used it once. During this time, the boss will ignore this attack.")]
         [SerializeField] private float coolDown = 4f;
-        [Tooltip("Define how much the the timeToEnd will be shorten. 0 means nothing will change, 1 means the attack will instantly end.")]
+        [Tooltip("Define how much the the timeToEnd will be shorten. 0 means nothing will change, 0.5 means half of the time left will be removed, 1 means the attack will instantly end.")]
         [SerializeField] [Range(0.01f, 1f)] private float cancelingTimerSpeedUp = 0.5f;
         [SerializeField] private UnityEngine.Events.UnityEvent pattern;
         [SerializeField] private PortalPlacement[] portals;
