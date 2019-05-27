@@ -42,7 +42,7 @@ namespace Team17.StreetHunt
         public override void OnBallHit(int powerGroupIndex, float hitPower)
         {
             base.OnBallHit(powerGroupIndex, hitPower);
-            GuiNbreBalls();
+            //GuiNbreBalls();
         }
         public override void OnBallDestroyed()
         {
