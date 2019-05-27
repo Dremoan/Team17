@@ -401,6 +401,15 @@ namespace Team17.StreetHunt
 
         #endregion
 
+        #region Tutorial Functions
+
+        public void AddPower(float powerToAdd)
+        {
+            power += powerToAdd;
+        }
+
+        #endregion
+
         [ContextMenu ("Setup score manager")]
         public void SetupScoreManager()
         {
