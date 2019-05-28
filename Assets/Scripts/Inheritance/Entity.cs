@@ -92,6 +92,16 @@ namespace Team17.StreetHunt
 
         }
 
+        public virtual void OnBallIncreasePowerGroup()
+        {
+
+        }
+
+        public virtual void OnBallDecreasePowerGroup()
+        {
+
+        }
+
         public virtual void OnCharacterStunned()
         {
 
