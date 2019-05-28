@@ -8,7 +8,6 @@ namespace Team17.StreetHunt
     {
         [SerializeField] private GameObject[] warps;
         [SerializeField] private SnakeBoss snakeBossScript;
-        [SerializeField] private Animator warpAnimator;
 
         public void SpawnWarps()
         {
