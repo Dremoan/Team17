@@ -436,7 +436,7 @@ namespace Team17.StreetHunt
         [ContextMenu ("Setup score manager")]
         public void SetupScoreManager()
         {
-            ScoreManager manager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
+            ScoreManager manager = GameObject.Find("UiManager").GetComponent<ScoreManager>();
             manager.ScoreHits = new ScoreHit[powerGroups.Length];
             for (int i = 0; i < manager.ScoreHits.Length; i++)
             {

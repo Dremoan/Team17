@@ -2,17 +2,30 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using TMPro;
 
 namespace Team17.StreetHunt
 {
     public class ScoreManager : Entity
     {
+        [Header("Saving parameters")]
         [Tooltip("Uncheck if you don't want the game to save, should be checked if the game is built.")]
         [SerializeField] private bool shouldSave = false;
         [Tooltip("This name has to be chosen once and never changed afterwards. It directs to this boss stats for the player.")]
         [SerializeField] private string scoreFileName;
+        [Header("Score parameters")]
         [SerializeField] private int scorePerBallLeft = 100;
         [SerializeField] private ScoreHit[] scoreHits;
+        [Header("Display parameters")]
+        [SerializeField] private GameObject scoreCanvas;
+        [SerializeField] private TextMeshProUGUI livesLeftValue;
+        [SerializeField] private TextMeshProUGUI livesLeftScore;
+        [SerializeField] private TextMeshProUGUI hitsValue;
+        [SerializeField] private TextMeshProUGUI hitsName;
+        [SerializeField] private TextMeshProUGUI hitsScore;
+        [SerializeField] private TextMeshProUGUI finalScore;
+
+
 
         private PlayerBossData currentData;
         private string dataPath;
@@ -33,6 +46,8 @@ namespace Team17.StreetHunt
         public override void OnLevelEnd()
         {
             base.OnLevelEnd();
+            SetValues();
+            scoreCanvas.SetActive(true);
             if(shouldSave)
             {
                 if (CalculateScore() > currentData.FinalScore)
@@ -69,6 +84,55 @@ namespace Team17.StreetHunt
 
             return score;
         }
+
+        #region Displaying Score
+
+        private void SetValues()
+        {
+            ClearTexts();
+
+            float score = 0;
+            livesLeftValue.text = GameManager.state.LivesLeft.ToString();
+            livesLeftScore.text = (GameManager.state.LivesLeft * scorePerBallLeft).ToString("F0");
+            score += GameManager.state.LivesLeft * scorePerBallLeft;
+
+            for (int i = 0; i < scoreHits.Length; i++)
+            {
+                hitsValue.text += scoreHits[i].Count.ToString() + "\n \n";
+                hitsName.text += scoreHits[i].Name + "\n \n";
+                hitsScore.text += (scoreHits[i].Count * scoreHits[i].ScoreValue).ToString() + "\n \n";
+                score += scoreHits[i].Count * scoreHits[i].ScoreValue;
+            }
+
+            finalScore.text = score.ToString();
+
+        }
+
+        private void ClearTexts()
+        {
+            livesLeftScore.text = "";
+            livesLeftScore.text = "";
+            hitsValue.text = "";
+            hitsName.text = "";
+            hitsScore.text = "";
+            finalScore.text = "";
+        }
+
+        /// <summary>
+        /// Testing method, do not use at runtime.
+        /// </summary>
+        [ContextMenu("Test score menu")]
+        public void TestFinalScoreDisplay()
+        {
+            for (int i = 0; i < scoreHits.Length; i++)
+            {
+                scoreHits[i].Count = Random.Range(0, 11);
+            }
+            SetValues();
+            scoreCanvas.SetActive(true);
+        }
+
+        #endregion
 
         #region Saving
 

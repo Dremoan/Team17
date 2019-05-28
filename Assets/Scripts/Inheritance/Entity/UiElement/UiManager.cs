@@ -28,7 +28,7 @@ namespace Team17.StreetHunt
         {
             if (GameManager.state.LivesLeft <= 0)
             {
-                GUiEndLevel(endLevelVictory);
+                //GUiEndLevel(endLevelVictory);
             }
         }
 
