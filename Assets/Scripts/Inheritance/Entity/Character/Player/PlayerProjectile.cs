@@ -182,6 +182,11 @@ namespace Team17.StreetHunt
                     character.CriticalShoot = false;
                 }
 
+                if(power > powerGroups[powerGroups.Length - 1].PowerThreshold + 10)
+                {
+                    power = powerGroups[powerGroups.Length - 1].PowerThreshold + 10;
+                }
+
                 SelectPowerGroup(power);
                 movementDirection = newDirection.normalized * (usedPowerGroup.Speed);
 
@@ -212,8 +217,14 @@ namespace Team17.StreetHunt
             
         }
 
+        /// <summary>
+        /// Change the usedPowerGroup and the usedPowerGroupIndex depending on actualPower.
+        /// </summary>
+        /// <param name="actualPower"></param>
         private void SelectPowerGroup(float actualPower)
         {
+            int lastIndex = usedPowergroupIndex;
+
             for (int i = 0; i < powerGroups.Length - 1; i++)
             {
                 if (power > powerGroups[i].PowerThreshold)
@@ -221,9 +232,21 @@ namespace Team17.StreetHunt
                     usedPowerGroup.Trail.Stop();
                     usedPowerGroup = powerGroups[i];
                     usedPowergroupIndex = i;
-                    //Debug.Log("P: " + power + ": " + usedPowerGroup.Name);
                 }
             }
+
+            if(lastIndex != usedPowergroupIndex)
+            {
+                if(lastIndex < usedPowergroupIndex) //increase
+                {
+                    GameManager.state.CallOnBallIncreasePowerGroup();
+                }
+                else // decrease
+                {
+                    GameManager.state.CallOnBallDecreasePowerGroup();
+                }
+            }
+
         }
 
         public void PauseBehavior()
@@ -401,10 +424,19 @@ namespace Team17.StreetHunt
 
         #endregion
 
+        #region Tutorial Functions
+
+        public void AddPower(float powerToAdd)
+        {
+            power += powerToAdd;
+        }
+
+        #endregion
+
         [ContextMenu ("Setup score manager")]
         public void SetupScoreManager()
         {
-            ScoreManager manager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
+            ScoreManager manager = GameObject.Find("UiManager").GetComponent<ScoreManager>();
             manager.ScoreHits = new ScoreHit[powerGroups.Length];
             for (int i = 0; i < manager.ScoreHits.Length; i++)
             {

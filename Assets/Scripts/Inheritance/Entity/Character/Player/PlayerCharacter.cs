@@ -81,15 +81,9 @@ namespace Team17.StreetHunt
 
         public void TeleportToRoom(Transform spawnPoint)
         {
+            anim.Play("Pj_Idle_Right");
             transform.position = spawnPoint.position;
             if (currentBall != null) currentBall.PauseBehavior();
-            tpFeedback.Play();
-            currentBall.transform.position = spawnPoint.position + new Vector3(1.35f, 0.16f, 0f);
-        }
-
-        public void TeleportPlayer(Transform teleportPos)
-        {
-            transform.position = teleportPos.position;
             tpFeedback.Play();
         }
 
@@ -109,6 +103,15 @@ namespace Team17.StreetHunt
         }
         #endregion
 
+        #region TutorialFunctions
+
+        public void TeleportPlayer(Transform teleportPos)
+        {
+            transform.position = teleportPos.position;
+            tpFeedback.Play();
+        }
+
+        #endregion
 
         public FeedBack TpFeedback { get => tpFeedback; }
         public PlayerProjectile CurrentBall { get => currentBall; set => currentBall = value; }

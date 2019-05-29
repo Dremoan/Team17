@@ -28,7 +28,7 @@ namespace Team17.StreetHunt
         {
             if (GameManager.state.LivesLeft <= 0)
             {
-                GUiEndLevel(endLevelVictory);
+                //GUiEndLevel(endLevelVictory);
             }
         }
 
@@ -42,7 +42,7 @@ namespace Team17.StreetHunt
         public override void OnBallHit(int powerGroupIndex, float hitPower)
         {
             base.OnBallHit(powerGroupIndex, hitPower);
-            GuiNbreBalls();
+            //GuiNbreBalls();
         }
         public override void OnBallDestroyed()
         {

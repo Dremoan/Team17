@@ -167,6 +167,22 @@ namespace Team17.StreetHunt
             }
         }
 
+        public void CallOnBallIncreasePowerGroup()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBallIncreasePowerGroup();
+            }
+        }
+
+        public void CallOnBallDecreasePowerGroup()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBallDecreasePowerGroup();
+            }
+        }
+
         public void CallOnBallSlowed()
         {
             for (int i = 0; i < entities.Count; i++)

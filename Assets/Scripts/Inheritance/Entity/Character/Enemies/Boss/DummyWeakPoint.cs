@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace Team17.StreetHunt
 {
@@ -9,8 +10,9 @@ namespace Team17.StreetHunt
         [Header("Gameplay Fields")]
         [SerializeField] private PlayerCharacter characterController;
         [SerializeField] private Transform tauntPoint;
-        [Range(0, 200)]
         [SerializeField] private float dummyHp;
+        [SerializeField] private GameObject touchPlane;
+        [SerializeField] private PlayableDirector timelineTransition;
 
         [Header("Feedbacks")]
         [SerializeField] private FeedBack deathFeedback;
@@ -86,7 +88,7 @@ namespace Team17.StreetHunt
 
         IEnumerator ExplosionWeakPoint()
         {
-            Debug.Log("Working");
+            touchPlane.SetActive(false);
             alreadyDead = true;
             deathFeedback.Play();
             yield return new WaitForSeconds(changeMaterialDelay);
@@ -94,7 +96,8 @@ namespace Team17.StreetHunt
             weaknessFx.SetActive(false);
             canvasAnim.Play("FlashBlanc");
             skinWeakPoint.material = newMaterial;
-            characterController.TeleportAndTaunt(tauntPoint);
+            characterController.TeleportToRoom(tauntPoint);
+            timelineTransition.Play();
         }
     }
 
