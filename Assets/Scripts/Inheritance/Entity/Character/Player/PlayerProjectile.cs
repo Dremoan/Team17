@@ -450,6 +450,7 @@ namespace Team17.StreetHunt
             manager.ScoreHits = new ScoreHit[powerGroups.Length];
             for (int i = 0; i < manager.ScoreHits.Length; i++)
             {
+                manager.ScoreHits[i] = new ScoreHit();
                 manager.ScoreHits[i].Name = powerGroups[i].Name;
             }
         }
