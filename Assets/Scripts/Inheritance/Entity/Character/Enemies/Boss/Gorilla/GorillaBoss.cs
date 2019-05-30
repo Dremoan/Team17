@@ -30,6 +30,7 @@ namespace Team17.StreetHunt
         [SerializeField] private Transform leftHand;
         [SerializeField] private RockProjectile[] rocksPool;
         [Header("Spikes parameters")]
+        [SerializeField] private bool canSpikesOnGround = true;
         [SerializeField] private Animator leftSpikes;
         [SerializeField] private Animator rightSpikes;
         [Header("FXs")]
@@ -241,19 +242,27 @@ namespace Team17.StreetHunt
             }
             else
             {
-                if(currentIdleType == 0f)
+                if(canSpikesOnGround)
                 {
-                    rightSpikes.SetTrigger("spikes");
+                    if (currentIdleType == 0f)
+                    {
+                        rightSpikes.SetTrigger("spikes");
+                    }
+                    if (currentIdleType == 0.25f)
+                    {
+                        leftSpikes.SetTrigger("spikes");
+                    }
                 }
-                if (currentIdleType == 0.25f)
+                else
                 {
-                    leftSpikes.SetTrigger("spikes");
+                    MediumAttack();
                 }
             }
         }
 
         public void LaunchCurrentRock()
         {
+            launchedRock.transform.position = new Vector3(launchedRock.transform.position.x, launchedRock.transform.position.y, 0);
             Vector3 dir = (GameManager.state.BallGameObject.transform.position - launchedRock.transform.position);
             //Vector3 dir = (GameManager.state.BallGameObject.GetComponent<PlayerProjectile>().FuturPositionInArena() - launchedRock.transform.position);
             launchedRock.Launch(dir);

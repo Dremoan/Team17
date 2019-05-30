@@ -344,7 +344,6 @@ namespace Team17.StreetHunt
                         isSlowMoIn = false;
                     }
                 }
-                Debug.Log(currentTimeScale);
             }
             if(isSlowMoOut)
             {

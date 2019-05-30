@@ -265,7 +265,7 @@ namespace Team17.StreetHunt
 
         private void Hit()
         {
-            power = 0;
+            power = 5;
             SelectPowerGroup(power);
             wasCanceled = true;
             timerFeedback.gameObject.SetActive(false);
