@@ -15,6 +15,7 @@ namespace Team17.StreetHunt
         {
             for (int i = 0; i < canvasToModify.Length; i++)
             {
+                canvasToModify[i].worldCamera = mainCam;
                 canvasToModify[i].planeDistance = planeDist;
             }
         }
