@@ -133,8 +133,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3383672076004445873}
-  - component: {fileID: 7769294193958642133}
   - component: {fileID: 724471870081362705}
+  - component: {fileID: 4759397516036752573}
   m_Layer: 0
   m_Name: SnakeBodyTail
   m_TagString: Untagged
@@ -157,20 +157,6 @@ Transform:
   m_Father: {fileID: 8780386487564795413}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &7769294193958642133
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7790000296734174174}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.33649346
-  m_Height: 6.3014784
-  m_Direction: 0
-  m_Center: {x: 1.3262057, y: 0, z: 0}
 --- !u!114 &724471870081362705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,6 +175,19 @@ MonoBehaviour:
   leftBend: 0.5
   rightBend: 0.5
   showDebug: 0
+--- !u!65 &4759397516036752573
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7790000296734174174}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.52308, y: 0.33680317, z: 1}
+  m_Center: {x: 1.078726, y: 0, z: 1.1187679e-15}
 --- !u!1001 &337387505776252605
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -252,6 +251,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2.5000033
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: fe6e1b23967d07643972ef61e9a7bc7e, type: 3}
+      propertyPath: m_Name
+      value: BossQueue_BendAnim
+      objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: fe6e1b23967d07643972ef61e9a7bc7e, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -260,10 +263,6 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 54d15c03ee6efee4c90df2e650f1b102, type: 2}
-    - target: {fileID: 100002, guid: fe6e1b23967d07643972ef61e9a7bc7e, type: 3}
-      propertyPath: m_Name
-      value: BossQueue_BendAnim
-      objectReference: {fileID: 0}
     - target: {fileID: 13700002, guid: fe6e1b23967d07643972ef61e9a7bc7e, type: 3}
       propertyPath: m_Bones.Array.data[0]
       value: 

@@ -11,7 +11,6 @@ namespace Team17.StreetHunt
         [SerializeField] private Animator anim;
         [SerializeField] private float distFromBall = 1.2f;
         [SerializeField] private FeedBack tpFeedback;
-        [SerializeField] private Transform tauntPoint;
         [Header("Ground check parameters")]
         [SerializeField] private Vector3 feetPosition;
         [SerializeField] private float feetlength = 0.25f;
@@ -82,28 +81,37 @@ namespace Team17.StreetHunt
 
         public void TeleportToRoom(Transform spawnPoint)
         {
+            anim.Play("PJ_R_IdlePose");
             transform.position = spawnPoint.position;
             if (currentBall != null) currentBall.PauseBehavior();
-            currentBall.transform.position = spawnPoint.position + new Vector3(0.75f, 0.15f, 0f);
             tpFeedback.Play();
         }
 
         public void TeleportAndTaunt(Transform tauntPoint)
         {
-            transform.position = tauntPoint.position;
-            if (currentBall != null) currentBall.PauseBehavior();
-            anim.Play("TauntIdle");
-            tpFeedback.Play();
+            StartCoroutine(Taunt(tauntPoint));
         }
 
-        public void ActiveBall(Transform ballPosition)
+
+        IEnumerator Taunt(Transform tauntPos)
         {
-            anim.SetTrigger("TauntToIdle");
-            if (currentBall != null) currentBall.gameObject.SetActive(true);
-            currentBall.transform.position = ballPosition.position;
+            anim.Play("TauntIdle");
+            yield return null;
+            if (currentBall != null) currentBall.PauseBehavior();
+            transform.position = tauntPos.position;
+            tpFeedback.Play();
         }
         #endregion
 
+        #region TutorialFunctions
+
+        public void TeleportPlayer(Transform teleportPos)
+        {
+            transform.position = teleportPos.position;
+            tpFeedback.Play();
+        }
+
+        #endregion
 
         public FeedBack TpFeedback { get => tpFeedback; }
         public PlayerProjectile CurrentBall { get => currentBall; set => currentBall = value; }

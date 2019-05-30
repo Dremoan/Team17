@@ -31,7 +31,7 @@ namespace Team17.StreetHunt
         [SerializeField] private LayerMask trajectoryCalculationMask;
 
 
-        private float power = 0;
+        public float power = 0;
         private int reHitTimer;
         private int usedPowergroupIndex = 0;
         private bool canStrike = true;
@@ -62,7 +62,6 @@ namespace Team17.StreetHunt
             Debug.DrawRay(lastContact, lastNormal.normalized * 3, Color.magenta);
             Debug.DrawRay(lastContact, -lastEnter.normalized * 3, Color.blue);
             Debug.DrawRay(lastContact, lastNewDir.normalized * 3, Color.red);
-            FuturPositionInArena();
         }
 
         protected override void OnEnable()
@@ -87,7 +86,7 @@ namespace Team17.StreetHunt
                 lastEnter = movementDirection;
                 Bounce(movementDirection, coll.contacts[0].normal);
                 coll.gameObject.GetComponent<IBallHitable>().Hit(usedPowergroupIndex, power);
-                //Hit();
+                Hit();
             }
             else
             {
@@ -113,7 +112,15 @@ namespace Team17.StreetHunt
             if (coll.gameObject.GetComponent<IBallHitable>() != null)
             {
                 coll.gameObject.GetComponent<IBallHitable>().Hit(usedPowergroupIndex, power);
-                Hit();
+                //Hit();
+            }
+
+            if(coll.gameObject.GetComponent<BallRelfecter>() != null)
+            {
+                Vector3 newDir = (transform.position - coll.transform.position).normalized * usedPowerGroup.Speed;
+                movementDirection = newDir;
+                body.velocity = newDir;
+                StunCharacter(coll.gameObject.GetComponent<BallRelfecter>().StunTime);
             }
         }
 
@@ -147,7 +154,7 @@ namespace Team17.StreetHunt
                 trajectory.position = Vector3.Lerp(transform.position, touchPos, 0.5f);
                 float zRot = Vector3.SignedAngle(transform.up, (touchPos - transform.position), Vector3.forward);
                 trajectory.rotation = Quaternion.Euler(0, 0, zRot);
-                trajectory.localScale = new Vector3(1, Vector3.Distance(transform.position, touchPos) * 2, 1);
+                trajectory.localScale = new Vector3(0.5f, Vector3.Distance(transform.position, touchPos) * 1f, 0.5f);
                 character.PrepareStrike(transform.position, touchPos);
             }
         }
@@ -175,11 +182,17 @@ namespace Team17.StreetHunt
                     character.CriticalShoot = false;
                 }
 
+
+                if(power > powerGroups[powerGroups.Length - 1].PowerThreshold + 10)
+                {
+                    power = powerGroups[powerGroups.Length - 1].PowerThreshold + 10;
+                }
+
                 SelectPowerGroup(power);
                 movementDirection = newDirection.normalized * (usedPowerGroup.Speed);
 
                 usedPowerGroup.Hit.Rotate3DStartRotationX(- GetRotationFromDirection(newDirection));
-                usedPowerGroup.Launch.Rotate3DStartRotationZ(- GetRotationFromDirection(newDirection));
+                usedPowerGroup.Launch.Rotate3DStartRotationZ(GetRotationFromDirection(newDirection));
                 usedPowerGroup.Trail.RotateShapeEmitter(GetRotationFromDirection(newDirection));
 
                 timer.DeleteTimer(reHitTimer);
@@ -196,17 +209,25 @@ namespace Team17.StreetHunt
 
         public void LaunchBall()
         {
-            body.velocity = movementDirection;
             usedPowerGroup.Launch.Play();
             usedPowerGroup.Trail.Play();
+            body.velocity = movementDirection;
             isStriking = false;
 
             GameManager.state.CallOnBallShot();
             
         }
 
+
+
+        /// <summary>
+        /// Change the usedPowerGroup and the usedPowerGroupIndex depending on actualPower.
+        /// </summary>
+        /// <param name="actualPower"></param>
         private void SelectPowerGroup(float actualPower)
         {
+            int lastIndex = usedPowergroupIndex;
+
             for (int i = 0; i < powerGroups.Length - 1; i++)
             {
                 if (power > powerGroups[i].PowerThreshold)
@@ -214,9 +235,21 @@ namespace Team17.StreetHunt
                     usedPowerGroup.Trail.Stop();
                     usedPowerGroup = powerGroups[i];
                     usedPowergroupIndex = i;
-                    Debug.Log("P: " + power + ": " + usedPowerGroup.Name);
                 }
             }
+
+            if(lastIndex != usedPowergroupIndex)
+            {
+                if(lastIndex < usedPowergroupIndex) //increase
+                {
+                    GameManager.state.CallOnBallIncreasePowerGroup();
+                }
+                else // decrease
+                {
+                    GameManager.state.CallOnBallDecreasePowerGroup();
+                }
+            }
+
         }
 
         public void PauseBehavior()
@@ -232,13 +265,11 @@ namespace Team17.StreetHunt
 
         private void Hit()
         {
-            power = 0;
+            power = 5;
+            SelectPowerGroup(power);
             wasCanceled = true;
             timerFeedback.gameObject.SetActive(false);
             trajectory.gameObject.SetActive(false);
-            //character.Physicate(true);
-            gameObject.SetActive(false);
-            //destroyed = true;
 
             usedPowerGroup.Hit.Play();
             usedPowerGroup.Trail.Stop();
@@ -249,12 +280,18 @@ namespace Team17.StreetHunt
         private void CancelBall()
         {
             power = 0;
+            SelectPowerGroup(power);
+            body.velocity = Vector3.zero;
+            canStrike = true;
             wasCanceled = true;
+            isStriking = false;
+            timer.DeleteTimer(reHitTimer);
             timerFeedback.gameObject.SetActive(false);
             trajectory.gameObject.SetActive(false);
             character.Physicate(true);
             gameObject.SetActive(false);
             destroyed = true;
+            timerFeedback.localScale = initialFeedbackScale;
 
             usedPowerGroup.Destroyed.Play();
             usedPowerGroup.Trail.Stop();
@@ -271,6 +308,17 @@ namespace Team17.StreetHunt
             character.Physicate(true);
             canStrike = false;
             timer.LaunchNewTimer(stunTime, RecoverCharacter);
+        }
+
+        public void StunCharacter(float time)
+        {
+            isStriking = false;
+            body.velocity = movementDirection;
+            timerFeedback.gameObject.SetActive(false);
+            trajectory.gameObject.SetActive(false);
+            character.Physicate(true);
+            canStrike = false;
+            timer.LaunchNewTimer(time, RecoverCharacter);
         }
 
         private void RecoverCharacter()
@@ -308,19 +356,30 @@ namespace Team17.StreetHunt
 
         private void PassThroughSpeedPortal(SpeedPortal portal, Vector3 entryVelocity, Vector3 portalRight)
         {
-            entryVelocity = new Vector3(Mathf.Abs(entryVelocity.x), entryVelocity.y, entryVelocity.z);
+            entryVelocity = new Vector3(Mathf.Abs(entryVelocity.x), Mathf.Abs(entryVelocity.y), entryVelocity.z);
+            portalRight = new Vector3(Mathf.Abs(portalRight.x), Mathf.Abs(portalRight.y), portalRight.z);
             float sqrMag = Vector3.SqrMagnitude(entryVelocity - portalRight);
 
             if(Mathf.Abs(sqrMag) < speedPortalPrecision)
             {
                 //Speed up
-                if (usedPowergroupIndex > powerGroups.Length - 2) return;
-                usedPowergroupIndex++;
+                if(usedPowergroupIndex < powerGroups.Length - 1)
+                {
+                    power = powerGroups[usedPowergroupIndex + 1].PowerThreshold + 10;
+                    SelectPowerGroup(powerGroups[usedPowergroupIndex + 1].PowerThreshold + 10);
+                }
+                else
+                {
+                    if(power < powerGroups[powerGroups.Length - 1].PowerThreshold)
+                    {
+                        power = powerGroups[powerGroups.Length - 1].PowerThreshold;
+                    }
+                    SelectPowerGroup(power);
+                }
+                               
                 portal.gameObject.SetActive(false);
             }
 
-            usedPowerGroup = powerGroups[usedPowergroupIndex];
-            power = usedPowerGroup.PowerThreshold;
             if(isStriking)
             {
                 movementDirection = body.velocity.normalized * (usedPowerGroup.Speed) * slowedTimeScale;
@@ -330,7 +389,6 @@ namespace Team17.StreetHunt
                 movementDirection = body.velocity.normalized * (usedPowerGroup.Speed);
             }
             body.velocity = movementDirection;
-            Debug.Log("P: " + power + ": " + usedPowerGroup.Name);
         }
 
         #endregion
@@ -369,13 +427,30 @@ namespace Team17.StreetHunt
 
         #endregion
 
+        #region Tutorial Functions
+
+        public void AddPower(float powerToAdd)
+        {
+            power += powerToAdd;
+            SelectPowerGroup(power);
+        }
+
+        public override void OnBallIncreasePowerGroup()
+        {
+            base.OnBallIncreasePowerGroup();
+            usedPowerGroup.Trail.Play();
+        }
+
+        #endregion
+
         [ContextMenu ("Setup score manager")]
         public void SetupScoreManager()
         {
-            ScoreManager manager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
+            ScoreManager manager = GameObject.Find("UiManager").GetComponent<ScoreManager>();
             manager.ScoreHits = new ScoreHit[powerGroups.Length];
             for (int i = 0; i < manager.ScoreHits.Length; i++)
             {
+                manager.ScoreHits[i] = new ScoreHit();
                 manager.ScoreHits[i].Name = powerGroups[i].Name;
             }
         }

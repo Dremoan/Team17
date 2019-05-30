@@ -344,7 +344,6 @@ namespace Team17.StreetHunt
                         isSlowMoIn = false;
                     }
                 }
-                Debug.Log(currentTimeScale);
             }
             if(isSlowMoOut)
             {
@@ -414,7 +413,7 @@ namespace Team17.StreetHunt
             for (int i = 0; i < particleSystemsToRotate.Length; i++)
             {
                 ParticleSystem.MainModule module = particleSystemsToRotate[i].main;
-                module.startRotationZ = newRotZ * Mathf.Deg2Rad;
+                module.startRotationZ = - newRotZ * Mathf.Deg2Rad;
             }
         }
 

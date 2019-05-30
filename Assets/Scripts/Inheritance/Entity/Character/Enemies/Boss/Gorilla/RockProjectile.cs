@@ -58,6 +58,19 @@ namespace Team17.StreetHunt
             }
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.gameObject.layer == 12) // 12 == wall
+            {
+                if (!available)
+                {
+                    body.velocity = Vector3.zero;
+                    body.angularVelocity = Vector3.zero;
+                    StartCoroutine(DisapearDelay());
+                }
+            }
+        }
+
         public bool Available { get => available; set => available = value; }
     }
 }

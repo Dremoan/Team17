@@ -20,9 +20,9 @@ namespace Team17.StreetHunt
         private int indexPath;
 
 
-            #region Spline movement
+        #region Spline movement
 
-            IEnumerator Delay()
+        IEnumerator Delay()
         {
             snakeBodyParts[0].startPathFollowing = true;
             yield return new WaitForSeconds(delayFollowSnakeChunks);
