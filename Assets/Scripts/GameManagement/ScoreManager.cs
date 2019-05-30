@@ -18,11 +18,19 @@ namespace Team17.StreetHunt
         [SerializeField] private ScoreHit[] scoreHits;
         [Header("Display parameters")]
         [SerializeField] private GameObject scoreCanvas;
+        [SerializeField] private float incSpeed = 5f;
+        [SerializeField] private float incWait = 0.01f;
+        [Space(5f)]
+        [SerializeField] private float scoreLineSpacing = 50f;
+        [SerializeField] private GameObject originalHitsValueText;
+        [SerializeField] private GameObject originalHitsNameText;
+        [SerializeField] private GameObject originalHitsScoreText;
+        [Space(5f)]
         [SerializeField] private TextMeshProUGUI livesLeftValue;
         [SerializeField] private TextMeshProUGUI livesLeftScore;
-        [SerializeField] private TextMeshProUGUI hitsValue;
-        [SerializeField] private TextMeshProUGUI hitsName;
-        [SerializeField] private TextMeshProUGUI hitsScore;
+        [SerializeField] private TextMeshProUGUI[] hitsValue;
+        [SerializeField] private TextMeshProUGUI[] hitsName;
+        [SerializeField] private TextMeshProUGUI[] hitsScore;
         [SerializeField] private TextMeshProUGUI finalScore;
 
 
@@ -46,7 +54,6 @@ namespace Team17.StreetHunt
         public override void OnLevelEnd()
         {
             base.OnLevelEnd();
-            SetValues();
             scoreCanvas.SetActive(true);
             if(shouldSave)
             {
@@ -87,35 +94,73 @@ namespace Team17.StreetHunt
 
         #region Displaying Score
 
-        private void SetValues()
+        /// <summary>
+        /// Building method, do not use at runtime.
+        /// </summary>
+        [ContextMenu ("Organize displays")]
+        public void OrganizeDsiplays()
         {
-            ClearTexts();
 
-            float score = 0;
-            livesLeftValue.text = GameManager.state.LivesLeft.ToString();
-            livesLeftScore.text = (GameManager.state.LivesLeft * scorePerBallLeft).ToString("F0");
-            score += GameManager.state.LivesLeft * scorePerBallLeft;
+            hitsValue = new TextMeshProUGUI[scoreHits.Length];
+            hitsName = new TextMeshProUGUI[scoreHits.Length];
+            hitsScore = new TextMeshProUGUI[scoreHits.Length];
 
-            for (int i = 0; i < scoreHits.Length; i++)
+            hitsValue[0] = originalHitsValueText.GetComponent<TextMeshProUGUI>();
+            hitsName[0] = originalHitsNameText.GetComponent<TextMeshProUGUI>();
+            hitsScore[0] = originalHitsScoreText.GetComponent<TextMeshProUGUI>();
+
+            for (int i = 1; i < scoreHits.Length; i++)
             {
-                hitsValue.text += scoreHits[i].Count.ToString() + "\n \n";
-                hitsName.text += scoreHits[i].Name + "\n \n";
-                hitsScore.text += (scoreHits[i].Count * scoreHits[i].ScoreValue).ToString() + "\n \n";
-                score += scoreHits[i].Count * scoreHits[i].ScoreValue;
+                hitsValue[i] = GameObject.Instantiate(hitsValue[0], new Vector3(hitsValue[0].rectTransform.position.x, hitsValue[0].rectTransform.position.y - (i * scoreLineSpacing), 0f), Quaternion.identity, scoreCanvas.transform);
+                hitsName[i] = GameObject.Instantiate(hitsName[0], new Vector3(hitsName[0].rectTransform.position.x, hitsName[0].rectTransform.position.y - (i * scoreLineSpacing), 0f), Quaternion.identity, scoreCanvas.transform);
+                hitsScore[i] = GameObject.Instantiate(hitsScore[0], new Vector3(hitsScore[0].rectTransform.position.x, hitsScore[0].rectTransform.position.y - (i * scoreLineSpacing), 0f), Quaternion.identity, scoreCanvas.transform);
             }
-
-            finalScore.text = score.ToString();
 
         }
 
-        private void ClearTexts()
+        private IEnumerator DynamicScoreDisplay()
         {
-            livesLeftScore.text = "";
-            livesLeftScore.text = "";
-            hitsValue.text = "";
-            hitsName.text = "";
-            hitsScore.text = "";
-            finalScore.text = "";
+            float scoreInc = 0f;
+            // livesleftValue and score
+            livesLeftValue.text = "4";
+            while (scoreInc < 4 * scorePerBallLeft)
+            {
+                scoreInc += Time.deltaTime * incSpeed;
+                livesLeftScore.text = scoreInc.ToString("F0");
+                yield return new WaitForSeconds(incWait);
+            }
+            scoreInc = 4 * scorePerBallLeft;
+            livesLeftScore.text = scoreInc.ToString("F0");
+            yield return new WaitForSeconds(incWait);
+
+            //Hits scores
+            scoreInc = 0f;
+            for (int i = 0; i < scoreHits.Length; i++)
+            {
+                hitsValue[i].text = scoreHits[i].Count.ToString();
+                while(scoreInc < scoreHits[i].Count * scoreHits[i].ScoreValue)
+                {
+                    scoreInc += Time.deltaTime * incSpeed;
+                    hitsScore[i].text = scoreInc.ToString("F0");
+                    yield return new WaitForSeconds(incWait);
+                }
+                scoreInc = 0f;
+                scoreInc = scoreHits[i].Count * scoreHits[i].ScoreValue;
+                hitsScore[i].text = scoreInc.ToString("F0");
+                yield return new WaitForSeconds(incWait);
+            }
+
+            // final score
+            float score = CalculateScore();
+            scoreInc = 0f;
+
+            while(scoreInc < score)
+            {
+                scoreInc += scoreInc += Time.deltaTime * incSpeed;
+                finalScore.text = scoreInc.ToString("F0");
+                yield return new WaitForSeconds(incWait);
+            }
+            finalScore.text = score.ToString();
         }
 
         /// <summary>
@@ -128,8 +173,8 @@ namespace Team17.StreetHunt
             {
                 scoreHits[i].Count = Random.Range(0, 11);
             }
-            SetValues();
             scoreCanvas.SetActive(true);
+            StartCoroutine(DynamicScoreDisplay());
         }
 
         #endregion
