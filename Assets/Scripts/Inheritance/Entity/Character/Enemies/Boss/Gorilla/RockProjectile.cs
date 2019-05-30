@@ -30,6 +30,7 @@ namespace Team17.StreetHunt
             isHeld = false;
             available = false;
             body.velocity = direction.normalized * speed;
+            Debug.Log("launched rock");
         }
 
         private void HoldingManagement()
