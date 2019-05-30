@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Playables;
+using UnityEngine.Events;
 
 namespace Team17.StreetHunt
 {
@@ -12,7 +12,8 @@ namespace Team17.StreetHunt
         [SerializeField] private Transform tauntPoint;
         [SerializeField] private float dummyHp;
         [SerializeField] private GameObject touchPlane;
-        [SerializeField] private PlayableDirector timelineTransition;
+        [SerializeField] private UnityEvent eventDummyDeath;
+        [SerializeField] private UiSceneManagement sceneManager;
 
         [Header("Feedbacks")]
         [SerializeField] private FeedBack deathFeedback;
@@ -75,6 +76,11 @@ namespace Team17.StreetHunt
             skinWeakPoint.material = actualBossMat;
         }
 
+        public void MenuBack(float timeToWait)
+        {
+            StartCoroutine(GoBackToMenu(timeToWait));
+        }
+
         IEnumerator Blink()
         {
             for (int i = 0; i < 2; i++)
@@ -97,7 +103,15 @@ namespace Team17.StreetHunt
             canvasAnim.Play("FlashBlanc");
             skinWeakPoint.material = newMaterial;
             characterController.TeleportToRoom(tauntPoint);
-            timelineTransition.Play();
+            eventDummyDeath.Invoke();
+        }
+
+        IEnumerator GoBackToMenu(float timer)
+        {
+            yield return new WaitForSeconds(timer);
+            canvasAnim.Play("FadeIn");
+            yield return new WaitForSeconds(1f);
+            sceneManager.LoadSceneIndex(0);
         }
     }
 

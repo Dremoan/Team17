@@ -81,7 +81,7 @@ namespace Team17.StreetHunt
 
         public void TeleportToRoom(Transform spawnPoint)
         {
-            anim.Play("Pj_Idle_Right");
+            anim.Play("PJ_R_IdlePose");
             transform.position = spawnPoint.position;
             if (currentBall != null) currentBall.PauseBehavior();
             tpFeedback.Play();
