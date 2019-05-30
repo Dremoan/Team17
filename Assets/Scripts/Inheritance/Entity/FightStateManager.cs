@@ -15,6 +15,8 @@ namespace Team17.StreetHunt
         [SerializeField] private Boss thirdPhaseBoss;
 
         [Header("Rooms spawn points")]
+        [Tooltip ("Check to test the boss without having to setup timelines. Has to be unchecked for final scene.")]
+        [SerializeField] private bool spawnPlayerWithoutTimeLines = false;
         [SerializeField] private PlayerCharacter character;
         [SerializeField] private Transform firstSpawnPoint;
         [SerializeField] private Transform secondSpawnPoint;
@@ -66,15 +68,24 @@ namespace Team17.StreetHunt
             {
                 case FightGlobalState.First:
                     firstPhaseBoss.gameObject.SetActive(true);
-                    //character.TeleportToRoom(firstSpawnPoint);
+                    if (spawnPlayerWithoutTimeLines)
+                    {
+                        character.TeleportToRoom(firstSpawnPoint);
+                    }
                     break;
                 case FightGlobalState.Second:
                     secondPhaseBoss.gameObject.SetActive(true);
-                    //character.TeleportToRoom(secondSpawnPoint);
+                    if(spawnPlayerWithoutTimeLines)
+                    {
+                        character.TeleportToRoom(secondSpawnPoint);
+                    }
                     break;
                 case FightGlobalState.Third:
                     thirdPhaseBoss.gameObject.SetActive(true);
-                    //character.TeleportToRoom(thirdSpawnPoint);
+                    if(spawnPlayerWithoutTimeLines)
+                    {
+                        character.TeleportToRoom(thirdSpawnPoint);
+                    }
                     break;
             }
         }
