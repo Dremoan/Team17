@@ -31,7 +31,7 @@ namespace Team17.StreetHunt
         [SerializeField] private LayerMask trajectoryCalculationMask;
 
 
-        private float power = 0;
+        public float power = 0;
         private int reHitTimer;
         private int usedPowergroupIndex = 0;
         private bool canStrike = true;
@@ -182,6 +182,7 @@ namespace Team17.StreetHunt
                     character.CriticalShoot = false;
                 }
 
+
                 if(power > powerGroups[powerGroups.Length - 1].PowerThreshold + 10)
                 {
                     power = powerGroups[powerGroups.Length - 1].PowerThreshold + 10;
@@ -216,6 +217,8 @@ namespace Team17.StreetHunt
             GameManager.state.CallOnBallShot();
             
         }
+
+
 
         /// <summary>
         /// Change the usedPowerGroup and the usedPowerGroupIndex depending on actualPower.
@@ -429,6 +432,13 @@ namespace Team17.StreetHunt
         public void AddPower(float powerToAdd)
         {
             power += powerToAdd;
+            SelectPowerGroup(power);
+        }
+
+        public override void OnBallIncreasePowerGroup()
+        {
+            base.OnBallIncreasePowerGroup();
+            usedPowerGroup.Trail.Play();
         }
 
         #endregion
