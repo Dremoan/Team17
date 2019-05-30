@@ -14,14 +14,13 @@ namespace Team17.StreetHunt
             transform.localScale = new Vector3(1 / transform.parent.localScale.x, 1 / transform.parent.localScale.y, 1 / transform.parent.localScale.z);
         }
 
-        public void SpawnPortal(Vector3 pos, float rot)
+        public void SpawnPortal(Vector3 pos, float rot, float time)
         {
             for (int i = 0; i < portalPool.Length; i++)
             {
                 if(portalPool[i].Available)
                 {
-                    portalPool[i].gameObject.SetActive(true);
-                    portalPool[i].SetTargets(pos, rot); // also sets portal[i].Available to false
+                    portalPool[i].Activate(pos, rot, time); // also sets portal[i].Available to false
                     return;
                 }
             }
@@ -31,9 +30,8 @@ namespace Team17.StreetHunt
         {
             for (int i = 0; i < portalPool.Length; i++)
             {
-                portalPool[i].Available = true;
-                portalPool[i].gameObject.SetActive(false);
-                portalPool[i].transform.localPosition = Vector3.zero;
+                portalPool[i].gameObject.SetActive(true);
+                portalPool[i].GetReadyForReactivation();
             }
         }
     }

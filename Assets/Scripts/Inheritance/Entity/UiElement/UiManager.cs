@@ -7,29 +7,28 @@ namespace Team17.StreetHunt
 {
     public class UiManager : UiElement
     {
+
+        [SerializeField] private Animator transitionsCanvas;
         // ------ Player Health Management ------
         [Header("End Level Ui"), SerializeField] private GameObject EndLevelUi;
         [SerializeField] private TextMeshProUGUI textEndGame;
         [SerializeField] private Animator animatorUiEndLevel;
+
         [Header("Health Management"), SerializeField] private GameObject[] nbreBallsArray;
         int nbreBall = 0;
         bool endLevelVictory = false;
 
-        public void LoadMenuScene()
+        protected override void Start()
         {
-            animatorUiEndLevel.SetTrigger("animEndLevelMenu");
-        }
-
-        public void ReloadScene()
-        {
-            animatorUiEndLevel.SetTrigger("animEndLevelReload");
+            base.Start();
+            transitionsCanvas.Play("FadeOut");
         }
 
         protected override void Update()
         {
             if (GameManager.state.LivesLeft <= 0)
             {
-                GUiEndLevel(endLevelVictory);
+                //GUiEndLevel(endLevelVictory);
             }
         }
 
@@ -43,9 +42,8 @@ namespace Team17.StreetHunt
         public override void OnBallHit(int powerGroupIndex, float hitPower)
         {
             base.OnBallHit(powerGroupIndex, hitPower);
-            GuiNbreBalls();
+            //GuiNbreBalls();
         }
-
         public override void OnBallDestroyed()
         {
             base.OnBallDestroyed();
@@ -55,7 +53,6 @@ namespace Team17.StreetHunt
         private void GuiNbreBalls()
         {
             nbreBall = GameManager.state.LivesLeft;
-            nbreBall -= 1;
             //Debug.Log("GameManager.state.LivesLeft : " + GameManager.state.LivesLeft);
             //Debug.Log("nbreBall : " + nbreBall);
             if ((nbreBall) >= 0)
@@ -82,5 +79,18 @@ namespace Team17.StreetHunt
                 EndLevelUi.SetActive(true);
             }
         }
+
+        // ------ Button management ------
+
+        public void LoadMenuScene()
+        {
+            animatorUiEndLevel.SetTrigger("animEndLevelMenu");
+        }
+
+        public void ReloadScene()
+        {
+            animatorUiEndLevel.SetTrigger("animEndLevelReload");
+        }
+
     }
 }

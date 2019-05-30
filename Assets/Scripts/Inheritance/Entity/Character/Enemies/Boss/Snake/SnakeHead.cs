@@ -45,7 +45,7 @@ namespace Team17.StreetHunt
             if (startPathFollowing)
             {
                 pathCreator.path.ended = false;
-                distanceTravelled += speed * Time.fixedDeltaTime;
+                distanceTravelled += speed * Time.deltaTime;
                 transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, EndOfPathInstruction.StopAndTrigger);
                 transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, EndOfPathInstruction.StopAndTrigger);
                 for (int i = 0; i < headFollowers.Length; i++)
@@ -58,7 +58,14 @@ namespace Team17.StreetHunt
             }
         }
 
-        public void EndSplineResetValues()
+
+        public override void OnBossDeath()
+        {
+            base.OnBossDeath();
+            speed = 14f;
+        }
+
+            public void EndSplineResetValues()
         {
             ResetTransform();
             startPathFollowing = false;

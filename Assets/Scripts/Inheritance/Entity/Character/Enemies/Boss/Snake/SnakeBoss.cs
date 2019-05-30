@@ -19,10 +19,6 @@ namespace Team17.StreetHunt
         [SerializeField] private float delayFollowSnakeChunks = 0.25f;
         private int indexPath;
 
-        protected override void Start()
-        {
-
-        }
 
         #region Spline movement
 

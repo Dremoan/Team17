@@ -11,6 +11,7 @@ namespace Team17.StreetHunt
         [Header("Components")]
         [SerializeField] private TimersCalculator timers;
         [SerializeField] private SpeedPortalManager portalManager;
+        [SerializeField] private TouchPlane touchPlane;
         [Header("Health and state")]
         [SerializeField] private BossPhaseState currentState = BossPhaseState.Entry;
         [SerializeField] private float health = 50f;
@@ -33,6 +34,7 @@ namespace Team17.StreetHunt
         private CutSceneEvent exitBeginsEvent;
         private CutSceneEvent exitEndsEvent;
 
+        private BossPattern currentPattern;
         private int currentAttackStateIndex = 0;
         protected float currentHealth = 0f;
         protected bool canAttack = false;
@@ -83,6 +85,8 @@ namespace Team17.StreetHunt
         private void Death()
         {
             currentState = BossPhaseState.Exit;
+            touchPlane.gameObject.SetActive(false);
+            currentPattern.CancelAttack();
             GameManager.state.CallOnBossDeath();
         }
 
@@ -161,6 +165,7 @@ namespace Team17.StreetHunt
             {
                 case BossPhaseState.Entry:
                     if (entryBeginsEvent != null) entryBeginsEvent.Invoke();
+                    currentPattern = entryPattern;
                     entryPattern.LaunchAttack(EntryEnd);
                     break;
                 case BossPhaseState.Attacking:
@@ -168,18 +173,21 @@ namespace Team17.StreetHunt
                     switch (attackStates[currentAttackStateIndex])
                     {
                         case BossAttackState.Easy:
+                            currentPattern = easyPatterns[index];
                             easyPatterns[index].LaunchAttack(AttackEnd);
                             currentAttackStateIndex++;
                             if (currentAttackStateIndex > attackStates.Length - 1) currentAttackStateIndex = 0;
                             break;
 
                         case BossAttackState.Medium:
+                            currentPattern = mediumPatterns[index];
                             mediumPatterns[index].LaunchAttack(AttackEnd);
                             currentAttackStateIndex++;
                             if (currentAttackStateIndex > attackStates.Length - 1) currentAttackStateIndex = 0;
                             break;
 
                         case BossAttackState.Hard:
+                            currentPattern = hardPatterns[index];
                             hardPatterns[index].LaunchAttack(AttackEnd);
                             currentAttackStateIndex++;
                             if (currentAttackStateIndex > attackStates.Length - 1) currentAttackStateIndex = 0;
@@ -190,6 +198,7 @@ namespace Team17.StreetHunt
                 case BossPhaseState.Exit:
                     //call exit begins
                     if (exitBeginsEvent != null) exitBeginsEvent.Invoke();
+                    currentPattern = exitPattern;
                     exitPattern.LaunchAttack(ExitEnd);
                     break;
 
@@ -201,6 +210,7 @@ namespace Team17.StreetHunt
         {
             canAttack = true;
             if (entryBeginsEvent != null) entryEndsEvent.Invoke();
+            touchPlane.gameObject.SetActive(true);
             currentState = BossPhaseState.Attacking;
         }
 
@@ -305,17 +315,19 @@ namespace Team17.StreetHunt
         [Header("Attack parameter")]
         [Tooltip("Time it takes for the attack to be considered finished. After that time, the boss can choose and launch another attack.")]
         [SerializeField] private float timeToEnd = 3f;
-        [Tooltip("Time it takes for spawned portal to disapear.")]
-        [SerializeField] private float timeForPortalsToDisapear = 2.5f;
         [Tooltip("Time it takes for the attack to be considered usable again after the boss used it once. During this time, the boss will ignore this attack.")]
         [SerializeField] private float coolDown = 4f;
+        [Tooltip("Define how much the the timeToEnd will be shorten. 0 means nothing will change, 0.5 means half of the time left will be removed, 1 means the attack will instantly end.")]
+        [SerializeField] [Range(0.01f, 1f)] private float cancelingTimerSpeedUp = 0.5f;
         [SerializeField] private UnityEngine.Events.UnityEvent pattern;
         [SerializeField] private PortalPlacement[] portals;
 
         private SpeedPortalManager portalManager;
         private TimersCalculator timers;
-        private bool canBeUsed = true;
         private System.Action endAction;
+        private bool canBeUsed = true;
+        private int cdTimerIndex;
+        private int endTimerIndex;
 
         public void LaunchAttack(System.Action endAct)
         {
@@ -325,21 +337,30 @@ namespace Team17.StreetHunt
             canBeUsed = false;
             for (int i = 0; i < portals.Length; i++)
             {
-                portalManager.SpawnPortal(portals[i].Position, portals[i].Rotation);
+                portalManager.SpawnPortal(portals[i].Position, portals[i].Rotation, portals[i].ApparitionTime);
             }
-            timers.LaunchNewTimer(timeToEnd, EndAttack);
+
+            //enable apparition
+            endTimerIndex = timers.LaunchNewTimer(timeToEnd, EndAttack);
         }
 
         private void EndAttack()
         {
             portalManager.DeactivateAllPortals();
             endAction.Invoke();
-            timers.LaunchNewTimer(coolDown, ResetAttack);
+            cdTimerIndex = timers.LaunchNewTimer(coolDown, ResetAttack);
         }
 
         private void ResetAttack()
         {
             canBeUsed = true;
+        }
+
+        public void CancelAttack()
+        {
+            Timer time = timers.GetTimerFromUserIndex(endTimerIndex);
+            float removedTime = cancelingTimerSpeedUp * time.TimeLeft;
+            timers.AddTime(endTimerIndex, -removedTime);
         }
 
         public bool IsUsableAndUseful(Transform zero, Vector3 targetPos)
@@ -358,11 +379,15 @@ namespace Team17.StreetHunt
     [System.Serializable]
     public struct PortalPlacement
     {
+        [SerializeField] private string name;
         [SerializeField] private Vector3 position;
         [SerializeField] private float rotation;
+        [SerializeField] private float apparitionTime;
 
-        public Vector3 Position { get => position; set => position = value; }
-        public float Rotation { get => rotation; set => rotation = value; }
+        public string Name { get => name; }
+        public Vector3 Position { get => position; }
+        public float Rotation { get => rotation; }
+        public float ApparitionTime { get => apparitionTime; }
     }
 
     public enum BossAttackState

@@ -16,11 +16,11 @@ namespace Team17.StreetHunt
 
         IEnumerator WarpsAppear()
         {
-            yield return new WaitForSeconds(.5f);
+            //yield return new WaitForSeconds(.5f);
             for (int i = 0; i < warps.Length; i++)
             {
                 warps[i].SetActive(true);
-                yield return null;
+                yield return new WaitForSeconds(.5f);
             }
             snakeBossScript.PickMove();
         }

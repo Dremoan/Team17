@@ -11,6 +11,10 @@ namespace Team17.StreetHunt
         [SerializeField] private Animator anim;
         [SerializeField] private float distFromBall = 1.2f;
         [SerializeField] private FeedBack tpFeedback;
+        [Header("Ground check parameters")]
+        [SerializeField] private Vector3 feetPosition;
+        [SerializeField] private float feetlength = 0.25f;
+        [SerializeField] private LayerMask groundMask;
 
         private PlayerProjectile currentBall;
         private bool criticalShoot;
@@ -18,7 +22,20 @@ namespace Team17.StreetHunt
         private float angle = 0;
         private bool aiming = false;
         private bool playedTp = false;
+        private bool grounded = false;
 
+        protected override void Update()
+        {
+            base.Update();
+            GroundCheck();
+        }
+
+        private void GroundCheck()
+        {
+            grounded = Physics.Raycast(transform.position + feetPosition, Vector3.down, feetlength, groundMask);
+            Debug.DrawRay(transform.position + feetPosition, Vector3.down * feetlength, Color.red);
+            anim.SetBool("Grounded", grounded);
+        }
 
         public void Physicate(bool physicate)
         {
@@ -26,7 +43,11 @@ namespace Team17.StreetHunt
             hardCollider.enabled = physicate;
             body.velocity = Vector3.zero;
             transform.rotation = Quaternion.Euler(0, 90, 0);
-            anim.SetBool("aiming", !physicate);
+        }
+
+        public void AimingParameterSetup(bool aiming)
+        {
+            anim.SetBool("aiming", !aiming);
         }
 
         public void PrepareStrike(Vector3 ballPos, Vector3 touchPos)
@@ -56,31 +77,41 @@ namespace Team17.StreetHunt
             currentBall.LaunchBall();
         }
 
+        #region TeleportFunctions
+
         public void TeleportToRoom(Transform spawnPoint)
         {
+            anim.Play("Pj_Idle_Right");
             transform.position = spawnPoint.position;
             if (currentBall != null) currentBall.PauseBehavior();
-            currentBall.transform.position = spawnPoint.position + new Vector3(0.75f, 0.15f, 0f);
             tpFeedback.Play();
         }
 
         public void TeleportAndTaunt(Transform tauntPoint)
         {
-            transform.position = tauntPoint.position;
-            if (currentBall != null) currentBall.PauseBehavior();
-            anim.Play("TauntIdle");
-            tpFeedback.Play();
+            StartCoroutine(Taunt(tauntPoint));
         }
 
-        public void TeleportAndActiveBall(Transform spawnPoint)
+
+        IEnumerator Taunt(Transform tauntPos)
         {
-            anim.SetTrigger("TauntToIdle");
-            transform.position = spawnPoint.position;
-            if (currentBall != null) currentBall.gameObject.SetActive(true);
-            currentBall.transform.position = spawnPoint.position + new Vector3(0.75f, 0.15f, 0f);
+            anim.Play("TauntIdle");
+            yield return null;
+            if (currentBall != null) currentBall.PauseBehavior();
+            transform.position = tauntPos.position;
+            tpFeedback.Play();
+        }
+        #endregion
+
+        #region TutorialFunctions
+
+        public void TeleportPlayer(Transform teleportPos)
+        {
+            transform.position = teleportPos.position;
             tpFeedback.Play();
         }
 
+        #endregion
 
         public FeedBack TpFeedback { get => tpFeedback; }
         public PlayerProjectile CurrentBall { get => currentBall; set => currentBall = value; }

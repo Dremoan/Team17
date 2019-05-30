@@ -12,35 +12,44 @@ namespace Team17.StreetHunt
         [Header("Jump parameters")]
         [SerializeField] private Transform jumpTarget;
         [SerializeField] private Transform jumpSummit;
+        [SerializeField] private float jumpSpeed = 2f;
+        [Tooltip("0 = small, 1 = long, 2 = low, 3 = high")]
+        [SerializeField] private AnimationCurve[] speedCurves;
+        [SerializeField] private GorillaJumpTarget[] rightTargets;
+        [SerializeField] private GorillaJumpTarget[] leftTargets;
         [SerializeField] private int jumpSteps = 7;
         [SerializeField] private float distToSwitchStep = 0.2f;
         [SerializeField] private float maxSummitHeight = 5f;
         [SerializeField] private float lowJumpThreshHold = 3f;
         [SerializeField] private float smallJumpThreshhold = 5f;
-        [Header("Speed parameters")]
-        [SerializeField] private float jumpSpeed = 2f;
-        [Tooltip("0 = small, 1 = long, 2 = low, 3 = high")][SerializeField] private AnimationCurve[] speedCurves;
-        [Header("Attack parameters")]
+        [Header("Shout parameters")]
+        [SerializeField] private Transform headTransform;
+        [SerializeField] private GorillaShoutBehaviour shoutGO;
+        [Header("Rocks parameters")]
         [SerializeField] private Transform rightHand;
         [SerializeField] private Transform leftHand;
         [SerializeField] private RockProjectile[] rocksPool;
+        [Header("Spikes parameters")]
         [SerializeField] private Animator leftSpikes;
         [SerializeField] private Animator rightSpikes;
         [Header("FXs")]
         [SerializeField] private FeedBack landingFB;
 
-        private bool isJumping = false;
-        private bool jumpingRight = false;
-        private int pathStepTarget = 0;
+        private AnimationCurve usedSpeedCurve;
+        private RockProjectile launchedRock;
+        private GorillaJumpTarget currentJumpTarget;
         private Vector3[] path;
         private Vector3 posRef;
         private Vector3 jumpStart;
+        private bool isJumping = false;
+        private bool jumpingRight = false;
+        private int pathStepTarget = 0;
         private float jumpInc = 0f;
         private float jumpParcouredDist = 0f;
         private float jumpCalculatedDist = 0f;
-        private AnimationCurve usedSpeedCurve;
         private float currentIdleType;
-        private RockProjectile launchedRock;
+
+        #region Monobehaviour
 
         protected override void Update()
         {
@@ -48,10 +57,35 @@ namespace Team17.StreetHunt
             JumpManagement();
         }
 
+        #endregion
+
         #region Jump calculation
 
-        public void LaunchJump(GameObject target)
+        public void JumpToRightSide()
         {
+            GorillaJumpTarget chosenTarget;
+            do
+            {
+                int c = Random.Range(0, rightTargets.Length);
+                chosenTarget = rightTargets[c];
+            } while (chosenTarget == currentJumpTarget);
+            LaunchJump(chosenTarget);
+        }
+
+        public void JumpToLeftSide()
+        {
+            GorillaJumpTarget chosenTarget;
+            do
+            {
+                int c = Random.Range(0, leftTargets.Length);
+                chosenTarget = leftTargets[c];
+            } while (chosenTarget == currentJumpTarget);
+            LaunchJump(chosenTarget);
+        }
+
+        public void LaunchJump(GorillaJumpTarget target)
+        {
+            currentJumpTarget = target;
             jumpTarget.position = target.transform.position;
 
             usedSpeedCurve = speedCurves[0];
@@ -150,6 +184,7 @@ namespace Team17.StreetHunt
                         jumpCalculatedDist = 0;
                         jumpParcouredDist = 0;
                         landingFB.Play();
+                        SetIdleType(currentJumpTarget.GorillaIdleValue);
                     }
                     else
                     {
@@ -166,11 +201,11 @@ namespace Team17.StreetHunt
 
         #endregion
 
-        #region Attack
+        #region Attacks
 
         public void MediumAttack()
         {
-            if(currentIdleType == 0.5f || currentIdleType == 0.75f) // rock launch
+            if(currentIdleType == 0.5f || currentIdleType == 0.75f) // rock launch (walled)
             {
                 GetNewRock();
                 if(currentIdleType == 0.5f)
@@ -184,13 +219,36 @@ namespace Team17.StreetHunt
                     anim.SetBool("leftArmRockLaunch", true);
                 }
             }
-            else if(currentIdleType == 0f) // right spikes
+            else
             {
-                rightSpikes.SetTrigger("spikes");
+                shoutGO.gameObject.SetActive(true);
+                shoutGO.transform.position = new Vector3(headTransform.position.x, headTransform.position.y, 0);
             }
-            else if(currentIdleType == 0.25f) // left spikes
+        }
+
+        public void HardAttack()
+        {
+            if (currentIdleType == 0.5f || currentIdleType == 0.75f) // Spikes (walled)
             {
-                leftSpikes.SetTrigger("spikes");
+                if (currentIdleType == 0.5f)
+                {
+                    rightSpikes.SetTrigger("spikes");
+                }
+                if (currentIdleType == 0.75f)
+                {
+                    leftSpikes.SetTrigger("spikes");
+                }
+            }
+            else
+            {
+                if(currentIdleType == 0f)
+                {
+                    rightSpikes.SetTrigger("spikes");
+                }
+                if (currentIdleType == 0.25f)
+                {
+                    leftSpikes.SetTrigger("spikes");
+                }
             }
         }
 
