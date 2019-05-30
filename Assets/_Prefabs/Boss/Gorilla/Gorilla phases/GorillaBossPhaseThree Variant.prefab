@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GorillaBossPhaseThree
       objectReference: {fileID: 0}
+    - target: {fileID: 6745982273284122372, guid: c226c167ecba05b478da7dc0d1dd3cba,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6745982273284122379, guid: c226c167ecba05b478da7dc0d1dd3cba,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20,7 +25,7 @@ PrefabInstance:
     - target: {fileID: 6745982273284122379, guid: c226c167ecba05b478da7dc0d1dd3cba,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6745982273284122379, guid: c226c167ecba05b478da7dc0d1dd3cba,
         type: 3}
@@ -69,6 +74,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6745982273284122378, guid: c226c167ecba05b478da7dc0d1dd3cba,
         type: 3}
+      propertyPath: timers
+      value: 
+      objectReference: {fileID: 8936892181878595968}
+    - target: {fileID: 6745982273284122378, guid: c226c167ecba05b478da7dc0d1dd3cba,
+        type: 3}
       propertyPath: portalManager
       value: 
       objectReference: {fileID: 0}
@@ -79,24 +89,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6745982273284122378, guid: c226c167ecba05b478da7dc0d1dd3cba,
         type: 3}
+      propertyPath: health
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6745982273284122378, guid: c226c167ecba05b478da7dc0d1dd3cba,
+        type: 3}
       propertyPath: roomZero
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6745982273284122378, guid: c226c167ecba05b478da7dc0d1dd3cba,
         type: 3}
-      propertyPath: entryPattern.pattern.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6745982273284122378, guid: c226c167ecba05b478da7dc0d1dd3cba,
-        type: 3}
-      propertyPath: timers
-      value: 
-      objectReference: {fileID: 8936892181878595968}
-    - target: {fileID: 6745982273284122378, guid: c226c167ecba05b478da7dc0d1dd3cba,
-        type: 3}
       propertyPath: entryPattern.pattern.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8936892180251542929}
+    - target: {fileID: 6745982273284122378, guid: c226c167ecba05b478da7dc0d1dd3cba,
+        type: 3}
+      propertyPath: entryPattern.pattern.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6745982273284122378, guid: c226c167ecba05b478da7dc0d1dd3cba,
         type: 3}
       propertyPath: easyPatterns.Array.data[0].pattern.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -119,26 +129,6 @@ PrefabInstance:
       objectReference: {fileID: 8936892180251542929}
     - target: {fileID: 6745982272864011032, guid: c226c167ecba05b478da7dc0d1dd3cba,
         type: 3}
-      propertyPath: rightTargets.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6745982272864011032, guid: c226c167ecba05b478da7dc0d1dd3cba,
-        type: 3}
-      propertyPath: rightTargets.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6745982272864011032, guid: c226c167ecba05b478da7dc0d1dd3cba,
-        type: 3}
-      propertyPath: leftTargets.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6745982272864011032, guid: c226c167ecba05b478da7dc0d1dd3cba,
-        type: 3}
-      propertyPath: leftTargets.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6745982272864011032, guid: c226c167ecba05b478da7dc0d1dd3cba,
-        type: 3}
       propertyPath: assignedBossScript
       value: 
       objectReference: {fileID: 8936892181878595971}
@@ -157,6 +147,26 @@ PrefabInstance:
       propertyPath: jumpSummit
       value: 
       objectReference: {fileID: 8936892181831994358}
+    - target: {fileID: 6745982272864011032, guid: c226c167ecba05b478da7dc0d1dd3cba,
+        type: 3}
+      propertyPath: rightTargets.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6745982272864011032, guid: c226c167ecba05b478da7dc0d1dd3cba,
+        type: 3}
+      propertyPath: rightTargets.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6745982272864011032, guid: c226c167ecba05b478da7dc0d1dd3cba,
+        type: 3}
+      propertyPath: leftTargets.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6745982272864011032, guid: c226c167ecba05b478da7dc0d1dd3cba,
+        type: 3}
+      propertyPath: leftTargets.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6745982272864011032, guid: c226c167ecba05b478da7dc0d1dd3cba,
         type: 3}
       propertyPath: headTransform
@@ -209,6 +219,11 @@ PrefabInstance:
       objectReference: {fileID: 8936892180821557740}
     - target: {fileID: 4253820570639485911, guid: c226c167ecba05b478da7dc0d1dd3cba,
         type: 3}
+      propertyPath: linkedBoss
+      value: 
+      objectReference: {fileID: 8936892181878595971}
+    - target: {fileID: 4253820570639485911, guid: c226c167ecba05b478da7dc0d1dd3cba,
+        type: 3}
       propertyPath: characterController
       value: 
       objectReference: {fileID: 0}
@@ -217,16 +232,6 @@ PrefabInstance:
       propertyPath: tauntPoint
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 4253820570639485911, guid: c226c167ecba05b478da7dc0d1dd3cba,
-        type: 3}
-      propertyPath: canvasAnim
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4253820570639485911, guid: c226c167ecba05b478da7dc0d1dd3cba,
-        type: 3}
-      propertyPath: linkedBoss
-      value: 
-      objectReference: {fileID: 8936892181878595971}
     - target: {fileID: 4253820570639485911, guid: c226c167ecba05b478da7dc0d1dd3cba,
         type: 3}
       propertyPath: deathFeedback
@@ -242,6 +247,11 @@ PrefabInstance:
       propertyPath: weaknessFx
       value: 
       objectReference: {fileID: 4541612620610962337}
+    - target: {fileID: 4253820570639485911, guid: c226c167ecba05b478da7dc0d1dd3cba,
+        type: 3}
+      propertyPath: canvasAnim
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4253820570639485911, guid: c226c167ecba05b478da7dc0d1dd3cba,
         type: 3}
       propertyPath: skinWeakPoint
