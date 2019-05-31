@@ -274,6 +274,11 @@ namespace Team17.StreetHunt
             currentHealth = health;
         }
 
+        public void SkipCurrentAttack()
+        {
+            currentPattern.SkipAttack();
+        }
+
         public void StopAllAttacks()
         {
             timers.DeleteAllTimers();
@@ -340,7 +345,6 @@ namespace Team17.StreetHunt
                 portalManager.SpawnPortal(portals[i].Position, portals[i].Rotation, portals[i].ApparitionTime);
             }
 
-            //enable apparition
             endTimerIndex = timers.LaunchNewTimer(timeToEnd, EndAttack);
         }
 
@@ -361,6 +365,12 @@ namespace Team17.StreetHunt
             Timer time = timers.GetTimerFromUserIndex(endTimerIndex);
             float removedTime = cancelingTimerSpeedUp * time.TimeLeft;
             timers.AddTime(endTimerIndex, -removedTime);
+        }
+
+        public void SkipAttack()
+        {
+            timers.ShortCutTimer(endTimerIndex);
+            timers.ShortCutTimer(cdTimerIndex);
         }
 
         public bool IsUsableAndUseful(Transform zero, Vector3 targetPos)
