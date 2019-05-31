@@ -7,7 +7,7 @@ namespace Team17.StreetHunt
     public class PlayerProjectile : Character
     {
         [Header("Components")]
-        public Rigidbody body;
+        [SerializeField] private Rigidbody body;
         [SerializeField] private TimersCalculator timer;
 
         [Header("Feedbacks")]
@@ -23,6 +23,7 @@ namespace Team17.StreetHunt
         [SerializeField] private AnimationCurve timeToHit;
         [SerializeField] private AnimationCurve powerGained;
         [SerializeField] private AnimationCurve feedBackRadius;
+        [SerializeField] private float maxPowerMargin = 50f;
         [SerializeField] private float powerLostOnBounce = 5f;
         [SerializeField] private float speedPortalPrecision = 2f;
         [SerializeField] private float stunTime = 1.5f;
@@ -30,8 +31,8 @@ namespace Team17.StreetHunt
         [Header("Trajectory calculation")]
         [SerializeField] private LayerMask trajectoryCalculationMask;
 
+        [SerializeField] private float power = 0;
 
-        public float power = 0;
         private int reHitTimer;
         private int usedPowergroupIndex = 0;
         private bool canStrike = true;
@@ -117,9 +118,9 @@ namespace Team17.StreetHunt
 
             if(coll.gameObject.GetComponent<BallRelfecter>() != null)
             {
-                Vector3 newDir = (transform.position - coll.transform.position).normalized * usedPowerGroup.Speed;
-                movementDirection = newDir;
-                body.velocity = newDir;
+                Vector3 newDir = (transform.position - coll.transform.position).normalized;
+                SetMovementDir(newDir);
+
                 StunCharacter(coll.gameObject.GetComponent<BallRelfecter>().StunTime);
             }
         }
@@ -132,14 +133,14 @@ namespace Team17.StreetHunt
         {
             if(canStrike)
             {
-                body.velocity *= slowedTimeScale;
+                isStriking = true;
+                SetMovementDir(movementDirection);
                 reHitTimer = timer.LaunchNewTimer(timeToHit.Evaluate(power), StunCharacter);
                 timerFeedback.gameObject.SetActive(true);
                 trajectory.gameObject.SetActive(true);
                 character.Physicate(false);
                 character.AimingParameterSetup(false);
                 wasCanceled = false;
-                isStriking = true;
 
                 GameManager.state.CallOnPlayerTeleport();
             }
@@ -149,6 +150,8 @@ namespace Team17.StreetHunt
         {
             if(canStrike)
             {
+                isStriking = true;
+                SetMovementDir(movementDirection);
                 Timer t = timer.GetTimerFromUserIndex(reHitTimer);
                 timerFeedback.localScale = (feedBackRadius.Evaluate(Mathf.InverseLerp(0, t.MaxTime, t.TimeLeft)) * initialFeedbackScale) + Vector3.one;
                 trajectory.position = Vector3.Lerp(transform.position, touchPos, 0.5f);
@@ -183,9 +186,9 @@ namespace Team17.StreetHunt
                 }
 
 
-                if(power > powerGroups[powerGroups.Length - 1].PowerThreshold + 10)
+                if(power > powerGroups[powerGroups.Length - 1].PowerThreshold + maxPowerMargin)
                 {
-                    power = powerGroups[powerGroups.Length - 1].PowerThreshold + 10;
+                    power = powerGroups[powerGroups.Length - 1].PowerThreshold + maxPowerMargin;
                 }
 
                 SelectPowerGroup(power);
@@ -211,8 +214,9 @@ namespace Team17.StreetHunt
         {
             usedPowerGroup.Launch.Play();
             usedPowerGroup.Trail.Play();
-            body.velocity = movementDirection;
+
             isStriking = false;
+            SetMovementDir(movementDirection);
 
             GameManager.state.CallOnBallShot();
             
@@ -254,7 +258,7 @@ namespace Team17.StreetHunt
 
         public void PauseBehavior()
         {
-            body.velocity = Vector3.zero;
+            SetMovementDir(Vector3.zero);
             usedPowerGroup.Trail.Stop();
             gameObject.SetActive(false);
         }
@@ -267,6 +271,7 @@ namespace Team17.StreetHunt
         {
             power = 5;
             SelectPowerGroup(power);
+            SetMovementDir(movementDirection);
             wasCanceled = true;
             timerFeedback.gameObject.SetActive(false);
             trajectory.gameObject.SetActive(false);
@@ -281,7 +286,7 @@ namespace Team17.StreetHunt
         {
             power = 0;
             SelectPowerGroup(power);
-            body.velocity = Vector3.zero;
+            SetMovementDir(Vector3.zero);
             canStrike = true;
             wasCanceled = true;
             isStriking = false;
@@ -302,7 +307,7 @@ namespace Team17.StreetHunt
         private void StunCharacter()
         {
             isStriking = false;
-            body.velocity = movementDirection;
+            SetMovementDir(movementDirection);
             timerFeedback.gameObject.SetActive(false);
             trajectory.gameObject.SetActive(false);
             character.Physicate(true);
@@ -313,7 +318,7 @@ namespace Team17.StreetHunt
         public void StunCharacter(float time)
         {
             isStriking = false;
-            body.velocity = movementDirection;
+            SetMovementDir(movementDirection);
             timerFeedback.gameObject.SetActive(false);
             trajectory.gameObject.SetActive(false);
             character.Physicate(true);
@@ -335,10 +340,7 @@ namespace Team17.StreetHunt
             power -= powerLostOnBounce;
             SelectPowerGroup(power);
             if (power < 0) power = 0;
-            if(isStriking) movementDirection = newDir.normalized * (usedPowerGroup.Speed) * slowedTimeScale;
-            else movementDirection = newDir.normalized * (usedPowerGroup.Speed);
-
-            body.velocity = movementDirection;
+            SetMovementDir(newDir);
 
             usedPowerGroup.Trail.RotateShapeEmitter(GetRotationFromDirection(newDir));
             usedPowerGroup.Bounce.Play();
@@ -380,20 +382,25 @@ namespace Team17.StreetHunt
                 portal.gameObject.SetActive(false);
             }
 
-            if(isStriking)
-            {
-                movementDirection = body.velocity.normalized * (usedPowerGroup.Speed) * slowedTimeScale;
-            }
-            else
-            {
-                movementDirection = body.velocity.normalized * (usedPowerGroup.Speed);
-            }
-            body.velocity = movementDirection;
+            SetMovementDir(body.velocity);
         }
 
         #endregion
 
         #region Trajectory management
+
+        private void SetMovementDir(Vector3 dir)
+        {
+            movementDirection = dir.normalized * usedPowerGroup.Speed;
+            if (isStriking)
+            {
+                body.velocity = movementDirection * slowedTimeScale;
+            }
+            else
+            {
+                body.velocity = movementDirection;
+            }
+        }
 
         public Vector3 FuturPositionInArena()
         {
@@ -476,6 +483,7 @@ namespace Team17.StreetHunt
         [SerializeField] private FeedBack trail;
         [SerializeField] private FeedBack destroyed;
         [SerializeField] private FeedBack hit;
+        [SerializeField] private FeedBack stunned;
 
         public string Name { get => name;}
         public float PowerThreshold { get => powerThreshold; }
