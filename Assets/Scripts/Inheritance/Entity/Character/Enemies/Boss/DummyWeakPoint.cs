@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Team17.StreetHunt
 {
@@ -9,8 +10,10 @@ namespace Team17.StreetHunt
         [Header("Gameplay Fields")]
         [SerializeField] private PlayerCharacter characterController;
         [SerializeField] private Transform tauntPoint;
-        [Range(0, 200)]
         [SerializeField] private float dummyHp;
+        [SerializeField] private GameObject touchPlane;
+        [SerializeField] private UnityEvent eventDummyDeath;
+        [SerializeField] private UiSceneManagement sceneManager;
 
         [Header("Feedbacks")]
         [SerializeField] private FeedBack deathFeedback;
@@ -73,6 +76,11 @@ namespace Team17.StreetHunt
             skinWeakPoint.material = actualBossMat;
         }
 
+        public void MenuBack(float timeToWait)
+        {
+            StartCoroutine(GoBackToMenu(timeToWait));
+        }
+
         IEnumerator Blink()
         {
             for (int i = 0; i < 2; i++)
@@ -86,7 +94,7 @@ namespace Team17.StreetHunt
 
         IEnumerator ExplosionWeakPoint()
         {
-            Debug.Log("Working");
+            touchPlane.SetActive(false);
             alreadyDead = true;
             deathFeedback.Play();
             yield return new WaitForSeconds(changeMaterialDelay);
@@ -94,7 +102,16 @@ namespace Team17.StreetHunt
             weaknessFx.SetActive(false);
             canvasAnim.Play("FlashBlanc");
             skinWeakPoint.material = newMaterial;
-            characterController.TeleportAndTaunt(tauntPoint);
+            characterController.TeleportToRoom(tauntPoint);
+            eventDummyDeath.Invoke();
+        }
+
+        IEnumerator GoBackToMenu(float timer)
+        {
+            yield return new WaitForSeconds(timer);
+            canvasAnim.Play("FadeIn");
+            yield return new WaitForSeconds(1f);
+            sceneManager.LoadSceneIndex(0);
         }
     }
 

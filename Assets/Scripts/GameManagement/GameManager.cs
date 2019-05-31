@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -164,6 +165,30 @@ namespace Team17.StreetHunt
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].OnBallShot();
+            }
+        }
+
+        public void CallOnBallCriticalShot()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBallCriticalShot();
+            }
+        }
+
+        public void CallOnBallIncreasePowerGroup()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBallIncreasePowerGroup();
+            }
+        }
+
+        public void CallOnBallDecreasePowerGroup()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnBallDecreasePowerGroup();
             }
         }
 

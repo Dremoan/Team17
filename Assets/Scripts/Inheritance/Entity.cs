@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -92,6 +93,16 @@ namespace Team17.StreetHunt
 
         }
 
+        public virtual void OnBallIncreasePowerGroup()
+        {
+
+        }
+
+        public virtual void OnBallDecreasePowerGroup()
+        {
+
+        }
+
         public virtual void OnCharacterStunned()
         {
 
@@ -153,6 +164,16 @@ namespace Team17.StreetHunt
         }
 
         public virtual void OnResume()
+        {
+
+        }
+
+        public virtual void OnBallCriticalShot()
+        {
+
+        }
+
+        public virtual void OnSpeedPortalCrossed()
         {
 
         }

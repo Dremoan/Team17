@@ -65,6 +65,13 @@ namespace Team17.StreetHunt
             deactivatedVisual.SetActive(true);
         }
 
+        public void TutorialActivation()
+        {
+            coll.enabled = true;
+            deactivatedVisual.SetActive(false);
+            activatedVisual.SetActive(true);
+        }
+
         public void GetReadyForReactivation()
         {
             coll.enabled = false;
