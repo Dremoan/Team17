@@ -21,7 +21,7 @@ namespace Team17.StreetHunt
         protected override void Start()
         {
             base.Start();
-            transitionsCanvas.Play("FadeOut");
+            //transitionsCanvas.Play("FadeOut");
         }
 
         protected override void Update()
