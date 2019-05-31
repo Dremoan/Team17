@@ -7,7 +7,7 @@ namespace Team17.StreetHunt
     public class SnakeAnimManager : Entity
     {
         [SerializeField] private Animator snakeAnim;
-
+        [SerializeField] private Animator animatorCanvasAnim;
 
         private void OnTriggerStay(Collider other)
         {
@@ -23,6 +23,12 @@ namespace Team17.StreetHunt
             {
                 snakeAnim.SetBool("Close", false);
             }
+        }
+
+        public override void OnBallDestroyed()
+        {
+            base.OnBallDestroyed();
+            animatorCanvasAnim.Play("FlashRed");
         }
     }
 }
