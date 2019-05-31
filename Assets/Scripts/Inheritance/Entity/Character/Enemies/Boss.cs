@@ -12,16 +12,12 @@ namespace Team17.StreetHunt
         [SerializeField] private TimersCalculator timers;
         [SerializeField] private SpeedPortalManager portalManager;
         [SerializeField] private TouchPlane touchPlane;
+        [SerializeField] private Transform roomZero;
         [Header("Health and state")]
         [SerializeField] private BossPhaseState currentState = BossPhaseState.Entry;
         [SerializeField] private float health = 50f;
-
-        [Header("Rooms zero")]
-        [SerializeField] private Transform roomZero;
-
         [Header("Patterns states serie")]
         [SerializeField] private BossAttackState[] attackStates;
-
         [Header("Patterns")]
         [SerializeField] private BossPattern entryPattern;
         [SerializeField] private BossPattern[] easyPatterns;
@@ -369,6 +365,7 @@ namespace Team17.StreetHunt
 
         public void SkipAttack()
         {
+            Debug.Log("Skipped " + name);
             timers.ShortCutTimer(endTimerIndex);
             timers.ShortCutTimer(cdTimerIndex);
         }
