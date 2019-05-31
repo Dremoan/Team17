@@ -84,6 +84,28 @@ namespace Team17.StreetHunt
             LaunchJump(chosenTarget);
         }
 
+        public void JumpToRandom()
+        {
+            GorillaJumpTarget chosenTarget;
+
+            do
+            {
+                int l = Random.Range(0, 2);
+                if (l == 0)
+                {
+                    int c = Random.Range(0, leftTargets.Length);
+                    chosenTarget = leftTargets[c];
+                }
+                else
+                {
+                    int c = Random.Range(0, rightTargets.Length);
+                    chosenTarget = rightTargets[c];
+                }
+            } while (chosenTarget == currentJumpTarget);
+
+            LaunchJump(chosenTarget);
+        }
+
         public void LaunchJump(GorillaJumpTarget target)
         {
             if(currentJumpTarget == target)

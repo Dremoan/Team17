@@ -179,6 +179,7 @@ namespace Team17.StreetHunt
                 if(powerGained.Evaluate(t.Inc) > 8)
                 {
                     character.CriticalShoot = true;
+                    GameManager.state.CallOnBallCriticalShot();
                 }
                 else
                 {
