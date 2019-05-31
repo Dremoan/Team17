@@ -772,8 +772,8 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
     portals: []
   easyPatterns:
-  - name: Jump Right
-    zone: {fileID: 11400000, guid: 315023730e68de840a679638e7b786ea, type: 2}
+  - name: Jump to left wall
+    zone: {fileID: 11400000, guid: b3489ea81c876604f8318e20edf4d83d, type: 2}
     priority: 5
     timeToEnd: 2
     coolDown: 1
@@ -782,11 +782,12 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 6745982272864011032}
-          m_MethodName: JumpToRightSide
-          m_Mode: 1
+          m_MethodName: LaunchJump
+          m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgumentAssemblyTypeName: Team17.StreetHunt.GorillaJumpTarget,
+              Assembly-CSharp
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -795,8 +796,8 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     portals: []
-  - name: Jump Left
-    zone: {fileID: 11400000, guid: aa2343c597d8f7d44ab5f34b8deb9a00, type: 2}
+  - name: Jump to left ground
+    zone: {fileID: 11400000, guid: 5512f78d117453b42a9eb13dba49d930, type: 2}
     priority: 5
     timeToEnd: 2
     coolDown: 1
@@ -805,11 +806,60 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 6745982272864011032}
-          m_MethodName: JumpToLeftSide
-          m_Mode: 1
+          m_MethodName: LaunchJump
+          m_Mode: 2
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgumentAssemblyTypeName: Team17.StreetHunt.GorillaJumpTarget,
+              Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    portals: []
+  - name: Jump to right wall
+    zone: {fileID: 11400000, guid: b3489ea81c876604f8318e20edf4d83d, type: 2}
+    priority: 5
+    timeToEnd: 2
+    coolDown: 1
+    cancelingTimerSpeedUp: 0.5
+    pattern:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6745982272864011032}
+          m_MethodName: LaunchJump
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: Team17.StreetHunt.GorillaJumpTarget,
+              Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    portals: []
+  - name: Jump to right ground
+    zone: {fileID: 11400000, guid: d336d33b354801540aabec5e2340fd96, type: 2}
+    priority: 5
+    timeToEnd: 2
+    coolDown: 1
+    cancelingTimerSpeedUp: 0.5
+    pattern:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6745982272864011032}
+          m_MethodName: LaunchJump
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: Team17.StreetHunt.GorillaJumpTarget,
+              Assembly-CSharp
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -1881,6 +1931,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6745982273878777723}
     m_Modifications:
+    - target: {fileID: 2218591216929269108, guid: dfb1105160ac19045aefe67fea486e2c,
+        type: 3}
+      propertyPath: m_Name
+      value: Back_PointFaible
+      objectReference: {fileID: 0}
     - target: {fileID: 3780164969492123889, guid: dfb1105160ac19045aefe67fea486e2c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1950,11 +2005,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.5415667
-      objectReference: {fileID: 0}
-    - target: {fileID: 2218591216929269108, guid: dfb1105160ac19045aefe67fea486e2c,
-        type: 3}
-      propertyPath: m_Name
-      value: Back_PointFaible
       objectReference: {fileID: 0}
     - target: {fileID: 4901426954208923517, guid: dfb1105160ac19045aefe67fea486e2c,
         type: 3}
