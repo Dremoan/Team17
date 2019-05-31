@@ -7,7 +7,7 @@ namespace Team17.StreetHunt
     public class PlayerProjectile : Character
     {
         [Header("Components")]
-        public Rigidbody body;
+        [SerializeField] private Rigidbody body;
         [SerializeField] private TimersCalculator timer;
 
         [Header("Feedbacks")]
@@ -30,8 +30,8 @@ namespace Team17.StreetHunt
         [Header("Trajectory calculation")]
         [SerializeField] private LayerMask trajectoryCalculationMask;
 
+        [SerializeField] private float power = 0;
 
-        public float power = 0;
         private int reHitTimer;
         private int usedPowergroupIndex = 0;
         private bool canStrike = true;
@@ -132,7 +132,7 @@ namespace Team17.StreetHunt
         {
             if(canStrike)
             {
-                body.velocity *= slowedTimeScale;
+                body.velocity = movementDirection * slowedTimeScale;
                 reHitTimer = timer.LaunchNewTimer(timeToHit.Evaluate(power), StunCharacter);
                 timerFeedback.gameObject.SetActive(true);
                 trajectory.gameObject.SetActive(true);
@@ -149,6 +149,7 @@ namespace Team17.StreetHunt
         {
             if(canStrike)
             {
+                body.velocity = movementDirection * slowedTimeScale;
                 Timer t = timer.GetTimerFromUserIndex(reHitTimer);
                 timerFeedback.localScale = (feedBackRadius.Evaluate(Mathf.InverseLerp(0, t.MaxTime, t.TimeLeft)) * initialFeedbackScale) + Vector3.one;
                 trajectory.position = Vector3.Lerp(transform.position, touchPos, 0.5f);
@@ -211,6 +212,10 @@ namespace Team17.StreetHunt
         {
             usedPowerGroup.Launch.Play();
             usedPowerGroup.Trail.Play();
+            if(isStriking)
+            {
+
+            }
             body.velocity = movementDirection;
             isStriking = false;
 
@@ -265,7 +270,7 @@ namespace Team17.StreetHunt
 
         private void Hit()
         {
-            power = 0;
+            power = 5;
             SelectPowerGroup(power);
             wasCanceled = true;
             timerFeedback.gameObject.SetActive(false);

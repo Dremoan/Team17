@@ -30,7 +30,6 @@ namespace Team17.StreetHunt
             isHeld = false;
             available = false;
             body.velocity = direction.normalized * speed;
-            Debug.Log("launched rock");
         }
 
         private void HoldingManagement()
@@ -56,6 +55,19 @@ namespace Team17.StreetHunt
                 body.velocity = Vector3.zero;
                 body.angularVelocity = Vector3.zero;
                 StartCoroutine(DisapearDelay());
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.gameObject.layer == 12) // 12 == wall
+            {
+                if (!available)
+                {
+                    body.velocity = Vector3.zero;
+                    body.angularVelocity = Vector3.zero;
+                    StartCoroutine(DisapearDelay());
+                }
             }
         }
 

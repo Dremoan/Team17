@@ -12,16 +12,12 @@ namespace Team17.StreetHunt
         [SerializeField] private TimersCalculator timers;
         [SerializeField] private SpeedPortalManager portalManager;
         [SerializeField] private TouchPlane touchPlane;
+        [SerializeField] private Transform roomZero;
         [Header("Health and state")]
         [SerializeField] private BossPhaseState currentState = BossPhaseState.Entry;
         [SerializeField] private float health = 50f;
-
-        [Header("Rooms zero")]
-        [SerializeField] private Transform roomZero;
-
         [Header("Patterns states serie")]
         [SerializeField] private BossAttackState[] attackStates;
-
         [Header("Patterns")]
         [SerializeField] private BossPattern entryPattern;
         [SerializeField] private BossPattern[] easyPatterns;
@@ -274,6 +270,11 @@ namespace Team17.StreetHunt
             currentHealth = health;
         }
 
+        public void SkipCurrentAttack()
+        {
+            currentPattern.SkipAttack();
+        }
+
         public void StopAllAttacks()
         {
             timers.DeleteAllTimers();
@@ -340,7 +341,6 @@ namespace Team17.StreetHunt
                 portalManager.SpawnPortal(portals[i].Position, portals[i].Rotation, portals[i].ApparitionTime);
             }
 
-            //enable apparition
             endTimerIndex = timers.LaunchNewTimer(timeToEnd, EndAttack);
         }
 
@@ -361,6 +361,13 @@ namespace Team17.StreetHunt
             Timer time = timers.GetTimerFromUserIndex(endTimerIndex);
             float removedTime = cancelingTimerSpeedUp * time.TimeLeft;
             timers.AddTime(endTimerIndex, -removedTime);
+        }
+
+        public void SkipAttack()
+        {
+            Debug.Log("Skipped " + name);
+            timers.ShortCutTimer(endTimerIndex);
+            timers.ShortCutTimer(cdTimerIndex);
         }
 
         public bool IsUsableAndUseful(Transform zero, Vector3 targetPos)

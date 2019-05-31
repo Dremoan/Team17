@@ -24,6 +24,7 @@ namespace Team17.StreetHunt
             base.OnEnable();
             goalWaveSprite.transform.localScale = Vector3.one * targetSize;
             currentWaveSprite.transform.localScale = Vector3.one * initialSize;
+            coll.radius = initialSize * 0.5f;
         }
 
         protected override void Update()
