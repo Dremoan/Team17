@@ -69,7 +69,7 @@ namespace Team17.StreetHunt
         {
             base.OnEnable();
             SelectPowerGroup(power);
-            initialFeedbackScale = timerFeedback.localScale;
+            timerFeedback.localScale = initialFeedbackScale;
             GameManager.state.BallGameObject = this.gameObject;
         }
 
