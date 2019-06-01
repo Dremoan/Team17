@@ -14,9 +14,7 @@ namespace Team17.StreetHunt
         [SerializeField] private Transform transformToTPToOnPlay;
         //Particles
         [SerializeField] private bool particles = false;
-        [SerializeField] private bool particleRotation = false;
         [SerializeField] private ParticleSystem[] particlesSystems;
-        [SerializeField] private ParticleSystem[] particleSystemsToRotate;
         //Trail
         [SerializeField] private bool trails = false;
         [SerializeField] private TrailRenderer[] trailRenderers;
@@ -51,6 +49,7 @@ namespace Team17.StreetHunt
         private Transform[] usedShakeTransform;
         private Vector3[] initialZoomTargetsPos;
         private Vector3 shakePosTarget;
+        private ParticleSystemRenderer[] particlesRenderers;
         private bool isShaking = false;
         private bool isRumbling = false;
         private bool isZoomingIn = false;
@@ -399,6 +398,26 @@ namespace Team17.StreetHunt
 
         #region Rotation
 
+        public void RotateFeedback(float value)
+        {
+            if(particles)
+            {
+                for (int i = 0; i < particlesRenderers.Length; i++)
+                {
+                    if(particlesRenderers[i].renderMode == ParticleSystemRenderMode.Billboard || particlesRenderers[i].renderMode == ParticleSystemRenderMode.Mesh)
+                    {
+                        particlesRenderers[i].transform.rotation = Quaternion.Euler(0, 0, value);
+                    }
+                    else if(particlesRenderers[i].renderMode == ParticleSystemRenderMode.Stretch)
+                    {
+                        var shape = particlesSystems[i].shape;
+                        shape.rotation = new Vector3(value, shape.rotation.y, 0);
+                    }
+                }
+            }
+        }
+
+        /*
         public void RotateShapeEmitter(float newRotX)
         {
             for (int i = 0; i < particleSystemsToRotate.Length ; i++)
@@ -425,22 +444,22 @@ namespace Team17.StreetHunt
                 module.startRotationX = newRotX * Mathf.Deg2Rad;
             }
         }
+        /**/
 
         #endregion
 
         public bool Particles { get => particles; }
-        public bool ParticleRotation { get => particleRotation; }
         public bool Trails { get => trails; }
         public bool Shake { get => shake; }
         public bool UseSpecificTransform { get => useSpecificTransform; }
         public bool HardFollowingTransform { get => hardFollowingTransform; }
         public bool TpOnTransformOnPlay { get => tpOnTransformOnPlay; }
         public ParticleSystem[] ParticlesSystems { get => particlesSystems; set => particlesSystems = value; }
-        public ParticleSystem[] ParticleSystemsToRotate { get => particleSystemsToRotate; set => particleSystemsToRotate = value; }
         public TrailRenderer[] TrailRenderers { get => trailRenderers; set => trailRenderers = value; }
         public bool Rumble { get => rumble; }
         public bool Zoom { get => zoom; }
         public bool SlowMo { get => slowMo; set => slowMo = value; }
         public bool FreezeFrame { get => freezeFrame; }
+        public ParticleSystemRenderer[] ParticlesRenderers { get => particlesRenderers; set => particlesRenderers = value; }
     }
 }
