@@ -68,9 +68,16 @@ namespace Team17.StreetHunt
         protected override void OnEnable()
         {
             base.OnEnable();
+            power = 5;
             SelectPowerGroup(power);
             timerFeedback.localScale = initialFeedbackScale;
             GameManager.state.BallGameObject = this.gameObject;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            GameManager.state.BallGameObject = character.gameObject;
         }
 
         private void OnCollisionEnter(Collision coll)
@@ -195,9 +202,9 @@ namespace Team17.StreetHunt
                 SelectPowerGroup(power);
                 movementDirection = newDirection.normalized * (usedPowerGroup.Speed);
 
-                usedPowerGroup.Hit.Rotate3DStartRotationX(- GetRotationFromDirection(newDirection));
+                /*usedPowerGroup.Hit.Rotate3DStartRotationX(- GetRotationFromDirection(newDirection));
                 usedPowerGroup.Launch.Rotate3DStartRotationZ(GetRotationFromDirection(newDirection));
-                usedPowerGroup.Trail.RotateShapeEmitter(GetRotationFromDirection(newDirection));
+                usedPowerGroup.Trail.RotateShapeEmitter(GetRotationFromDirection(newDirection));*/
 
                 timer.DeleteTimer(reHitTimer);
                 timerFeedback.gameObject.SetActive(false);
@@ -343,7 +350,7 @@ namespace Team17.StreetHunt
             if (power < 0) power = 0;
             SetMovementDir(newDir);
 
-            usedPowerGroup.Trail.RotateShapeEmitter(GetRotationFromDirection(newDir));
+            //usedPowerGroup.Trail.RotateShapeEmitter(GetRotationFromDirection(newDir));
             usedPowerGroup.Bounce.Play();
             usedPowerGroup.Hit.Play();
             usedPowerGroup.Trail.Play();

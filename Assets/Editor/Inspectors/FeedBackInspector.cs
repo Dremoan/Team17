@@ -39,13 +39,15 @@ namespace Team17.StreetHunt
                 if(GUILayout.Button("Find Particles"))
                 {
                     feedBack.ParticlesSystems = feedBack.gameObject.GetComponentsInChildren<ParticleSystem>(true);
-                }
-
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("particleRotation"), new GUIContent("Use Rotation"));
-
-                if (feedBack.ParticleRotation)
-                {
-                    EditorGUILayout.PropertyField(serializedObject.FindProperty("particleSystemsToRotate"), true);
+                    feedBack.ParticlesRenderers = new ParticleSystemRenderer[feedBack.ParticlesSystems.Length];
+                    for (int i = 0; i < feedBack.ParticlesSystems.Length; i++)
+                    {
+                        feedBack.ParticlesRenderers[i] = feedBack.ParticlesSystems[i].GetComponent<ParticleSystemRenderer>();
+                    }
+                    if(feedBack.ParticlesSystems.Length != feedBack.ParticlesRenderers.Length)
+                    {
+                        EditorGUILayout.LabelField("Different number of particle system and renderersn please press Find Particles button.");
+                    }
                 }
             }
 
