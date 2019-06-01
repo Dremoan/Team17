@@ -68,9 +68,16 @@ namespace Team17.StreetHunt
         protected override void OnEnable()
         {
             base.OnEnable();
+            power = 5;
             SelectPowerGroup(power);
             timerFeedback.localScale = initialFeedbackScale;
             GameManager.state.BallGameObject = this.gameObject;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            GameManager.state.BallGameObject = character.gameObject;
         }
 
         private void OnCollisionEnter(Collision coll)
