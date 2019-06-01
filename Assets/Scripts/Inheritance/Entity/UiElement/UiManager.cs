@@ -18,6 +18,8 @@ namespace Team17.StreetHunt
         int nbreBall = 0;
         bool endLevelVictory = false;
 
+        [Header("FeedBacks"), SerializeField] private Animator animatorCanvasAnim;
+
         protected override void Start()
         {
             base.Start();
@@ -48,6 +50,7 @@ namespace Team17.StreetHunt
         {
             base.OnBallDestroyed();
             GuiNbreBalls();
+            animatorCanvasAnim.Play("FlashRed");
         }
 
         private void GuiNbreBalls()

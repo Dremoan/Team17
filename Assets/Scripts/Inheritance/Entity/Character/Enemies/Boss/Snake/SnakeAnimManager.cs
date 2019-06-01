@@ -8,7 +8,6 @@ namespace Team17.StreetHunt
     {
         [SerializeField] private Animator snakeAnim;
 
-
         private void OnTriggerStay(Collider other)
         {
             if(other.GetComponent<Wall>() != null)
