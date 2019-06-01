@@ -15,6 +15,7 @@ namespace Team17.StreetHunt
         //Particles
         [SerializeField] private bool particles = false;
         [SerializeField] private ParticleSystem[] particlesSystems;
+        [SerializeField] private ParticleSystemRenderer[] particlesRenderers;
         //Trail
         [SerializeField] private bool trails = false;
         [SerializeField] private TrailRenderer[] trailRenderers;
@@ -49,7 +50,6 @@ namespace Team17.StreetHunt
         private Transform[] usedShakeTransform;
         private Vector3[] initialZoomTargetsPos;
         private Vector3 shakePosTarget;
-        private ParticleSystemRenderer[] particlesRenderers;
         private bool isShaking = false;
         private bool isRumbling = false;
         private bool isZoomingIn = false;

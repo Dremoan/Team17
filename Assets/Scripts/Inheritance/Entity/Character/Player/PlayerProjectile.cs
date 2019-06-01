@@ -202,6 +202,8 @@ namespace Team17.StreetHunt
                 SelectPowerGroup(power);
                 movementDirection = newDirection.normalized * (usedPowerGroup.Speed);
 
+                usedPowerGroup.Trail.RotateFeedback(GetRotationFromDirection(movementDirection));
+
                 /*usedPowerGroup.Hit.Rotate3DStartRotationX(- GetRotationFromDirection(newDirection));
                 usedPowerGroup.Launch.Rotate3DStartRotationZ(GetRotationFromDirection(newDirection));
                 usedPowerGroup.Trail.RotateShapeEmitter(GetRotationFromDirection(newDirection));*/
