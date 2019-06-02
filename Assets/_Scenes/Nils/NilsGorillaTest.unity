@@ -639,6 +639,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 644286230}
   m_PrefabAsset: {fileID: 0}
+--- !u!199 &898392494 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 1243420860693645436, guid: 8b808d24c39665d4697ce96ca97535b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1124285880}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &947182299 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6646031911183900036, guid: 1d7d8698125f9844c8139764c4c000a7,
@@ -756,13 +762,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 481834950215677483, guid: 8b808d24c39665d4697ce96ca97535b8,
         type: 3}
+      propertyPath: particlesRenderers.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 481834950215677483, guid: 8b808d24c39665d4697ce96ca97535b8,
+        type: 3}
+      propertyPath: particlesSystems.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 481834950215677483, guid: 8b808d24c39665d4697ce96ca97535b8,
+        type: 3}
       propertyPath: trails
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 481834950215677483, guid: 8b808d24c39665d4697ce96ca97535b8,
         type: 3}
       propertyPath: looping
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 481834950215677483, guid: 8b808d24c39665d4697ce96ca97535b8,
         type: 3}
@@ -774,6 +790,21 @@ PrefabInstance:
       propertyPath: transformToHardFollow
       value: 
       objectReference: {fileID: 1618312284594600676}
+    - target: {fileID: 481834950215677483, guid: 8b808d24c39665d4697ce96ca97535b8,
+        type: 3}
+      propertyPath: particlesRenderers.Array.data[0]
+      value: 
+      objectReference: {fileID: 2098100841}
+    - target: {fileID: 481834950215677483, guid: 8b808d24c39665d4697ce96ca97535b8,
+        type: 3}
+      propertyPath: particlesRenderers.Array.data[1]
+      value: 
+      objectReference: {fileID: 1699744159}
+    - target: {fileID: 481834950215677483, guid: 8b808d24c39665d4697ce96ca97535b8,
+        type: 3}
+      propertyPath: particlesRenderers.Array.data[2]
+      value: 
+      objectReference: {fileID: 898392494}
     - target: {fileID: 1243420859285989138, guid: 8b808d24c39665d4697ce96ca97535b8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1572,6 +1603,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!199 &1699744159 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 1243420860118955285, guid: 8b808d24c39665d4697ce96ca97535b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1124285880}
+  m_PrefabAsset: {fileID: 0}
 --- !u!223 &1728542592 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 2912255648133610308, guid: bd0cd64cef2c1404096e6946b56bde98,
@@ -1924,6 +1961,12 @@ Canvas:
   m_CorrespondingSourceObject: {fileID: 7685700406040672826, guid: bd0cd64cef2c1404096e6946b56bde98,
     type: 3}
   m_PrefabInstance: {fileID: 1147144560}
+  m_PrefabAsset: {fileID: 0}
+--- !u!199 &2098100841 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 1243420859285989164, guid: 8b808d24c39665d4697ce96ca97535b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1124285880}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &456350702108935410
 PrefabInstance:
@@ -3049,6 +3092,26 @@ PrefabInstance:
     - target: {fileID: 3958103120534874544, guid: 1d7d8698125f9844c8139764c4c000a7,
         type: 3}
       propertyPath: powerGroups.Array.data[2].trail
+      value: 
+      objectReference: {fileID: 1124285881}
+    - target: {fileID: 3958103120534874544, guid: 1d7d8698125f9844c8139764c4c000a7,
+        type: 3}
+      propertyPath: powerGroups.Array.data[0].trail
+      value: 
+      objectReference: {fileID: 1124285881}
+    - target: {fileID: 3958103120534874544, guid: 1d7d8698125f9844c8139764c4c000a7,
+        type: 3}
+      propertyPath: powerGroups.Array.data[1].trail
+      value: 
+      objectReference: {fileID: 1124285881}
+    - target: {fileID: 3958103120534874544, guid: 1d7d8698125f9844c8139764c4c000a7,
+        type: 3}
+      propertyPath: powerGroups.Array.data[3].trail
+      value: 
+      objectReference: {fileID: 1124285881}
+    - target: {fileID: 3958103120534874544, guid: 1d7d8698125f9844c8139764c4c000a7,
+        type: 3}
+      propertyPath: powerGroups.Array.data[4].trail
       value: 
       objectReference: {fileID: 1124285881}
     - target: {fileID: 1025494600108493335, guid: 1d7d8698125f9844c8139764c4c000a7,
