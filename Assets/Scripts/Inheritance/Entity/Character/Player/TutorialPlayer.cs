@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Events;
 
 namespace Team17.StreetHunt
 {
@@ -11,6 +12,8 @@ namespace Team17.StreetHunt
         private int valueCount;
         [SerializeField] private PlayableDirector[] timelinesTransitions;
         [SerializeField] private int valueRequired;
+        [SerializeField] private GameObject[] touchPlanes;
+        [SerializeField] private TutorialCasesEvents[] endCaseEvents;
 
         public override void OnBallShot()
         {
@@ -21,9 +24,7 @@ namespace Team17.StreetHunt
             }
             else
             {
-                timelinesTransitions[caseIndex].Play();
-                caseIndex++;
-                valueCount = 0;
+                StartCoroutine(DelayEndCase());
             }
         }
 
@@ -36,18 +37,53 @@ namespace Team17.StreetHunt
             }
             else
             {
-                timelinesTransitions[caseIndex].Play();
-                caseIndex++;
-                valueCount = 0;
+                StartCoroutine(DelayEndCase());
             }
         }
 
-
-        public void SelectValues(int valueShoot)
+        public override void OnDummyDeath()
         {
-            valueRequired = valueShoot;
+            base.OnDummyDeath();
+            if(caseIndex == 3)
+            {
+                endCaseEvents[caseIndex].eventEndCase.Invoke();
+            }
+
+            if (valueCount < valueRequired && caseIndex == 2)
+            {
+                valueCount++;
+            }
+
+            else
+            {
+                endCaseEvents[caseIndex].eventEndCase.Invoke();
+                caseIndex++;
+                valueCount = 0;
+            }
+
         }
 
+        public void SelectValues(int valueModified)
+        {
+            valueRequired = valueModified;
+        }
+
+
+        IEnumerator DelayEndCase()
+        {
+            touchPlanes[caseIndex].SetActive(false);
+            yield return new WaitForSeconds(1f);
+            endCaseEvents[caseIndex].eventEndCase.Invoke();
+            caseIndex++;
+            valueCount = 0;
+        }
+    }
+
+    [System.Serializable]
+    public class TutorialCasesEvents
+    {
+        [SerializeField] private string nameCases;
+        public UnityEvent eventEndCase;
     }
 
 }

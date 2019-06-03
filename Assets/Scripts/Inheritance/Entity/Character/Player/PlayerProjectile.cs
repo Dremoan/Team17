@@ -353,6 +353,7 @@ namespace Team17.StreetHunt
             SetMovementDir(newDir);
 
             //usedPowerGroup.Trail.RotateShapeEmitter(GetRotationFromDirection(newDir));
+            usedPowerGroup.Trail.RotateFeedback(GetRotationFromDirection(movementDirection));
             usedPowerGroup.Bounce.Play();
             usedPowerGroup.Hit.Play();
             usedPowerGroup.Trail.Play();
