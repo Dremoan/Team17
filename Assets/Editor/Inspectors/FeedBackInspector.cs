@@ -44,10 +44,11 @@ namespace Team17.StreetHunt
                     {
                         feedBack.ParticlesRenderers[i] = feedBack.ParticlesSystems[i].GetComponent<ParticleSystemRenderer>();
                     }
-                    if(feedBack.ParticlesSystems.Length != feedBack.ParticlesRenderers.Length)
-                    {
-                        EditorGUILayout.LabelField("Different number of particle system and renderersn please press Find Particles button.");
-                    }
+                    
+                }
+                if (feedBack.ParticlesSystems.Length != feedBack.ParticlesRenderers.Length || feedBack.ParticlesRenderers == null)
+                {
+                    EditorGUILayout.LabelField("Different number of particle system and renderers, please press Find Particles button.");
                 }
             }
 
