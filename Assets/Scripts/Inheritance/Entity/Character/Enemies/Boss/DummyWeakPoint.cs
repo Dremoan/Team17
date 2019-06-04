@@ -94,6 +94,17 @@ namespace Team17.StreetHunt
 
         IEnumerator ExplosionWeakPoint()
         {
+            alreadyDead = true;
+            deathFeedback.Play();
+            yield return new WaitForSeconds(changeMaterialDelay);
+            hitFeedback.gameObject.SetActive(false);
+            weaknessFx.SetActive(false);
+            canvasAnim.Play("FlashBlanc");
+            skinWeakPoint.material = newMaterial;
+        }
+
+        IEnumerator ExplosionEnd()
+        {
             touchPlane.SetActive(false);
             alreadyDead = true;
             deathFeedback.Play();
@@ -103,7 +114,6 @@ namespace Team17.StreetHunt
             canvasAnim.Play("FlashBlanc");
             skinWeakPoint.material = newMaterial;
             characterController.TeleportToRoom(tauntPoint);
-            eventDummyDeath.Invoke();
         }
 
         IEnumerator GoBackToMenu(float timer)

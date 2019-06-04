@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace Team17.StreetHunt
 {
-    public class TutorialPlayer : Entity
+    public class TutorialManager : Entity
     {
         private int caseIndex = 0;
         private int valueCount;
@@ -30,7 +30,7 @@ namespace Team17.StreetHunt
             {
                 if (!case1Valid)
                 {
-                    case1Valid = false;
+                    case1Valid = true;
                     StartCoroutine(DelayEndCase());
                 }
             }
@@ -45,30 +45,66 @@ namespace Team17.StreetHunt
             }
             else
             {
-                case2Valid = false;
-                StartCoroutine(DelayEndCase());
+                if (!case2Valid)
+                {
+                    case2Valid = true;
+                    StartCoroutine(DelayEndCase());
+                }
             }
         }
 
         public override void OnDummyDeath()
         {
             base.OnDummyDeath();
-            if (caseIndex == 3 && !case3Valid)
-            {
-                endCaseEvents[caseIndex].eventEndCase.Invoke();
-            }
-
-            if (valueCount < valueRequired && caseIndex == 2)
+            if (valueCount < valueRequired && caseIndex == 2 && !case3Valid)
             {
                 valueCount++;
             }
 
             else
             {
-                endCaseEvents[caseIndex].eventEndCase.Invoke();
-                caseIndex++;
-                valueCount = 0;
+                if (!case3Valid)
+                {
+                    case3Valid = true;
+                    touchPlanes[caseIndex].SetActive(false);
+                    endCaseEvents[caseIndex].eventEndCase.Invoke();
+                    caseIndex++;
+                    valueCount = 0;
+                }
             }
+
+            if (valueCount < valueRequired && caseIndex == 3 && !case4Valid)
+            {
+                valueCount++;
+            }
+
+            else
+            {
+                if (!case4Valid)
+                {
+                    case4Valid = true;
+                    endCaseEvents[caseIndex].eventEndCase.Invoke();
+                    caseIndex++;
+                    valueCount = 0;
+                }
+            }
+
+            if (valueCount < valueRequired && caseIndex == 4 && !case5Valid)
+            {
+                valueCount++;
+            }
+
+            else
+            {
+                if (!case5Valid)
+                {
+                    case5Valid = true;
+                    endCaseEvents[caseIndex].eventEndCase.Invoke();
+                    caseIndex++;
+                    valueCount = 0;
+                }
+            }
+
 
         }
 
