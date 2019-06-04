@@ -10,33 +10,42 @@ namespace Team17.StreetHunt
     {
         private int caseIndex = 0;
         private int valueCount;
-        [SerializeField] private PlayableDirector[] timelinesTransitions;
         [SerializeField] private int valueRequired;
         [SerializeField] private GameObject[] touchPlanes;
         [SerializeField] private TutorialCasesEvents[] endCaseEvents;
+        private bool case1Valid;
+        private bool case2Valid;
+        private bool case3Valid;
+        private bool case4Valid;
+        private bool case5Valid;
 
         public override void OnBallShot()
         {
             base.OnBallShot();
-            if(valueCount < valueRequired && caseIndex == 0)
+            if (valueCount < valueRequired && caseIndex == 0 && !case1Valid)
             {
                 valueCount++;
             }
             else
             {
-                StartCoroutine(DelayEndCase());
+                if (!case1Valid)
+                {
+                    case1Valid = false;
+                    StartCoroutine(DelayEndCase());
+                }
             }
         }
 
         public override void OnBallCriticalShot()
         {
             base.OnBallCriticalShot();
-            if(valueCount < valueRequired && caseIndex == 1)
+            if (valueCount < valueRequired && caseIndex == 1 && !case2Valid)
             {
                 valueCount++;
             }
             else
             {
+                case2Valid = false;
                 StartCoroutine(DelayEndCase());
             }
         }
@@ -44,7 +53,7 @@ namespace Team17.StreetHunt
         public override void OnDummyDeath()
         {
             base.OnDummyDeath();
-            if(caseIndex == 3)
+            if (caseIndex == 3 && !case3Valid)
             {
                 endCaseEvents[caseIndex].eventEndCase.Invoke();
             }

@@ -186,7 +186,6 @@ namespace Team17.StreetHunt
                 if(powerGained.Evaluate(t.Inc) > 8)
                 {
                     character.CriticalShoot = true;
-                    GameManager.state.CallOnBallCriticalShot();
                 }
                 else
                 {
@@ -290,6 +289,11 @@ namespace Team17.StreetHunt
             usedPowerGroup.Trail.Stop();
 
             GameManager.state.CallOnBallHit(usedPowergroupIndex, power);
+        }
+
+        public void CriticalShot()
+        {
+            GameManager.state.CallOnBallCriticalShot();
         }
 
         private void CancelBall()
