@@ -457,11 +457,11 @@ namespace Team17.StreetHunt
             SelectPowerGroup(power);
         }
 
-        //public override void OnBallIncreasePowerGroup()
-        //{
-        //    base.OnBallIncreasePowerGroup();
-        //    usedPowerGroup.Trail.Play();
-        //}
+        public override void OnBallIncreasePowerGroup()
+        {
+            base.OnBallIncreasePowerGroup();
+            usedPowerGroup.Trail.Play();
+        }
 
         #endregion
 
