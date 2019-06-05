@@ -14,7 +14,7 @@ namespace Team17.StreetHunt
         [SerializeField] private Transform timerFeedback;
         [SerializeField] private Transform trajectory;
         [SerializeField] private PlayerCharacter character;
-        [Tooltip ("The power threshold of the group must be sorted from the smallest to highest.")]
+        [Tooltip("The power threshold of the group must be sorted from the smallest to highest.")]
         [SerializeField] private PowerGroups[] powerGroups;
 
         [Header("Parameters")]
@@ -120,10 +120,10 @@ namespace Team17.StreetHunt
             if (coll.gameObject.GetComponent<IBallHitable>() != null)
             {
                 coll.gameObject.GetComponent<IBallHitable>().Hit(usedPowergroupIndex, power);
-                //Hit();
+                Hit();
             }
 
-            if(coll.gameObject.GetComponent<BallRelfecter>() != null)
+            if (coll.gameObject.GetComponent<BallRelfecter>() != null)
             {
                 Vector3 newDir = (transform.position - coll.transform.position).normalized;
                 SetMovementDir(newDir);
@@ -138,7 +138,7 @@ namespace Team17.StreetHunt
 
         public void StartCalculation()
         {
-            if(canStrike)
+            if (canStrike)
             {
                 isStriking = true;
                 SetMovementDir(movementDirection);
@@ -155,7 +155,7 @@ namespace Team17.StreetHunt
 
         public void FeedBack(Vector3 touchPos)
         {
-            if(canStrike)
+            if (canStrike)
             {
                 isStriking = true;
                 SetMovementDir(movementDirection);
@@ -171,7 +171,7 @@ namespace Team17.StreetHunt
 
         public void GetNewDirection(Vector3 newDirection)
         {
-            if(canStrike)
+            if (canStrike)
             {
                 if (wasCanceled)
                 {
@@ -183,7 +183,7 @@ namespace Team17.StreetHunt
 
                 power += powerGained.Evaluate(t.Inc);
 
-                if(powerGained.Evaluate(t.Inc) > 8)
+                if (powerGained.Evaluate(t.Inc) > 8)
                 {
                     character.CriticalShoot = true;
                 }
@@ -193,7 +193,7 @@ namespace Team17.StreetHunt
                 }
 
 
-                if(power > powerGroups[powerGroups.Length - 1].PowerThreshold + maxPowerMargin)
+                if (power > powerGroups[powerGroups.Length - 1].PowerThreshold + maxPowerMargin)
                 {
                     power = powerGroups[powerGroups.Length - 1].PowerThreshold + maxPowerMargin;
                 }
@@ -228,7 +228,7 @@ namespace Team17.StreetHunt
             SetMovementDir(movementDirection);
 
             GameManager.state.CallOnBallShot();
-            
+
         }
 
 
@@ -251,9 +251,9 @@ namespace Team17.StreetHunt
                 }
             }
 
-            if(lastIndex != usedPowergroupIndex)
+            if (lastIndex != usedPowergroupIndex)
             {
-                if(lastIndex < usedPowergroupIndex) //increase
+                if (lastIndex < usedPowergroupIndex) //increase
                 {
                     GameManager.state.CallOnBallIncreasePowerGroup();
                 }
@@ -286,7 +286,7 @@ namespace Team17.StreetHunt
             trajectory.gameObject.SetActive(false);
 
             usedPowerGroup.Hit.Play();
-            usedPowerGroup.Trail.Stop();
+            //usedPowerGroup.Trail.Stop();
 
             GameManager.state.CallOnBallHit(usedPowergroupIndex, power);
         }
@@ -377,23 +377,23 @@ namespace Team17.StreetHunt
             portalRight = new Vector3(Mathf.Abs(portalRight.x), Mathf.Abs(portalRight.y), portalRight.z);
             float sqrMag = Vector3.SqrMagnitude(entryVelocity - portalRight);
 
-            if(Mathf.Abs(sqrMag) < speedPortalPrecision)
+            if (Mathf.Abs(sqrMag) < speedPortalPrecision)
             {
                 //Speed up
-                if(usedPowergroupIndex < powerGroups.Length - 1)
+                if (usedPowergroupIndex < powerGroups.Length - 1)
                 {
                     power = powerGroups[usedPowergroupIndex + 1].PowerThreshold + 10;
                     SelectPowerGroup(powerGroups[usedPowergroupIndex + 1].PowerThreshold + 10);
                 }
                 else
                 {
-                    if(power < powerGroups[powerGroups.Length - 1].PowerThreshold)
+                    if (power < powerGroups[powerGroups.Length - 1].PowerThreshold)
                     {
                         power = powerGroups[powerGroups.Length - 1].PowerThreshold;
                     }
                     SelectPowerGroup(power);
                 }
-                               
+
                 portal.gameObject.SetActive(false);
             }
 
@@ -425,12 +425,12 @@ namespace Team17.StreetHunt
             Vector3 futurMovementDir = body.velocity.normalized;
             Vector3 futurPos = Vector3.zero;
 
-            while(remainingDist > 0)
+            while (remainingDist > 0)
             {
                 RaycastHit hit = new RaycastHit();
                 Physics.Raycast(rayStart, futurMovementDir, out hit, remainingDist, trajectoryCalculationMask);
                 //Debug.DrawRay(rayStart, futurMovementDir.normalized * remainingDist, Color.green);
-                if(hit.collider != null)
+                if (hit.collider != null)
                 {
                     rayStart = hit.point;
                     futurMovementDir = Vector3.Reflect(futurMovementDir, hit.normal);
@@ -465,7 +465,7 @@ namespace Team17.StreetHunt
 
         #endregion
 
-        [ContextMenu ("Setup score manager")]
+        [ContextMenu("Setup score manager")]
         public void SetupScoreManager()
         {
             ScoreManager manager = GameObject.Find("UiManager").GetComponent<ScoreManager>();
@@ -500,7 +500,7 @@ namespace Team17.StreetHunt
         [SerializeField] private FeedBack hit;
         [SerializeField] private FeedBack stunned;
 
-        public string Name { get => name;}
+        public string Name { get => name; }
         public float PowerThreshold { get => powerThreshold; }
         public float Speed { get => speed; }
         public FeedBack Launch { get => launch; }
