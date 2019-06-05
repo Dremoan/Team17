@@ -248,9 +248,8 @@ MonoBehaviour:
   tpOnTransformOnPlay: 1
   transformToTPToOnPlay: {fileID: 6745982272864011033}
   particles: 0
-  particleRotation: 0
   particlesSystems: []
-  particleSystemsToRotate: []
+  particlesRenderers: []
   trails: 0
   trailRenderers: []
   shake: 1
@@ -773,11 +772,11 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
     portals: []
   easyPatterns:
-  - name: Jump to left wall
+  - name: Jump to Left Wall
     zone: {fileID: 11400000, guid: b3489ea81c876604f8318e20edf4d83d, type: 2}
     priority: 5
     timeToEnd: 2
-    coolDown: 1
+    coolDown: 4
     cancelingTimerSpeedUp: 0.5
     pattern:
       m_PersistentCalls:
@@ -797,11 +796,11 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     portals: []
-  - name: Jump to left ground
+  - name: Jump to Left Ground
     zone: {fileID: 11400000, guid: d336d33b354801540aabec5e2340fd96, type: 2}
     priority: 5
     timeToEnd: 2
-    coolDown: 1
+    coolDown: 4
     cancelingTimerSpeedUp: 0.5
     pattern:
       m_PersistentCalls:
@@ -821,11 +820,11 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     portals: []
-  - name: Jump to right wall
+  - name: Jump to Right Wall
     zone: {fileID: 11400000, guid: b3489ea81c876604f8318e20edf4d83d, type: 2}
     priority: 5
     timeToEnd: 2
-    coolDown: 1
+    coolDown: 4
     cancelingTimerSpeedUp: 0.5
     pattern:
       m_PersistentCalls:
@@ -845,11 +844,11 @@ MonoBehaviour:
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     portals: []
-  - name: Jump to right ground
+  - name: Jump to Right Ground
     zone: {fileID: 11400000, guid: 5512f78d117453b42a9eb13dba49d930, type: 2}
     priority: 5
     timeToEnd: 2
-    coolDown: 1
+    coolDown: 4
     cancelingTimerSpeedUp: 0.5
     pattern:
       m_PersistentCalls:
@@ -861,6 +860,75 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: Team17.StreetHunt.GorillaJumpTarget,
               Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    portals: []
+  - name: Jump to Random
+    zone: {fileID: 11400000, guid: a4c6b4baf478abb4dba0f6f0612beb80, type: 2}
+    priority: 1
+    timeToEnd: 2
+    coolDown: 4
+    cancelingTimerSpeedUp: 0.5
+    pattern:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6745982272864011032}
+          m_MethodName: JumpToRandom
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    portals: []
+  - name: Jump to LeftSide
+    zone: {fileID: 11400000, guid: 315023730e68de840a679638e7b786ea, type: 2}
+    priority: 2
+    timeToEnd: 2
+    coolDown: 4
+    cancelingTimerSpeedUp: 0.5
+    pattern:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6745982272864011032}
+          m_MethodName: JumpToRandom
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    portals: []
+  - name: Jump to RightSide
+    zone: {fileID: 11400000, guid: aa2343c597d8f7d44ab5f34b8deb9a00, type: 2}
+    priority: 2
+    timeToEnd: 2
+    coolDown: 4
+    cancelingTimerSpeedUp: 0.5
+    pattern:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6745982272864011032}
+          m_MethodName: JumpToRandom
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
