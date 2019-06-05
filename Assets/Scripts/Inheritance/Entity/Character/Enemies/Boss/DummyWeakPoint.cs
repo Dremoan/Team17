@@ -44,9 +44,11 @@ namespace Team17.StreetHunt
             {
                 dummyHp -= dmgs;
                 hitFeedback.Play();
-                if (dummyHp < 0)
+                if (dummyHp < 0 && !alreadyDead)
                 {
+                    alreadyDead = true;
                     GameManager.state.CallOnDummyDeath();
+                    StartCoroutine(ExplosionWeakPoint());
                 }
                 if (!alreadyDead)
                 {
@@ -55,31 +57,6 @@ namespace Team17.StreetHunt
             }
         }
 
-        public override void OnDummyDeath()
-        {
-            base.OnDummyDeath();
-            StartCoroutine(ExplosionWeakPoint());
-        }
-
-        public void EndDummy()
-        {
-            hitFeedback.gameObject.SetActive(false);
-            weaknessFx.SetActive(false);
-            skinWeakPoint.material = newMaterial;
-        }
-
-        public void ResetDummy()
-        {
-            alreadyDead = false;
-            hitFeedback.gameObject.SetActive(true);
-            weaknessFx.SetActive(true);
-            skinWeakPoint.material = actualBossMat;
-        }
-
-        public void MenuBack(float timeToWait)
-        {
-            StartCoroutine(GoBackToMenu(timeToWait));
-        }
 
         IEnumerator Blink()
         {
@@ -94,34 +71,12 @@ namespace Team17.StreetHunt
 
         IEnumerator ExplosionWeakPoint()
         {
-            alreadyDead = true;
             deathFeedback.Play();
             yield return new WaitForSeconds(changeMaterialDelay);
             hitFeedback.gameObject.SetActive(false);
             weaknessFx.SetActive(false);
             canvasAnim.Play("FlashBlanc");
             skinWeakPoint.material = newMaterial;
-        }
-
-        IEnumerator ExplosionEnd()
-        {
-            touchPlane.SetActive(false);
-            alreadyDead = true;
-            deathFeedback.Play();
-            yield return new WaitForSeconds(changeMaterialDelay);
-            hitFeedback.gameObject.SetActive(false);
-            weaknessFx.SetActive(false);
-            canvasAnim.Play("FlashBlanc");
-            skinWeakPoint.material = newMaterial;
-            characterController.TeleportToRoom(tauntPoint);
-        }
-
-        IEnumerator GoBackToMenu(float timer)
-        {
-            yield return new WaitForSeconds(timer);
-            canvasAnim.Play("FadeIn");
-            yield return new WaitForSeconds(1f);
-            sceneManager.LoadSceneIndex(0);
         }
     }
 

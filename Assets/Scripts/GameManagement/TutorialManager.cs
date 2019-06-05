@@ -19,6 +19,8 @@ namespace Team17.StreetHunt
         private bool case4Valid;
         private bool case5Valid;
 
+        public int ValueCount { get => valueCount; set => valueCount = value; }
+
         public override void OnBallShot()
         {
             base.OnBallShot();
@@ -56,54 +58,59 @@ namespace Team17.StreetHunt
         public override void OnDummyDeath()
         {
             base.OnDummyDeath();
+
+            #region Case3
+
             if (valueCount < valueRequired && caseIndex == 2 && !case3Valid)
             {
                 valueCount++;
             }
 
-            else
+            if (valueCount == valueRequired && !case3Valid && caseIndex == 2)
             {
-                if (!case3Valid)
-                {
-                    case3Valid = true;
-                    touchPlanes[caseIndex].SetActive(false);
-                    endCaseEvents[caseIndex].eventEndCase.Invoke();
-                    caseIndex++;
-                    valueCount = 0;
-                }
+                case3Valid = true;
+                touchPlanes[caseIndex].SetActive(false);
+                endCaseEvents[caseIndex].eventEndCase.Invoke();
+                caseIndex++;
+                valueCount = 0;
             }
+
+            #endregion
+
+            #region Case4
 
             if (valueCount < valueRequired && caseIndex == 3 && !case4Valid)
             {
                 valueCount++;
             }
 
-            else
+
+            if (valueCount == valueRequired && !case4Valid && caseIndex == 3)
             {
-                if (!case4Valid)
-                {
-                    case4Valid = true;
-                    endCaseEvents[caseIndex].eventEndCase.Invoke();
-                    caseIndex++;
-                    valueCount = 0;
-                }
+                case4Valid = true;
+                endCaseEvents[caseIndex].eventEndCase.Invoke();
+                caseIndex++;
+                valueCount = 0;
             }
+
+            #endregion
+
+            #region Case5
 
             if (valueCount < valueRequired && caseIndex == 4 && !case5Valid)
             {
                 valueCount++;
             }
 
-            else
+            if (valueCount == valueRequired && !case5Valid && caseIndex == 4)
             {
-                if (!case5Valid)
-                {
-                    case5Valid = true;
-                    endCaseEvents[caseIndex].eventEndCase.Invoke();
-                    caseIndex++;
-                    valueCount = 0;
-                }
+                case5Valid = true;
+                endCaseEvents[caseIndex].eventEndCase.Invoke();
+                caseIndex++;
+                valueCount = 0;
             }
+
+            #endregion
 
 
         }
