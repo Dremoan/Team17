@@ -69,10 +69,7 @@ namespace Team17.StreetHunt
             if (valueCount == valueRequired && !case3Valid && caseIndex == 2)
             {
                 case3Valid = true;
-                touchPlanes[caseIndex].SetActive(false);
-                endCaseEvents[caseIndex].eventEndCase.Invoke();
-                caseIndex++;
-                valueCount = 0;
+                StartCoroutine(DelayEndCase());
             }
 
             #endregion
@@ -88,9 +85,7 @@ namespace Team17.StreetHunt
             if (valueCount == valueRequired && !case4Valid && caseIndex == 3)
             {
                 case4Valid = true;
-                endCaseEvents[caseIndex].eventEndCase.Invoke();
-                caseIndex++;
-                valueCount = 0;
+                StartCoroutine(DelayEndCase());
             }
 
             #endregion
@@ -105,9 +100,7 @@ namespace Team17.StreetHunt
             if (valueCount == valueRequired && !case5Valid && caseIndex == 4)
             {
                 case5Valid = true;
-                endCaseEvents[caseIndex].eventEndCase.Invoke();
-                caseIndex++;
-                valueCount = 0;
+                StartCoroutine(DelayEndCase());
             }
 
             #endregion
