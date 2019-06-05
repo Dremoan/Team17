@@ -4716,8 +4716,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8308007640978122268}
+  - component: {fileID: 5087297915705526179}
   m_Layer: 0
-  m_Name: new trail lvl 4
+  m_Name: TrailFB lvl 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4745,6 +4746,83 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5087297915705526179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8308007640978122269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7be32b554ce1e04293ce2c45ca8e22e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnStart: 0
+  looping: 1
+  hardFollowingTransform: 1
+  transformToHardFollow: {fileID: 0}
+  tpOnTransformOnPlay: 0
+  transformToTPToOnPlay: {fileID: 0}
+  particles: 1
+  particlesSystems:
+  - {fileID: 8308007641469319616}
+  - {fileID: 8308007640915419127}
+  - {fileID: 8308007642906361576}
+  - {fileID: 8308007641612397215}
+  - {fileID: 8308007641034287104}
+  - {fileID: 8308007641363150961}
+  particlesRenderers:
+  - {fileID: 8308007641469319617}
+  - {fileID: 8308007640915419124}
+  - {fileID: 8308007642906361577}
+  - {fileID: 8308007641612397212}
+  - {fileID: 8308007641034287105}
+  - {fileID: 8308007641363150974}
+  trails: 1
+  trailRenderers:
+  - {fileID: 8308007641191045710}
+  - {fileID: 8308007641586268708}
+  shake: 0
+  useSpecificTransform: 0
+  specificTransformToShake: []
+  shakeAmplitude: 0.2
+  shakeTime: 0.1
+  slowMo: 0
+  targetTimeScale: 0.05
+  slowMoSpeed: 0.1
+  slowMoInCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  slowMoOutCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  zoom: 0
+  zoomInCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  zoomOutCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  zoomedDist: 4
+  zoomSpeed: 0.1
+  freezeFrame: 0
+  timeBeforeFreezedFrame: 1
+  freezedFrameTime: 0.1
+  rumble: 0
+  rumbleTime: 5
 --- !u!1 &8308007641034287119
 GameObject:
   m_ObjectHideFlags: 0
