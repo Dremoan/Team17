@@ -186,7 +186,6 @@ namespace Team17.StreetHunt
                 if(powerGained.Evaluate(t.Inc) > 8)
                 {
                     character.CriticalShoot = true;
-                    GameManager.state.CallOnBallCriticalShot();
                 }
                 else
                 {
@@ -201,6 +200,8 @@ namespace Team17.StreetHunt
 
                 SelectPowerGroup(power);
                 movementDirection = newDirection.normalized * (usedPowerGroup.Speed);
+
+                usedPowerGroup.Trail.RotateFeedback(GetRotationFromDirection(movementDirection));
 
                 /*usedPowerGroup.Hit.Rotate3DStartRotationX(- GetRotationFromDirection(newDirection));
                 usedPowerGroup.Launch.Rotate3DStartRotationZ(GetRotationFromDirection(newDirection));
@@ -290,6 +291,11 @@ namespace Team17.StreetHunt
             GameManager.state.CallOnBallHit(usedPowergroupIndex, power);
         }
 
+        public void CriticalShot()
+        {
+            GameManager.state.CallOnBallCriticalShot();
+        }
+
         private void CancelBall()
         {
             power = 0;
@@ -351,6 +357,7 @@ namespace Team17.StreetHunt
             SetMovementDir(newDir);
 
             //usedPowerGroup.Trail.RotateShapeEmitter(GetRotationFromDirection(newDir));
+            usedPowerGroup.Trail.RotateFeedback(GetRotationFromDirection(movementDirection));
             usedPowerGroup.Bounce.Play();
             usedPowerGroup.Hit.Play();
             usedPowerGroup.Trail.Play();

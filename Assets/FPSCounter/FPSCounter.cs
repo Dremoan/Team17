@@ -34,6 +34,10 @@ namespace Otumn.FPSCounter
             }
             fps /= fpsArray.Length;
             fps = Mathf.Round(fps);
+            if(fps > 60)
+            {
+                fps = 60;
+            }
             fpsText.text = fps.ToString("F0") + " fps";
         }
     }
