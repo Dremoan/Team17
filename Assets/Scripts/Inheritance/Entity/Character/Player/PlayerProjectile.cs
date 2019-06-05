@@ -120,7 +120,7 @@ namespace Team17.StreetHunt
             if (coll.gameObject.GetComponent<IBallHitable>() != null)
             {
                 coll.gameObject.GetComponent<IBallHitable>().Hit(usedPowergroupIndex, power);
-                //Hit();
+                Hit();
             }
 
             if(coll.gameObject.GetComponent<BallRelfecter>() != null)
@@ -286,7 +286,7 @@ namespace Team17.StreetHunt
             trajectory.gameObject.SetActive(false);
 
             usedPowerGroup.Hit.Play();
-            usedPowerGroup.Trail.Stop();
+            //usedPowerGroup.Trail.Stop();
 
             GameManager.state.CallOnBallHit(usedPowergroupIndex, power);
         }
