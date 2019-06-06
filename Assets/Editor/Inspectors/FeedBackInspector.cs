@@ -34,6 +34,7 @@ namespace Team17.StreetHunt
             EditorGUILayout.PropertyField(serializedObject.FindProperty("particles"), new GUIContent("Use particles"));
             if(feedBack.Particles)
             {
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("useRotation"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("particlesSystems"), true);
                 
                 if(GUILayout.Button("Find Particles"))
