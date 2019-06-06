@@ -89,7 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -118,36 +118,6 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 847663596}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &24944580
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 24944581}
-  m_Layer: 0
-  m_Name: Repaire
-  m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &24944581
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 24944580}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50, y: -35, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 17
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &35439846
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +195,7 @@ Transform:
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &116735770 stripped
 Transform:
@@ -590,6 +560,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SnakeBossOne
       objectReference: {fileID: 0}
+    - target: {fileID: 2840939439129170540, guid: 9c5ff747c1f33544f88cef43f310e5e1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2840939439129170542, guid: 9c5ff747c1f33544f88cef43f310e5e1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -705,6 +680,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: SnakeBossThree
       objectReference: {fileID: 0}
+    - target: {fileID: 7999859923531386608, guid: dec8b0c3bc52a22439ce1727ea30ee7a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2701890313858903794, guid: dec8b0c3bc52a22439ce1727ea30ee7a,
+        type: 3}
+      propertyPath: portalManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2701890313858903794, guid: dec8b0c3bc52a22439ce1727ea30ee7a,
+        type: 3}
+      propertyPath: touchPlane
+      value: 
+      objectReference: {fileID: 1202716611}
+    - target: {fileID: 2701890313858903794, guid: dec8b0c3bc52a22439ce1727ea30ee7a,
+        type: 3}
+      propertyPath: roomZero
+      value: 
+      objectReference: {fileID: 475433207}
     - target: {fileID: 1112554571779953120, guid: dec8b0c3bc52a22439ce1727ea30ee7a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -760,21 +755,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2701890313858903794, guid: dec8b0c3bc52a22439ce1727ea30ee7a,
-        type: 3}
-      propertyPath: portalManager
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2701890313858903794, guid: dec8b0c3bc52a22439ce1727ea30ee7a,
-        type: 3}
-      propertyPath: touchPlane
-      value: 
-      objectReference: {fileID: 1202716611}
-    - target: {fileID: 2701890313858903794, guid: dec8b0c3bc52a22439ce1727ea30ee7a,
-        type: 3}
-      propertyPath: roomZero
-      value: 
-      objectReference: {fileID: 475433207}
     - target: {fileID: 3703292587816363433, guid: dec8b0c3bc52a22439ce1727ea30ee7a,
         type: 3}
       propertyPath: characterController
@@ -991,16 +971,11 @@ PrefabInstance:
       propertyPath: thirdSpawnPoint
       value: 
       objectReference: {fileID: 1938687538}
-    - target: {fileID: 3482633378167582069, guid: 53e70c60ea00c7442922d0a1c33aaa75,
+    - target: {fileID: 332976733673807741, guid: 53e70c60ea00c7442922d0a1c33aaa75,
         type: 3}
-      propertyPath: m_SceneBindings.Array.data[2].value
-      value: 
-      objectReference: {fileID: 1998036102}
-    - target: {fileID: 3482633378167582069, guid: 53e70c60ea00c7442922d0a1c33aaa75,
-        type: 3}
-      propertyPath: m_SceneBindings.Array.data[3].value
-      value: 
-      objectReference: {fileID: 1998036102}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
       propertyPath: animEventsArray.Array.data[0].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1021,6 +996,16 @@ PrefabInstance:
       propertyPath: animEventsArray.Array.data[4].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 414047620}
+    - target: {fileID: 3482633378167582069, guid: 53e70c60ea00c7442922d0a1c33aaa75,
+        type: 3}
+      propertyPath: m_SceneBindings.Array.data[2].value
+      value: 
+      objectReference: {fileID: 1998036102}
+    - target: {fileID: 3482633378167582069, guid: 53e70c60ea00c7442922d0a1c33aaa75,
+        type: 3}
+      propertyPath: m_SceneBindings.Array.data[3].value
+      value: 
+      objectReference: {fileID: 1998036102}
     - target: {fileID: 1605709929, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
       propertyPath: animEventsArray.Array.data[2].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1040,7 +1025,22 @@ PrefabInstance:
     - target: {fileID: 332976734573855700, guid: 53e70c60ea00c7442922d0a1c33aaa75,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.075
+      value: 49.925
+      objectReference: {fileID: 0}
+    - target: {fileID: 332976734573855700, guid: 53e70c60ea00c7442922d0a1c33aaa75,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -35
+      objectReference: {fileID: 0}
+    - target: {fileID: 332976734063018068, guid: 53e70c60ea00c7442922d0a1c33aaa75,
+        type: 3}
+      propertyPath: m_Priority
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 332976734063018069, guid: 53e70c60ea00c7442922d0a1c33aaa75,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 49.925
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
@@ -1134,6 +1134,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SnakeBossTwo
       objectReference: {fileID: 0}
+    - target: {fileID: 8300155711299718575, guid: ff126a46a6ccaed46b7cb557984e9225,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2330250225451049752, guid: ff126a46a6ccaed46b7cb557984e9225,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1204,10 +1209,6 @@ PrefabInstance:
       propertyPath: roomZero
       value: 
       objectReference: {fileID: 1081807303}
-    - target: {fileID: 659139625, guid: ff126a46a6ccaed46b7cb557984e9225, type: 3}
-      propertyPath: snakeAnim
-      value: 
-      objectReference: {fileID: 21992272}
     - target: {fileID: 4471716224503659969, guid: ff126a46a6ccaed46b7cb557984e9225,
         type: 3}
       propertyPath: characterController
@@ -1223,6 +1224,10 @@ PrefabInstance:
       propertyPath: canvasAnim
       value: 
       objectReference: {fileID: 1998036102}
+    - target: {fileID: 659139625, guid: ff126a46a6ccaed46b7cb557984e9225, type: 3}
+      propertyPath: snakeAnim
+      value: 
+      objectReference: {fileID: 21992272}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff126a46a6ccaed46b7cb557984e9225, type: 3}
 --- !u!114 &1522339739 stripped
@@ -1704,6 +1709,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6267907410888173715, guid: 1d7d8698125f9844c8139764c4c000a7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 35a972dba6a7e464a96b21f9f238f947, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d7d8698125f9844c8139764c4c000a7, type: 3}
 --- !u!114 &1618312284594600676 stripped
