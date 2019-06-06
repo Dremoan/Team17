@@ -14,6 +14,7 @@ namespace Team17.StreetHunt
         [SerializeField] private Transform transformToTPToOnPlay;
         //Particles
         [SerializeField] private bool particles = false;
+        [SerializeField] private bool useRotation = true;
         [SerializeField] private ParticleSystem[] particlesSystems;
         [SerializeField] private ParticleSystemRenderer[] particlesRenderers;
         //Trail
@@ -402,6 +403,7 @@ namespace Team17.StreetHunt
         {
             if(particles)
             {
+                if (!useRotation) return;
                 for (int i = 0; i < particlesRenderers.Length; i++)
                 {
                     if(particlesRenderers[i].renderMode == ParticleSystemRenderMode.Billboard || particlesRenderers[i].renderMode == ParticleSystemRenderMode.Mesh)
