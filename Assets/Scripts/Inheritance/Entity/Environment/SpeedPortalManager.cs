@@ -6,6 +6,7 @@ namespace Team17.StreetHunt
 {
     public class SpeedPortalManager : Entity
     {
+        [SerializeField] private bool usePortals = true;
         [SerializeField] private SpeedPortal[] portalPool;
 
         protected override void Update()
@@ -16,6 +17,7 @@ namespace Team17.StreetHunt
 
         public void SpawnPortal(Vector3 pos, float rot, float time)
         {
+            if (!usePortals) return;
             for (int i = 0; i < portalPool.Length; i++)
             {
                 if(portalPool[i].Available)
@@ -28,6 +30,7 @@ namespace Team17.StreetHunt
 
         public void DeactivateAllPortals()
         {
+            if (!usePortals) return;
             for (int i = 0; i < portalPool.Length; i++)
             {
                 portalPool[i].gameObject.SetActive(true);
