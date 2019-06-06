@@ -119,6 +119,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4744417715129876774}
   - component: {fileID: 4744417715129876775}
+  - component: {fileID: 3287327459905120260}
+  - component: {fileID: 2981816144771508800}
   m_Layer: 0
   m_Name: SnakeTailBody
   m_TagString: Untagged
@@ -159,6 +161,32 @@ MonoBehaviour:
   leftBend: 0.5
   rightBend: 0.5
   showDebug: 0
+--- !u!65 &3287327459905120260
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4744417715129876773}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7349312, y: 0.448956, z: 0.5914911}
+  m_Center: {x: 0.51873744, y: 0, z: 0}
+--- !u!65 &2981816144771508800
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4744417715129876773}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.907103, y: 0.1556484, z: 1}
+  m_Center: {x: -0.18324052, y: 0, z: -0}
 --- !u!1 &4744417715565891004
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,18 +224,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4744417714210566891}
     m_Modifications:
-    - target: {fileID: 100000, guid: 15041c402ca21e94a93e887f830ceff4, type: 3}
-      propertyPath: m_Name
-      value: BossQueue_Plumes_BendAnim
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 15041c402ca21e94a93e887f830ceff4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 15041c402ca21e94a93e887f830ceff4, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 15041c402ca21e94a93e887f830ceff4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.745
@@ -264,6 +280,18 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 15041c402ca21e94a93e887f830ceff4, type: 3}
+      propertyPath: m_Name
+      value: BossQueue_Plumes_BendAnim
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 15041c402ca21e94a93e887f830ceff4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 15041c402ca21e94a93e887f830ceff4, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 15041c402ca21e94a93e887f830ceff4, type: 3}
       propertyPath: m_Controller
       value: 
@@ -272,6 +300,22 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5689b4e34386bf54ca7e367e823a496c, type: 2}
+    - target: {fileID: 13700000, guid: 15041c402ca21e94a93e887f830ceff4, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 13700000, guid: 15041c402ca21e94a93e887f830ceff4, type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 13700000, guid: 15041c402ca21e94a93e887f830ceff4, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 13700000, guid: 15041c402ca21e94a93e887f830ceff4, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15041c402ca21e94a93e887f830ceff4, type: 3}
 --- !u!4 &4744417714387511912 stripped
@@ -287,15 +331,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4744417715129876774}
     m_Modifications:
-    - target: {fileID: 100000, guid: 7e67d6b9ab8c60a4f862438b915f2b2d, type: 3}
-      propertyPath: m_Name
-      value: BossQueue_Corps_BendAnim
-      objectReference: {fileID: 0}
-    - target: {fileID: 100012, guid: 7e67d6b9ab8c60a4f862438b915f2b2d, type: 3}
-      propertyPath: m_Icon
+    - target: {fileID: 9500000, guid: 7e67d6b9ab8c60a4f862438b915f2b2d, type: 3}
+      propertyPath: m_Controller
       value: 
-      objectReference: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000,
-        type: 0}
+      objectReference: {fileID: 9100000, guid: bb6a635d619ccf9488b244c936fe5561, type: 2}
     - target: {fileID: 400000, guid: 7e67d6b9ab8c60a4f862438b915f2b2d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -352,14 +391,35 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: 7e67d6b9ab8c60a4f862438b915f2b2d, type: 3}
-      propertyPath: m_Controller
+    - target: {fileID: 100000, guid: 7e67d6b9ab8c60a4f862438b915f2b2d, type: 3}
+      propertyPath: m_Name
+      value: BossQueue_Corps_BendAnim
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: 7e67d6b9ab8c60a4f862438b915f2b2d, type: 3}
+      propertyPath: m_Icon
       value: 
-      objectReference: {fileID: 9100000, guid: bb6a635d619ccf9488b244c936fe5561, type: 2}
+      objectReference: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000,
+        type: 0}
     - target: {fileID: 13700000, guid: 7e67d6b9ab8c60a4f862438b915f2b2d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5689b4e34386bf54ca7e367e823a496c, type: 2}
+    - target: {fileID: 13700000, guid: 7e67d6b9ab8c60a4f862438b915f2b2d, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 13700000, guid: 7e67d6b9ab8c60a4f862438b915f2b2d, type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 13700000, guid: 7e67d6b9ab8c60a4f862438b915f2b2d, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 13700000, guid: 7e67d6b9ab8c60a4f862438b915f2b2d, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e67d6b9ab8c60a4f862438b915f2b2d, type: 3}
 --- !u!4 &4744417714887036201 stripped
