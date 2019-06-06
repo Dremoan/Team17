@@ -30,7 +30,6 @@ namespace Team17.StreetHunt
                 {
                     character.CurrentBall = lives.GetNextBall();
                     ball.transform.position = character.transform.position;
-                    Debug.Log("Spawned ball on player, canStrike = " + ball.CanStrike);
                     ball.gameObject.SetActive(true);
                     ball.StartCalculation();
                     touchBegan = true;
