@@ -221,6 +221,7 @@ namespace Team17.StreetHunt
 
         public void LaunchBall()
         {
+            usedPowerGroup.Launch.RotateFeedback(GetRotationFromDirection(movementDirection));
             usedPowerGroup.Launch.Play();
             usedPowerGroup.Trail.Play();
 
@@ -356,10 +357,9 @@ namespace Team17.StreetHunt
             if (power < 0) power = 0;
             SetMovementDir(newDir);
 
-            //usedPowerGroup.Trail.RotateShapeEmitter(GetRotationFromDirection(newDir));
+            usedPowerGroup.Bounce.RotateFeedback(-GetRotationFromDirection(collisionNormal));
             usedPowerGroup.Trail.RotateFeedback(GetRotationFromDirection(movementDirection));
             usedPowerGroup.Bounce.Play();
-            usedPowerGroup.Hit.Play();
             usedPowerGroup.Trail.Play();
 
             GameManager.state.CallOnBallBounced();
