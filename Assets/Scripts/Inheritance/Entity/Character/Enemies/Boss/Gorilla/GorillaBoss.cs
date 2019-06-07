@@ -42,6 +42,7 @@ namespace Team17.StreetHunt
         private Vector3[] path;
         private Vector3 posRef;
         private Vector3 jumpStart;
+        private bool isShouting = false;
         private bool isJumping = false;
         private bool jumpingRight = false;
         private int pathStepTarget = 0;
@@ -249,8 +250,17 @@ namespace Team17.StreetHunt
             }
             else
             {
+                if(currentIdleType == 0f) // is left
+                {
+                    anim.SetBool("shoutingRight", true);
+                }
+                if(currentIdleType == 0.25f) // is right
+                {
+
+                }
                 shoutGO.gameObject.SetActive(true);
-                shoutGO.transform.position = new Vector3(headTransform.position.x, headTransform.position.y, 0);
+                //shoutGO.transform.position = new Vector3(headTransform.position.x, headTransform.position.y, 0);
+                shoutGO.FollowedTransfom = headTransform;
             }
         }
 
@@ -299,6 +309,11 @@ namespace Team17.StreetHunt
         {
             anim.SetBool("rightArmRockLaunch", false);
             anim.SetBool("leftArmRockLaunch", false);
+        }
+
+        public void EndShout()
+        {
+            anim.SetBool("shoutingRight", false);
         }
 
         private void GetNewRock()

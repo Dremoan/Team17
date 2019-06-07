@@ -9,7 +9,7 @@ namespace Team17.StreetHunt
     public class TutorialManager : Entity
     {
         private int caseIndex = 0;
-        private int valueCount;
+        public int valueCount;
         [SerializeField] private int valueRequired;
         [SerializeField] private GameObject[] touchPlanes;
         [SerializeField] private TutorialCasesEvents[] endCaseEvents;
@@ -21,21 +21,19 @@ namespace Team17.StreetHunt
 
         public int ValueCount { get => valueCount; set => valueCount = value; }
 
-        public override void OnBallShot()
+        public override void OnTargetTutorialDestroyed()
         {
-            base.OnBallShot();
+            base.OnTargetTutorialDestroyed();
             if (valueCount < valueRequired && caseIndex == 0 && !case1Valid)
             {
                 valueCount++;
             }
-            else
+            if (!case1Valid && valueCount == valueRequired && caseIndex == 0)
             {
-                if (!case1Valid)
-                {
-                    case1Valid = true;
-                    StartCoroutine(DelayEndCase());
-                }
+                case1Valid = true;
+                StartCoroutine(DelayEndCase());
             }
+
         }
 
         public override void OnBallCriticalShot()
@@ -45,14 +43,13 @@ namespace Team17.StreetHunt
             {
                 valueCount++;
             }
-            else
+
+            if (!case2Valid && valueCount == valueRequired && caseIndex == 1)
             {
-                if (!case2Valid)
-                {
-                    case2Valid = true;
-                    StartCoroutine(DelayEndCase());
-                }
+                case2Valid = true;
+                StartCoroutine(DelayEndCase());
             }
+
         }
 
         public override void OnDummyDeath()
