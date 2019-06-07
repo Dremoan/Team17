@@ -14,7 +14,10 @@ namespace Team17.StreetHunt
         private PathCreator actualPath;
         
         [SerializeField] private Transform snakeHead;
-        
+        [SerializeField] private SkinnedMeshRenderer headMesh;
+        [SerializeField] private SkinnedMeshRenderer tailMesh;
+        [SerializeField] private SkinnedMeshRenderer featherMesh;
+        [SerializeField] private Material newMat;
 
         [SerializeField] private float delayFollowSnakeChunks = 0.25f;
         private int indexPath;
@@ -93,6 +96,13 @@ namespace Team17.StreetHunt
         public void StartMovingSnake()
         {
             StartCoroutine(Delay());
+        }
+
+        public void NewMaterialBoss()
+        {
+            headMesh.material = newMat;
+            featherMesh.material = newMat;
+            tailMesh.material = newMat;
         }
 
         #endregion
