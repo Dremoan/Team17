@@ -117,6 +117,7 @@ namespace Team17.StreetHunt
             thirdPhaseBoss.ExitBeginsEvent += endCutScene.Play;
             thirdPhaseBoss.ExitBeginsEvent += GameManager.state.CallOnEndCutScene;
             thirdPhaseBoss.ExitEndsEvent += GameManager.state.CallOnEndCutSceneEnds;
+            thirdPhaseBoss.ExitEndsEvent += GameManager.state.CallOnLevelEnd;
 
             // fight end
 
@@ -149,6 +150,7 @@ namespace Team17.StreetHunt
             thirdPhaseBoss.ExitBeginsEvent -= endCutScene.Play;
             thirdPhaseBoss.ExitBeginsEvent -= GameManager.state.CallOnEndCutScene;
             thirdPhaseBoss.ExitEndsEvent -= GameManager.state.CallOnEndCutSceneEnds;
+            thirdPhaseBoss.ExitEndsEvent -= GameManager.state.CallOnLevelEnd;
 
             // fight end
         }
