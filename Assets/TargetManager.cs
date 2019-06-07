@@ -2,17 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetManager : MonoBehaviour
+namespace Team17.StreetHunt
 {
-    // Start is called before the first frame update
-    void Start()
+    public class TargetManager : Entity
     {
-        
-    }
+        [SerializeField] private TargetTutorial[] targets;
+        private int targetIndex;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void NextTarget()
+        {
+            StartCoroutine(AppearNextTarget());
+        }
+
+        public override void OnTargetTutorialDestroyed()
+        {
+            base.OnTargetTutorialDestroyed();
+            targetIndex++;
+            NextTarget();
+        }
+
+        IEnumerator AppearNextTarget()
+        {
+            if (targetIndex < targets.Length)
+            {
+                yield return new WaitForSeconds(1f);
+                targets[targetIndex].TriggerNextAnim();
+            }
+        }
     }
 }

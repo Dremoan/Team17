@@ -4,23 +4,23 @@ using UnityEngine;
 
 namespace Team17.StreetHunt
 {
-    public class TargetTutorial : MonoBehaviour
+    public class TargetTutorial : Entity
     {
-        [SerializeField] private TutorialManager tutorialManager;
         [SerializeField] private Animator targetAnim;
 
-        private void OnTriggerEnter(Collider other)
+        private void OnCollisionEnter(Collision other)
         {
-            if(other.GetComponent<PlayerProjectile>() != null)
+            if(other.gameObject.GetComponent<PlayerProjectile>() != null)
             {
-                tutorialManager.ValueCount++;
-                targetAnim.Play("TutorialDisappearTarget");
+                this.GetComponent<BoxCollider>().enabled = false;
+                GameManager.state.CallOnTargetTutorialDestroyed();
+                TriggerNextAnim();
             }
         }
 
-        public void TutorialAppearTarget()
+        public void TriggerNextAnim()
         {
-            targetAnim.Play("TutorialAppearTarget");
+            targetAnim.SetTrigger("Next");
         }
     }
 }
