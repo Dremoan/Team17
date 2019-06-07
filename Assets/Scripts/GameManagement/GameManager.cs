@@ -314,7 +314,16 @@ namespace Team17.StreetHunt
             }
         }
 
+        public void CallOnTargetTutorialDestroyed()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnTargetTutorialDestroyed();
+            }
+        }
+
         #endregion
+
         #endregion
 
         /// <summary>

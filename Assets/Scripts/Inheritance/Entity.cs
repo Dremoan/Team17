@@ -153,6 +153,11 @@ namespace Team17.StreetHunt
 
         }
 
+        public virtual void OnTargetTutorialDestroyed()
+        {
+
+        }
+
         public virtual void OnLevelEnd()
         {
 
