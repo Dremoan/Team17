@@ -72,7 +72,7 @@ namespace Team17.StreetHunt
             weaknessFx.SetActive(false);
             canvasAnim.Play("FlashBlanc");
             skinWeakPoint.material = newMaterial;
-            characterController.TeleportAndTaunt(tauntPoint);
+            characterController.TeleportToRoom(tauntPoint);
         }
     }
 
