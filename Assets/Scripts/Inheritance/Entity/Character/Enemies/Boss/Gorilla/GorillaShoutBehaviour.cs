@@ -17,6 +17,7 @@ namespace Team17.StreetHunt
         [SerializeField] private SpriteRenderer currentWaveSprite;
         [SerializeField] private SpriteRenderer goalWaveSprite;
 
+        private Transform followedTransfom;
         private float timeInc = 0f;
 
         protected override void OnEnable()
@@ -35,6 +36,8 @@ namespace Team17.StreetHunt
 
         private void ShoutManagement()
         {
+            transform.position = new Vector3(followedTransfom.position.x, followedTransfom.position.y, 0);
+
             if (timeInc < 1f)
             {
                 float ratio = propagationCurve.Evaluate(timeInc);
@@ -49,5 +52,7 @@ namespace Team17.StreetHunt
                 gameObject.SetActive(false);
             }
         }
+
+        public Transform FollowedTransfom { get => followedTransfom; set => followedTransfom = value; }
     }
 }
