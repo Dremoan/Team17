@@ -377,26 +377,23 @@ namespace Team17.StreetHunt
             portalRight = new Vector3(Mathf.Abs(portalRight.x), Mathf.Abs(portalRight.y), portalRight.z);
             float sqrMag = Vector3.SqrMagnitude(entryVelocity - portalRight);
 
-            if (Mathf.Abs(sqrMag) < speedPortalPrecision)
+            /*if (Mathf.Abs(sqrMag) < speedPortalPrecision)
             {
-                //Speed up
-                if (usedPowergroupIndex < powerGroups.Length - 1)
-                {
-                    power = powerGroups[usedPowergroupIndex + 1].PowerThreshold + 10;
-                    SelectPowerGroup(powerGroups[usedPowergroupIndex + 1].PowerThreshold + 10);
-                }
-                else
-                {
-                    if (power < powerGroups[powerGroups.Length - 1].PowerThreshold)
-                    {
-                        power = powerGroups[powerGroups.Length - 1].PowerThreshold;
-                    }
-                    SelectPowerGroup(power);
-                }
 
-                portal.gameObject.SetActive(false);
+            }*/
+
+            //Speed up
+            if (usedPowergroupIndex < powerGroups.Length - 1)
+            {
+                power = powerGroups[usedPowergroupIndex + 1].PowerThreshold + 10;
             }
+            else
+            {
+                power = powerGroups[powerGroups.Length - 1].PowerThreshold + maxPowerMargin;
+            }
+            portal.gameObject.SetActive(false);
 
+            SelectPowerGroup(power);
             SetMovementDir(body.velocity);
         }
 

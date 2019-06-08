@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1076825329525645874}
   - component: {fileID: 1798772278973419546}
-  - component: {fileID: 4590811103143536238}
+  - component: {fileID: 1146995693849668042}
   m_Layer: 0
   m_Name: SpeedPortal
   m_TagString: Untagged
@@ -46,11 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placementSpeed: 0.25
-  coll: {fileID: 4590811103143536238}
+  coll: {fileID: 1146995693849668042}
   deactivatedVisual: {fileID: 7132208052017371433}
   activatedVisual: {fileID: 8079204514709902888}
---- !u!65 &4590811103143536238
-BoxCollider:
+--- !u!135 &1146995693849668042
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -60,7 +60,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.1631633, y: 1.8348657, z: 0.5080888}
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6201241742113920654
 GameObject:
@@ -121,7 +121,7 @@ Transform:
   m_GameObject: {fileID: 7132208052017371433}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 2, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2852683617094790430}
   m_RootOrder: 1
@@ -133,7 +133,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7132208052017371433}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &7786849542365077451
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -198,7 +198,7 @@ Transform:
   m_GameObject: {fileID: 8079204514709902888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 2, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2852683617094790430}
   m_RootOrder: 0
@@ -210,7 +210,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8079204514709902888}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &6369231533472186947
 MeshRenderer:
   m_ObjectHideFlags: 0
