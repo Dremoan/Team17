@@ -176,6 +176,14 @@ namespace Team17.StreetHunt
             }
         }
 
+        public void CallOnSpeedPortalCrossed()
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnSpeedPortalCrossed();
+            }
+        }
+
         public void CallOnBallIncreasePowerGroup()
         {
             for (int i = 0; i < entities.Count; i++)
