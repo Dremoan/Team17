@@ -112,11 +112,11 @@ namespace Team17.StreetHunt
 
         public void LaunchJump(GorillaJumpTarget target)
         {
-            if(currentJumpTarget == target)
+            /*if(currentJumpTarget == target)
             {
                 assignedBossScript.SkipCurrentAttack();
                 return;
-            }
+            }*/
             currentJumpTarget = target;
             jumpTarget.position = target.transform.position;
 
