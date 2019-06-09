@@ -11,6 +11,8 @@ namespace Team17.StreetHunt
         [SerializeField] private TimersCalculator timer;
 
         [Header("Feedbacks")]
+        [SerializeField] private FeedBack accuracyFeedback;
+        [SerializeField] private FeedBack powergroupIncreasedFeedback;
         [SerializeField] private Transform timerFeedback;
         [SerializeField] private Transform trajectory;
         [SerializeField] private PlayerCharacter character;
@@ -143,6 +145,7 @@ namespace Team17.StreetHunt
                 isStriking = true;
                 SetMovementDir(movementDirection);
                 reHitTimer = timer.LaunchNewTimer(timeToHit.Evaluate(power), StunCharacter);
+                accuracyFeedback.Play();
                 timerFeedback.gameObject.SetActive(true);
                 trajectory.gameObject.SetActive(true);
                 character.Physicate(false);
@@ -224,6 +227,7 @@ namespace Team17.StreetHunt
             usedPowerGroup.Launch.RotateFeedback(GetRotationFromDirection(movementDirection));
             usedPowerGroup.Launch.Play();
             usedPowerGroup.Trail.Play();
+            accuracyFeedback.Stop();
 
             isStriking = false;
             SetMovementDir(movementDirection);
@@ -231,8 +235,6 @@ namespace Team17.StreetHunt
             GameManager.state.CallOnBallShot();
 
         }
-
-
 
         /// <summary>
         /// Change the usedPowerGroup and the usedPowerGroupIndex depending on actualPower.
@@ -256,6 +258,8 @@ namespace Team17.StreetHunt
             {
                 if (lastIndex < usedPowergroupIndex) //increase
                 {
+                    powergroupIncreasedFeedback.RotateFeedback(GetRotationFromDirection(movementDirection));
+                    powergroupIncreasedFeedback.Play();
                     GameManager.state.CallOnBallIncreasePowerGroup();
                 }
                 else // decrease
@@ -321,6 +325,7 @@ namespace Team17.StreetHunt
 
         private void StunCharacter()
         {
+            accuracyFeedback.Stop();
             isStriking = false;
             SetMovementDir(movementDirection);
             timerFeedback.gameObject.SetActive(false);
