@@ -11,6 +11,7 @@ namespace Team17.StreetHunt
         [SerializeField] private Animator anim;
         [SerializeField] private float distFromBall = 1.2f;
         [SerializeField] private FeedBack tpFeedback;
+        [SerializeField] private Transform teleportPoint;
         [Header("Ground check parameters")]
         [SerializeField] private Vector3 feetPosition;
         [SerializeField] private float feetlength = 0.25f;
@@ -79,11 +80,24 @@ namespace Team17.StreetHunt
 
         #region TeleportFunctions
 
+        public void ModifyTeleportPoint(Transform newTeleportPoint)
+        {
+            teleportPoint = newTeleportPoint;
+        }
+
         public void TeleportToRoom(Transform spawnPoint)
         {
             anim.Play("PJ_R_IdlePose");
             transform.position = spawnPoint.position;
             if (currentBall != null) currentBall.PauseBehavior();
+            tpFeedback.Play();
+        }
+
+        public void Exhausted()
+        {
+            anim.SetBool("CriticalShoot", false);
+            anim.Play("PJ_R_FatigueLoop");
+            transform.position = teleportPoint.position;
             tpFeedback.Play();
         }
 

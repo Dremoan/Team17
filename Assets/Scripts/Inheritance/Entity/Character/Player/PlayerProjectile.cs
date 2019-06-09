@@ -116,6 +116,7 @@ namespace Team17.StreetHunt
 
             if (coll.gameObject.GetComponent<SpeedPortal>() != null)
             {
+                GameManager.state.CallOnSpeedPortalCrossed();
                 PassThroughSpeedPortal(coll.gameObject.GetComponent<SpeedPortal>(), body.velocity.normalized, coll.gameObject.transform.right);
             }
 
@@ -325,6 +326,8 @@ namespace Team17.StreetHunt
 
         private void StunCharacter()
         {
+            character.AimingParameterSetup(true);
+            character.Exhausted();
             accuracyFeedback.Stop();
             isStriking = false;
             SetMovementDir(movementDirection);
@@ -378,7 +381,6 @@ namespace Team17.StreetHunt
 
         private void PassThroughSpeedPortal(SpeedPortal portal, Vector3 entryVelocity, Vector3 portalRight)
         {
-            GameManager.state.CallOnSpeedPortalCrossed();
             entryVelocity = new Vector3(Mathf.Abs(entryVelocity.x), Mathf.Abs(entryVelocity.y), entryVelocity.z);
             portalRight = new Vector3(Mathf.Abs(portalRight.x), Mathf.Abs(portalRight.y), portalRight.z);
             float sqrMag = Vector3.SqrMagnitude(entryVelocity - portalRight);
