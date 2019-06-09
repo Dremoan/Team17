@@ -25,6 +25,8 @@ namespace Team17.StreetHunt
         [Header("Shout parameters")]
         [SerializeField] private Transform headTransform;
         [SerializeField] private GorillaShoutBehaviour shoutGO;
+        [SerializeField] private int shoutingLoops = 5;
+        [SerializeField] private int shoutingRecoverLoops = 5;
         [Header("Rocks parameters")]
         [SerializeField] private Transform rightHand;
         [SerializeField] private Transform leftHand;
@@ -46,6 +48,7 @@ namespace Team17.StreetHunt
         private bool isJumping = false;
         private bool jumpingRight = false;
         private int pathStepTarget = 0;
+        private int shoutLoopsTodo = 5;
         private float jumpInc = 0f;
         private float jumpParcouredDist = 0f;
         private float jumpCalculatedDist = 0f;
@@ -256,8 +259,10 @@ namespace Team17.StreetHunt
                 }
                 if(currentIdleType == 0.25f) // is right
                 {
-
+                    anim.SetBool("shoutingLeft", true);
                 }
+                anim.SetBool("shoutingLoop", true);
+                shoutLoopsTodo = shoutingLoops;
                 shoutGO.gameObject.SetActive(true);
                 //shoutGO.transform.position = new Vector3(headTransform.position.x, headTransform.position.y, 0);
                 shoutGO.FollowedTransfom = headTransform;
@@ -297,6 +302,21 @@ namespace Team17.StreetHunt
             }
         }
 
+        #region Rock launch
+
+        private void GetNewRock()
+        {
+            for (int i = 0; i < rocksPool.Length; i++)
+            {
+                if (rocksPool[i].Available)
+                {
+                    launchedRock = rocksPool[i];
+                    launchedRock.gameObject.SetActive(true);
+                    return;
+                }
+            }
+        }
+
         public void LaunchCurrentRock()
         {
             launchedRock.transform.position = new Vector3(launchedRock.transform.position.x, launchedRock.transform.position.y, 0);
@@ -311,23 +331,38 @@ namespace Team17.StreetHunt
             anim.SetBool("leftArmRockLaunch", false);
         }
 
-        public void EndShout()
-        {
-            anim.SetBool("shoutingRight", false);
-        }
+        #endregion
 
-        private void GetNewRock()
+        #region Shout
+
+        public void EndOneShoutLoop()
         {
-            for (int i = 0; i < rocksPool.Length; i++)
+            shoutLoopsTodo--;
+            if(shoutLoopsTodo == 0)
             {
-                if(rocksPool[i].Available)
-                {
-                    launchedRock = rocksPool[i];
-                    launchedRock.gameObject.SetActive(true);
-                    return;
-                }
+                shoutLoopsTodo = shoutingRecoverLoops;
+                anim.SetBool("shoutingLoop", false);
+                anim.SetBool("shoutingRecoverLoop", true);
             }
         }
+
+        public void EndOneShoutRecoverLoop()
+        {
+            shoutLoopsTodo--;
+            if(shoutLoopsTodo == 0)
+            {
+                anim.SetBool("shoutingRecoverLoop", false);
+            }
+        }
+
+        public void EndShoutAttack()
+        {
+            anim.SetBool("shoutingRight", false);
+            anim.SetBool("shoutingLeft", false);
+        }
+
+
+        #endregion
 
         #endregion
 
