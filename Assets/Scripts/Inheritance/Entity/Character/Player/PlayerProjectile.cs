@@ -117,7 +117,7 @@ namespace Team17.StreetHunt
             if (coll.gameObject.GetComponent<SpeedPortal>() != null)
             {
                 GameManager.state.CallOnSpeedPortalCrossed();
-                PassThroughSpeedPortal(coll.gameObject.GetComponent<SpeedPortal>(), body.velocity.normalized, coll.gameObject.transform.right);
+                //PassThroughSpeedPortal(coll.gameObject.GetComponent<SpeedPortal>(), body.velocity.normalized, coll.gameObject.transform.right);
             }
 
             if (coll.gameObject.GetComponent<IBallHitable>() != null)
@@ -450,6 +450,26 @@ namespace Team17.StreetHunt
         #endregion
 
         #region Tutorial Functions
+
+        public override void OnSpeedPortalCrossed()
+        {
+            base.OnSpeedPortalCrossed();
+            PassThroughSpeedBallTutorial();
+        }
+        public void PassThroughSpeedBallTutorial()
+        {
+            if (usedPowergroupIndex < powerGroups.Length - 1)
+            {
+                power = powerGroups[usedPowergroupIndex + 1].PowerThreshold + 10;
+            }
+            else
+            {
+                power = powerGroups[powerGroups.Length - 1].PowerThreshold + maxPowerMargin;
+            }
+            SelectPowerGroup(power);
+            SetMovementDir(body.velocity);
+            usedPowerGroup.Trail.RotateFeedback(GetRotationFromDirection(movementDirection));
+        }
 
         public void AddPower(float powerToAdd)
         {
