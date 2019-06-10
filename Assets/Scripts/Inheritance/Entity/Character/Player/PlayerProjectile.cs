@@ -207,15 +207,10 @@ namespace Team17.StreetHunt
 
                 usedPowerGroup.Trail.RotateFeedback(GetRotationFromDirection(movementDirection));
 
-                /*usedPowerGroup.Hit.Rotate3DStartRotationX(- GetRotationFromDirection(newDirection));
-                usedPowerGroup.Launch.Rotate3DStartRotationZ(GetRotationFromDirection(newDirection));
-                usedPowerGroup.Trail.RotateShapeEmitter(GetRotationFromDirection(newDirection));*/
-
                 timer.DeleteTimer(reHitTimer);
                 timerFeedback.gameObject.SetActive(false);
                 trajectory.gameObject.SetActive(false);
 
-                //character.Physicate(true);
                 character.AimingParameterSetup(true);
                 character.Strike();
 
