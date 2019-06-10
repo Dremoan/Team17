@@ -112,11 +112,11 @@ namespace Team17.StreetHunt
 
         public void LaunchJump(GorillaJumpTarget target)
         {
-            if(currentJumpTarget == target)
+            /*if(currentJumpTarget == target)
             {
                 assignedBossScript.SkipCurrentAttack();
                 return;
-            }
+            }*/
             currentJumpTarget = target;
             jumpTarget.position = target.transform.position;
 
@@ -239,17 +239,7 @@ namespace Team17.StreetHunt
         {
             if(currentIdleType == 0.5f || currentIdleType == 0.75f) // rock launch (walled)
             {
-                GetNewRock();
-                if(currentIdleType == 0.5f)
-                {
-                    launchedRock.HeldBy(rightHand);
-                    anim.SetBool("rightArmRockLaunch", true);
-                }
-                if(currentIdleType == 0.75f)
-                {
-                    launchedRock.HeldBy(leftHand);
-                    anim.SetBool("leftArmRockLaunch", true);
-                }
+                //GetNewRock();
             }
             else
             {
@@ -273,27 +263,13 @@ namespace Team17.StreetHunt
         {
             if (currentIdleType == 0.5f || currentIdleType == 0.75f) // Spikes (walled)
             {
-                if (currentIdleType == 0.5f)
-                {
-                    rightSpikes.SetTrigger("spikes");
-                }
-                if (currentIdleType == 0.75f)
-                {
-                    leftSpikes.SetTrigger("spikes");
-                }
+                anim.SetTrigger("spikes");
             }
             else
             {
-                if(canSpikesOnGround)
+                if (canSpikesOnGround)
                 {
-                    if (currentIdleType == 0f)
-                    {
-                        rightSpikes.SetTrigger("spikes");
-                    }
-                    if (currentIdleType == 0.25f)
-                    {
-                        leftSpikes.SetTrigger("spikes");
-                    }
+                    anim.SetTrigger("spikes");
                 }
                 else
                 {
@@ -314,6 +290,17 @@ namespace Team17.StreetHunt
                     launchedRock.gameObject.SetActive(true);
                     return;
                 }
+            }
+
+            if (currentIdleType == 0.5f)
+            {
+                launchedRock.HeldBy(rightHand);
+                anim.SetBool("rightArmRockLaunch", true);
+            }
+            if (currentIdleType == 0.75f)
+            {
+                launchedRock.HeldBy(leftHand);
+                anim.SetBool("leftArmRockLaunch", true);
             }
         }
 
@@ -361,6 +348,30 @@ namespace Team17.StreetHunt
             anim.SetBool("shoutingLeft", false);
         }
 
+
+        #endregion
+
+        #region Spikes
+
+        public void ActivateSpikes()
+        {
+            if (currentIdleType == 0.5f)
+            {
+                rightSpikes.SetTrigger("spikes");
+            }
+            if (currentIdleType == 0.75f)
+            {
+                leftSpikes.SetTrigger("spikes");
+            }
+            if (currentIdleType == 0f)
+            {
+                rightSpikes.SetTrigger("spikes");
+            }
+            if (currentIdleType == 0.25f)
+            {
+                leftSpikes.SetTrigger("spikes");
+            }
+        }
 
         #endregion
 

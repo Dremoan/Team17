@@ -9,6 +9,15 @@ namespace Team17.StreetHunt
         [SerializeField] private GameObject[] warps;
         [SerializeField] private SnakeBoss snakeBossScript;
 
+        public void ResetAllWarps()
+        {
+            for (int i = 0; i < warps.Length; i++)
+            {
+                //warps[i].SetActive(false);
+                warps[i].GetComponentInChildren<Animator>().SetTrigger("AnimWarpDisappear");
+            }
+        }
+
         public void SpawnWarps()
         {
             StartCoroutine(WarpsAppear());
@@ -23,14 +32,6 @@ namespace Team17.StreetHunt
                 yield return new WaitForSeconds(.5f);
             }
             snakeBossScript.PickMove();
-        }
-
-        public void ResetAllWarps()
-        {
-            for (int i = 0; i < warps.Length; i++)
-            {
-                warps[i].SetActive(false);
-            }
         }
     }
 }

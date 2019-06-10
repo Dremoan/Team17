@@ -81,5 +81,13 @@ namespace Team17.StreetHunt
         }
 
         public bool Available { get => available; set => available = value; }
+
+        void OnTriggerEnter(Collider coll)
+        {
+            if(coll.gameObject.GetComponent<BallCanceler>() != null)
+            {
+                transform.gameObject.SetActive(false);
+            }
+        }
     }
 }

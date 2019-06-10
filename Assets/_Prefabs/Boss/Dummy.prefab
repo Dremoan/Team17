@@ -51,6 +51,7 @@ MonoBehaviour:
   tpOnTransformOnPlay: 0
   transformToTPToOnPlay: {fileID: 0}
   particles: 1
+  useRotation: 1
   particlesSystems:
   - {fileID: 6307433513733972627}
   - {fileID: 7307184410155468623}
@@ -9697,7 +9698,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2004968809440368538}
   - component: {fileID: 2402408235251224760}
-  - component: {fileID: 1479921993077024876}
+  - component: {fileID: 1923492302}
   m_Layer: 0
   m_Name: Dummy
   m_TagString: Untagged
@@ -9714,7 +9715,7 @@ Transform:
   m_GameObject: {fileID: 1479921993077024875}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children:
   - {fileID: 4557519969525439232}
   - {fileID: 8052278089398898297}
@@ -9734,9 +9735,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.82647705, y: 0.6207392, z: 1.1876225}
-  m_Center: {x: -0.20674133, y: 1.5744978, z: 0}
---- !u!114 &1479921993077024876
+  m_Size: {x: 0.8502312, y: 2.1481802, z: 1.1876225}
+  m_Center: {x: -0.11449242, y: 0.8107773, z: 0}
+--- !u!114 &1923492302
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9750,13 +9751,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterController: {fileID: 0}
   tauntPoint: {fileID: 0}
-  dummyHp: 50
+  dummyHp: 100
   touchPlane: {fileID: 0}
-  eventDummyDeath:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   sceneManager: {fileID: 0}
   deathFeedback: {fileID: 2597102343132744662}
   hitFeedback: {fileID: 3319969703314093108}
@@ -9764,7 +9760,7 @@ MonoBehaviour:
   canvasAnim: {fileID: 0}
   blinkTime: 0.1
   actualBossMat: {fileID: 2100000, guid: f17e1e32735d5394b8cac4ef2aee040e, type: 2}
-  newMaterial: {fileID: 2100000, guid: 9a96f168a2c52cd4fa108ed475c0c620, type: 2}
+  newMaterial: {fileID: 2100000, guid: ddb63b76269768f46881c18c0b9ae96b, type: 2}
   skinWeakPoint: {fileID: 4557519969527863776}
   changeMaterialDelay: 0.055
 --- !u!1 &1730365513128373940
@@ -9815,7 +9811,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -23969,7 +23965,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -33492,6 +33488,7 @@ MonoBehaviour:
   tpOnTransformOnPlay: 0
   transformToTPToOnPlay: {fileID: 0}
   particles: 0
+  useRotation: 1
   particlesSystems:
   - {fileID: 6307433513733972627}
   - {fileID: 7307184410155468623}
@@ -33713,7 +33710,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -38438,7 +38435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8052278089398898297
 Transform:
   m_ObjectHideFlags: 0
@@ -38446,9 +38443,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8116800900896483709}
-  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: -0.2, y: 1.74, z: 0.033}
-  m_LocalScale: {x: 1.01181, y: 1.01181, z: 1.01181}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6071255836736204244}
   - {fileID: 4985333200783900102}
@@ -38457,7 +38454,7 @@ Transform:
   - {fileID: 8269037536911303028}
   m_Father: {fileID: 2004968809440368538}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &4207003074147457969
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -43195,7 +43192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 92913625c8aab2347b3767e50c3ea942, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 92913625c8aab2347b3767e50c3ea942, type: 3}
       propertyPath: m_LocalPosition.y
@@ -43238,9 +43235,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 92913625c8aab2347b3767e50c3ea942, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 92913625c8aab2347b3767e50c3ea942, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f17e1e32735d5394b8cac4ef2aee040e, type: 2}
+    - target: {fileID: 2300000, guid: 92913625c8aab2347b3767e50c3ea942, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: f508547ec188a694fbc4caf52808997c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92913625c8aab2347b3767e50c3ea942, type: 3}
 --- !u!4 &4557519969525439232 stripped
