@@ -165,6 +165,7 @@ namespace Team17.StreetHunt
             {
                 if (particles)
                 {
+                    Debug.Log("stopped " + name);
                     for (int i = 0; i < particlesSystems.Length; i++)
                     {
                         particlesSystems[i].Stop();
