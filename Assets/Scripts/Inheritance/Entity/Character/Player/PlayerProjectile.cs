@@ -117,7 +117,7 @@ namespace Team17.StreetHunt
             if (coll.gameObject.GetComponent<SpeedPortal>() != null)
             {
                 GameManager.state.CallOnSpeedPortalCrossed();
-                //PassThroughSpeedPortal(coll.gameObject.GetComponent<SpeedPortal>(), body.velocity.normalized, coll.gameObject.transform.right);
+                PassThroughSpeedPortal(coll.gameObject.GetComponent<SpeedPortal>(), body.velocity.normalized, coll.gameObject.transform.right);
             }
 
             if (coll.gameObject.GetComponent<IBallHitable>() != null)
