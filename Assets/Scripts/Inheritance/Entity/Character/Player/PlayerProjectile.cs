@@ -54,6 +54,7 @@ namespace Team17.StreetHunt
         protected override void Start()
         {
             base.Start();
+            SelectPowerGroup(power);
             character.CurrentBall = this.GetComponent<PlayerProjectile>();
             initialFeedbackScale = timerFeedback.localScale;
             usedPowerGroup = powerGroups[0];
