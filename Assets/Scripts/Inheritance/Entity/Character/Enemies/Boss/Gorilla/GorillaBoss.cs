@@ -251,6 +251,8 @@ namespace Team17.StreetHunt
                 {
                     anim.SetBool("leftArmRockLaunch", true);
                 }
+                rockLoopsToDo = rockAimingLoops;
+                isRockAiming = true;
             }
             else
             {
@@ -303,16 +305,14 @@ namespace Team17.StreetHunt
                 }
             }
 
-            if (currentIdleType == 0.5f)
+            if (currentIdleType == 0.75f)
             {
                 launchedRock.HeldBy(rightHand);
             }
-            if (currentIdleType == 0.75f)
+            if (currentIdleType == 0.5f)
             {
                 launchedRock.HeldBy(leftHand);
             }
-            rockLoopsToDo = rockAimingLoops;
-            isRockAiming = true;
         }
 
         private void CalculateRockYAiming()
@@ -331,7 +331,7 @@ namespace Team17.StreetHunt
             rockLoopsToDo--;
             if(rockLoopsToDo == 0)
             {
-                // throw anim
+                anim.SetTrigger("throwRock");
             }
         }
 

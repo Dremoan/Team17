@@ -205,6 +205,7 @@ namespace Team17.StreetHunt
                 movementDirection = newDirection.normalized * (usedPowerGroup.Speed);
 
                 usedPowerGroup.Trail.RotateFeedback(GetRotationFromDirection(movementDirection));
+                accuracyFeedback.Stop(ParticleSystemStopBehavior.StopEmittingAndClear);
 
                 timer.DeleteTimer(reHitTimer);
                 timerFeedback.gameObject.SetActive(false);
@@ -222,7 +223,6 @@ namespace Team17.StreetHunt
             usedPowerGroup.Launch.RotateFeedback(GetRotationFromDirection(movementDirection));
             usedPowerGroup.Launch.Play();
             usedPowerGroup.Trail.Play();
-            accuracyFeedback.Stop();
 
             isStriking = false;
             SetMovementDir(movementDirection);
