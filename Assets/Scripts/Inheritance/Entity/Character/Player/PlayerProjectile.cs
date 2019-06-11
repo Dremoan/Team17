@@ -54,6 +54,7 @@ namespace Team17.StreetHunt
         protected override void Start()
         {
             base.Start();
+            SelectPowerGroup(power);
             character.CurrentBall = this.GetComponent<PlayerProjectile>();
             initialFeedbackScale = timerFeedback.localScale;
             usedPowerGroup = powerGroups[0];
@@ -394,7 +395,7 @@ namespace Team17.StreetHunt
             {
                 power = powerGroups[powerGroups.Length - 1].PowerThreshold + maxPowerMargin;
             }
-            portal.gameObject.SetActive(false);
+            portal.SpeedBallDesactivation();
             SelectPowerGroup(power);
             SetMovementDir(body.velocity);
             usedPowerGroup.Trail.RotateFeedback(GetRotationFromDirection(movementDirection));
