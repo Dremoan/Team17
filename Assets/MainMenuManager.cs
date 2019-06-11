@@ -7,7 +7,7 @@ namespace Team17.StreetHunt
     public class MainMenuManager : Entity
     {
         [SerializeField] private Animator compositionAnimator;
-
+        [SerializeField] private Animator canvasUiAnim;
 
         public void PickRandomCompositionAnim(int MaxRange)
         {
@@ -16,7 +16,17 @@ namespace Team17.StreetHunt
 
         public void OpenLevelMenu(float timeToOpen)
         {
+            
+        }
+
+        IEnumerator OpenPlayMenu(float openingDelay)
+        {
+            yield return new WaitForSeconds(openingDelay);
+            canvasUiAnim.Play("FadeOut");
 
         }
+
+
+
     }
 }
