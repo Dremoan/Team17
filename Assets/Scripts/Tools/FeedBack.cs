@@ -165,7 +165,6 @@ namespace Team17.StreetHunt
             {
                 if (particles)
                 {
-                    Debug.Log("stopped " + name);
                     for (int i = 0; i < particlesSystems.Length; i++)
                     {
                         particlesSystems[i].Stop();
@@ -194,6 +193,46 @@ namespace Team17.StreetHunt
                     isZoomingIn = false;
                 }
                 if(rumble)
+                {
+                    isRumbling = false;
+                }
+            }
+        }
+
+        public void Stop(ParticleSystemStopBehavior stop)
+        {
+            if (looping)
+            {
+                if (particles)
+                {
+                    for (int i = 0; i < particlesSystems.Length; i++)
+                    {
+                        particlesSystems[i].Stop(true, stop);
+                    }
+                }
+                if (trails)
+                {
+                    for (int i = 0; i < trailRenderers.Length; i++)
+                    {
+                        trailRenderers[i].enabled = false;
+                    }
+                }
+                if (shake)
+                {
+                    shakeTimerDecrementer = shakeTime;
+                    isShaking = false;
+                }
+                if (slowMo)
+                {
+                    isSlowMoIn = false;
+                    isSlowMoOut = true;
+                }
+                if (zoom)
+                {
+                    isZoomingOut = true;
+                    isZoomingIn = false;
+                }
+                if (rumble)
                 {
                     isRumbling = false;
                 }
