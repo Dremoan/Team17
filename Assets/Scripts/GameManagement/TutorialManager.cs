@@ -31,7 +31,7 @@ namespace Team17.StreetHunt
             if (!case1Valid && valueCount == valueRequired && caseIndex == 0)
             {
                 case1Valid = true;
-                StartCoroutine(DelayEndCase());
+                StartCoroutine(DelayEndCase(endCaseEvents[caseIndex].endingCount));
             }
 
         }
@@ -47,7 +47,7 @@ namespace Team17.StreetHunt
             if (!case2Valid && valueCount == valueRequired && caseIndex == 1)
             {
                 case2Valid = true;
-                StartCoroutine(DelayEndCase());
+                StartCoroutine(DelayEndCase(endCaseEvents[caseIndex].endingCount));
             }
 
         }
@@ -66,7 +66,7 @@ namespace Team17.StreetHunt
             if (valueCount == valueRequired && !case3Valid && caseIndex == 2)
             {
                 case3Valid = true;
-                StartCoroutine(DelayEndCase());
+                StartCoroutine(DelayEndCase(endCaseEvents[caseIndex].endingCount));
             }
 
             #endregion
@@ -82,7 +82,7 @@ namespace Team17.StreetHunt
             if (valueCount == valueRequired && !case4Valid && caseIndex == 3)
             {
                 case4Valid = true;
-                StartCoroutine(DelayEndCase());
+                StartCoroutine(DelayEndCase(endCaseEvents[caseIndex].endingCount));
             }
 
             #endregion
@@ -97,7 +97,7 @@ namespace Team17.StreetHunt
             if (valueCount == valueRequired && !case5Valid && caseIndex == 4)
             {
                 case5Valid = true;
-                StartCoroutine(DelayEndCase());
+                StartCoroutine(DelayEndCase(endCaseEvents[caseIndex].endingCount));
             }
 
             #endregion
@@ -111,10 +111,10 @@ namespace Team17.StreetHunt
         }
 
 
-        IEnumerator DelayEndCase()
+        IEnumerator DelayEndCase(float delayEndCase)
         {
             touchPlanes[caseIndex].SetActive(false);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(delayEndCase);
             endCaseEvents[caseIndex].eventEndCase.Invoke();
             caseIndex++;
             valueCount = 0;
@@ -125,6 +125,7 @@ namespace Team17.StreetHunt
     public class TutorialCasesEvents
     {
         [SerializeField] private string nameCases;
+        public float endingCount;
         public UnityEvent eventEndCase;
     }
 
