@@ -54,6 +54,7 @@ namespace Team17.StreetHunt
         protected override void Start()
         {
             base.Start();
+            SelectPowerGroup(power);
             character.CurrentBall = this.GetComponent<PlayerProjectile>();
             initialFeedbackScale = timerFeedback.localScale;
             usedPowerGroup = powerGroups[0];
@@ -116,7 +117,6 @@ namespace Team17.StreetHunt
 
             if (coll.gameObject.GetComponent<SpeedPortal>() != null)
             {
-                GameManager.state.CallOnSpeedPortalCrossed();
                 PassThroughSpeedPortal(coll.gameObject.GetComponent<SpeedPortal>(), body.velocity.normalized, coll.gameObject.transform.right);
             }
 
@@ -376,6 +376,7 @@ namespace Team17.StreetHunt
 
         private void PassThroughSpeedPortal(SpeedPortal portal, Vector3 entryVelocity, Vector3 portalRight)
         {
+            GameManager.state.CallOnSpeedPortalCrossed();
             entryVelocity = new Vector3(Mathf.Abs(entryVelocity.x), Mathf.Abs(entryVelocity.y), entryVelocity.z);
             portalRight = new Vector3(Mathf.Abs(portalRight.x), Mathf.Abs(portalRight.y), portalRight.z);
             float sqrMag = Vector3.SqrMagnitude(entryVelocity - portalRight);
@@ -451,25 +452,6 @@ namespace Team17.StreetHunt
 
         #region Tutorial Functions
 
-        public override void OnSpeedPortalCrossed()
-        {
-            base.OnSpeedPortalCrossed();
-            PassThroughSpeedBallTutorial();
-        }
-        public void PassThroughSpeedBallTutorial()
-        {
-            if (usedPowergroupIndex < powerGroups.Length - 1)
-            {
-                power = powerGroups[usedPowergroupIndex + 1].PowerThreshold + 10;
-            }
-            else
-            {
-                power = powerGroups[powerGroups.Length - 1].PowerThreshold + maxPowerMargin;
-            }
-            SelectPowerGroup(power);
-            SetMovementDir(body.velocity);
-            usedPowerGroup.Trail.RotateFeedback(GetRotationFromDirection(movementDirection));
-        }
 
         public void AddPower(float powerToAdd)
         {
