@@ -301,7 +301,7 @@ namespace Team17.StreetHunt
                 {
                     launchedRock = rocksPool[i];
                     launchedRock.gameObject.SetActive(true);
-                    return;
+                    break;
                 }
             }
 
