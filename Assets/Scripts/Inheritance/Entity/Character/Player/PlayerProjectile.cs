@@ -395,7 +395,7 @@ namespace Team17.StreetHunt
             {
                 power = powerGroups[powerGroups.Length - 1].PowerThreshold + maxPowerMargin;
             }
-            portal.gameObject.SetActive(false);
+            portal.SpeedBallDesactivation();
             SelectPowerGroup(power);
             SetMovementDir(body.velocity);
             usedPowerGroup.Trail.RotateFeedback(GetRotationFromDirection(movementDirection));

@@ -11,6 +11,7 @@ namespace Team17.StreetHunt
         [SerializeField] private Collider coll;
         [SerializeField] private GameObject deactivatedVisual;
         [SerializeField] private GameObject activatedVisual;
+        [SerializeField] private Animator speedPortalAnimator;
 
         private Vector3 targetPos;
         private Vector3 refTargetPos;
@@ -60,9 +61,10 @@ namespace Team17.StreetHunt
             targetPos = pos;
             targetZRot = rot;
             timeToActivate = time;
+            deactivatedVisual.SetActive(true);
+            speedPortalAnimator.SetTrigger("AnimSpeedPortalDisplay");
             available = false;
             activated = true;
-            deactivatedVisual.SetActive(true);
         }
 
         public void TutorialActivation()
@@ -80,13 +82,20 @@ namespace Team17.StreetHunt
             available = true;
         }
 
+        public void SpeedBallDesactivation()
+        {
+            coll.enabled = false;
+            speedPortalAnimator.SetTrigger("AnimSpeedPortalDisable");
+            available = true;
+        }
+
         public bool Available { get => available; set => available = value; }
 
-        void OnTriggerEnter(Collider coll)
+        void OnTriggerEnter(Collider other)
         {
-            if(coll.gameObject.GetComponent<BallCanceler>() != null)
+            if(other.gameObject.GetComponent<BallCanceler>() != null)
             {
-                transform.gameObject.SetActive(false);
+                SpeedBallDesactivation();
             }
         }
     }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1798772278973419546}
   - component: {fileID: 1146995693849668042}
   - component: {fileID: 5893417008509549544}
+  - component: {fileID: 4339033932913031767}
   m_Layer: 0
   m_Name: SpeedPortal
   m_TagString: Untagged
@@ -50,6 +51,7 @@ MonoBehaviour:
   coll: {fileID: 1146995693849668042}
   deactivatedVisual: {fileID: 7132208052017371433}
   activatedVisual: {fileID: 8079204514709902888}
+  speedPortalAnimator: {fileID: 5893417008509549544}
 --- !u!135 &1146995693849668042
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -82,6 +84,47 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4339033932913031767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076825329525645875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d5713fc24138541a17ccb2b84da605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animEventsArray:
+  - EventName: DisableSpeedBalls 0
+    eventTrigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8079204514709902888}
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 7132208052017371433}
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
 --- !u!1 &6201241742113920654
 GameObject:
   m_ObjectHideFlags: 0
