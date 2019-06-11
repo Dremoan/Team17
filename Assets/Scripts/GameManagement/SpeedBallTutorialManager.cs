@@ -18,7 +18,6 @@ namespace Team17.StreetHunt
         public override void OnSpeedPortalCrossed()
         {
             base.OnSpeedPortalCrossed();
-            speedPortals[actualIndex].gameObject.SetActive(false);
             actualIndex++;
             ActivePortal(1.5f);
         }
