@@ -7,15 +7,22 @@ namespace Team17.StreetHunt
     public class WarpManager : Entity
     {
         [SerializeField] private GameObject[] warps;
+        [SerializeField] private Animator[] warpsAnims;
         [SerializeField] private SnakeBoss snakeBossScript;
-        public Animator[] animatorWarp;
 
         public void ResetAllWarps()
         {
             for (int i = 0; i < warps.Length; i++)
             {
+                if(warps[i].active)
+                {
+                    warpsAnims[i].SetTrigger("AnimWarpDisappear");
+                }
+                else
+                {
+                    return;
+                }
                 //warps[i].SetActive(false);
-                warps[i].GetComponentInChildren<Animator>().SetTrigger("AnimWarpDisappear");
             }
         }
 
@@ -30,7 +37,7 @@ namespace Team17.StreetHunt
             for (int i = 0; i < warps.Length; i++)
             {
                 warps[i].SetActive(true);
-                yield return new WaitForSeconds(.5f);
+                yield return new WaitForSecondsRealtime(.5f);
             }
             snakeBossScript.PickMove();
         }
