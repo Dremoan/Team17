@@ -6,26 +6,26 @@ namespace Team17.StreetHunt
 {
     public class SpeedBallTutorialManager : Entity
     {
-        [SerializeField] private SpeedPortal[] speedPortals;
+        [SerializeField] private SpeedPortal speedPortal;
+        [SerializeField] private float maxX = 5f;
+        [SerializeField] private float maxY = 5f;
+        [SerializeField] private float timeBeforeActivation = 1.5f;
         public int actualIndex;
 
-        public void ActivePortal(float timerActivation)
+        protected override void Start()
         {
-            speedPortals[actualIndex].gameObject.SetActive(true);
-            StartCoroutine(PortalActivation(timerActivation));
+            base.Start();
+            speedPortal.GetReadyForReactivation();
+            speedPortal.Activate(transform.position + new Vector3(Random.Range(-maxX, maxX), Random.Range(-maxY, maxY), 0), 0f, timeBeforeActivation);
         }
 
         public override void OnSpeedPortalCrossed()
         {
             base.OnSpeedPortalCrossed();
             actualIndex++;
-            ActivePortal(1.5f);
+            speedPortal.GetReadyForReactivation();
+            speedPortal.Activate(transform.position + new Vector3(Random.Range(-maxX, maxX), Random.Range(-maxY, maxY), 0), 0f, timeBeforeActivation);
         }
 
-        IEnumerator PortalActivation(float timerActivation)
-        {
-            yield return new WaitForSeconds(timerActivation);
-            speedPortals[actualIndex].TutorialActivation();
-        }
     }
 }
