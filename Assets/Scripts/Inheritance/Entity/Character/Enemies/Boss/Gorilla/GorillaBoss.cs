@@ -36,7 +36,7 @@ namespace Team17.StreetHunt
         [SerializeField] private bool canSpikesOnGround = true;
         [SerializeField] private Animator leftSpikes;
         [SerializeField] private Animator rightSpikes;
-        [Header("FXs")]
+        [Header("FeedBacks")]
         [SerializeField] private FeedBack landingFB;
 
         private AnimationCurve usedSpeedCurve;
