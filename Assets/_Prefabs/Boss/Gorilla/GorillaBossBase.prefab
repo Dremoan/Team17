@@ -92,10 +92,10 @@ MonoBehaviour:
   - {fileID: 2915677686609558170}
   trails: 0
   trailRenderers: []
-  shake: 0
+  shake: 1
   useSpecificTransform: 0
   specificTransformToShake: []
-  shakeAmplitude: 0.2
+  shakeAmplitude: 1
   shakeTime: 0.1
   slowMo: 0
   targetTimeScale: 0.05
@@ -162,7 +162,7 @@ MonoBehaviour:
   - {fileID: 3799330458451624429}
   trails: 0
   trailRenderers: []
-  shake: 0
+  shake: 1
   useSpecificTransform: 0
   specificTransformToShake: []
   shakeAmplitude: 0.2
@@ -1558,6 +1558,23 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 2870295096877320373}
           m_MethodName: Stop
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  - EventName: StopShout
+    eventTrigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6745982272864011032}
+          m_MethodName: ActiveJump
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
