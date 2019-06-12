@@ -9,6 +9,7 @@ namespace Team17.StreetHunt
     {
         [SerializeField] private Animator compositionAnimator;
         [SerializeField] private TransitionEvents[] transitionEvents;
+        [SerializeField] private UiSceneManagement sceneManger;
         [SerializeField] private string nameLevel;
 
         protected override void Start()
@@ -37,7 +38,7 @@ namespace Team17.StreetHunt
             StartCoroutine(CloseLevelMenu(timeToClose));
         }
 
-        public void LaunchSelectedLevel(string levelName)
+        public void LaunchSelectedLevel()
         {
             transitionEvents[2].EventTransition[0].Invoke();
         }

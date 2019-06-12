@@ -13,7 +13,7 @@ namespace Team17.StreetHunt
         [SerializeField] private Transform jumpTarget;
         [SerializeField] private Transform jumpSummit;
         [SerializeField] private float jumpSpeed = 2f;
-        [Tooltip("0 = small, 1 = long, 2 = low, 3 = high")]
+        [Tooltip("1 = Down to Down, 2 = Up to Up, 3 = Down to Up Long, 4 = Down to Up Short, 5 = Up to Down Long, 6 = Up to Down Short")]
         [SerializeField] private AnimationCurve[] speedCurves;
         [SerializeField] private GorillaJumpTarget[] rightTargets;
         [SerializeField] private GorillaJumpTarget[] leftTargets;
@@ -116,11 +116,14 @@ namespace Team17.StreetHunt
 
         public void LaunchJump(GorillaJumpTarget target)
         {
-            /*if(currentJumpTarget == target)
+            if(currentJumpTarget == null)
             {
-                assignedBossScript.SkipCurrentAttack();
-                return;
-            }*/
+                SelectJumpBlend(0.25f, target.GorillaIdleValue);
+            }
+            else
+            {
+                SelectJumpBlend(currentJumpTarget.GorillaIdleValue, target.GorillaIdleValue);
+            }
             currentJumpTarget = target;
             jumpTarget.position = target.transform.position;
 
@@ -131,19 +134,9 @@ namespace Team17.StreetHunt
 
             jumpSummit.position = new Vector3(middlePoint.x, jumpSummit.position.y, 0);
 
-            if (Mathf.Abs(transform.position.x - jumpTarget.position.x) > smallJumpThreshhold) // jump is long
-            {
-                usedSpeedCurve = speedCurves[1];
-            }
-            else // jump is low
-            {
-                usedSpeedCurve = speedCurves[0];
-            }
-
             if (Mathf.Abs(transform.position.y - jumpTarget.position.y) < lowJumpThreshHold) // jump is low
             {
                 jumpSummit.position = new Vector3(jumpSummit.position.x, jumpTarget.position.y + 8f, 0f);
-                usedSpeedCurve = speedCurves[2];
             }
             else // jump is high
             {
@@ -155,7 +148,6 @@ namespace Team17.StreetHunt
                 {
                     jumpSummit.position = new Vector3(jumpSummit.position.x, jumpTarget.position.y * 2, 0);
                 }
-                usedSpeedCurve = speedCurves[3];
             }
 
             if (jumpSummit.position.y > assignedBossScript.RoomZero.position.y + maxSummitHeight * 2)
@@ -181,18 +173,104 @@ namespace Team17.StreetHunt
                     jumpCalculatedDist += Vector3.Distance(path[i], path[i + 1]);
                 }
             }
+            anim.SetTrigger("jumping");
+            anim.SetBool("toTheRight", (transform.position.x < jumpTarget.position.x));
+        }
+
+        private void SelectJumpBlend(float b, float t)
+        {
+            float r = 0f;
+
+            if(b == 0f && t == 0.25f)
+            {
+                //0
+                r = 0f;
+                usedSpeedCurve = speedCurves[0];
+            }
+            if(b == 0.25f && t == 0f)
+            {
+                //0
+                r = 0f;
+                usedSpeedCurve = speedCurves[0];
+            }
+            // =====
+            if(b == 0.5f && t == 0.75f)
+            {
+                // 0.2f
+                r = 0.2f;
+                usedSpeedCurve = speedCurves[1];
+            }
+            if(b == 0.75f && t == 0.5f)
+            {
+                // 0.2f
+                r = 0.2f;
+                usedSpeedCurve = speedCurves[1];
+            }
+            // ====
+            if(b == 0f && t == 0.75f)
+            {
+                // 0.4f
+                r = 0.4f;
+                usedSpeedCurve = speedCurves[2];
+            }
+            if(b == 0.25f && t == 0.5f)
+            {
+                // 0.4f
+                r = 0.4f;
+                usedSpeedCurve = speedCurves[2];
+            }
+            // ====
+            if(b == 0f && t == 0.5f)
+            {
+                // 0.6f
+                r = 0.6f;
+                usedSpeedCurve = speedCurves[3];
+            }
+            if(b == 0.25f && t == 0.75f)
+            {
+                // 0.6f
+                r = 0.6f;
+                usedSpeedCurve = speedCurves[3];
+            }
+            // ====
+            if(b == 0.5f && t == 0.25f)
+            {
+                // 0.8f
+                r = 0.8f;
+                usedSpeedCurve = speedCurves[4];
+            }
+            if(b == 0.75f && t == 0.0f)
+            {
+                // 0.8f
+                r = 0.8f;
+                usedSpeedCurve = speedCurves[4];
+            }
+            // ====
+            if(b == 0.5f && t == 0f)
+            {
+                // 1f
+                r = 1f;
+                usedSpeedCurve = speedCurves[5];
+            }
+            if(b == 0.75f && t == 0.25f)
+            {
+                // 1f
+                r = 1f;
+                usedSpeedCurve = speedCurves[5];
+            }
+
+            Debug.Log("Jump is : " + r);
+
+            anim.SetFloat("jumpBlend", r);
+        }
+
+        public void ActiveJump()
+        {
             jumpParcouredDist = 0f;
             pathStepTarget = 0;
             jumpStart = transform.position;
             jumpInc = 0;
             isJumping = true;
-            anim.SetBool("jumping", isJumping);
-            anim.SetBool("toTheRight", (transform.position.x < jumpTarget.position.x));
-        }
-
-        public void ActiveJump()
-        {
-
         }
 
         private void JumpManagement()
