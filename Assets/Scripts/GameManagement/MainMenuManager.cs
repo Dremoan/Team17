@@ -9,7 +9,6 @@ namespace Team17.StreetHunt
     {
         [SerializeField] private Animator compositionAnimator;
         [SerializeField] private TransitionEvents[] transitionEvents;
-        [SerializeField] private float timeTransition;
         [SerializeField] private string nameLevel;
 
         protected override void Start()
@@ -30,12 +29,12 @@ namespace Team17.StreetHunt
 
         public void CallOpenLevelMenu(float timeToOpen)
         {
-            StartCoroutine(OpenLevelMenu(timeTransition));
+            StartCoroutine(OpenLevelMenu(timeToOpen));
         }
 
         public void CallCloseLevelMenu(float timeToClose)
         {
-            StartCoroutine(CloseLevelMenu(timeTransition));
+            StartCoroutine(CloseLevelMenu(timeToClose));
         }
 
         public void LaunchSelectedLevel(string levelName)
