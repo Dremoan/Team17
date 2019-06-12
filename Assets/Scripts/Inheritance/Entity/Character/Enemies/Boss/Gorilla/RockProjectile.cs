@@ -9,6 +9,7 @@ namespace Team17.StreetHunt
         [SerializeField] private Rigidbody body;
         [SerializeField] private float speed = 5f;
         [SerializeField] private float disapearTime = 3f;
+        [SerializeField] private GameObject[] possibleVisuals;
         private Transform holdingTransform;
         private bool available = true;
         private bool isHeld = false;
@@ -23,6 +24,11 @@ namespace Team17.StreetHunt
         {
             holdingTransform = holdTransfom;
             isHeld = true;
+            for (int i = 0; i < possibleVisuals.Length; i++)
+            {
+                possibleVisuals[i].SetActive(false);
+            }
+            possibleVisuals[Random.Range(0, possibleVisuals.Length)].SetActive(true);
         }
 
         public void Launch(Vector3 direction)
@@ -38,6 +44,7 @@ namespace Team17.StreetHunt
             {
                 available = false;
                 transform.position = holdingTransform.position;
+                transform.rotation = holdingTransform.rotation;
             }
         }
 
