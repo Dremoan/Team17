@@ -190,6 +190,11 @@ namespace Team17.StreetHunt
             anim.SetBool("toTheRight", (transform.position.x < jumpTarget.position.x));
         }
 
+        public void ActiveJump()
+        {
+
+        }
+
         private void JumpManagement()
         {
             if (isJumping)
