@@ -199,6 +199,46 @@ namespace Team17.StreetHunt
             }
         }
 
+        public void Stop(ParticleSystemStopBehavior stop)
+        {
+            if (looping)
+            {
+                if (particles)
+                {
+                    for (int i = 0; i < particlesSystems.Length; i++)
+                    {
+                        particlesSystems[i].Stop(true, stop);
+                    }
+                }
+                if (trails)
+                {
+                    for (int i = 0; i < trailRenderers.Length; i++)
+                    {
+                        trailRenderers[i].enabled = false;
+                    }
+                }
+                if (shake)
+                {
+                    shakeTimerDecrementer = shakeTime;
+                    isShaking = false;
+                }
+                if (slowMo)
+                {
+                    isSlowMoIn = false;
+                    isSlowMoOut = true;
+                }
+                if (zoom)
+                {
+                    isZoomingOut = true;
+                    isZoomingIn = false;
+                }
+                if (rumble)
+                {
+                    isRumbling = false;
+                }
+            }
+        }
+
         #region Effects management
 
         private void ShakeManagement()

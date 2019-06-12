@@ -12,7 +12,6 @@ namespace Team17.StreetHunt
         [SerializeField] private Transform tauntPoint;
         [SerializeField] private float dummyHp;
         [SerializeField] private GameObject touchPlane;
-        [SerializeField] private UnityEvent eventDummyDeath;
         [SerializeField] private UiSceneManagement sceneManager;
 
         [Header("Feedbacks")]

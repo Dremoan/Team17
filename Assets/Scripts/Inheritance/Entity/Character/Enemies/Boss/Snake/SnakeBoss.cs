@@ -55,7 +55,7 @@ namespace Team17.StreetHunt
             {
                 warpPull[i].ResetAllWarps();
             }
-
+        
             indexPath = index;
             AssignPath();
             actualWarps.SpawnWarps();
