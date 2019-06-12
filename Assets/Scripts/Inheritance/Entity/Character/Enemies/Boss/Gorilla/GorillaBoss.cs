@@ -116,11 +116,14 @@ namespace Team17.StreetHunt
 
         public void LaunchJump(GorillaJumpTarget target)
         {
-            /*if(currentJumpTarget == target)
+            if(currentJumpTarget == null)
             {
-                assignedBossScript.SkipCurrentAttack();
-                return;
-            }*/
+                SelectJumpBlend(0.25f, target.GorillaIdleValue);
+            }
+            else
+            {
+                SelectJumpBlend(currentJumpTarget.GorillaIdleValue, target.GorillaIdleValue);
+            }
             currentJumpTarget = target;
             jumpTarget.position = target.transform.position;
 
@@ -181,10 +184,82 @@ namespace Team17.StreetHunt
                     jumpCalculatedDist += Vector3.Distance(path[i], path[i + 1]);
                 }
             }
-
-            anim.SetFloat("jumpBlend", 0f);
             anim.SetTrigger("jumping");
             anim.SetBool("toTheRight", (transform.position.x < jumpTarget.position.x));
+        }
+
+        private void SelectJumpBlend(float b, float t)
+        {
+            float r = 0f;
+
+            if(b == 0f && t == 0.25f)
+            {
+                //0
+                r = 0f;
+            }
+            if(b == 0.25f && t == 0f)
+            {
+                //0
+                r = 0f;
+            }
+            // =====
+            if(b == 0.5f && t == 0.75f)
+            {
+                // 0.2f
+                r = 0.2f;
+            }
+            if(b == 0.75f && t == 0.5f)
+            {
+                // 0.2f
+                r = 0.2f;
+            }
+            // ====
+            if(b == 0f && t == 0.75f)
+            {
+                // 0.4f
+                r = 0.4f;
+            }
+            if(b == 0.25f && t == 0.5f)
+            {
+                // 0.4f
+                r = 0.4f;
+            }
+            // ====
+            if(b == 0f && t == 0.5f)
+            {
+                // 0.6f
+                r = 0.6f;
+            }
+            if(b == 0.25f && t == 0.75f)
+            {
+                r = 0.6f;
+            }
+            // ====
+            if(b == 0.5f && t == 0.25f)
+            {
+                // 0.8f
+                r = 0.8f;
+            }
+            if(b == 0.75f && t == 0.0f)
+            {
+                // 0.8f
+                r = 0.8f;
+            }
+            // ====
+            if(b == 0.5f && t == 0f)
+            {
+                // 1f
+                r = 1f;
+            }
+            if(b == 0.75f && t == 0.25f)
+            {
+                // 1f
+                r = 1f;
+            }
+
+            Debug.Log("Jump is : " + r);
+
+            anim.SetFloat("jumpBlend", r);
         }
 
         public void ActiveJump()
