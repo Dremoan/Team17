@@ -129,6 +129,7 @@ namespace Team17.StreetHunt
             {
                 Vector3 newDir = (transform.position - coll.transform.position).normalized;
                 SetMovementDir(newDir);
+                usedPowerGroup.Trail.RotateFeedback(GetRotationFromDirection(newDir));
 
                 StunCharacter(coll.gameObject.GetComponent<BallRelfecter>().StunTime);
             }
@@ -243,7 +244,7 @@ namespace Team17.StreetHunt
             {
                 if (power > powerGroups[i].PowerThreshold)
                 { 
-                    if(usedPowerGroup.Trail != null) usedPowerGroup.Trail.Stop();
+                    if(usedPowerGroup.Trail != null) usedPowerGroup.Trail.Stop(ParticleSystemStopBehavior.StopEmittingAndClear);
                     usedPowerGroup = powerGroups[i];
                     usedPowergroupIndex = i;
                 }
@@ -313,7 +314,7 @@ namespace Team17.StreetHunt
             timerFeedback.localScale = initialFeedbackScale;
 
             usedPowerGroup.Destroyed.Play();
-            usedPowerGroup.Trail.Stop();
+            usedPowerGroup.Trail.Stop(ParticleSystemStopBehavior.StopEmittingAndClear);
 
             GameManager.state.CallOnBallDestroyed();
         }
