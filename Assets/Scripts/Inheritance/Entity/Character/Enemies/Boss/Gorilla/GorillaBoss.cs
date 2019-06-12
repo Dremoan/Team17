@@ -181,18 +181,19 @@ namespace Team17.StreetHunt
                     jumpCalculatedDist += Vector3.Distance(path[i], path[i + 1]);
                 }
             }
-            jumpParcouredDist = 0f;
-            pathStepTarget = 0;
-            jumpStart = transform.position;
-            jumpInc = 0;
-            isJumping = true;
-            anim.SetBool("jumping", isJumping);
+
+            anim.SetFloat("jumpBlend", 0f);
+            anim.SetTrigger("jumping");
             anim.SetBool("toTheRight", (transform.position.x < jumpTarget.position.x));
         }
 
         public void ActiveJump()
         {
-
+            jumpParcouredDist = 0f;
+            pathStepTarget = 0;
+            jumpStart = transform.position;
+            jumpInc = 0;
+            isJumping = true;
         }
 
         private void JumpManagement()
