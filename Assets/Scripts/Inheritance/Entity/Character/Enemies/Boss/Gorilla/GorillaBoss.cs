@@ -116,6 +116,7 @@ namespace Team17.StreetHunt
 
         public void LaunchJump(GorillaJumpTarget target)
         {
+            Debug.Break();
             if(currentJumpTarget == null)
             {
                 SelectJumpBlend(0.25f, target.GorillaIdleValue);
@@ -126,8 +127,9 @@ namespace Team17.StreetHunt
             }
             currentJumpTarget = target;
             jumpTarget.position = target.transform.position;
+            SetIdleType(currentJumpTarget.GorillaIdleValue);
 
-            usedSpeedCurve = speedCurves[0];
+            //usedSpeedCurve = speedCurves[0];
 
             Vector3 vectorToTarget = (jumpTarget.position - transform.position);
             Vector3 middlePoint = transform.position + (vectorToTarget * 0.5f);
