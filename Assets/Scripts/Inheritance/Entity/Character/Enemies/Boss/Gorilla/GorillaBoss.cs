@@ -137,7 +137,7 @@ namespace Team17.StreetHunt
                 SelectJumpBlend(currentJumpTarget.GorillaIdleValue, target.GorillaIdleValue);
             }
 
-            Debug.Break();
+            //Debug.Break();
 
             currentJumpTarget = target;
             jumpTarget.position = target.transform.position;
