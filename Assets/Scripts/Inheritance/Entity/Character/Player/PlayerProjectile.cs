@@ -376,15 +376,9 @@ namespace Team17.StreetHunt
 
         private void PassThroughSpeedPortal(SpeedPortal portal, Vector3 entryVelocity, Vector3 portalRight)
         {
-            GameManager.state.CallOnSpeedPortalCrossed();
             entryVelocity = new Vector3(Mathf.Abs(entryVelocity.x), Mathf.Abs(entryVelocity.y), entryVelocity.z);
             portalRight = new Vector3(Mathf.Abs(portalRight.x), Mathf.Abs(portalRight.y), portalRight.z);
             float sqrMag = Vector3.SqrMagnitude(entryVelocity - portalRight);
-
-            /*if (Mathf.Abs(sqrMag) < speedPortalPrecision)
-            {
-
-            }*/
 
             //Speed up
             if (usedPowergroupIndex < powerGroups.Length - 1)
@@ -395,10 +389,12 @@ namespace Team17.StreetHunt
             {
                 power = powerGroups[powerGroups.Length - 1].PowerThreshold + maxPowerMargin;
             }
-            portal.SpeedBallDesactivation();
+            portal.SpeedPortalDesactivation();
             SelectPowerGroup(power);
             SetMovementDir(body.velocity);
             usedPowerGroup.Trail.RotateFeedback(GetRotationFromDirection(movementDirection));
+            usedPowerGroup.Trail.Play();
+            GameManager.state.CallOnSpeedPortalCrossed();
         }
 
         #endregion

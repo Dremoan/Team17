@@ -21,6 +21,8 @@ namespace Team17.StreetHunt
         private bool activated = false;
 
 
+        #region Monobehaviour callbacks
+
         protected override void Update()
         {
             base.Update();
@@ -30,6 +32,16 @@ namespace Team17.StreetHunt
                 ActivationManagement();
             }
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.GetComponent<BallCanceler>() != null)
+            {
+                SpeedPortalDesactivation();
+            }
+        }
+
+        #endregion
 
         private void PosRotManagement()
         {
@@ -48,6 +60,7 @@ namespace Team17.StreetHunt
                 else
                 {
                     // TO DO : replace game object activation with animation
+                    speedPortalAnimator.SetTrigger("AnimSpeedPortalDisplay");
                     coll.enabled = true;
                     deactivatedVisual.SetActive(false);
                     activatedVisual.SetActive(true);
@@ -62,16 +75,8 @@ namespace Team17.StreetHunt
             targetZRot = rot;
             timeToActivate = time;
             deactivatedVisual.SetActive(true);
-            speedPortalAnimator.SetTrigger("AnimSpeedPortalDisplay");
             available = false;
             activated = true;
-        }
-
-        public void TutorialActivation()
-        {
-            coll.enabled = true;
-            deactivatedVisual.SetActive(false);
-            activatedVisual.SetActive(true);
         }
 
         public void GetReadyForReactivation()
@@ -82,7 +87,7 @@ namespace Team17.StreetHunt
             available = true;
         }
 
-        public void SpeedBallDesactivation()
+        public void SpeedPortalDesactivation()
         {
             coll.enabled = false;
             speedPortalAnimator.SetTrigger("AnimSpeedPortalDisable");
@@ -91,12 +96,5 @@ namespace Team17.StreetHunt
 
         public bool Available { get => available; set => available = value; }
 
-        void OnTriggerEnter(Collider other)
-        {
-            if(other.gameObject.GetComponent<BallCanceler>() != null)
-            {
-                SpeedBallDesactivation();
-            }
-        }
     }
 }
