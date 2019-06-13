@@ -16,6 +16,7 @@ namespace Team17.StreetHunt
         [SerializeField] private Transform timerFeedback;
         [SerializeField] private Transform trajectory;
         [SerializeField] private PlayerCharacter character;
+        [SerializeField] private FeedBack criticalShotFeedBack;
         [Tooltip("The power threshold of the group must be sorted from the smallest to highest.")]
         [SerializeField] private PowerGroups[] powerGroups;
 
@@ -294,6 +295,7 @@ namespace Team17.StreetHunt
 
         public void CriticalShot()
         {
+            criticalShotFeedBack.Play();
             GameManager.state.CallOnBallCriticalShot();
         }
 
