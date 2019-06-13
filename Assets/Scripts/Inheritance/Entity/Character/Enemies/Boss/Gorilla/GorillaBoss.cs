@@ -116,7 +116,7 @@ namespace Team17.StreetHunt
 
         public void LaunchJump(GorillaJumpTarget target)
         {
-            Debug.Break();
+            //Debug.Break();
             if(currentJumpTarget == null)
             {
                 SelectJumpBlend(0.25f, target.GorillaIdleValue);
@@ -129,9 +129,7 @@ namespace Team17.StreetHunt
             jumpTarget.position = target.transform.position;
             SetIdleType(currentJumpTarget.GorillaIdleValue);
 
-            //usedSpeedCurve = speedCurves[0];
-
-            Vector3 vectorToTarget = (jumpTarget.position - transform.position);
+            /*Vector3 vectorToTarget = (jumpTarget.position - transform.position);
             Vector3 middlePoint = transform.position + (vectorToTarget * 0.5f);
 
             jumpSummit.position = new Vector3(middlePoint.x, jumpSummit.position.y, 0);
@@ -161,8 +159,7 @@ namespace Team17.StreetHunt
                  jumpSummit.position = new Vector3(jumpSummit.position.x, 0, 0);
             }
 
-
-            path = new Vector3[jumpSteps];
+            /*path = new Vector3[jumpSteps];
             for (int i = 0; i < path.Length; i++)
             {
                 float t = Mathf.InverseLerp(0, jumpSteps - 1, i);
@@ -174,7 +171,8 @@ namespace Team17.StreetHunt
                 {
                     jumpCalculatedDist += Vector3.Distance(path[i], path[i + 1]);
                 }
-            }
+            }*/
+
             anim.SetTrigger("jumping");
             anim.SetBool("toTheRight", (transform.position.x < jumpTarget.position.x));
         }
