@@ -10,14 +10,15 @@ namespace Team17.StreetHunt
         [SerializeField] private Animator compositionAnimator;
         [SerializeField] private TransitionEvents[] transitionEvents;
         [SerializeField] private UiSceneManagement sceneManager;
-        [SerializeField] private string nameLevel;
+        [SerializeField] private int indexLevel;
         private int indexSwipe;
 
+        public int IndexSwipe { get => indexSwipe; set => indexSwipe = value; }
 
         protected override void Start()
         {
             base.Start();
-            SetLevelName("");
+            SetLevelIndex(0);
             InputManager.inputManager.OnSwipe += SwipeRight;
             InputManager.inputManager.OnSwipe += SwipeLeft;
         }
@@ -27,9 +28,9 @@ namespace Team17.StreetHunt
             compositionAnimator.SetInteger("IndexToPick", Random.Range(0, MaxRange));
         }
 
-        public void SetLevelName(string newNameLevel)
+        public void SetLevelIndex(int newIndexLevel)
         {
-            nameLevel = newNameLevel;
+            indexLevel = newIndexLevel;
         }
 
         public void CallOpenLevelMenu(float timeToOpen)
@@ -44,26 +45,25 @@ namespace Team17.StreetHunt
 
         public void LaunchSelectedLevel()
         {
-            transitionEvents[2].EventTransition[0].Invoke();
+            sceneManager.LoadSceneIndex(indexLevel);
         }
 
         public void SwipeRight(InputManager.SwipeDirection direction)
         {
             if (direction == InputManager.SwipeDirection.Right)
             {
-                indexSwipe++;
+                IndexSwipe++;
             }
         }
 
         public void SwipeLeft(InputManager.SwipeDirection direction)
         {
-            if (direction == InputManager.SwipeDirection.Right && indexSwipe != 0)
+            if (direction == InputManager.SwipeDirection.Right && IndexSwipe != 0)
             {
-                indexSwipe--;
+                IndexSwipe--;
             }
         }
-
-
+        
 
         IEnumerator OpenLevelMenu(float openingDelay)
         {
