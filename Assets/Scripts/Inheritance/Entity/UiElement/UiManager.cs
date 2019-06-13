@@ -9,9 +9,8 @@ namespace Team17.StreetHunt
     {
 
         [SerializeField] private Animator transitionsCanvas;
-        // ------ Player Health Management ------
-        [Header("End Level Ui"), SerializeField] private GameObject EndLevelUi;
-        [SerializeField] private TextMeshProUGUI textEndGame;
+
+        [Header("End Level Ui"), SerializeField] private GameObject endLevelUi;
         [SerializeField] private Animator animatorUiEndLevel;
 
         [Header("Health Management"), SerializeField] private GameObject[] nbreBallsArray;
@@ -34,11 +33,25 @@ namespace Team17.StreetHunt
             }
         }
 
+        public override void OnBossDeath()
+        {
+            base.OnBossDeath();
+            endLevelVictory = true;
+            //Debug.LogError("ON BOSS DEATH");
+        }
+
+        public override void OnEndCutSceneEnds()
+        {
+            base.OnEndCutSceneEnds();
+            //Debug.LogError("ON END CUT SCENE");
+            endLevelUi.SetActive(true);
+            animatorUiEndLevel.SetTrigger("AnimWinScreen");
+        }
+
         public override void OnLevelEnd()
         {
             base.OnLevelEnd();
-            endLevelVictory = true;
-            GUiEndLevel(endLevelVictory);
+            //Debug.LogError("ON LEVEL END");
         }
 
         public override void OnBallHit(int powerGroupIndex, float hitPower)
@@ -65,21 +78,6 @@ namespace Team17.StreetHunt
             else if (nbreBall < 0)
             {
                 Debug.LogWarning("Balls number can't be under 0 !");
-            }
-        }
-        private void GUiEndLevel(bool endLevelVictory)
-        {
-            if (endLevelVictory == false)
-            {
-                textEndGame.color = new Color(186 / 255, 0 / 255, 2 / 255);
-                textEndGame.text = "Defeat!";
-                EndLevelUi.SetActive(true);
-            }
-            else
-            {
-                textEndGame.color = new Color(20 / 255, 220 / 255, 0 / 255);
-                textEndGame.text = "Victory!";
-                EndLevelUi.SetActive(true);
             }
         }
 
