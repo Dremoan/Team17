@@ -59,6 +59,12 @@ namespace Team17.StreetHunt
 
         #region Monobehaviour
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            SetIdleType(0.25f);
+        }
+
         protected override void Update()
         {
             base.Update();
@@ -116,7 +122,12 @@ namespace Team17.StreetHunt
 
         public void LaunchJump(GorillaJumpTarget target)
         {
-            //Debug.Break();
+            if(target == currentJumpTarget)
+            {
+                JumpToRandom();
+                return;
+            }
+
             if(currentJumpTarget == null)
             {
                 SelectJumpBlend(0.25f, target.GorillaIdleValue);
@@ -125,6 +136,9 @@ namespace Team17.StreetHunt
             {
                 SelectJumpBlend(currentJumpTarget.GorillaIdleValue, target.GorillaIdleValue);
             }
+
+            //Debug.Break();
+
             currentJumpTarget = target;
             jumpTarget.position = target.transform.position;
             SetIdleType(currentJumpTarget.GorillaIdleValue);
@@ -175,6 +189,7 @@ namespace Team17.StreetHunt
 
             anim.SetTrigger("jumping");
             anim.SetBool("toTheRight", (transform.position.x < jumpTarget.position.x));
+            Debug.Log("To the right : " + (transform.position.x < jumpTarget.position.x));
         }
 
         private void SelectJumpBlend(float b, float t)
