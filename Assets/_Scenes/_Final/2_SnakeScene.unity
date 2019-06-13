@@ -513,6 +513,76 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 291478466}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &296988616 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3482633379767069828, guid: 53e70c60ea00c7442922d0a1c33aaa75,
+    type: 3}
+  m_PrefabInstance: {fileID: 1113174007}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &296988617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296988616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7be32b554ce1e04293ce2c45ca8e22e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnStart: 0
+  looping: 0
+  hardFollowingTransform: 0
+  transformToHardFollow: {fileID: 0}
+  tpOnTransformOnPlay: 0
+  transformToTPToOnPlay: {fileID: 0}
+  particles: 0
+  useRotation: 1
+  particlesSystems: []
+  particlesRenderers: []
+  trails: 0
+  trailRenderers: []
+  shake: 1
+  useSpecificTransform: 0
+  specificTransformToShake: []
+  shakeAmplitude: 2
+  shakeTime: 10
+  slowMo: 0
+  targetTimeScale: 0.05
+  slowMoSpeed: 0.1
+  slowMoInCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  slowMoOutCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  zoom: 0
+  zoomInCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  zoomOutCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  zoomedDist: 4
+  zoomSpeed: 0.1
+  freezeFrame: 0
+  timeBeforeFreezedFrame: 1
+  freezedFrameTime: 0.1
+  rumble: 0
+  rumbleTime: 5
 --- !u!1001 &345292088
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1694,6 +1764,11 @@ PrefabInstance:
       propertyPath: roomZero
       value: 
       objectReference: {fileID: 537758159}
+    - target: {fileID: 6883557121161636250, guid: 9c5ff747c1f33544f88cef43f310e5e1,
+        type: 3}
+      propertyPath: health
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7387680614374387324, guid: 9c5ff747c1f33544f88cef43f310e5e1,
         type: 3}
       propertyPath: characterController
@@ -1764,6 +1839,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1516444118615062974, guid: 9c5ff747c1f33544f88cef43f310e5e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c5ff747c1f33544f88cef43f310e5e1, type: 3}
 --- !u!114 &847663597 stripped
@@ -1801,6 +1881,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SnakeBossThree
+      objectReference: {fileID: 0}
+    - target: {fileID: 7999859923531386608, guid: dec8b0c3bc52a22439ce1727ea30ee7a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1112554571779953120, guid: dec8b0c3bc52a22439ce1727ea30ee7a,
         type: 3}
@@ -1875,7 +1960,7 @@ PrefabInstance:
     - target: {fileID: 2701890313858903794, guid: dec8b0c3bc52a22439ce1727ea30ee7a,
         type: 3}
       propertyPath: health
-      value: 250
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3703292587816363433, guid: dec8b0c3bc52a22439ce1727ea30ee7a,
         type: 3}
@@ -1892,6 +1977,11 @@ PrefabInstance:
       propertyPath: canvasAnim
       value: 
       objectReference: {fileID: 1998036102}
+    - target: {fileID: 4677429634230743659, guid: dec8b0c3bc52a22439ce1727ea30ee7a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dec8b0c3bc52a22439ce1727ea30ee7a, type: 3}
 --- !u!114 &939781441 stripped
@@ -2240,6 +2330,210 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[3].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[4].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[5].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[6].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[7].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[8].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[9].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[10].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[11].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[12].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[13].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[14].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[15].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[16].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[17].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[18].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[19].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[20].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[21].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[22].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[23].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[24].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[25].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[26].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[27].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[28].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[29].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[30].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[31].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[32].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[33].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[34].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[35].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[36].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[37].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[38].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[39].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[40].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[41].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[42].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[43].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[44].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[45].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[46].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[47].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[48].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[49].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[50].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[51].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[52].eventTrigger.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
       propertyPath: animEventsArray.Array.data[0].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1618312284594600676}
@@ -2285,11 +2579,1653 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
       propertyPath: animEventsArray.Array.data[3].EventName
-      value: Snake Restart 3
+      value: 3 Snake Restart
       objectReference: {fileID: 0}
     - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
       propertyPath: animEventsArray.Array.data[4].EventName
-      value: Active Touch Plane 4
+      value: 4 Touch Plane Active
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[3].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartMovingSnake
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[3].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[3].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[3].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[3].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[3].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[4].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[4].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[4].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[4].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[4].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[4].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[5].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[5].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[5].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[5].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[5].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[5].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[5].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[5].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[6].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[6].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[6].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[6].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[6].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[6].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[6].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[6].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[7].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[7].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[7].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[7].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[7].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[7].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[7].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[7].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[8].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[8].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[8].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[8].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[8].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[8].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[8].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[8].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[9].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[9].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[9].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[9].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[9].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[9].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[9].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[9].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[10].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[10].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[10].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[10].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[10].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[10].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[10].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[10].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[11].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[11].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[11].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[11].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[11].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[11].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[11].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[11].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[12].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[12].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[12].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[12].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[12].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[12].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[12].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[12].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[13].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[13].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[13].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[13].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[13].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[13].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[13].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[13].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[14].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[14].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[14].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[14].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[14].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[14].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[14].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[14].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[15].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[15].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[15].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[15].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[15].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[15].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[15].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[15].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[16].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[16].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[16].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[16].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[16].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[16].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[16].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[16].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[17].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[17].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[17].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[17].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[17].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[17].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[17].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[17].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[18].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[18].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[18].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[18].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[18].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[18].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[18].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[18].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[19].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[19].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[19].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[19].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[19].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[19].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[19].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[19].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[20].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[20].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[20].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[20].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[20].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[20].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[20].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[20].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[21].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[21].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[21].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[21].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[21].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[21].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[21].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[21].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[22].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[22].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[22].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[22].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[22].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[22].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[22].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[22].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[23].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[23].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[23].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[23].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[23].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[23].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[23].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[23].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[24].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[24].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[24].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[24].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[24].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[24].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[24].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[24].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[25].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[25].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[25].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[25].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[25].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[25].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[25].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[25].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[26].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[26].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[26].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[26].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[26].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[26].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[26].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[26].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[27].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[27].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[27].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[27].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[27].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[27].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[27].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[27].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[28].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[28].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[28].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[28].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[28].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[28].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[28].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[28].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[29].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[29].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[29].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[29].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[29].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[29].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[29].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[29].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[30].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[30].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[30].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[30].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[30].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[30].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[30].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[30].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[31].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[31].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[31].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[31].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[31].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[31].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[31].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[31].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[32].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[32].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[32].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[32].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[32].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[32].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[32].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[32].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[33].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[33].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[33].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[33].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[33].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[33].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[33].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[33].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[34].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[34].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[34].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[34].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[34].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[34].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[34].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[34].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[35].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[35].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[35].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[35].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[35].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[35].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[35].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[35].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[36].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[36].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[36].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[36].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[36].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[36].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[36].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[36].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[37].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[37].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[37].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[37].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[37].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[37].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[37].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[37].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[38].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[38].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[38].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[38].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[38].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[38].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[38].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[38].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[39].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[39].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[39].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[39].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[39].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[39].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[39].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[39].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[40].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[40].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[40].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[40].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[40].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[40].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[40].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[40].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[41].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[41].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[41].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[41].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[41].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[41].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[41].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[41].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[42].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[42].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[42].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[42].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[42].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[42].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[42].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[42].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[43].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[43].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[43].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[43].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[43].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[43].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[43].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[43].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[44].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[44].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[44].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[44].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[44].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[44].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[44].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[44].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[45].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[45].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[45].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[45].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[45].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[45].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[45].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[45].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[46].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[46].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[46].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[46].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[46].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[46].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[46].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[46].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[47].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[47].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[47].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[47].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[47].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[47].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[47].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[47].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[48].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[48].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[48].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[48].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[48].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[48].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[48].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[48].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[49].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[49].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[49].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[49].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[49].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[49].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[49].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[49].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[50].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[50].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[50].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[50].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[50].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[50].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[50].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[50].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[51].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[51].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[51].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[51].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[51].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[51].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[51].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[51].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[52].EventName
+      value: Snake Stop 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[52].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1634705470}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[52].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[52].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[52].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[52].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[52].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[52].eventTrigger.m_TypeName
+      value: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[4].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1149243381, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[2].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StopMovingSnake
       objectReference: {fileID: 0}
     - target: {fileID: 1605709929, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
       propertyPath: animEventsArray.Array.data[2].eventTrigger.m_PersistentCalls.m_Calls.Array.size
@@ -2335,6 +4271,26 @@ PrefabInstance:
       propertyPath: animEventsArray.Array.data[2].eventTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 116735770}
+    - target: {fileID: 1605709929, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[1].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 296988617}
+    - target: {fileID: 1605709929, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[1].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605709929, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[0].EventName
+      value: 0 Camera Priority
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605709929, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[1].EventName
+      value: 1 ScreenShake
+      objectReference: {fileID: 0}
+    - target: {fileID: 1605709929, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[2].EventName
+      value: 2 Teleport and Taunt
+      objectReference: {fileID: 0}
     - target: {fileID: 70491313, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
       propertyPath: animEventsArray.Array.data[2].eventTrigger.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -2379,6 +4335,26 @@ PrefabInstance:
       propertyPath: animEventsArray.Array.data[2].eventTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 1938687538}
+    - target: {fileID: 70491313, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[1].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1905362715}
+    - target: {fileID: 70491313, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[1].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 70491313, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[0].EventName
+      value: 0 Camera Priority
+      objectReference: {fileID: 0}
+    - target: {fileID: 70491313, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[1].EventName
+      value: 1 ScreenShake
+      objectReference: {fileID: 0}
+    - target: {fileID: 70491313, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[2].EventName
+      value: 2 Teleport and Taunt
+      objectReference: {fileID: 0}
     - target: {fileID: 332976734063018069, guid: 53e70c60ea00c7442922d0a1c33aaa75,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2495,6 +4471,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: f9cae20e43a9ca3408a97a54e2b955e9,
         type: 2}
+    - target: {fileID: 781134257, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: m_SceneBindings.Array.data[6].value
+      value: 
+      objectReference: {fileID: 1979172925}
     - target: {fileID: 332976732716680864, guid: 53e70c60ea00c7442922d0a1c33aaa75,
         type: 3}
       propertyPath: m_Priority
@@ -2527,7 +4507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 781134256, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
       propertyPath: animEventsArray.Array.data[2].EventName
-      value: Change Boss Material 2
+      value: 2 Change Boss Material
       objectReference: {fileID: 0}
     - target: {fileID: 781134256, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
       propertyPath: animEventsArray.Array.data[2].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2560,11 +4540,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 781134256, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
       propertyPath: animEventsArray.Array.data[1].EventName
-      value: Screen Shake 1
+      value: 1 Screen Shake
       objectReference: {fileID: 0}
     - target: {fileID: 781134256, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
       propertyPath: animEventsArray.Array.data[0].EventName
-      value: Camera Priority 0
+      value: 0 Camera Priority
+      objectReference: {fileID: 0}
+    - target: {fileID: 781134256, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[1].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1979172926}
+    - target: {fileID: 781134256, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
+      propertyPath: animEventsArray.Array.data[1].eventTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
       objectReference: {fileID: 0}
     - target: {fileID: 781134254, guid: 53e70c60ea00c7442922d0a1c33aaa75, type: 3}
       propertyPath: shakeAmplitude
@@ -3200,7 +5188,7 @@ PrefabInstance:
     - target: {fileID: 1428417058107449534, guid: ff126a46a6ccaed46b7cb557984e9225,
         type: 3}
       propertyPath: health
-      value: 250
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4471716224503659969, guid: ff126a46a6ccaed46b7cb557984e9225,
         type: 3}
@@ -3217,6 +5205,11 @@ PrefabInstance:
       propertyPath: canvasAnim
       value: 
       objectReference: {fileID: 1998036102}
+    - target: {fileID: 5585474755641797123, guid: ff126a46a6ccaed46b7cb557984e9225,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff126a46a6ccaed46b7cb557984e9225, type: 3}
 --- !u!114 &1522339739 stripped
@@ -3921,6 +5914,70 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1113174007}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1905362715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905362714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7be32b554ce1e04293ce2c45ca8e22e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnStart: 0
+  looping: 0
+  hardFollowingTransform: 0
+  transformToHardFollow: {fileID: 0}
+  tpOnTransformOnPlay: 0
+  transformToTPToOnPlay: {fileID: 0}
+  particles: 0
+  useRotation: 1
+  particlesSystems: []
+  particlesRenderers: []
+  trails: 0
+  trailRenderers: []
+  shake: 1
+  useSpecificTransform: 0
+  specificTransformToShake: []
+  shakeAmplitude: 2
+  shakeTime: 10
+  slowMo: 0
+  targetTimeScale: 0.05
+  slowMoSpeed: 0.1
+  slowMoInCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  slowMoOutCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  zoom: 0
+  zoomInCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  zoomOutCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  zoomedDist: 4
+  zoomSpeed: 0.1
+  freezeFrame: 0
+  timeBeforeFreezedFrame: 1
+  freezedFrameTime: 0.1
+  rumble: 0
+  rumbleTime: 5
 --- !u!95 &1905362718
 Animator:
   serializedVersion: 3
@@ -4257,6 +6314,95 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1956545216}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1979172924 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 781134252, guid: 53e70c60ea00c7442922d0a1c33aaa75,
+    type: 3}
+  m_PrefabInstance: {fileID: 1113174007}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1979172925
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979172924}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1979172926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979172924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7be32b554ce1e04293ce2c45ca8e22e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnStart: 0
+  looping: 0
+  hardFollowingTransform: 0
+  transformToHardFollow: {fileID: 0}
+  tpOnTransformOnPlay: 0
+  transformToTPToOnPlay: {fileID: 0}
+  particles: 0
+  useRotation: 1
+  particlesSystems: []
+  particlesRenderers: []
+  trails: 0
+  trailRenderers: []
+  shake: 1
+  useSpecificTransform: 0
+  specificTransformToShake: []
+  shakeAmplitude: 3
+  shakeTime: 8
+  slowMo: 0
+  targetTimeScale: 0.05
+  slowMoSpeed: 0.1
+  slowMoInCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  slowMoOutCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  zoom: 0
+  zoomInCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  zoomOutCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  zoomedDist: 4
+  zoomSpeed: 0.1
+  freezeFrame: 0
+  timeBeforeFreezedFrame: 1
+  freezedFrameTime: 0.1
+  rumble: 0
+  rumbleTime: 5
 --- !u!95 &1998036102 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 4855699912175038315, guid: bd0cd64cef2c1404096e6946b56bde98,
