@@ -10,6 +10,7 @@ namespace Team17.StreetHunt
         [SerializeField] private Animator compositionAnimator;
         [SerializeField] private TransitionEvents[] transitionEvents;
         [SerializeField] private UiSceneManagement sceneManager;
+        [SerializeField] private Animator selectionMenuAnimator;
         [SerializeField] private int indexLevel;
         private int indexSwipe;
 
@@ -50,17 +51,27 @@ namespace Team17.StreetHunt
 
         public void SwipeRight(InputManager.SwipeDirection direction)
         {
-            if (direction == InputManager.SwipeDirection.Right)
+            if (direction == InputManager.SwipeDirection.Left)
             {
                 IndexSwipe++;
+                selectionMenuAnimator.SetInteger("IndexSelectionMenu", indexSwipe);
+            }
+            else
+            {
+                return;
             }
         }
 
         public void SwipeLeft(InputManager.SwipeDirection direction)
         {
-            if (direction == InputManager.SwipeDirection.Right && IndexSwipe != 0)
+            if (direction == InputManager.SwipeDirection.Right)
             {
                 IndexSwipe--;
+                selectionMenuAnimator.SetInteger("IndexSelectionMenu", indexSwipe);
+            }
+            else
+            {
+                return;
             }
         }
         
