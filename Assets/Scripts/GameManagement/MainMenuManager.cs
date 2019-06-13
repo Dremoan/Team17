@@ -9,13 +9,17 @@ namespace Team17.StreetHunt
     {
         [SerializeField] private Animator compositionAnimator;
         [SerializeField] private TransitionEvents[] transitionEvents;
-        [SerializeField] private UiSceneManagement sceneManger;
+        [SerializeField] private UiSceneManagement sceneManager;
         [SerializeField] private string nameLevel;
+        private int indexSwipe;
+
 
         protected override void Start()
         {
             base.Start();
             SetLevelName("");
+            InputManager.inputManager.OnSwipe += SwipeRight;
+            InputManager.inputManager.OnSwipe += SwipeLeft;
         }
 
         public void PickRandomCompositionAnim(int MaxRange)
@@ -42,6 +46,24 @@ namespace Team17.StreetHunt
         {
             transitionEvents[2].EventTransition[0].Invoke();
         }
+
+        public void SwipeRight(InputManager.SwipeDirection direction)
+        {
+            if (direction == InputManager.SwipeDirection.Right)
+            {
+                indexSwipe++;
+            }
+        }
+
+        public void SwipeLeft(InputManager.SwipeDirection direction)
+        {
+            if (direction == InputManager.SwipeDirection.Right && indexSwipe != 0)
+            {
+                indexSwipe--;
+            }
+        }
+
+
 
         IEnumerator OpenLevelMenu(float openingDelay)
         {
