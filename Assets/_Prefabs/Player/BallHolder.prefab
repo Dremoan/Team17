@@ -287,8 +287,8 @@ MonoBehaviour:
   looping: 0
   hardFollowingTransform: 0
   transformToHardFollow: {fileID: 0}
-  tpOnTransformOnPlay: 0
-  transformToTPToOnPlay: {fileID: 0}
+  tpOnTransformOnPlay: 1
+  transformToTPToOnPlay: {fileID: 8110133984785293297}
   particles: 0
   useRotation: 1
   particlesSystems: []
@@ -299,7 +299,7 @@ MonoBehaviour:
   useSpecificTransform: 0
   specificTransformToShake: []
   shakeAmplitude: 0.75
-  shakeTime: 4
+  shakeTime: 0.2
   slowMo: 0
   targetTimeScale: 0.05
   slowMoSpeed: 0.1
@@ -1671,6 +1671,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8532729943036199441, guid: cea73c5d8bb6f1b4383cbbb58703bfbf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8532729942767798380, guid: cea73c5d8bb6f1b4383cbbb58703bfbf,
         type: 3}
       propertyPath: powerGroups.Array.data[0].launch
@@ -1826,10 +1831,15 @@ PrefabInstance:
       propertyPath: powergroupIncreasedFeedback
       value: 
       objectReference: {fileID: 756580817270911180}
+    - target: {fileID: 8532729942767798380, guid: cea73c5d8bb6f1b4383cbbb58703bfbf,
+        type: 3}
+      propertyPath: criticalShotFeedBack
+      value: 
+      objectReference: {fileID: 5420019917709437002}
     - target: {fileID: 8532729943036199443, guid: cea73c5d8bb6f1b4383cbbb58703bfbf,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cea73c5d8bb6f1b4383cbbb58703bfbf, type: 3}
