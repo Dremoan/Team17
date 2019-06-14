@@ -384,7 +384,8 @@ namespace Team17.StreetHunt
                 }
                 else
                 {
-                    MediumAttack();
+                    assignedBossScript.SkipCurrentAttack();
+                    //MediumAttack();
                 }
             }
         }
