@@ -101,8 +101,7 @@ namespace Team17.StreetHunt
             }
 
             #endregion
-
-
+            
         }
 
         public void SelectValues(int valueModified)
@@ -110,6 +109,10 @@ namespace Team17.StreetHunt
             valueRequired = valueModified;
         }
 
+        public void EndLevel()
+        {
+            GameManager.state.CallOnLevelEnd();
+        }
 
         IEnumerator DelayEndCase(float delayEndCase)
         {
