@@ -384,7 +384,8 @@ namespace Team17.StreetHunt
                 }
                 else
                 {
-                    MediumAttack();
+                    assignedBossScript.SkipCurrentAttack();
+                    //MediumAttack();
                 }
             }
         }
@@ -511,6 +512,21 @@ namespace Team17.StreetHunt
         {
             currentIdleType = type;
             anim.SetFloat("idle", currentIdleType);
+        }
+
+        public void GoToTransition()
+        {
+            if(currentIdleType != 0.25f)
+            {
+                LaunchJump(firstTarget);
+            }
+            anim.SetTrigger("goToIntro");
+            PlayIntro(0.3333f);
+        }
+
+        public void PlayIntro(float blend)
+        {
+            anim.SetFloat("introBlend", blend);
         }
 
         #endregion

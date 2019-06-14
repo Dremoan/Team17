@@ -135,7 +135,7 @@ namespace Team17.StreetHunt
                 freezeDecrementer = timeBeforeFreezedFrame;
             }
 
-            if(zoom)
+            /*if(zoom)
             {
                 initialZoomTargetsPos = new Vector3[GameManager.state.VirtualCameraZoomTargets.Count];
                 for (int i = 0; i < initialZoomTargetsPos.Length; i++)
@@ -143,7 +143,7 @@ namespace Team17.StreetHunt
                     initialZoomTargetsPos[i] = GameManager.state.VirtualCameraZoomTargets[i].transform.position;
                 }
                 isZoomingIn = true;
-            }
+            }*/
 
             if(rumble)
             {

@@ -232,9 +232,9 @@ namespace Team17.StreetHunt
     [System.Serializable]
     public class ScoreHit
     {
-        [SerializeField] private string name;
-        [SerializeField] private int count;
-        [SerializeField] private int scoreValue;
+        [SerializeField] private string name = "hit";
+        [SerializeField] private int count = 0;
+        [SerializeField] private int scoreValue = 10;
 
         public string Name { get => name; set => name = value; }
         public int Count { get => count; set => count = value; }
@@ -247,6 +247,11 @@ namespace Team17.StreetHunt
         [SerializeField] private int finalScore = 0;
         [SerializeField] private ScoreHit[] hitsData;
         [SerializeField] private int ballsLeft = 4;
+
+        public PlayerBossData()
+        {
+            hitsData = new ScoreHit[4];
+        }
 
         public int FinalScore { get => finalScore; set => finalScore = value; }
         public ScoreHit[] HitsData { get => hitsData; set => hitsData = value; }
