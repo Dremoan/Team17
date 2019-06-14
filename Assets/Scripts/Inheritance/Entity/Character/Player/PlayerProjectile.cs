@@ -16,8 +16,10 @@ namespace Team17.StreetHunt
         [SerializeField] private Transform timerFeedback;
         [SerializeField] private float initialFeedbackScale = 5f;
         [SerializeField] private Transform trajectory;
+        [SerializeField] private SpriteRenderer aimArrow;
         [SerializeField] private PlayerCharacter character;
         [SerializeField] private FeedBack criticalShotFeedBack;
+        [SerializeField] private FeedBack criticalSignFeedback;
         [Tooltip("The power threshold of the group must be sorted from the smallest to highest.")]
         [SerializeField] private PowerGroups[] powerGroups;
 
@@ -43,6 +45,7 @@ namespace Team17.StreetHunt
         private bool destroyed = false;
         private bool wasCanceled = false;
         private bool isStriking = false;
+        private bool shouldTriggerCriticalSign = true;
         private Vector3 movementDirection;
         private Vector3 lastEnter;
         private Vector3 lastNormal;
@@ -152,6 +155,7 @@ namespace Team17.StreetHunt
                 character.Physicate(false);
                 character.AimingParameterSetup(false);
                 wasCanceled = false;
+                shouldTriggerCriticalSign = true;
 
                 GameManager.state.CallOnPlayerTeleport();
             }
@@ -166,9 +170,17 @@ namespace Team17.StreetHunt
                 Timer t = timer.GetTimerFromUserIndex(reHitTimer);
                 timerFeedback.localScale = (feedBackRadius.Evaluate(Mathf.InverseLerp(0, t.MaxTime, t.TimeLeft)) * initialFeedbackScale * Vector3.one) + Vector3.one;
                 trajectory.position = Vector3.Lerp(transform.position, touchPos, 0.5f);
+
+                if(t.TimeLeft < 0.7f && shouldTriggerCriticalSign)
+                {
+                    shouldTriggerCriticalSign = false;
+                    criticalSignFeedback.Play();
+                }
+
                 float zRot = Vector3.SignedAngle(transform.up, (touchPos - transform.position), Vector3.forward);
-                trajectory.rotation = Quaternion.Euler(0, 0, zRot);
-                trajectory.localScale = new Vector3(0.5f, Vector3.Distance(transform.position, touchPos) * 1f, 0.5f);
+                trajectory.rotation = Quaternion.Euler(0, 0, zRot + 90);
+                //trajectory.localScale = new Vector3(0.5f, Vector3.Distance(transform.position, touchPos) * 1f, 0.5f);
+                aimArrow.size = new Vector2(Vector3.Distance(transform.position, touchPos) * 1f, aimArrow.size.y);
                 character.PrepareStrike(transform.position, touchPos);
             }
         }
@@ -207,6 +219,7 @@ namespace Team17.StreetHunt
 
                 usedPowerGroup.Trail.RotateFeedback(GetRotationFromDirection(movementDirection));
                 accuracyFeedback.Stop(ParticleSystemStopBehavior.StopEmittingAndClear);
+                criticalSignFeedback.Stop(ParticleSystemStopBehavior.StopEmittingAndClear);
 
                 timer.DeleteTimer(reHitTimer);
                 timerFeedback.gameObject.SetActive(false);
@@ -324,7 +337,8 @@ namespace Team17.StreetHunt
         {
             character.AimingParameterSetup(true);
             character.Exhausted();
-            accuracyFeedback.Stop();
+            accuracyFeedback.Stop(ParticleSystemStopBehavior.StopEmittingAndClear);
+            criticalSignFeedback.Stop(ParticleSystemStopBehavior.StopEmittingAndClear);
             isStriking = false;
             SetMovementDir(movementDirection);
             timerFeedback.gameObject.SetActive(false);
