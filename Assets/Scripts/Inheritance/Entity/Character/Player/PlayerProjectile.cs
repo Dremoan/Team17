@@ -16,6 +16,7 @@ namespace Team17.StreetHunt
         [SerializeField] private Transform timerFeedback;
         [SerializeField] private float initialFeedbackScale = 5f;
         [SerializeField] private Transform trajectory;
+        [SerializeField] private SpriteRenderer aimArrow;
         [SerializeField] private PlayerCharacter character;
         [SerializeField] private FeedBack criticalShotFeedBack;
         [SerializeField] private FeedBack criticalSignFeedback;
@@ -177,8 +178,9 @@ namespace Team17.StreetHunt
                 }
 
                 float zRot = Vector3.SignedAngle(transform.up, (touchPos - transform.position), Vector3.forward);
-                trajectory.rotation = Quaternion.Euler(0, 0, zRot);
-                trajectory.localScale = new Vector3(0.5f, Vector3.Distance(transform.position, touchPos) * 1f, 0.5f);
+                trajectory.rotation = Quaternion.Euler(0, 0, zRot + 90);
+                //trajectory.localScale = new Vector3(0.5f, Vector3.Distance(transform.position, touchPos) * 1f, 0.5f);
+                aimArrow.size = new Vector2(Vector3.Distance(transform.position, touchPos) * 1f, aimArrow.size.y);
                 character.PrepareStrike(transform.position, touchPos);
             }
         }
