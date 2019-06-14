@@ -30,6 +30,8 @@ namespace Team17.StreetHunt
         private CutSceneEvent exitBeginsEvent;
         private CutSceneEvent exitEndsEvent;
 
+        private BossStateEvent bossDeadEvent;
+
         private BossPattern currentPattern;
         private int currentAttackStateIndex = 0;
         protected float currentHealth = 0f;
@@ -83,6 +85,7 @@ namespace Team17.StreetHunt
             currentState = BossPhaseState.Exit;
             touchPlane.gameObject.SetActive(false);
             currentPattern.CancelAttack();
+            if (bossDeadEvent != null) bossDeadEvent.Invoke();
             GameManager.state.CallOnBossDeath();
         }
 
@@ -296,6 +299,7 @@ namespace Team17.StreetHunt
         public CutSceneEvent ExitBeginsEvent { get => exitBeginsEvent; set => exitBeginsEvent = value; }
         public CutSceneEvent ExitEndsEvent { get => exitEndsEvent; set => exitEndsEvent = value; }
         public Transform RoomZero { get => roomZero; }
+        public BossStateEvent BossDeadEvent { get => bossDeadEvent; set => bossDeadEvent = value; }
 
         #endregion
 
@@ -403,4 +407,6 @@ namespace Team17.StreetHunt
         Medium = 1,
         Hard = 2,
     }
+
+    public delegate void BossStateEvent();
 }
