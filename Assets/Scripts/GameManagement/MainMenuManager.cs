@@ -7,6 +7,7 @@ namespace Team17.StreetHunt
 {
     public class MainMenuManager : Entity
     {
+        [SerializeField] private MainMenuSaveLoader saveLoader;
         [SerializeField] private Animator compositionAnimator;
         [SerializeField] private TransitionEvents[] transitionEvents;
         [SerializeField] private UiSceneManagement sceneManager;
@@ -20,6 +21,7 @@ namespace Team17.StreetHunt
         {
             base.Start();
             SetLevelIndex(0);
+            saveLoader.DisplayDataFromSave(indexSwipe);
             InputManager.inputManager.OnSwipe += SwipeRight;
             InputManager.inputManager.OnSwipe += SwipeLeft;
         }
@@ -54,6 +56,11 @@ namespace Team17.StreetHunt
             if (direction == InputManager.SwipeDirection.Left)
             {
                 IndexSwipe++;
+                if(indexSwipe > 2)
+                {
+                    indexSwipe = 2;
+                }
+                saveLoader.DisplayDataFromSave(indexSwipe);
                 selectionMenuAnimator.SetInteger("IndexSelectionMenu", indexSwipe);
             }
             else
@@ -67,6 +74,11 @@ namespace Team17.StreetHunt
             if (direction == InputManager.SwipeDirection.Right)
             {
                 IndexSwipe--;
+                if (indexSwipe < 0)
+                {
+                    indexSwipe = 0;
+                }
+                saveLoader.DisplayDataFromSave(indexSwipe);
                 selectionMenuAnimator.SetInteger("IndexSelectionMenu", indexSwipe);
             }
             else

@@ -10,6 +10,7 @@ namespace Team17.StreetHunt
         [SerializeField] private Boss assignedBossScript;
         [SerializeField] private Animator anim;
         [Header("Jump parameters")]
+        [SerializeField] private GorillaJumpTarget firstTarget;
         [SerializeField] private Transform jumpTarget;
         [SerializeField] private Transform jumpSummit;
         [SerializeField] private float jumpSpeed = 2f;
@@ -62,7 +63,8 @@ namespace Team17.StreetHunt
         protected override void OnEnable()
         {
             base.OnEnable();
-            SetIdleType(0.25f);
+            currentJumpTarget = firstTarget;
+            SetIdleType(currentJumpTarget.GorillaIdleValue);
         }
 
         protected override void Update()
@@ -138,9 +140,11 @@ namespace Team17.StreetHunt
             }
 
             //Debug.Break();
-
+            float x = currentJumpTarget.transform.position.x;
+            anim.SetBool("toTheRight", (x < target.transform.position.x));
+            Debug.Log("To the right : " + (x < target.transform.position.x) + " x = " + x + " target x = " + target.transform.position.x);
+            anim.SetTrigger("jumping");
             currentJumpTarget = target;
-            jumpTarget.position = target.transform.position;
             SetIdleType(currentJumpTarget.GorillaIdleValue);
 
             /*Vector3 vectorToTarget = (jumpTarget.position - transform.position);
@@ -186,10 +190,6 @@ namespace Team17.StreetHunt
                     jumpCalculatedDist += Vector3.Distance(path[i], path[i + 1]);
                 }
             }*/
-
-            anim.SetTrigger("jumping");
-            anim.SetBool("toTheRight", (transform.position.x < jumpTarget.position.x));
-            Debug.Log("To the right : " + (transform.position.x < jumpTarget.position.x));
         }
 
         private void SelectJumpBlend(float b, float t)
@@ -384,7 +384,8 @@ namespace Team17.StreetHunt
                 }
                 else
                 {
-                    MediumAttack();
+                    assignedBossScript.SkipCurrentAttack();
+                    //MediumAttack();
                 }
             }
         }
@@ -511,6 +512,21 @@ namespace Team17.StreetHunt
         {
             currentIdleType = type;
             anim.SetFloat("idle", currentIdleType);
+        }
+
+        public void GoToTransition()
+        {
+            if(currentIdleType != 0.25f)
+            {
+                LaunchJump(firstTarget);
+            }
+            anim.SetTrigger("goToIntro");
+            PlayIntro(0.3333f);
+        }
+
+        public void PlayIntro(float blend)
+        {
+            anim.SetFloat("introBlend", blend);
         }
 
         #endregion
