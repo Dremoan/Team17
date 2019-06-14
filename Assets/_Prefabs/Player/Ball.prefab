@@ -80,9 +80,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 8532729942767798381}
   timer: {fileID: 8532729942767798383}
+  accuracyFeedback: {fileID: 0}
+  powergroupIncreasedFeedback: {fileID: 0}
   timerFeedback: {fileID: 8532729943036199440}
+  initialFeedbackScale: 5
   trajectory: {fileID: 8532729943327276625}
   character: {fileID: 0}
+  criticalShotFeedBack: {fileID: 0}
+  criticalSignFeedback: {fileID: 0}
   powerGroups:
   - name: Power lvl 0
     powerThreshold: 0
@@ -103,7 +108,7 @@ MonoBehaviour:
     hit: {fileID: 0}
     stunned: {fileID: 0}
   - name: Power lvl 2
-    powerThreshold: 50
+    powerThreshold: 100
     speed: 15
     launch: {fileID: 0}
     bounce: {fileID: 0}
@@ -112,7 +117,7 @@ MonoBehaviour:
     hit: {fileID: 0}
     stunned: {fileID: 0}
   - name: Power lvl 3
-    powerThreshold: 100
+    powerThreshold: 250
     speed: 20
     launch: {fileID: 0}
     bounce: {fileID: 0}
