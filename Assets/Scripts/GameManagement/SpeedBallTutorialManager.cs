@@ -10,7 +10,6 @@ namespace Team17.StreetHunt
         [SerializeField] private float maxX = 5f;
         [SerializeField] private float maxY = 5f;
         [SerializeField] private float timeBeforeActivation = 1.5f;
-        public int actualIndex;
 
         protected override void Start()
         {
@@ -22,7 +21,6 @@ namespace Team17.StreetHunt
         public override void OnSpeedPortalCrossed()
         {
             base.OnSpeedPortalCrossed();
-            actualIndex++;
             speedPortal.GetReadyForReactivation();
             speedPortal.Activate(transform.position + new Vector3(Random.Range(-maxX, maxX), Random.Range(-maxY, maxY), 0), 0f, timeBeforeActivation);
         }
