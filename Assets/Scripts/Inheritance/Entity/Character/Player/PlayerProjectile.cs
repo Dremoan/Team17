@@ -177,8 +177,8 @@ namespace Team17.StreetHunt
                 }
 
                 float zRot = Vector3.SignedAngle(transform.up, (touchPos - transform.position), Vector3.forward);
-                trajectory.rotation = Quaternion.Euler(0, 0, zRot);
-                trajectory.localScale = new Vector3(0.5f, Vector3.Distance(transform.position, touchPos) * 1f, 0.5f);
+                trajectory.rotation = Quaternion.Euler(0, 0, zRot + 180);
+                trajectory.localScale = new Vector3(0.5f, Vector3.Distance(transform.position, touchPos) * 0.1f, 0.5f);
                 character.PrepareStrike(transform.position, touchPos);
             }
         }
