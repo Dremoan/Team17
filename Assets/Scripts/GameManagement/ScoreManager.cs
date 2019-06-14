@@ -69,7 +69,6 @@ namespace Team17.StreetHunt
                 {
                     Debug.Log("No new high score");
                 }
-                StartCoroutine(DynamicScoreDisplay());
             }
         }
 
