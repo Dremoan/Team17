@@ -545,6 +545,16 @@ namespace Team17.StreetHunt
             PlayIntro(0.3333f);
         }
 
+        public void GoToDeath()
+        {
+            if (currentIdleType != 0.25f)
+            {
+                LaunchJump(firstTarget);
+            }
+            anim.SetTrigger("goToIntro");
+            PlayIntro(0.66666f);
+        }
+
         public void GoToIdle()
         {
             anim.SetTrigger("goToIdle");
