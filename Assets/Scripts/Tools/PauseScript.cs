@@ -12,18 +12,23 @@ public class PauseScript : MonoBehaviour
     {
         if(Input.GetKeyDown(pauseKey))
         {
-            if(paused)
-            {
-                Time.timeScale = 1f;
-                Time.fixedDeltaTime = 0.02f;
-                paused = false;
-            }
-            else
-            {
-                Time.timeScale = 0f;
-                Time.fixedDeltaTime = 0f;
-                paused = true;
-            }
+            pauseActive();
+        }
+    }
+
+    public void pauseActive()
+    {
+        if (paused)
+        {
+            Time.timeScale = 1f;
+            Time.fixedDeltaTime = 0.02f;
+            paused = false;
+        }
+        else
+        {
+            Time.timeScale = 0f;
+            Time.fixedDeltaTime = 0f;
+            paused = true;
         }
     }
 }
