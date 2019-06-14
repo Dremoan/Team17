@@ -63,6 +63,7 @@ namespace Team17.StreetHunt
         protected override void OnEnable()
         {
             base.OnEnable();
+            assignedBossScript.BossDeadEvent += CancelAttack;
             currentJumpTarget = firstTarget;
             SetIdleType(currentJumpTarget.GorillaIdleValue);
         }
@@ -504,6 +505,26 @@ namespace Team17.StreetHunt
 
         #endregion
 
+        private void CancelAttack()
+        {
+            for (int i = 0; i < rocksPool.Length; i++)
+            {
+                rocksPool[i].gameObject.SetActive(false);
+            }
+            shoutGO.gameObject.SetActive(false);
+
+            anim.SetBool("leftArmRockLaunch", false);
+            anim.SetBool("rightArmRockLaunch", false);
+            anim.SetBool("shoutingRight", false);
+            anim.SetBool("shoutingLeft", false);
+            anim.SetBool("shoutingRecoverLoop", false);
+            anim.SetBool("shoutingLoop", false);
+            anim.ResetTrigger("jumping");
+            anim.ResetTrigger("throwRock");
+
+            anim.SetTrigger("goToIdle");
+        }
+
         #endregion
 
         #region Animations 
@@ -512,6 +533,36 @@ namespace Team17.StreetHunt
         {
             currentIdleType = type;
             anim.SetFloat("idle", currentIdleType);
+        }
+
+        public void GoToTransition()
+        {
+            if(currentIdleType != 0.25f)
+            {
+                LaunchJump(firstTarget);
+            }
+            anim.SetTrigger("goToIntro");
+            PlayIntro(0.3333f);
+        }
+
+        public void GoToDeath()
+        {
+            if (currentIdleType != 0.25f)
+            {
+                LaunchJump(firstTarget);
+            }
+            anim.SetTrigger("goToIntro");
+            PlayIntro(0.66666f);
+        }
+
+        public void GoToIdle()
+        {
+            anim.SetTrigger("goToIdle");
+        }
+
+        public void PlayIntro(float blend)
+        {
+            anim.SetFloat("introBlend", blend);
         }
 
         #endregion
