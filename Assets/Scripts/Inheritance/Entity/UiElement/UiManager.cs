@@ -7,7 +7,7 @@ namespace Team17.StreetHunt
 {
     public class UiManager : UiElement
     {
-        [SerializeField] private UiSceneManagement sceneManager;
+
         [SerializeField] private Animator transitionsCanvas;
 
         [Header("End Level Ui"), SerializeField] private GameObject endLevelUi;
@@ -109,17 +109,7 @@ namespace Team17.StreetHunt
             animatorUiEndLevel.SetTrigger("AnimLoseScreen");
         }
 
-        public void BackToMenu()
-        {
-            StartCoroutine(DelayBackMenu());
-        }
 
-        IEnumerator DelayBackMenu()
-        {
-            animatorCanvasAnim.Play("FadeIn");
-            yield return new WaitForSeconds(1f);
-            sceneManager.LoadSceneIndex(0);
-        }
 
     }
 }
