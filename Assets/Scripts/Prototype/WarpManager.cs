@@ -14,7 +14,7 @@ namespace Team17.StreetHunt
         {
             for (int i = 0; i < warps.Length; i++)
             {
-                if(warps[i].active)
+                if(warps[i].activeInHierarchy)
                 {
                     warpsAnims[i].SetTrigger("AnimWarpDisappear");
                 }
