@@ -75,7 +75,9 @@ namespace Team17.StreetHunt
 
         private void AddHit(int powerGroupIndex)
         {
+            Debug.Log("hit received");
             if (powerGroupIndex > scoreHits.Length - 1) return;
+            Debug.Log("hit added");
             scoreHits[powerGroupIndex].Count++;
         }
 
@@ -123,7 +125,7 @@ namespace Team17.StreetHunt
         {
             float scoreInc = 0f;
             // livesleftValue and score
-            livesLeftValue.text = "4";
+            livesLeftValue.text = (4 - GameManager.state.LivesLeft).ToString();
             while (scoreInc < 4 * scorePerBallLeft)
             {
                 scoreInc += Time.deltaTime * incSpeed;
