@@ -72,6 +72,7 @@ namespace Team17.StreetHunt
             Debug.Log(gameObject.name + " has " + currentHealth + " hp. Damaged " + dmgs);
             if (currentHealth < 0)
             {
+                GameManager.state.CallOnBossHurt(index, dmgs);
                 Death();
             }
             else
