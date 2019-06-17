@@ -20,6 +20,7 @@ namespace Team17.StreetHunt
         [SerializeField] private PlayerCharacter character;
         [SerializeField] private FeedBack criticalShotFeedBack;
         [SerializeField] private FeedBack criticalSignFeedback;
+        [SerializeField] private FeedBack stunnedFeedback;
         [Tooltip("The power threshold of the group must be sorted from the smallest to highest.")]
         [SerializeField] private PowerGroups[] powerGroups;
 
@@ -345,6 +346,8 @@ namespace Team17.StreetHunt
             trajectory.gameObject.SetActive(false);
             character.Physicate(true);
             canStrike = false;
+            usedPowerGroup.Trail.Stop();
+            stunnedFeedback.Play();
             timer.LaunchNewTimer(stunTime, RecoverCharacter);
         }
 
@@ -356,11 +359,15 @@ namespace Team17.StreetHunt
             trajectory.gameObject.SetActive(false);
             character.Physicate(true);
             canStrike = false;
+            usedPowerGroup.Trail.Stop();
+            stunnedFeedback.Play();
             timer.LaunchNewTimer(time, RecoverCharacter);
         }
 
         private void RecoverCharacter()
         {
+            usedPowerGroup.Trail.Play();
+            stunnedFeedback.Stop();
             canStrike = true;
         }
 
@@ -511,7 +518,6 @@ namespace Team17.StreetHunt
         [SerializeField] private FeedBack trail;
         [SerializeField] private FeedBack destroyed;
         [SerializeField] private FeedBack hit;
-        [SerializeField] private FeedBack stunned;
 
         public string Name { get => name; }
         public float PowerThreshold { get => powerThreshold; }
