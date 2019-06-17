@@ -15,6 +15,7 @@ namespace Team17.StreetHunt
         {
             baseGO.SetActive(false);
             transitionGO.SetActive(true);
+            transitionFeedback.RotateFeedback(-90f);
             transitionFeedback.Play();
         }
     }
