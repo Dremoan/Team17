@@ -16,6 +16,7 @@ namespace Team17.StreetHunt
         [SerializeField] private Transform timerFeedback;
         [SerializeField] private float initialFeedbackScale = 5f;
         [SerializeField] private Transform trajectory;
+        [SerializeField] private SpriteRenderer trajectorySprite;
         [SerializeField] private PlayerCharacter character;
         [SerializeField] private FeedBack criticalShotFeedBack;
         [SerializeField] private FeedBack criticalSignFeedback;
@@ -168,7 +169,6 @@ namespace Team17.StreetHunt
                 SetMovementDir(movementDirection);
                 Timer t = timer.GetTimerFromUserIndex(reHitTimer);
                 timerFeedback.localScale = (feedBackRadius.Evaluate(Mathf.InverseLerp(0, t.MaxTime, t.TimeLeft)) * initialFeedbackScale * Vector3.one) + Vector3.one;
-                trajectory.position = Vector3.Lerp(transform.position, touchPos, 0.5f);
 
                 if(t.TimeLeft < 0.7f && shouldTriggerCriticalSign)
                 {
@@ -177,8 +177,10 @@ namespace Team17.StreetHunt
                 }
 
                 float zRot = Vector3.SignedAngle(transform.up, (touchPos - transform.position), Vector3.forward);
+                trajectory.position = Vector3.Lerp(transform.position, touchPos, 1f);
                 trajectory.rotation = Quaternion.Euler(0, 0, zRot + 180);
-                trajectory.localScale = new Vector3(0.5f, Vector3.Distance(transform.position, touchPos) * 0.1f, 0.5f);
+                trajectory.localScale = new Vector3(0.25f, /*Vector3.Distance(transform.position, touchPos) * 0.1f*/ 0.25f, 0.25f);
+                trajectorySprite.size = new Vector2(5, Vector3.Distance(transform.position, touchPos) * 3);
                 character.PrepareStrike(transform.position, touchPos);
             }
         }
